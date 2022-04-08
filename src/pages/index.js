@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import NavBar from "../components/Navbar";
 
 const Home = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
   return (
     <>
-      <Sidebar />
+      <Sidebar isOpen={isOpen} toggle={toggle} />
 
-      <NavBar />
+      <NavBar toggle={toggle} />
     </>
   );
 };
