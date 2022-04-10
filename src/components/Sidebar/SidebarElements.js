@@ -81,11 +81,11 @@ export const SidebarRoute = styled.div`
 export const SidebarMenu = styled.ul`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, 80px);
+  grid-template-rows: repeat(6, 25px);
   text-align: center;
   padding: 0;
 
   @media screen and (max-width: 480px) {
-    grid-template-rows: repeat(2, 60px);
+    grid-template-rows: repeat(2, 50px);
   }
 `;
