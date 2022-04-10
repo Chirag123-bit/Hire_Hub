@@ -1,4 +1,3 @@
-import Image from "../../images/svg-1.svg";
 export const homeObjOne = {
   id: "about",
   lightBg: false,
@@ -8,11 +7,11 @@ export const homeObjOne = {
   headline: "Looking for a job?",
   description:
     "Whether you are looking for job or candidates to fill your vacancies, We are here for you. HireHub is commited to offering best opportunities/talents for you.",
-  button_label: "Get Started",
+  button_label: "Sign Up Now",
   imgStart: false,
-  img: Image,
+  img: require("../../images/svg-1.svg").default,
   alt: "Home Image",
   dark: true,
-  primary: true,
+  primary: false,
   darkText: false,
 };

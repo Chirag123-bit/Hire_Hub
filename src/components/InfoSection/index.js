@@ -24,7 +24,7 @@ const InfoSection = ({
   darkText,
   headline,
   description,
-  buttonLabel,
+  button_label,
   img,
   alt,
 }) => {
@@ -39,7 +39,9 @@ const InfoSection = ({
                 <Heading lightText={lightText}>{headline}</Heading>
                 <Subtitle darkText={darkText}>{description}</Subtitle>
                 <BtnWrap>
-                  <Button to="/home">{buttonLabel}</Button>
+                  <Button to="/home" primary="true" dark="true">
+                    {button_label}
+                  </Button>
                 </BtnWrap>
               </TextWrapper>
             </Column1>
