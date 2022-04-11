@@ -11,7 +11,7 @@ export const InfoContainer = styled.div`
 export const InfoWrapper = styled.div`
   display: grid;
   z-index: 1;
-  height: 650px;
+  height: 900px;
   width: 100%;
   max-width: 1100px;
   margin-right: auto;
@@ -80,7 +80,7 @@ export const Subtitle = styled.p`
   font-size: 1.125rem;
   line-height: 24px;
   text-align: justify;
-  color: ${({ lightTextDesc }) => (lightTextDesc ? "#cccccc" : "#fff")};
+  color: ${({ darkText }) => (darkText ? "#000" : "#fff")};
   @media screen and (max-width: 768px) {
     font-size: 1.12rem;
   }
