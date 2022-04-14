@@ -6,6 +6,9 @@ import Home from "./pages/index";
 import { Login } from "./pages/Login";
 import Register from "./pages/Register";
 import SigninPage from "./pages/signin";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import SetAvatar from "./pages/SetAvatar";
 
 function App() {
   return (
@@ -15,8 +18,10 @@ function App() {
         <Route exact path="/signin" element={<SigninPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/setAvatar" element={<SetAvatar />} />
         <Route path="/chat" element={<Chat />} />
       </Routes>
+      <ToastContainer autoClose={500} />
     </Router>
   );
 }

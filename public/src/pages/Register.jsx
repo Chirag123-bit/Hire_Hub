@@ -1,15 +1,73 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../images/logo.svg";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { registerRoute } from "../utils/APIRoutes";
 
 const Register = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    alert("Form");
+  const navigate = useNavigate();
+  const [values, setValues] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "dark",
   };
 
-  const handleChange = (event) => {};
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      navigate("/chat");
+    }
+  }, []);
+
+  const handleValidation = () => {
+    const { password, confirmPassword, username } = values;
+    if (password !== confirmPassword) {
+      toast.error(
+        "Password and confirm password should be same.",
+        toastOptions
+      );
+      return false;
+    } else if (username.length < 3) {
+      toast.error("User name is too short", toastOptions);
+      return false;
+    } else if (password.length < 3) {
+      toast.error("Password is too short", toastOptions);
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (handleValidation()) {
+      const { password, username, email } = values;
+      const { data } = await axios.post(registerRoute, {
+        username,
+        email,
+        password,
+      });
+      if (data.status === false) {
+        toast.error(data.msg, toastOptions);
+      } else {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        navigate("/");
+      }
+    }
+  };
+
+  const handleChange = (event) => {
+    setValues({ ...values, [event.target.name]: event.target.value });
+  };
   return (
     <>
       <FormContainer>
@@ -112,7 +170,7 @@ const FormContainer = styled.div`
     }
     span {
       color: white;
-      Link {
+      a {
         text-decoration: none;
       }
     }
