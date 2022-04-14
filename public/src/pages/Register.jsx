@@ -27,7 +27,7 @@ const Register = () => {
     if (localStorage.getItem("user")) {
       navigate("/chat");
     }
-  }, []);
+  });
 
   const handleValidation = () => {
     const { password, confirmPassword, username } = values;
