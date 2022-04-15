@@ -132,6 +132,14 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     overflow: auto;
+    &::-webkit-scrollbar {
+      width: 0.2rem;
+      &-thumb {
+        background-color: #ffffff39;
+        width: 0.1rem;
+        border-radius: 1rem;
+      }
+    }
     gap: 1rem;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
       grid-template-rows: 15%% 70% 15%;
