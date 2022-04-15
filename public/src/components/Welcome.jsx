@@ -14,8 +14,15 @@ export default function Welcome({ currentUser }) {
 }
 
 const Container = styled.div`
-  /* display: flex; */
+  display: flex;
   justify-content: center;
+  align-items: center;
+  color: white;
   flex-direction: column;
-  text-align: center;
+  img {
+    height: 20rem;
+  }
+  span {
+    color: #4e0eff;
+  }
 `;
