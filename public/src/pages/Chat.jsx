@@ -3,16 +3,19 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { allUsersRoute } from "../utils/APIRoutes";
+import Contacts from "../components/Contacts";
 
 export const Chat = () => {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
+
   useEffect(async () => {
     if (!localStorage.getItem("user")) {
       navigate("/login");
     } else {
       setCurrentUser(await JSON.parse(localStorage.getItem("user")));
+      console.log(currentUser);
     }
   }, []);
   useEffect(
@@ -28,7 +31,9 @@ export const Chat = () => {
   );
   return (
     <Container>
-      <div className="container"></div>
+      <div className="container">
+        <Contacts contacts={contacts} currentUser={currentUser}></Contacts>
+      </div>
     </Container>
   );
 };
