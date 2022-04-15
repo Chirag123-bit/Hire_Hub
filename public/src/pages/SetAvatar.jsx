@@ -20,10 +20,13 @@ export default function SetAvatar() {
     draggable: true,
     theme: "dark",
   };
-  useEffect(async () => {
-    if (!localStorage.getItem("user")) {
-      navigate("/login");
+  useEffect(() => {
+    async function rd() {
+      if (!localStorage.getItem("user")) {
+        navigate("/login");
+      }
     }
+    rd();
   });
   const setProfilePicture = async () => {
     if (selectedAvatar === undefined) {
