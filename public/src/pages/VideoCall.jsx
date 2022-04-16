@@ -1,22 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import { io } from "socket.io-client";
 import { host } from "../utils/APIRoutes";
-import { MdNextWeek } from "react-icons/md";
+import Peer from "peerjs";
 
 export default function VideoCall() {
   const navigate = useNavigate();
   const socket = useRef();
   const params = useParams();
   const roomID = params.roomId;
-  var currentUser;
 
-  try {
+  var currentUser;
+  useEffect(() => {
     if (!localStorage.getItem("user")) {
       navigate("/login");
-    } else currentUser = JSON.parse(localStorage.getItem("user"));
+    }
+  }, []);
+  try {
+    currentUser = JSON.parse(localStorage.getItem("user"));
   } catch (e) {
     console.log(e);
   }
@@ -27,15 +29,27 @@ export default function VideoCall() {
     }
   }, [currentUser]);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   socket.current.emit("join-room", {
+  //     roomId: roomID,
+  //     userId: currentUser._id,
+  //   });
+  //   socket.current.on("user-connected", (userId) => {
+  //     console.log("User Connected", userId);
+  //   });
+  // }, []);
+
+  const myPeer = new Peer(undefined, {
+    host: "/",
+    port: "3001",
+  });
+
+  myPeer.on("open", (id) => {
     socket.current.emit("join-room", {
       roomId: roomID,
       userId: currentUser._id,
     });
-    socket.current.on("user-connected", (userId) => {
-      console.log("User COnnected", userId);
-    });
-  }, []);
+  });
 
   return <div id="video_grid">{roomID}</div>;
 }
