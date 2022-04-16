@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Chat } from "./pages/Chat";
 // import Navbar from "./components/Navbar";
@@ -9,8 +9,10 @@ import SigninPage from "./pages/signin";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SetAvatar from "./pages/SetAvatar";
+import VideoCall from "./pages/VideoCall";
 
 function App() {
+  const [socket, setSocket] = useState(null);
   return (
     <Router>
       <Routes>
@@ -19,7 +21,14 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/setAvatar" element={<SetAvatar />} />
-        <Route path="/chat" element={<Chat />} />
+        <Route
+          path="/chat"
+          element={<Chat socket={socket} setSocket={setSocket} />}
+        />
+        <Route
+          path="/videoCall/:roomId"
+          element={<VideoCall socket={socket} />}
+        />
       </Routes>
       <ToastContainer autoClose={500} />
     </Router>

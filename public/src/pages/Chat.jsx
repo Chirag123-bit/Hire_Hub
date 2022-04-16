@@ -8,8 +8,8 @@ import Welcome from "../components/Welcome";
 import ChatContainer from "../components/ChatContainer";
 import { io } from "socket.io-client";
 
-export const Chat = () => {
-  const socket = useRef();
+export const Chat = ({ socket, setSocket }) => {
+  socket = useRef();
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -30,6 +30,7 @@ export const Chat = () => {
   useEffect(() => {
     if (currentUser) {
       socket.current = io(host);
+      setSocket(socket);
       socket.current.emit("add-user", currentUser._id);
     }
   }, [currentUser]);

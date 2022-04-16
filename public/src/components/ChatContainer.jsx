@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import ChatInput from "./ChatInput";
 import Logout from "./Logout";
+import VideoButton from "./VideoButton";
 import axios from "axios";
 import { sendMessageRoute, getAllMessageRoute } from "../utils/APIRoutes";
 import { v4 as uuidv4 } from "uuid";
+import { Link } from "react-router-dom";
 
 export default function ChatContainer({ currentChat, currentUser, socket }) {
   const [messages, setMessages] = useState([]);
@@ -72,6 +74,9 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
                 <h3>{currentChat.username}</h3>
               </div>
             </div>
+
+            <VideoButton currentUser={currentUser} />
+
             <Logout />
           </div>
 
