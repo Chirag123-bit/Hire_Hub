@@ -58,6 +58,6 @@ io.on("connection", (socket) => {
     if (!userId in clientsInRoom) {
       socket.join(roomId);
     }
-    socket.to(roomId).broadcast.emit("user-connected", userId);
+    socket.broadcast.to(roomId).emit("user-connected", userId);
   });
 });

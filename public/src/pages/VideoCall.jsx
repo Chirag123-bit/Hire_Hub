@@ -10,6 +10,7 @@ export default function VideoCall() {
   const socket = useRef();
   const params = useParams();
   const roomID = params.roomId;
+  const peers = {};
 
   var testData = !!document.getElementById("video-grid");
   if (!testData) {
@@ -55,6 +56,38 @@ export default function VideoCall() {
     socket.current.on("user-connected", (userId) => {
       console.log("User Connected", userId);
     });
+
+    const myVideo = document.createElement("video");
+    myVideo.muted = true;
+
+    navigator.mediaDevices
+      .getUserMedia({
+        video: true,
+        audio: true,
+      })
+      .then((stream) => {
+        addVideoStream(myVideo, stream);
+
+        myPeer.on("call", (call) => {
+          call.answer(stream);
+          const video = document.createElement("video");
+          call.on("stream", (userVideoStream) => {
+            addVideoStream(video, userVideoStream);
+          });
+        });
+
+        socket.current.on("user-connected", (userId) => {
+          console.log("Sth");
+          connectToNewUser(userId, stream);
+        });
+      });
+    socket.current.on("user-disconnected", (userId) => {
+      if (peers[userId]) peers[userId].close();
+    });
+
+    myPeer.on("open", (id) => {
+      socket.emit("join-room", roomID, id);
+    });
   }, []);
 
   function addVideoStream(video, stream) {
@@ -66,50 +99,16 @@ export default function VideoCall() {
   }
   function connectToNewUser(userId, stream) {
     const call = myPeer.call(userId, stream);
-    console.log(call);
-
     const video = document.createElement("video");
     call.on("stream", (userVideoStream) => {
-      console.log(userVideoStream);
       addVideoStream(video, userVideoStream);
     });
     call.on("close", () => {
       video.remove();
     });
+
+    peers[userId] = call;
   }
-
-  const myVideo = document.createElement("video");
-  myVideo.muted = true;
-  const peers = {};
-  navigator.mediaDevices
-    .getUserMedia({
-      video: true,
-      audio: true,
-    })
-    .then((stream) => {
-      addVideoStream(myVideo, stream);
-
-      myPeer.on("call", (call) => {
-        console.log("Called");
-        call.answer(stream);
-        const video = document.createElement("video");
-        call.on("stream", (userVideoStream) => {
-          addVideoStream(video, userVideoStream);
-        });
-      });
-
-      socket.on("user-connected", (userId) => {
-        connectToNewUser(userId, stream);
-      });
-    });
-
-  socket.on("user-disconnected", (userId) => {
-    if (peers[userId]) peers[userId].close();
-  });
-
-  myPeer.on("open", (id) => {
-    socket.emit("join-room", roomID, id);
-  });
 
   return <></>;
 }
