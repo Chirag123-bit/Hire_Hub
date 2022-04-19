@@ -1,8 +1,9 @@
 const videoGrid = document.getElementById("video-grid");
-const myPeer = new Peer(undefined, {
-  host: "/",
-  port: "3001",
-});
+console.log("sjdnasdas");
+// const myPeer = new Peer(undefined, {
+//   host: "/",
+//   port: "3001",
+// });
 const myVideo = document.createElement("video");
 myVideo.muted = true;
 const peers = {};
@@ -18,6 +19,7 @@ navigator.mediaDevices
       call.answer(stream);
       const video = document.createElement("video");
       call.on("stream", (userVideoStream) => {
+        console.log("Called");
         addVideoStream(video, userVideoStream);
       });
     });
@@ -32,6 +34,7 @@ socket.on("user-disconnected", (userId) => {
 });
 
 myPeer.on("open", (id) => {
+  console.log("log");
   socket.emit("join-room", ROOM_ID, id);
 });
 

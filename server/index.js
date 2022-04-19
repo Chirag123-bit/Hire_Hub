@@ -54,7 +54,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("join-room", ({ roomId, userId }) => {
-    socket.join(roomId);
-    socket.to(roomId).emit("user-connected", userId);
+    const clientsInRoom = io.in(roomId).allSockets();
+    if (!userId in clientsInRoom) {
+      socket.join(roomId);
+    }
+    socket.to(roomId).broadcast.emit("user-connected", userId);
   });
 });
