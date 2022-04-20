@@ -6,6 +6,8 @@ import {
   channelName,
 } from "./settings";
 import { Grid } from "@material-ui/core";
+import Controls from "./Controls";
+import Videos from "./Video";
 
 export default function VideoCall(props) {
   const { setInCall } = props;
@@ -26,6 +28,7 @@ export default function VideoCall(props) {
         if (mediaType === "audio") {
           user.audioTrack.play();
         }
+        console.log(user);
       });
 
       client.on("user-unpublished", (user, mediaType) => {
@@ -48,7 +51,7 @@ export default function VideoCall(props) {
       });
 
       try {
-        await client.join(config.appId, name, config.token, null);
+        await client.join(config.appId, name, config.token, 0);
       } catch (e) {
         console.log(e);
       }
@@ -64,4 +67,17 @@ export default function VideoCall(props) {
       }
     }
   }, [channelName, client, ready, tracks]);
+
+  return (
+    <Grid direction="column" style={{ height: "100vh", width: "100vw" }}>
+      <Grid item style={{ height: "5%" }}>
+        {ready && tracks && (
+          <Controls tracks={tracks} setStart={setStart} setInCall={setInCall} />
+        )}
+      </Grid>
+      <Grid item style={{ height: "90%" }}>
+        {start && tracks && <Videos tracks={tracks} users={users} />}
+      </Grid>
+    </Grid>
+  );
 }

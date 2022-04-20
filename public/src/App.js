@@ -9,6 +9,7 @@ import SigninPage from "./pages/signin";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SetAvatar from "./pages/SetAvatar";
+import VideoCall from "./components/Meeting/VideoCall";
 // import VideoApp from "./components/videoCall";
 
 function App() {
@@ -21,8 +22,15 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/setAvatar" element={<SetAvatar />} />
-        <Route path="/chat" element={<Chat />} />
+        <Route
+          path="/chat"
+          element={<Chat inCall={inCall} setInCall={setInCall} />}
+        />
         {/* <Route path="/videoCall/" element={<VideoApp />} /> */}
+        <Route
+          path="/videoCall"
+          element={<VideoCall setInCall={setInCall} />}
+        />
       </Routes>
       <ToastContainer autoClose={500} />
     </Router>

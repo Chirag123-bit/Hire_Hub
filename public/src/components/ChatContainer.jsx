@@ -8,7 +8,13 @@ import { sendMessageRoute, getAllMessageRoute } from "../utils/APIRoutes";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
 
-export default function ChatContainer({ currentChat, currentUser, socket }) {
+export default function ChatContainer({
+  currentChat,
+  currentUser,
+  socket,
+  inCall,
+  setInCall,
+}) {
   const [messages, setMessages] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const scrollRef = useRef();
@@ -75,7 +81,11 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
               </div>
             </div>
 
-            <VideoButton currentUser={currentUser} />
+            <VideoButton
+              currentUser={currentUser}
+              inCall={inCall}
+              setInCall={setInCall}
+            />
 
             <Logout />
           </div>

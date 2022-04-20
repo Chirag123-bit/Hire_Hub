@@ -6,18 +6,15 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
-export default function VideoButton({ currentUser }) {
+export default function VideoButton({ currentUser, inCall, setInCall }) {
   let navigate = useNavigate();
   const handleClick = async () => {
-    const roomId = uuid();
-    const response = await axios.post(`${videoCall}/${roomId}`, {});
+    // const roomId = uuid();
+    setInCall(true);
 
-    navigate("/videoCall/" + roomId, {
-      state: {
-        user: currentUser,
-      },
-    });
+    navigate("/videoCall");
   };
+
   return (
     <Button onClick={handleClick}>
       <BiVideo />
