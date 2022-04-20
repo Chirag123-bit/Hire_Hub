@@ -8,7 +8,7 @@ import Welcome from "../components/Welcome";
 import ChatContainer from "../components/ChatContainer";
 import { io } from "socket.io-client";
 
-export const Chat = () => {
+export const Chat = ({ inCall, setInCall }) => {
   const socket = useRef();
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
@@ -66,6 +66,8 @@ export const Chat = () => {
             currentChat={currentChat}
             currentUser={currentUser}
             socket={socket}
+            inCall={inCall}
+            setInCall={setInCall}
           />
         )}
       </div>

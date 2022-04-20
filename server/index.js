@@ -3,6 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
 const messageRoute = require("./routes/messagesRoute");
+const videoRoute = require("./routes/videoRoute");
 const socket = require("socket.io");
 
 const app = express();
@@ -10,8 +11,10 @@ require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
+
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoute);
+app.use("/api/video", videoRoute);
 
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -48,5 +51,13 @@ io.on("connection", (socket) => {
     if (sendUserSocket) {
       socket.to(sendUserSocket).emit("msg-recive", data.message);
     }
+  });
+
+  socket.on("join-room", ({ roomId, userId }) => {
+    const clientsInRoom = io.in(roomId).allSockets();
+    if (!userId in clientsInRoom) {
+      socket.join(roomId);
+    }
+    socket.broadcast.to(roomId).emit("user-connected", userId);
   });
 });
