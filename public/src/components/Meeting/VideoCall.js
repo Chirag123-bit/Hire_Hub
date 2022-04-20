@@ -28,25 +28,22 @@ export default function VideoCall(props) {
         if (mediaType === "audio") {
           user.audioTrack.play();
         }
-        console.log(user);
       });
 
       client.on("user-unpublished", (user, mediaType) => {
         if (mediaType === "audio") {
-          if (user.audioTrack) {
-            user.audioTrack.stop();
-          }
-          if (mediaType === "video") {
-            setUsers((prevUsers) => {
-              return prevUsers.filter((User) => User.uid != user.uid);
-            });
-          }
+          if (user.audioTrack) user.audioTrack.stop();
+        }
+        if (mediaType === "video") {
+          setUsers((prevUsers) => {
+            return prevUsers.filter((User) => User.uid !== user.uid);
+          });
         }
       });
 
       client.on("user-left", (user) => {
         setUsers((prevUsers) => {
-          return prevUsers.filter((User) => User.uid != user.uid);
+          return prevUsers.filter((User) => User.uid !== user.uid);
         });
       });
 
@@ -69,13 +66,16 @@ export default function VideoCall(props) {
   }, [channelName, client, ready, tracks]);
 
   return (
-    <Grid direction="column" style={{ height: "100vh", width: "100vw" }}>
+    <Grid
+      direction="column"
+      style={{ height: "99vh", width: "99vw", margin: "auto" }}
+    >
       <Grid item style={{ height: "5%" }}>
         {ready && tracks && (
           <Controls tracks={tracks} setStart={setStart} setInCall={setInCall} />
         )}
       </Grid>
-      <Grid item style={{ height: "90%" }}>
+      <Grid item style={{ height: "95%" }}>
         {start && tracks && <Videos tracks={tracks} users={users} />}
       </Grid>
     </Grid>
