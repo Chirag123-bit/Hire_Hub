@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SetAvatar from "./pages/SetAvatar";
 import VideoCall from "./components/Meeting/VideoCall";
+import ApplicantHome from "./pages/Seeker";
 // import VideoApp from "./components/videoCall";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
     <Router>
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route exact path="/applicant" element={<ApplicantHome />} />
         <Route exact path="/signin" element={<SigninPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
