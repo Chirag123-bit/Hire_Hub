@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/lab": "^4.0.0-alpha.61",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "agora-rtc-react": "^1.1.1",
+    "agora-rtc-sdk-ng": "^4.3.0",
     "axios": "^0.26.1",
     "bcrypt": "^5.0.1",
     "bootstrap": "^5.1.3",
