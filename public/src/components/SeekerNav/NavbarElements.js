@@ -8,7 +8,7 @@ import {
 } from "react-icons/bi";
 
 export const Nav = styled.nav`
-  background: ${({ scrollNav }) => (scrollNav ? "#000" : "transparent")};
+  background: ${({ scrollNav }) => (scrollNav ? "transparent" : "transparent")};
   height: 80px;
   margin-top: -80px;
   display: flex;
@@ -37,7 +37,7 @@ export const NavbarContainer = styled.div`
 `;
 
 export const NavLogo = styled(LinkR)`
-  color: #fff;
+  color: #045de9;
   justify-self: flex-start;
   cursor: pointer;
   font-size: 1.5rem;
@@ -83,7 +83,7 @@ export const NavItem = styled.li`
 `;
 
 export const NavLinks = styled(LinkS)`
-  color: #fff;
+  color: #000;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -93,10 +93,10 @@ export const NavLinks = styled(LinkS)`
   cursor: pointer;
 
   &:hover {
-    color: #01bf71;
+    color: #045de9;
   }
   &.active {
-    border-bottom: 4px solid #01bf71;
+    border-bottom: 4px solid #045de9;
   }
 `;
 
@@ -131,11 +131,11 @@ export const NavBtnLink = styled(LinkR)`
 `;
 
 export const Notification = styled(BiNotification)`
-  color: white !important;
+  color: black !important;
 `;
 export const Message = styled(BiMessageRounded)`
-  color: white !important;
+  color: black !important;
 `;
 export const Down = styled(BiDownArrowAlt)`
-  color: white !important;
+  color: black !important;
 `;
