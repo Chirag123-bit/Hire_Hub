@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { FcAdvertising } from "react-icons/fc";
 
 export const SolutionsContainer = styled.div`
-  height: 500px;
+  height: 700px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -30,44 +31,51 @@ export const CardsContainer = styled.div`
   padding: 1rem 0;
   border-radius: 1.2rem;
 `;
-
+export const FcAdvertisment = styled(FcAdvertising)`
+  font-size: 3rem;
+`;
 export const CategoryCard = styled(CardsContainer)`
   display: grid;
   grid-template-columns: [image-row] 1fr [context] 3fr;
-  width: 35%;
+  width: 30%;
+  justify-content: space-between;
   background-color: white;
-  width: min-content;
-  padding: 0.5rem 2rem;
+  padding: 1.5rem 2rem;
   text-align: center;
   margin: 1rem 0;
   padding-left: 0;
+  transition: all 0.2s ease-in-out;
 
   .box1 {
     grid-column-start: image-row;
-
-    img {
-      padding: 0.5rem;
-      width: 4rem;
-    }
+    transition: all 0.2s ease-in-out;
   }
   .box2 {
     grid-column-start: context;
+    transition: all 0.2s ease-in-out;
+
     p {
+      transition: all 0.2s ease-in-out;
+
       font-size: 14px;
       margin: 0;
     }
   }
   &:hover {
+    transition: all 0.2s ease-in-out;
     background-color: #423edd;
-    .box1 {
-      img {
-        fill: white;
-      }
-    }
     .box2 {
+      transition: all 0.2s ease-in-out;
       p,
       h6 {
         color: white;
+        transition: all 0.2s ease-in-out;
+      }
+    }
+    ${FcAdvertisment} {
+      g,
+      path {
+        fill: rgb(255, 254, 254);
       }
     }
   }

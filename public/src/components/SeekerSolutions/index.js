@@ -3,6 +3,7 @@ import {
   SolutionsContainer,
   CardsContainer,
   CategoryCard,
+  FcAdvertisment,
 } from "./SolutionComponents";
 import {
   ColoredSlogan,
@@ -21,7 +22,7 @@ function SeekerSolutions() {
       <CardsContainer>
         <CategoryCard>
           <div className="box1">
-            <img src={marketing} alt="marketing" />
+            <FcAdvertisment />
           </div>
           <div className="box2">
             <h6>Marketing and Communication</h6>
@@ -30,7 +31,7 @@ function SeekerSolutions() {
         </CategoryCard>
         <CategoryCard>
           <div className="box1">
-            <img src={marketing} alt="marketing" />
+            <FcAdvertisment />
           </div>
           <div className="box2">
             <h6>Marketing and Communication</h6>
@@ -39,7 +40,7 @@ function SeekerSolutions() {
         </CategoryCard>
         <CategoryCard>
           <div className="box1">
-            <img src={marketing} alt="marketing" />
+            <FcAdvertisment />
           </div>
           <div className="box2">
             <h6>Marketing and Communication</h6>
@@ -48,7 +49,7 @@ function SeekerSolutions() {
         </CategoryCard>
         <CategoryCard>
           <div className="box1">
-            <img src={marketing} alt="marketing" />
+            <FcAdvertisment />
           </div>
           <div className="box2">
             <h6>Marketing and Communication</h6>
@@ -57,7 +58,7 @@ function SeekerSolutions() {
         </CategoryCard>
         <CategoryCard>
           <div className="box1">
-            <img src={marketing} alt="marketing" />
+            <FcAdvertisment />
           </div>
           <div className="box2">
             <h6>Marketing and Communication</h6>
@@ -66,7 +67,7 @@ function SeekerSolutions() {
         </CategoryCard>
         <CategoryCard>
           <div className="box1">
-            <img src={marketing} alt="marketing" />
+            <FcAdvertisment />
           </div>
           <div className="box2">
             <h6>Marketing and Communication</h6>
@@ -75,7 +76,7 @@ function SeekerSolutions() {
         </CategoryCard>
         <CategoryCard>
           <div className="box1">
-            <img src={marketing} alt="marketing" />
+            <FcAdvertisment />
           </div>
           <div className="box2">
             <h6>Marketing and Communication</h6>
@@ -84,7 +85,16 @@ function SeekerSolutions() {
         </CategoryCard>
         <CategoryCard>
           <div className="box1">
-            <img src={marketing} alt="marketing" />
+            <FcAdvertisment />
+          </div>
+          <div className="box2">
+            <h6>Marketing and Communication</h6>
+            <p>100 Jobs Available</p>
+          </div>
+        </CategoryCard>
+        <CategoryCard>
+          <div className="box1">
+            <FcAdvertisment />
           </div>
           <div className="box2">
             <h6>Marketing and Communication</h6>
