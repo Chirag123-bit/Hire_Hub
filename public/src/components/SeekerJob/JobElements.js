@@ -35,7 +35,7 @@ export const TitleHolder = styled.div`
 
 export const JobCardsHoler = styled.div`
   width: 85%;
-  margin: auto;
+  margin: 1rem auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

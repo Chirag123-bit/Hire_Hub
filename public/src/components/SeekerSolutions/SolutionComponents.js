@@ -31,9 +31,11 @@ export const CardsContainer = styled.div`
   margin: 1rem 0;
   padding: 1rem 0;
   border-radius: 1.2rem;
+  cursor: pointer;
 `;
 export const FcAdvertisment = styled(FcAdvertising)`
   font-size: 3rem;
+  cursor: pointer;
 `;
 export const CategoryCard = styled(CardsContainer)`
   display: grid;
@@ -46,6 +48,7 @@ export const CategoryCard = styled(CardsContainer)`
   margin: 1rem 0;
   padding-left: 0;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 
   .box1 {
     grid-column-start: image-row;
