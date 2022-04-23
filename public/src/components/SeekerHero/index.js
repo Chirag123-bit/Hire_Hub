@@ -1,6 +1,7 @@
 import React from "react";
-import Particles from "react-tsparticles";
-import particle_config from "../config/particle_config";
+import "./style.css";
+import ParticleBackground from "./ParticleBackground";
+
 import {
   HeroContainer,
   ContentHolder,
@@ -18,7 +19,7 @@ import {
 function SeekerHero() {
   return (
     <HeroContainer>
-      <Particles params={particle_config} />
+      <ParticleBackground />
       <ContentHolder>
         <TextContent>
           <Slogan>

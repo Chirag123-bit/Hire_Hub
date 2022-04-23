@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import Particles from "react-tsparticles";
 
 export const HeroContainer = styled.div`
-  height: 500px;
+  height: 700px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -23,6 +24,7 @@ export const ContentHolder = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: absolute;
 `;
 
 export const TextContent = styled.div`
