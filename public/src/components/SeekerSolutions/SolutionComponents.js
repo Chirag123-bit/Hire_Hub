@@ -11,7 +11,7 @@ export const SolutionsContainer = styled.div`
   background: #010606;
   background-color: rgb(246, 246, 253);
   padding: 5rem 0;
-  position: absolute;
+  /* position: absolute; */
 
   @media screen and (max-width: 768px) {
     height: 1100px;

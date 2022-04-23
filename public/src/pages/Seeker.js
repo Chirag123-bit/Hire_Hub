@@ -4,6 +4,7 @@ import SeekerNav from "../components/SeekerNav";
 import Footer from "../components/Footer";
 import SeekerHero from "../components/SeekerHero";
 import SeekerSolutions from "../components/SeekerSolutions";
+import SeekerJob from "../components/SeekerJob";
 
 const ApplicantHome = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,7 @@ const ApplicantHome = () => {
 
       <SeekerHero />
       <SeekerSolutions />
+      <SeekerJob />
       <Footer />
     </>
   );
