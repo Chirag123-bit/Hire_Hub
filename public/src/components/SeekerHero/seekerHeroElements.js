@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Particles from "react-tsparticles";
 
 export const HeroContainer = styled.div`
   height: 700px;
@@ -65,12 +64,14 @@ export const SearchContainer = styled.form`
   -moz-box-shadow: 10px 17px 71px 0px rgba(174, 167, 167, 0.75);
   border-radius: 2rem;
   width: max-content;
+  background-color: rgb(255, 254, 254);
 `;
 export const JobSearch = styled.input`
   border-radius: 2rem;
   border: none;
   padding: 0.5rem;
   text-align: center;
+  outline: none;
 `;
 
 export const LocationFilter = styled.select`
