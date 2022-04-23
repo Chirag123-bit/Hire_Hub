@@ -1,19 +1,2 @@
 @import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@400;700&family=Josefin+Sans:wght@100;200;300;500;600;700&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body,
-button,
-input {
-  font-family: "Josefin Sans", sans-serif;
-}
-
-body {
-  max-height: 100vh;
-  max-width: 100vw;
-  overflow: hidden;
-}
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@400;700&family=Source+Sans+Pro:ital@1&display=swap");

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const JobsContainer = styled.div`
-  height: 700px;
+  height: min-content;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -21,7 +21,7 @@ export const JobsContainer = styled.div`
 
 export const ContentHolder = styled.div`
   padding: 0.5rem 1rem;
-  width: 80%;
+  width: 90%;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@ export const TitleHolder = styled.div`
 `;
 
 export const JobCardsHoler = styled.div`
-  width: 90%;
+  width: 85%;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
@@ -45,12 +45,19 @@ export const JobCardsHoler = styled.div`
 export const JobCard = styled.div`
   display: flex;
   flex-direction: column;
-  box-shadow: 1px -2px 6px -1px rgba(0, 0, 0, 0.81);
-  -webkit-box-shadow: 1px -2px 6px -1px rgba(0, 0, 0, 0.81);
-  -moz-box-shadow: 1px -2px 6px -1px rgba(0, 0, 0, 0.81);
+  /* box-shadow: 0px 0px 0px grey; */
+  box-shadow: 1px 1px 1px 0px rgba(69, 65, 221, 0.75);
+  -webkit-box-shadow: 1px 1px 1px 0px rgba(69, 65, 221, 0.75);
+  -moz-box-shadow: 1px 1px 1px 0px rgba(69, 65, 221, 0.75);
   padding: 0 1rem;
   max-width: 25%;
   justify-content: space-between;
+  transition: box-shadow 0.3s ease-in;
+  margin: 1rem;
+  &:hover {
+    box-shadow: 1px 8px 20px rgba(69, 65, 221, 0.75);
+    transition: box-shadow 0.3s ease-in;
+  }
 `;
 
 export const CompanyInfoHoler = styled.div`
@@ -94,11 +101,13 @@ export const JobTitleHolder = styled.div`
 
 export const JobTitle = styled.h4`
   margin-bottom: 0;
+  font-family: "Encode Sans Expanded", sans-serif;
 `;
 
 export const JobType = styled.p`
   font-size: 15px;
-  color: #c5c4cc;
+  color: gray;
+  font-family: "Encode Sans Expanded", sans-serif;
 `;
 
 export const JobDescriptionBox = styled.div`
@@ -110,9 +119,10 @@ export const JobDescription = styled.p`
   max-width: 100%;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  color: #dcdcdc;
+  color: rgb(112, 137, 157);
+  font-family: "Source Sans Pro", sans-serif;
 `;
 
 export const JobFooter = styled.div`
@@ -135,4 +145,12 @@ export const ApplyButton = styled.button`
   color: rgb(69, 65, 221);
   background-color: #f8f6fe;
   padding: 0.2rem 0.5rem;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transition: all 0.3s ease-in-out;
+
+    background-color: rgb(66, 62, 221);
+    color: white;
+  }
 `;
