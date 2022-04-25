@@ -18,10 +18,13 @@ import {
 } from "./JobElements";
 import { Slogan, ColoredSlogan } from "../SeekerHero/seekerHeroElements";
 import { SiMicrosoft } from "react-icons/si";
+import ParticleBackground from "./ParticleBackground";
+import "./style.css";
 
 function SeekerJob() {
   return (
     <JobsContainer>
+      <ParticleBackground />
       <ContentHolder>
         <TitleHolder>
           <Slogan>

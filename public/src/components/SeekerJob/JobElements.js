@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const JobsContainer = styled.div`
-  height: min-content;
+  height: 900px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -26,6 +26,7 @@ export const ContentHolder = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: absolute;
 `;
 
 export const TitleHolder = styled.div`
@@ -45,10 +46,10 @@ export const JobCardsHoler = styled.div`
 export const JobCard = styled.div`
   display: flex;
   flex-direction: column;
-  /* box-shadow: 0px 0px 0px grey; */
-  box-shadow: 1px 1px 1px 0px rgba(69, 65, 221, 0.75);
-  -webkit-box-shadow: 1px 1px 1px 0px rgba(69, 65, 221, 0.75);
-  -moz-box-shadow: 1px 1px 1px 0px rgba(69, 65, 221, 0.75);
+  background-color: rgb(255, 254, 254);
+  box-shadow: 7px 7px 22px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 7px 7px 22px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 7px 7px 22px 0px rgba(0, 0, 0, 0.75);
   padding: 0 1rem;
   max-width: 25%;
   justify-content: space-between;
