@@ -50,42 +50,51 @@ const SeekerNav = ({ toggle }) => {
             <NavMenu>
               <NavItem>
                 <NavLinks
-                  to="about"
+                  to="home"
                   smooth={true}
                   duration={500}
                   spy={true}
                   exact="true"
-                  offset={-80}
+                  onClick={toggleHome}
                 >
                   Home
                 </NavLinks>
               </NavItem>
               <NavItem>
                 <NavLinks
-                  to="discover"
+                  to="category"
                   smooth={true}
                   duration={500}
                   spy={true}
                   exact="true"
-                  offset={-80}
+                  // offset={-80}
                 >
                   Categories
                 </NavLinks>
               </NavItem>
               <NavItem>
                 <NavLinks
-                  to="services"
+                  to="jobs"
                   smooth={true}
                   duration={500}
                   spy={true}
                   exact="true"
-                  offset={-80}
+                  // offset={-80}
                 >
                   Jobs
                 </NavLinks>
               </NavItem>
               <NavItem>
-                <NavLinks to="signup">Companies</NavLinks>
+                <NavLinks
+                  to="companies"
+                  smooth={true}
+                  duration={500}
+                  spy={true}
+                  exact="true"
+                  // offset={-80}
+                >
+                  Companies
+                </NavLinks>
               </NavItem>
             </NavMenu>
             <NavImp>

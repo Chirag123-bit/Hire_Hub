@@ -17,7 +17,7 @@ import {
   Sallary,
 } from "./JobElements";
 import { Slogan, ColoredSlogan } from "../SeekerHero/seekerHeroElements";
-import { SiMicrosoft } from "react-icons/si";
+import { FcBrokenLink } from "react-icons/fc";
 import ParticleBackground from "./ParticleBackground";
 import "./style.css";
 
@@ -35,7 +35,7 @@ function SeekerJob() {
           <JobCard>
             <CompanyInfoHoler>
               <div className="box1">
-                <SiMicrosoft style={{ fontSize: "1.5rem" }} />
+                <FcBrokenLink style={{ fontSize: "1.5rem" }} />
               </div>
               <div className="box2">
                 <h6>Microsoft</h6>
@@ -62,7 +62,7 @@ function SeekerJob() {
           <JobCard>
             <CompanyInfoHoler>
               <div className="box1">
-                <SiMicrosoft style={{ fontSize: "1.5rem" }} />
+                <FcBrokenLink style={{ fontSize: "1.5rem" }} />
               </div>
               <div className="box2">
                 <h6>Microsoft</h6>
@@ -89,7 +89,7 @@ function SeekerJob() {
           <JobCard>
             <CompanyInfoHoler>
               <div className="box1">
-                <SiMicrosoft style={{ fontSize: "1.5rem" }} />
+                <FcBrokenLink style={{ fontSize: "1.5rem" }} />
               </div>
               <div className="box2">
                 <h6>Microsoft</h6>
@@ -116,7 +116,7 @@ function SeekerJob() {
           <JobCard>
             <CompanyInfoHoler>
               <div className="box1">
-                <SiMicrosoft style={{ fontSize: "1.5rem" }} />
+                <FcBrokenLink style={{ fontSize: "1.5rem" }} />
               </div>
               <div className="box2">
                 <h6>Microsoft</h6>
@@ -143,7 +143,7 @@ function SeekerJob() {
           <JobCard>
             <CompanyInfoHoler>
               <div className="box1">
-                <SiMicrosoft style={{ fontSize: "1.5rem" }} />
+                <FcBrokenLink style={{ fontSize: "1.5rem" }} />
               </div>
               <div className="box2">
                 <h6>Microsoft</h6>
@@ -170,7 +170,7 @@ function SeekerJob() {
           <JobCard>
             <CompanyInfoHoler>
               <div className="box1">
-                <SiMicrosoft style={{ fontSize: "1.5rem" }} />
+                <FcBrokenLink style={{ fontSize: "1.5rem" }} />
               </div>
               <div className="box2">
                 <h6>Microsoft</h6>

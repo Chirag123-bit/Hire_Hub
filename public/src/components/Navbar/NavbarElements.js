@@ -1,20 +1,25 @@
 import styled from "styled-components";
-import { Link as LinkR } from "react-router-dom";
-import { Link as LinkS } from "react-scroll";
+import { Link } from "react-router-dom";
+import { Link as LinkScroll } from "react-scroll";
 
+/*======== CSS Variables: ========*/
+const varHeaderHeight = "5rem";
+const firstColor = "#00bb77";
+const firstAltColor = "#009955";
+
+/*======== Components: ========*/
 export const Nav = styled.nav`
+  //If user scroll than the background is black. If not, it's transparent:
   background: ${({ scrollNav }) => (scrollNav ? "#000" : "transparent")};
-  height: 80px;
-  margin-top: -80px;
+  height: ${varHeaderHeight};
+  margin-top: -${varHeaderHeight};
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: -webkit-center;
   font-size: 1rem;
   position: sticky;
   top: 0;
   z-index: 10;
-
   @media screen and (max-width: 960px) {
     transition: 0.8s all ease;
   }
@@ -23,15 +28,14 @@ export const Nav = styled.nav`
 export const NavbarContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  height: 80px;
+  height: ${varHeaderHeight};
   z-index: 1;
   width: 100%;
   padding: 0 24px;
   max-width: 1100px;
 `;
 
-export const NavLogo = styled(LinkR)`
+export const NavLogo = styled(LinkScroll)`
   color: #fff;
   justify-self: flex-start;
   cursor: pointer;
@@ -41,23 +45,19 @@ export const NavLogo = styled(LinkR)`
   margin-left: 24px;
   font-weight: bold;
   text-decoration: none;
-
-  &:hover {
-    color: #01bf71;
-  }
 `;
 
 export const MobileIcon = styled.div`
   display: none;
   @media screen and (max-width: 768px) {
     display: block;
+    color: #fff;
     position: absolute;
     top: 0;
     right: 0;
     transform: translate(-100%, 60%);
     font-size: 1.8rem;
     cursor: pointer;
-    color: #fff;
   }
 `;
 
@@ -67,17 +67,17 @@ export const NavMenu = styled.div`
   list-style: none;
   text-align: center;
   margin-right: -22px;
-
   @media screen and (max-width: 768px) {
     display: none;
   }
 `;
 
-export const NavItem = styled.li`
-  height: 80px;
+export const NavItem = styled.div`
+  height: 5rem;
 `;
 
-export const NavLinks = styled(LinkS)`
+//This navLinks component is a link from react-scroll lib:
+export const NavLinks = styled(LinkScroll)`
   color: #fff;
   display: flex;
   align-items: center;
@@ -86,17 +86,18 @@ export const NavLinks = styled(LinkS)`
   font-weight: 600;
   height: 100%;
   cursor: pointer;
-
+  /* &.signUp {
+    color: ${firstColor};
+  } */
   &:hover {
-    color: #01bf71;
+    color: ${firstAltColor};
   }
   &.active {
-    border-bottom: 4px solid #01bf71;
+    border-bottom: 4px solid ${firstColor};
   }
 `;
 
-// border-bottom: 3px solid #01bf71;
-export const NavBtn = styled.div`
+export const NavBtn = styled.nav`
   display: flex;
   align-items: center;
   @media screen and (max-width: 768px) {
@@ -104,22 +105,21 @@ export const NavBtn = styled.div`
   }
 `;
 
-export const NavBtnLink = styled(LinkR)`
+export const NavBtnLink = styled(Link)`
   border-radius: 50px;
-  background: #01bf71;
+  background: ${firstColor};
   white-space: nowrap;
-  padding: 10px 22px;
-  color: #010606;
-  fonr-size: 16px;
+  padding: 10px 24px;
+  color: #000;
+  font-weight: 600;
+  font-size: 1rem;
   outline: none;
   border: none;
   cursor: pointer;
-  transition: 0.2s all ease-in-out;
+  transition: all 0.2 ease-in-out;
   text-decoration: none;
-
   &:hover {
-    transition: 0.2s all ease-in-out;
-    background: white !important;
-    color: #010606;
+    transition: all 0.2 ease-in-out;
+    background: ${firstAltColor};
   }
 `;

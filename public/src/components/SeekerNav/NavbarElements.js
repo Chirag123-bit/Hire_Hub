@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link as LinkR } from "react-router-dom";
-import { Link as LinkS } from "react-scroll";
+
 import {
   BiNotification,
   BiMessageRounded,
@@ -8,7 +8,8 @@ import {
 } from "react-icons/bi";
 
 export const Nav = styled.nav`
-  background: ${({ scrollNav }) => (scrollNav ? "transparent" : "transparent")};
+  background: ${({ scrollNav }) =>
+    scrollNav ? "rgba(0,0,0, 0.3)" : "transparent"};
   height: 80px;
   margin-top: -80px;
   display: flex;
@@ -19,9 +20,10 @@ export const Nav = styled.nav`
   position: sticky;
   top: 0;
   z-index: 10;
+  transition: 0.2s all linear;
 
   @media screen and (max-width: 960px) {
-    transition: 0.8s all ease;
+    transition: 0.2s all ease;
   }
 `;
 
@@ -34,6 +36,7 @@ export const NavbarContainer = styled.div`
   width: 100%;
   padding: 0 24px;
   max-width: 1100px;
+  transition: 0.2s all linear;
 `;
 
 export const NavLogo = styled(LinkR)`
@@ -82,7 +85,7 @@ export const NavItem = styled.li`
   height: 80px;
 `;
 
-export const NavLinks = styled(LinkS)`
+export const NavLinks = styled(LinkR)`
   color: #000;
   display: flex;
   align-items: center;
