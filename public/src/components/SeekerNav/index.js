@@ -86,7 +86,7 @@ const SeekerNav = ({ toggle }) => {
               </NavItem>
               <NavItem>
                 <NavLinks
-                  to="companies"
+                  to="company"
                   smooth={true}
                   duration={500}
                   spy={true}

@@ -35,18 +35,18 @@ export const homeObjTwo = {
 };
 
 export const homeObjThree = {
-  id: "test",
+  id: "explore",
   lightBg: true,
   lightText: false,
   lightTextDesc: false,
-  topLine: "Discover Our Services",
+  topLine: "Explore Our Services",
   headline: "Looking For a Change?",
   description:
     "Whether you are looking for looking for new opportunity or career growth, We've got you covered. Discover our services below",
   button_label: "Learn More",
   imgStart: false,
   img: require("../../images/svg-3.svg").default,
-  alt: "Discover Image",
+  alt: "Explore Image",
   dark: false,
   primary: false,
   darkText: true,

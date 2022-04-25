@@ -90,10 +90,10 @@ export const NavLinks = styled(LinkScroll)`
     color: ${firstColor};
   } */
   &:hover {
-    color: ${firstAltColor};
+    color: #423edd;
   }
   &.active {
-    border-bottom: 4px solid ${firstColor};
+    border-bottom: 4px solid #423edd;
   }
 `;
 
@@ -107,10 +107,10 @@ export const NavBtn = styled.nav`
 
 export const NavBtnLink = styled(Link)`
   border-radius: 50px;
-  background: ${firstColor};
+  background: #423edd;
   white-space: nowrap;
   padding: 10px 24px;
-  color: #000;
+  color: white;
   font-weight: 600;
   font-size: 1rem;
   outline: none;
@@ -120,6 +120,7 @@ export const NavBtnLink = styled(Link)`
   text-decoration: none;
   &:hover {
     transition: all 0.2 ease-in-out;
-    background: ${firstAltColor};
+    background-color: white;
+    color: black;
   }
 `;
