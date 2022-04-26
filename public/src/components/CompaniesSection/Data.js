@@ -6,7 +6,7 @@ export const catObjOne = {
 };
 export const catObjTwo = {
   Sector: "Real Estate",
-  Company_Name: "Brookfield Asset Management",
+  Company_Name: "Brookfield Asset",
   no_of_jobs: "10",
   white: true,
 };

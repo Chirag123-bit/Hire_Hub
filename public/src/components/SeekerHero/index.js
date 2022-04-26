@@ -19,7 +19,7 @@ import {
 function SeekerHero() {
   return (
     <HeroContainer>
-      <ParticleBackground />
+      {/* <ParticleBackground /> */}
       <ContentHolder>
         <TextContent>
           <Slogan>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeadSectionContainer = styled.div`
-  height: 400px;
+  height: 650px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -20,6 +20,7 @@ export const HeadSectionContainer = styled.div`
 `;
 
 export const ContentHolder = styled.div`
+  position: absolute;
   width: 90%;
   margin: auto;
 `;

@@ -35,7 +35,7 @@ export const CategoryCard = styled.div`
   flex-direction: column;
   background-color: ${({ white }) => (white ? "#F6F6FD" : "#FFFEFE")};
 
-  padding: 1rem 3rem;
+  padding: 2rem 3rem;
   text-align: center;
   justify-content: center;
   width: 30%;
@@ -43,12 +43,12 @@ export const CategoryCard = styled.div`
 `;
 
 export const ImageSection = styled.div`
-  width: 50%;
+  width: 30%;
   /* margin: 0.5rem; */
   margin: auto;
 `;
 export const CatImage = styled.img`
-  width: 100px;
+  width: 80%;
 `;
 
 export const TitleSection = styled.div`

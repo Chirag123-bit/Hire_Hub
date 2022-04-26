@@ -38,6 +38,8 @@
     "socket.io-client": "^4.4.1",
     "styled-components": "^5.3.5",
     "tsparticles": "^2.0.6",
+    "tsparticles-plugin-polygon-mask": "^2.0.6",
+    "tsparticles-preset-triangles": "^2.0.6",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },
