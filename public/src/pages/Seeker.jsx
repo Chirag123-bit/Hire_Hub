@@ -6,6 +6,8 @@ import SeekerNav from "../components/SeekerNav";
 import Sidebar from "../components/Sidebar";
 import ApplicantHome from "../components/SeekerHome";
 import SeekerCompany from "../components/SeekerCompany";
+import SeekerJobs from "../components/SeekerJobComponent/SeekerJobs";
+// import SeekerJobs from "../components/SeekerJobComponent/SeekerJobs";
 
 export default function Seeker() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +21,7 @@ export default function Seeker() {
         <Route path="/home" element={<ApplicantHome id="home" />} />
         <Route path="/category" element={<SeekerCategory />} />
         <Route path="/company" element={<SeekerCompany />} />
+        <Route path="/jobs" element={<SeekerJobs />} />
       </Routes>
 
       <Footer />

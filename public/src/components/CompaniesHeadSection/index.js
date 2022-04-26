@@ -10,10 +10,13 @@ import {
   HeadSubtitle,
   HeadTitle,
 } from "../CategoryLoadSection/CategoryElements";
+import "../SeekerHero/style.css";
+import ParticleBackground from "./ParticleBackground";
 
 function CompanyHeadSection() {
   return (
     <HeadSectionContainer>
+      <ParticleBackground />
       <ContentHolder>
         <HeadTitle>
           <Slogan>

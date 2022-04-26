@@ -24,7 +24,7 @@ import "./style.css";
 function SeekerJob() {
   return (
     <JobsContainer>
-      {/* <ParticleBackground /> */}
+      <ParticleBackground />
       <ContentHolder>
         <TitleHolder>
           <Slogan>

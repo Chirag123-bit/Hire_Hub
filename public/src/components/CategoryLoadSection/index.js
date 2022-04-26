@@ -10,13 +10,13 @@ import {
   HeadSubtitle,
   HeadTitle,
 } from "./CategoryElements";
-// import ParticleBackground from "./ParticleBackground";
+import ParticleBackground from "./ParticleBackground";
 import "../SeekerHero/style.css";
 
 function CategoryDescription() {
   return (
     <HeadSectionContainer>
-      {/* <ParticleBackground /> */}
+      <ParticleBackground />
 
       <ContentHolder>
         <HeadTitle>
