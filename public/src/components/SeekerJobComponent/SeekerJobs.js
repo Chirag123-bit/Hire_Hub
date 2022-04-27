@@ -8,6 +8,7 @@ import {
   HomePanalWrap,
   ListWrap,
 } from "./JobComponents";
+import { dataList } from "../SearchbarComponent/Constants";
 
 function SeekerJobs() {
   const [selectedType, setSelectedType] = useState(null);
@@ -54,13 +55,11 @@ function SeekerJobs() {
   ]);
 
   const handleChangeChecked = (id) => {
-    const locationStateList = locations;
     const changeCheckedLocations = locations.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
 
     setLocations(changeCheckedLocations);
-    console.log(locations);
   };
 
   const [selectedPrice, setSelectedPrice] = useState([0, 100]);
@@ -68,6 +67,8 @@ function SeekerJobs() {
   const handleChangePrice = (event, value) => {
     setSelectedPrice(value);
   };
+
+  const [list, setList] = useState(dataList);
   return (
     <div id="jobs">
       <ContentHolder>
@@ -86,7 +87,7 @@ function SeekerJobs() {
             />
           </HomePanalWrap>
           <ListWrap>
-            <ListComponent />
+            <ListComponent list={list} />
           </ListWrap>
         </HomePanalListWrap>
       </ContentHolder>

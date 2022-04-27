@@ -11,7 +11,9 @@ export const InputGroup = styled.div`
   margin: 2rem 0;
 `;
 
-export const FilterContainer = styled.div``;
+export const FilterContainer = styled.div`
+  height: 100vh;
+`;
 
 export const LabelRange = styled.p`
   margin-bottom: 2.5rem;
