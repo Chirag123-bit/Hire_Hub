@@ -6,8 +6,9 @@ export const Label = styled.p`
   font-weight: 600;
 `;
 
-export const inputGroup = styled.div`
-  margin-bottom: 2rem;
+export const InputGroup = styled.div`
+  /* margin-bottom: 2rem; */
+  margin: 2rem 0;
 `;
 
 export const FilterContainer = styled.div``;

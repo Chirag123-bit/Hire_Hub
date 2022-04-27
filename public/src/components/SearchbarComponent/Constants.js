@@ -1,13 +1,28 @@
 export const categoryList = [
   {
     id: 1,
-    value: "place",
-    label: "🚩 Places",
+    value: "Technology",
+    label: "Technology",
   },
   {
     id: 2,
-    value: "dish",
-    label: "🍕 Dishes",
+    value: "Health",
+    label: "Health",
+  },
+  {
+    id: 3,
+    value: "Entertainment",
+    label: "Entertainment",
+  },
+  {
+    id: 4,
+    value: "Service",
+    label: "Service",
+  },
+  {
+    id: 5,
+    value: "Finance",
+    label: "Finance",
   },
 ];
 export const typeList = [

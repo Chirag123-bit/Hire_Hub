@@ -14,6 +14,11 @@ function SeekerJobs() {
   const handleSelectType = (event, value) => {
     return !value ? null : setSelectedType(value);
   };
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const selectCategoryToggle = (event, value) => {
+    console.log(value.props.value);
+    return !value ? null : setSelectedCategory(value.props.value);
+  };
   return (
     <div id="jobs">
       <ContentHolder>
@@ -23,6 +28,8 @@ function SeekerJobs() {
             <FilterPanel
               selectToggle={handleSelectType}
               selectedType={selectedType}
+              selectedCategory={selectedCategory}
+              selectCategoryToggle={selectCategoryToggle}
             />
           </HomePanalWrap>
           <ListWrap>

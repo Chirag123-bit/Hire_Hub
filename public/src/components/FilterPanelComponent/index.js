@@ -1,24 +1,35 @@
 import React from "react";
-import { typeList } from "../SearchbarComponent/Constants";
+import { FilterListSelect } from "../FilterListToggle";
+import { categoryList, typeList } from "../SearchbarComponent/Constants";
 import {
   Label,
-  inputGroup,
+  InputGroup,
   FilterContainer,
   Togglegroup,
 } from "./FilterComponents";
 
-function FilterPanel({ selectedType, selectToggle }) {
+function FilterPanel({ selectedType, selectToggle, selectCategoryToggle }) {
   return (
     <FilterContainer>
-      <inputGroup>
+      <InputGroup>
         <Label>Job Type</Label>
         <Togglegroup
           options={typeList}
           value={selectedType}
           selectToggle={selectToggle}
         />
-        {/* <TypeFilter /> */}
-      </inputGroup>
+      </InputGroup>
+
+      <InputGroup>
+        <Label style={{ marginTop: "2rem", marginBottom: 0 }}>
+          Job Category
+        </Label>
+        <FilterListSelect
+          options={categoryList}
+          selectCategoryToggle={selectCategoryToggle}
+          inputLabel="Select a Category"
+        />
+      </InputGroup>
       {/* <CategoryFilter></CategoryFilter>
       <LocationFilter></LocationFilter>
       <PayRangeFilter></PayRangeFilter> */}
