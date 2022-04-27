@@ -2,6 +2,7 @@ import React from "react";
 import CheckboxComponent from "../CheckboxComponent";
 import { FilterListSelect } from "../FilterListToggle";
 import { categoryList, typeList } from "../SearchbarComponent/Constants";
+import SliderComponent from "../SliderComponent";
 import {
   Label,
   InputGroup,
@@ -15,6 +16,8 @@ function FilterPanel({
   selectCategoryToggle,
   locations,
   changeChecked,
+  selectedPrice,
+  changedPrice,
 }) {
   return (
     <FilterContainer>
@@ -49,9 +52,11 @@ function FilterPanel({
           />
         ))}
       </InputGroup>
-      {/* <CategoryFilter></CategoryFilter>
-      <LocationFilter></LocationFilter>
-      <PayRangeFilter></PayRangeFilter> */}
+
+      <InputGroup>
+        <Label>Pay Range</Label>
+        <SliderComponent value={selectedPrice} changedPrice={changedPrice} />
+      </InputGroup>
     </FilterContainer>
   );
 }

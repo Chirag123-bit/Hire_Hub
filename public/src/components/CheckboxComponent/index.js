@@ -20,8 +20,9 @@ const useStyles = makeStyles({
     marginLeft: 0,
   },
   label: {
-    fontSize: "0.8rem",
+    fontSize: "1rem",
     fontFamily: `'Raleway', sans-sarif`,
+    fontWeight: 500,
   },
 });
 
@@ -47,6 +48,11 @@ function CheckboxComponent({ options, changeChecked }) {
           />
         }
         label={label}
+        style={{
+          color: checked ? "#045DE9" : "#212529",
+          fontWeight: "bold",
+          transition: "background-color 0.5s ease",
+        }}
       />
     </div>
   );

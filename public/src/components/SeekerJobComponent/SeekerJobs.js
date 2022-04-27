@@ -62,6 +62,12 @@ function SeekerJobs() {
     setLocations(changeCheckedLocations);
     console.log(locations);
   };
+
+  const [selectedPrice, setSelectedPrice] = useState([0, 100]);
+
+  const handleChangePrice = (event, value) => {
+    setSelectedPrice(value);
+  };
   return (
     <div id="jobs">
       <ContentHolder>
@@ -75,6 +81,8 @@ function SeekerJobs() {
               selectCategoryToggle={selectCategoryToggle}
               locations={locations}
               changeChecked={handleChangeChecked}
+              selectedPrice={selectedPrice}
+              changedPrice={handleChangePrice}
             />
           </HomePanalWrap>
           <ListWrap>

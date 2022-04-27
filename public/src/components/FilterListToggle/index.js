@@ -11,9 +11,10 @@ const useStyles = makeStyles({
   },
   toggle: {
     fontFamily: `'Raleway', sans-serif`,
-    fontSize: ".8rem",
+    fontSize: ".9rem",
     border: "1px solid rgba(0, 0, 0, 0.12)",
     borderRadius: "10px",
+
     "&.MuiToggleButtonGroup-groupedHorizontal:not(:last-child)": {
       borderRadius: "10px",
     },
@@ -23,12 +24,17 @@ const useStyles = makeStyles({
     },
     "&.Mui-selected": {
       borderRadius: "10px",
-      background: "#000",
+      backgroundColor: "#045DE9",
       color: "#fff",
     },
+    "&.MuiSelect-select:focus": {
+      borderRadius: 0,
+      backgroundColor: "transparent !important",
+    },
+
     "&.MuiToggleButton-root": {
       "&:hover": {
-        background: "#000",
+        background: "#045DE9",
         color: "#fff",
       },
     },
@@ -45,7 +51,12 @@ function FilterListToggle({ options, value, selectToggle }) {
       exclusive
     >
       {options.map(({ label, id, value }) => (
-        <ToggleButton className={classes.toggle} key={id} value={value}>
+        <ToggleButton
+          className={classes.toggle}
+          key={id}
+          value={value}
+          style={{ fontWeight: 500 }}
+        >
           {label}
         </ToggleButton>
       ))}
@@ -57,7 +68,6 @@ export default FilterListToggle;
 
 export function FilterListSelect({
   options,
-  value,
   selectCategoryToggle,
   inputLabel,
 }) {
@@ -68,7 +78,17 @@ export function FilterListSelect({
       <SelectBox
         onChange={selectCategoryToggle}
         className={classes.root}
-        style={{ backgroundColor: "transparent", color: "#045DE9" }}
+        style={{
+          backgroundColor: "transparent",
+          color: "#045DE9",
+          cursor: "pointer",
+          textAlign: "center",
+          fontWeight: 500,
+          fontSize: "1rem",
+        }}
+        onFocus={() => {
+          this.style.backgroundColor = "transparent";
+        }}
       >
         {options.map(({ label, id, value }) => (
           <MenuItem
