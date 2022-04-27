@@ -19,6 +19,49 @@ function SeekerJobs() {
     console.log(value.props.value);
     return !value ? null : setSelectedCategory(value.props.value);
   };
+
+  const [locations, setLocations] = useState([
+    {
+      id: 1,
+      checked: false,
+      label: "Nepal",
+    },
+    {
+      id: 2,
+      checked: false,
+      label: "India",
+    },
+    {
+      id: 3,
+      checked: false,
+      label: "China",
+    },
+    {
+      id: 4,
+      checked: false,
+      label: "Australia",
+    },
+    {
+      id: 5,
+      checked: false,
+      label: "United States",
+    },
+    {
+      id: 6,
+      checked: false,
+      label: "Russia",
+    },
+  ]);
+
+  const handleChangeChecked = (id) => {
+    const locationStateList = locations;
+    const changeCheckedLocations = locations.map((item) =>
+      item.id === id ? { ...item, checked: !item.checked } : item
+    );
+
+    setLocations(changeCheckedLocations);
+    console.log(locations);
+  };
   return (
     <div id="jobs">
       <ContentHolder>
@@ -30,6 +73,8 @@ function SeekerJobs() {
               selectedType={selectedType}
               selectedCategory={selectedCategory}
               selectCategoryToggle={selectCategoryToggle}
+              locations={locations}
+              changeChecked={handleChangeChecked}
             />
           </HomePanalWrap>
           <ListWrap>
