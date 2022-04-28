@@ -26,6 +26,7 @@
     "postscribe": "^2.0.8",
     "react": "^18.0.0",
     "react-bootstrap": "^2.2.3",
+    "react-country-region-selector": "^3.4.0",
     "react-dom": "^18.0.0",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.3.0",

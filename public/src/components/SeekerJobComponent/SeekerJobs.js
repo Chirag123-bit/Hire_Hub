@@ -15,37 +15,37 @@ function SeekerJobs() {
   const handleSelectType = (event, value) => {
     return !value ? null : setSelectedType(value);
   };
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const selectCategoryToggle = (event, value) => {
-    console.log(value.props.value);
-    return !value ? null : setSelectedCategory(value.props.value);
-  };
+  // const [selectedCategory, setSelectedCategory] = useState(null);
+  // const selectCategoryToggle = (event, value) => {
+  //   console.log(value.props.value);
+  //   return !value ? null : setSelectedCategory(value.props.value);
+  // };
 
-  const [locations, setLocations] = useState([
+  const [selectedCategory, setSelectedCategory] = useState([
     {
       id: 1,
       checked: false,
-      label: "Nepal",
+      label: "Technology",
     },
     {
       id: 2,
       checked: false,
-      label: "India",
+      label: "Health",
     },
     {
       id: 3,
       checked: false,
-      label: "China",
+      label: "Education",
     },
     {
       id: 4,
       checked: false,
-      label: "Australia",
+      label: "Service",
     },
     {
       id: 5,
       checked: false,
-      label: "United States",
+      label: "Finance",
     },
     {
       id: 6,
@@ -55,11 +55,11 @@ function SeekerJobs() {
   ]);
 
   const handleChangeChecked = (id) => {
-    const changeCheckedLocations = locations.map((item) =>
+    const changeCheckedCategory = selectedCategory.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
 
-    setLocations(changeCheckedLocations);
+    setSelectedCategory(changeCheckedCategory);
   };
 
   const [selectedPrice, setSelectedPrice] = useState([0, 100]);
@@ -67,6 +67,9 @@ function SeekerJobs() {
   const handleChangePrice = (event, value) => {
     setSelectedPrice(value);
   };
+
+  const [country, setCountry] = useState("");
+  const [region, setRegion] = useState("");
 
   const [list, setList] = useState(dataList);
   return (
@@ -79,11 +82,13 @@ function SeekerJobs() {
               selectToggle={handleSelectType}
               selectedType={selectedType}
               selectedCategory={selectedCategory}
-              selectCategoryToggle={selectCategoryToggle}
-              locations={locations}
               changeChecked={handleChangeChecked}
               selectedPrice={selectedPrice}
               changedPrice={handleChangePrice}
+              setCountry={setCountry}
+              country={country}
+              region={region}
+              setRegion={setRegion}
             />
           </HomePanalWrap>
           <ListWrap>

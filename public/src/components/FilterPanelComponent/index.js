@@ -3,21 +3,27 @@ import CheckboxComponent from "../CheckboxComponent";
 import { FilterListSelect } from "../FilterListToggle";
 import { categoryList, typeList } from "../SearchbarComponent/Constants";
 import SliderComponent from "../SliderComponent";
+
 import {
   Label,
   InputGroup,
   FilterContainer,
   Togglegroup,
+  Countrydropdown,
+  Regiondropdown,
 } from "./FilterComponents";
 
 function FilterPanel({
   selectedType,
   selectToggle,
-  selectCategoryToggle,
-  locations,
+  selectedCategory,
   changeChecked,
   selectedPrice,
   changedPrice,
+  setCountry,
+  country,
+  region,
+  setRegion,
 }) {
   return (
     <FilterContainer>
@@ -31,26 +37,33 @@ function FilterPanel({
       </InputGroup>
 
       <InputGroup>
-        <Label style={{ marginTop: "2rem", marginBottom: 0 }}>
-          Job Category
-        </Label>
+        <Label>Job Categories</Label>
+        {selectedCategory.map((category) => (
+          <CheckboxComponent
+            key={category.id}
+            options={category}
+            changeChecked={changeChecked}
+          />
+        ))}
+      </InputGroup>
 
-        <FilterListSelect
-          options={categoryList}
-          selectCategoryToggle={selectCategoryToggle}
-          inputLabel="Select a Category"
+      <InputGroup>
+        <Label>Country</Label>
+        <Countrydropdown
+          value={country}
+          onChange={(val) => {
+            setCountry(val);
+          }}
         />
       </InputGroup>
 
       <InputGroup>
-        <Label>Locations</Label>
-        {locations.map((location) => (
-          <CheckboxComponent
-            key={location.id}
-            options={location}
-            changeChecked={changeChecked}
-          />
-        ))}
+        <Label>Region</Label>
+        <Regiondropdown
+          country={country}
+          value={region}
+          onChange={(val) => setRegion(val)}
+        />
       </InputGroup>
 
       <InputGroup>
