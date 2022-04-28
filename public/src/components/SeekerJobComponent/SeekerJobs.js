@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FilterPanel from "../FilterPanelComponent";
 import ListComponent from "../ListComponent";
 import SearchBar from "../SearchbarComponent";
@@ -9,17 +9,15 @@ import {
   ListWrap,
 } from "./JobComponents";
 import { dataList } from "../SearchbarComponent/Constants";
+import { SearchInput } from "../SearchbarComponent/Components";
 
 function SeekerJobs() {
   const [selectedType, setSelectedType] = useState(null);
   const handleSelectType = (event, value) => {
     return !value ? null : setSelectedType(value);
   };
-  // const [selectedCategory, setSelectedCategory] = useState(null);
-  // const selectCategoryToggle = (event, value) => {
-  //   console.log(value.props.value);
-  //   return !value ? null : setSelectedCategory(value.props.value);
-  // };
+
+  const [inputSearch, setInputSearch] = useState("");
 
   const [selectedCategory, setSelectedCategory] = useState([
     {
@@ -50,7 +48,7 @@ function SeekerJobs() {
     {
       id: 6,
       checked: false,
-      label: "Russia",
+      label: "Entertainment",
     },
   ]);
 
@@ -72,10 +70,71 @@ function SeekerJobs() {
   const [region, setRegion] = useState("");
 
   const [list, setList] = useState(dataList);
+
+  const applyFilter = () => {
+    let updatedList = dataList;
+
+    if (selectedType) {
+      updatedList = updatedList.filter((item) => item.type === selectedType);
+    }
+
+    const categoryChecked = selectedCategory
+      .filter((item) => item.checked)
+      .map((item) => item.label);
+
+    if (categoryChecked.length > 0) {
+      updatedList = updatedList.filter((item) =>
+        categoryChecked.includes(item.category)
+      );
+    }
+
+    const minPrice = selectedPrice[0] * 1000;
+    const maxPrice = selectedPrice[1] * 1000;
+
+    updatedList = updatedList.filter(
+      (item) => item.sallary >= minPrice && item.sallary <= maxPrice
+    );
+
+    if (country !== "") {
+      updatedList = updatedList.filter(
+        (item) => item.company_country === country
+      );
+    }
+
+    if (region !== "") {
+      updatedList = updatedList.filter(
+        (item) => item.company_region === region
+      );
+    }
+
+    if (inputSearch) {
+      updatedList = updatedList.filter(
+        (item) =>
+          item.title.toLowerCase().search(inputSearch.toLowerCase().trim()) !==
+          -1
+      );
+    }
+
+    setList(updatedList);
+  };
+
+  useEffect(() => {
+    applyFilter();
+  }, [
+    selectedType,
+    selectedCategory,
+    selectedPrice,
+    country,
+    region,
+    inputSearch,
+  ]);
   return (
     <div id="jobs">
       <ContentHolder>
-        <SearchBar />
+        <SearchBar
+          value={inputSearch}
+          changeInput={(e) => setInputSearch(e.target.value)}
+        />
         <HomePanalListWrap>
           <HomePanalWrap>
             <FilterPanel

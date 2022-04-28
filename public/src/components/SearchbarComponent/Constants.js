@@ -28,41 +28,13 @@ export const categoryList = [
 export const typeList = [
   {
     id: 1,
-    value: "part",
+    value: "Part Time",
     label: "Part Time",
   },
   {
     id: 2,
-    value: "full",
+    value: "Full Time",
     label: "Full Time",
-  },
-];
-
-export const ratingList = [
-  {
-    id: 1,
-    value: "1",
-    label: "1🌟",
-  },
-  {
-    id: 2,
-    value: "2",
-    label: "2🌟",
-  },
-  {
-    id: 3,
-    value: "3",
-    label: "3🌟",
-  },
-  {
-    id: 4,
-    value: "4",
-    label: "4🌟",
-  },
-  {
-    id: 5,
-    value: "5",
-    label: "5🌟",
   },
 ];
 
@@ -70,7 +42,7 @@ export const dataList = [
   {
     id: 1,
     company_name: "Google",
-    company_city: "Kathmandu",
+    company_region: "Province No. 1",
     company_country: "Nepal",
     title: "Backend Developer",
     type: "Full Time",
@@ -82,8 +54,8 @@ export const dataList = [
   {
     id: 2,
     company_name: "Facebook",
-    company_city: "Kathmandu",
-    company_country: "India",
+    company_region: "Province No. 2",
+    company_country: "Nepal",
     title: "Frontend Developer",
     type: "Part Time",
     description:
@@ -94,7 +66,7 @@ export const dataList = [
   {
     id: 3,
     company_name: "Some Clinic",
-    company_city: "Kathmandu",
+    company_region: "Bagmati Provience",
     company_country: "China",
     title: "Nurse",
     type: "Full Time",
@@ -106,7 +78,7 @@ export const dataList = [
   {
     id: 4,
     company_name: "Cs States",
-    company_city: "Kathmandu",
+    company_region: "Kathmandu",
     company_country: "Australia",
     title: "Broker Agent",
     type: "Part Time",
@@ -118,7 +90,7 @@ export const dataList = [
   {
     id: 5,
     company_name: "Tesla",
-    company_city: "Kathmandu",
+    company_region: "Kathmandu",
     company_country: "United States",
     title: "Customer Representative",
     type: "Full Time",
@@ -130,8 +102,8 @@ export const dataList = [
   {
     id: 6,
     company_name: "SpaceX",
-    company_city: "Kathmandu",
-    company_country: "Russia",
+    company_region: "Kathmandu",
+    company_country: "Russian Federation",
     title: "Accountant",
     type: "Full Time",
     description:
@@ -142,8 +114,8 @@ export const dataList = [
   {
     id: 7,
     company_name: "SpaceX",
-    company_city: "Kathmandu",
-    company_country: "Russia",
+    company_region: "Kathmandu",
+    company_country: "Russian Federation",
     title: "Accountant",
     type: "Full Time",
     description:
@@ -154,8 +126,8 @@ export const dataList = [
   {
     id: 8,
     company_name: "SpaceX",
-    company_city: "Kathmandu",
-    company_country: "Russia",
+    company_region: "Kathmandu",
+    company_country: "Russian Federation",
     title: "Accountant",
     type: "Full Time",
     description:

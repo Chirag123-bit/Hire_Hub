@@ -33,6 +33,7 @@ export const Countrydropdown = styled(CountryDropdown)`
   outline: none;
   background-color: transparent;
   width: max-content;
+  border-radius: 0.8rem;
 
   option {
     text-align: left;
@@ -46,6 +47,7 @@ export const Regiondropdown = styled(RegionDropdown)`
   margin-bottom: 1rem;
   outline: none;
   background-color: transparent;
+  border-radius: 0.8rem;
 
   option {
     text-align: left;

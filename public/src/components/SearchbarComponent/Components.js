@@ -24,7 +24,8 @@ export const SearchInput = styled.input`
   font-size: 1.5rem;
   outline: none;
   border: none;
-  /* width: 100%; */
+  width: 100%;
+  border-radius: 2rem;
   font-family: "Raleway", sans-serif;
   color: #045de9;
   &::placeholder {

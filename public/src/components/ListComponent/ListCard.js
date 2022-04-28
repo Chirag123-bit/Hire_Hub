@@ -17,7 +17,7 @@ import {
 function Job({
   item: {
     company_name,
-    company_city,
+    company_region,
     company_country,
     title,
     type,
@@ -35,7 +35,7 @@ function Job({
         <div className="box2">
           <h6>{company_name}</h6>
           <p>
-            {company_city}, {company_country}
+            {company_region}, {company_country}
           </p>
         </div>
       </CompanyInfoHoler>

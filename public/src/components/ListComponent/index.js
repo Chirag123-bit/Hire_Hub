@@ -4,7 +4,6 @@ import Job from "./ListCard";
 import { JobCardsHoler } from "./listElements";
 
 function ListComponent({ list }) {
-  console.log(list);
   return (
     <JobCardsHoler>
       {list.map((item) => {
