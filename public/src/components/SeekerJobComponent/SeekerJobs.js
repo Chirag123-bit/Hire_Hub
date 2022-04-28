@@ -10,6 +10,7 @@ import {
 } from "./JobComponents";
 import { dataList } from "../SearchbarComponent/Constants";
 import { SearchInput } from "../SearchbarComponent/Components";
+import EmptyView from "../EmptyView";
 
 function SeekerJobs() {
   const [selectedType, setSelectedType] = useState(null);
@@ -70,6 +71,7 @@ function SeekerJobs() {
   const [region, setRegion] = useState("");
 
   const [list, setList] = useState(dataList);
+  const [resultFound, setResultFound] = useState(false);
 
   const applyFilter = () => {
     let updatedList = dataList;
@@ -116,6 +118,8 @@ function SeekerJobs() {
     }
 
     setList(updatedList);
+
+    !updatedList.length ? setResultFound(false) : setResultFound(true);
   };
 
   useEffect(() => {
@@ -151,7 +155,7 @@ function SeekerJobs() {
             />
           </HomePanalWrap>
           <ListWrap>
-            <ListComponent list={list} />
+            {resultFound ? <ListComponent list={list} /> : <EmptyView />}
           </ListWrap>
         </HomePanalListWrap>
       </ContentHolder>
