@@ -7,6 +7,7 @@ import Sidebar from "../components/Sidebar";
 import ApplicantHome from "../components/SeekerHome";
 import SeekerCompany from "../components/SeekerCompany";
 import SeekerJobs from "../components/SeekerJobComponent/SeekerJobs";
+import Profile from "../components/ProfileComponent";
 // import SeekerJobs from "../components/SeekerJobComponent/SeekerJobs";
 
 export default function Seeker() {
@@ -22,6 +23,7 @@ export default function Seeker() {
         <Route path="/category" element={<SeekerCategory />} />
         <Route path="/company" element={<SeekerCompany />} />
         <Route path="/jobs" element={<SeekerJobs />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
 
       <Footer />

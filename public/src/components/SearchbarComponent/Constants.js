@@ -135,4 +135,16 @@ export const dataList = [
     sallary: "80000",
     category: "Finance",
   },
+  {
+    id: 9,
+    company_name: "SpaceX",
+    company_region: "Kathmandu",
+    company_country: "Russian Federation",
+    title: "Accountant",
+    type: "Full Time",
+    description:
+      "You will be expected to manage and lead a fleet of developers in order to achieve the company goals.",
+    sallary: "80000",
+    category: "Finance",
+  },
 ];
