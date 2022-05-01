@@ -6,7 +6,11 @@ import SeekerSolutions from "./SeekerSolutions";
 
 const ApplicantHome = () => {
   return (
-    <div id="home">
+    <div
+      id="home"
+      style={{
+      }}
+    >
       <SeekerHero />
       <SeekerSolutions />
       <SeekerJob />

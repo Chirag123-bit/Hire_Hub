@@ -8,7 +8,7 @@ export const JobsContainer = styled.div`
   justify-content: center;
   align-items: center;
   background: #010606;
-  background-color: rgb(255, 254, 254);
+  background-color: transparent;
 
   @media screen and (max-width: 768px) {
     height: 1100px;

@@ -7,8 +7,7 @@ export const HeroContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #010606;
-  background-color: rgb(255, 254, 254);
+  background: transparent;
 
   @media screen and (max-width: 768px) {
     height: 1100px;

@@ -9,7 +9,7 @@ export const SolutionsContainer = styled.div`
   justify-content: center;
   align-items: center;
   background: #010606;
-  background-color: rgb(246, 246, 253);
+  background-color: transparent;
   padding: 5rem 0;
   /* position: absolute; */
 
