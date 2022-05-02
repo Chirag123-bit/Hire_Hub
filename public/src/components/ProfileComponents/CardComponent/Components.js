@@ -8,6 +8,8 @@ export const Card = styled.div`
 
 export const ProfileContainer = styled.div`
   padding: 5rem 3rem;
+  display: flex;
+  justify-content: space-evenly;
 `;
 
 export const ContentHolder = styled.div`
@@ -57,8 +59,8 @@ export const SkillHolder = styled.ul`
 `;
 
 export const Skill = styled.li`
-  background-color: #045de9;
-  color: white;
+  /* background-color: #045de9; */
+  color: black;
   padding: 0.2rem;
   margin: 0.4rem;
   border-radius: 0.7rem;

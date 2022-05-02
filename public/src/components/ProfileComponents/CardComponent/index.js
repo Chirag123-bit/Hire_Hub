@@ -32,12 +32,14 @@ function ProfileCard() {
               roundedColor="rgb(4,93,233)"
               imageWidth="150"
               imageHeight="150"
-              roundedSize="4"
+              roundedSize="0"
               hoverColor="#DD1144"
             />
           </ImageContainer>
           <IntroTextHolder>
-            <Name>Chirag Simkhada</Name>
+            <Name>
+              Chirag <br /> Simkhada
+            </Name>
             <Title>Backend Developer</Title>
           </IntroTextHolder>
         </IntroContainer>
