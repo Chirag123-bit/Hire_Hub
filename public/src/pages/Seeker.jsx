@@ -8,6 +8,7 @@ import ApplicantHome from "../components/SeekerHome";
 import SeekerCompany from "../components/SeekerCompany";
 import SeekerJobs from "../components/SeekerJobComponent/SeekerJobs";
 import Profile from "../components/ProfileComponent";
+import JobDescription from "../components/JobDescriptionComponent";
 // import SeekerJobs from "../components/SeekerJobComponent/SeekerJobs";
 
 export default function Seeker() {
@@ -24,6 +25,7 @@ export default function Seeker() {
         <Route path="/company" element={<SeekerCompany />} />
         <Route path="/jobs" element={<SeekerJobs />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/job" element={<JobDescription />} />
       </Routes>
 
       <Footer />
