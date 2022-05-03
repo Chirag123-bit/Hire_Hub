@@ -3,6 +3,11 @@ import styled from "styled-components";
 export const SectionWrapper = styled.div`
   width: 70%;
   background: transparent;
+  overflow-y: auto;
+  height: 100vh;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const ContentWrapper = styled.div`
@@ -24,7 +29,7 @@ export const CompanyInfo = styled.div`
   display: flex;
   justify-content: space-around;
   width: 70%;
-  /* margin: auto; */
+  margin: 1rem 0;
 `;
 
 export const LogoContainer = styled.div`
@@ -79,7 +84,7 @@ export const CompanyDescription = styled.div`
 
 export const Description = styled.p`
   text-align: justify;
-  line-height: 1.4rem;
+  line-height: 1.5rem;
 `;
 export const SkillSection = styled.div`
   width: 70%;
@@ -135,4 +140,9 @@ export const RequirementsSections = styled.div`
   width: 70%;
   margin: auto;
   padding-bottom: 2rem;
+`;
+
+export const SideWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
 `;
