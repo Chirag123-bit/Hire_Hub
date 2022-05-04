@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SetAvatar from "./pages/SetAvatar";
 import VideoCall from "./components/Meeting/VideoCall";
 import Seeker from "./pages/Seeker";
+import Employer from "./pages/Employer";
 // import VideoApp from "./components/videoCall";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         />
 
         <Route exact path="/applicant/*" element={<Seeker />} />
+        <Route exact path="/employer/*" element={<Employer />} />
       </Routes>
       <ToastContainer autoClose={500} />
     </div>
