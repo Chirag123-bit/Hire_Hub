@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Button } from "../../ButtonElement";
-import { ArrowForward, ArrowRight } from "../../HeroSection/HeroElements";
+import {
+  ArrowForward,
+  ArrowRight,
+} from "../../OnboardingPageComponents/HeroSection/HeroElements";
 import {
   SectionContainer,
   ContentHolder,

@@ -1,8 +1,11 @@
 import React from "react";
 import CheckboxComponent from "../CheckboxComponent";
 import { FilterListSelect } from "../FilterListToggle";
-import { categoryList, typeList } from "../SearchbarComponent/Constants";
-import SliderComponent from "../SliderComponent";
+import {
+  categoryList,
+  typeList,
+} from "../ApplicantPageComponents/Jobs/SearchbarComponent/Constants";
+import SliderComponent from "../ApplicantPageComponents/Jobs/SliderComponent";
 
 import {
   Label,

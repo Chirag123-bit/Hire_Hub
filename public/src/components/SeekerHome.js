@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import Companies from "./SeekerCompanies";
-import SeekerHero from "./SeekerHero";
-import SeekerJob from "./SeekerJob";
-import SeekerSolutions from "./SeekerSolutions";
+import Companies from "./ApplicantPageComponents/Home/SeekerCompanies";
+import SeekerHero from "./ApplicantPageComponents/Home/SeekerHero";
+import SeekerJob from "./ApplicantPageComponents/Home/SeekerJob";
+import SeekerSolutions from "./ApplicantPageComponents/Home/SeekerSolutions";
 
 const ApplicantHome = () => {
   return (
-    <div
-      id="home"
-      style={{
-      }}
-    >
+    <div id="home" style={{}}>
       <SeekerHero />
       <SeekerSolutions />
       <SeekerJob />

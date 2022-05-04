@@ -1,7 +1,7 @@
 import React from "react";
 import Categories from "./CompaniesSection/index";
 import { catObjOne, catObjThree, catObjTwo } from "./CompaniesSection/Data";
-import CompanyHeadSection from "./CompaniesHeadSection";
+import CompanyHeadSection from "./ApplicantPageComponents/Company/CompaniesHeadSection";
 const SeekerCompany = () => {
   return (
     <div id="category">

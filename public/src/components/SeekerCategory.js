@@ -1,6 +1,7 @@
 import React from "react";
-import CategoryDescription from "./CategoryLoadSection";
-import Categories from "./CategorySection";
+import CategoryDescription from "./ApplicantPageComponents/CategoryLoadSection";
+import Categories from "./ApplicantPageComponents/Home/CategorySection";
+// import CategoryDescription from "./CategoryLoadSection";
 import { catObjOne, catObjThree, catObjTwo } from "./CategorySection/Data";
 const SeekerHome = () => {
   return (

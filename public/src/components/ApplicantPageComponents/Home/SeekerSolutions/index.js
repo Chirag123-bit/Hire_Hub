@@ -10,7 +10,7 @@ import {
   Slogan,
   TextContent,
 } from "../SeekerHero/seekerHeroElements";
-import marketing from "../../images/marketing.svg";
+
 function SeekerSolutions() {
   return (
     <SolutionsContainer>

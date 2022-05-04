@@ -3,14 +3,14 @@ import {
   ColoredSlogan,
   Slogan,
   SloganSubtext,
-} from "../SeekerHero/seekerHeroElements";
+} from "../../Home/SeekerHero/seekerHeroElements";
 import {
   HeadSectionContainer,
   ContentHolder,
   HeadSubtitle,
   HeadTitle,
-} from "../CategoryLoadSection/CategoryElements";
-import "../SeekerHero/style.css";
+} from "../../CategoryLoadSection/CategoryElements";
+import "../../Home/SeekerHero/style.css";
 import ParticleBackground from "./ParticleBackground";
 
 function CompanyHeadSection() {

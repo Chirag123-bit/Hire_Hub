@@ -13,30 +13,26 @@ import {
   SubTitleSection,
   TitleSection,
   ContentHolder,
-} from "../CategorySection/CategoryElements";
+} from "./CategoryElements";
 
-import google from "../../images/google.png";
-// import brook from "../../images/brook.png";
-// import cleveland from "../../images/cleveland.png";
+import backend from "../../../../images/backend.png";
 
-function Categories({ Sector, Company_Name, no_of_jobs, white }) {
+function Categories({ Sector, Job_Title, no_of_jobs, white }) {
   return (
     <CategoryContainer white={white}>
       <ContentHolder>
         <TitleContainer>
           <Title>
-            Companies Focused in <ColoredSlogan>{Sector}</ColoredSlogan>
+            Jobs in <ColoredSlogan>{Sector}</ColoredSlogan>
           </Title>
         </TitleContainer>
         <HContainer>
           <CategoryCard white={white}>
             <ImageSection>
-              <CatImage src={google} alt="Backend" />
+              <CatImage src={backend} alt="Backend" />
             </ImageSection>
             <TitleSection>
-              <CategoryTitle style={{ "font-size": "20px" }}>
-                {Company_Name}
-              </CategoryTitle>
+              <CategoryTitle>{Job_Title}</CategoryTitle>
             </TitleSection>
             <SubTitleSection>
               <CategorySubtitle>{no_of_jobs} Jobs Available</CategorySubtitle>
@@ -44,12 +40,10 @@ function Categories({ Sector, Company_Name, no_of_jobs, white }) {
           </CategoryCard>
           <CategoryCard white={white}>
             <ImageSection>
-              <CatImage src={google} alt="Backend" />
+              <CatImage src={backend} alt="Backend" />
             </ImageSection>
             <TitleSection>
-              <CategoryTitle style={{ "font-size": "20px" }}>
-                {Company_Name}
-              </CategoryTitle>
+              <CategoryTitle>{Job_Title}</CategoryTitle>
             </TitleSection>
             <SubTitleSection>
               <CategorySubtitle>{no_of_jobs} Jobs Available</CategorySubtitle>
@@ -57,12 +51,10 @@ function Categories({ Sector, Company_Name, no_of_jobs, white }) {
           </CategoryCard>
           <CategoryCard white={white}>
             <ImageSection>
-              <CatImage src={google} alt="Backend" />
+              <CatImage src={backend} alt="Backend" />
             </ImageSection>
             <TitleSection>
-              <CategoryTitle style={{ "font-size": "20px" }}>
-                {Company_Name}
-              </CategoryTitle>
+              <CategoryTitle>{Job_Title}</CategoryTitle>
             </TitleSection>
             <SubTitleSection>
               <CategorySubtitle>{no_of_jobs} Jobs Available</CategorySubtitle>

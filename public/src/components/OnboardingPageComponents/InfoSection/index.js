@@ -13,7 +13,7 @@ import {
   TextWrapper,
   TopLine,
 } from "./InfoElements";
-import { Button } from "../ButtonElement";
+import { Button } from "../../ButtonElement";
 
 const InfoSection = ({
   lightBg,

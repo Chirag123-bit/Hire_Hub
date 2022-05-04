@@ -3,7 +3,7 @@ import {
   ColoredSlogan,
   Slogan,
   SloganSubtext,
-} from "../SeekerHero/seekerHeroElements";
+} from "../Home/SeekerHero/seekerHeroElements";
 import {
   HeadSectionContainer,
   ContentHolder,
@@ -11,7 +11,7 @@ import {
   HeadTitle,
 } from "./CategoryElements";
 import ParticleBackground from "./ParticleBackground";
-import "../SeekerHero/style.css";
+import "../Home/SeekerHero/style.css";
 
 function CategoryDescription() {
   return (
