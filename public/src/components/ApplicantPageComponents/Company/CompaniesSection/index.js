@@ -1,5 +1,5 @@
 import React from "react";
-import { ColoredSlogan } from "../ApplicantPageComponents/Home/SeekerHero/seekerHeroElements";
+import { ColoredSlogan } from "../../Home/SeekerHero/seekerHeroElements";
 import {
   CategoryContainer,
   Title,
@@ -13,9 +13,9 @@ import {
   SubTitleSection,
   TitleSection,
   ContentHolder,
-} from "../CategorySection/CategoryElements";
+} from "../../Home/CategorySection/CategoryElements";
 
-import google from "../../images/google.png";
+import google from "../../../../images/google.png";
 // import brook from "../../images/brook.png";
 // import cleveland from "../../images/cleveland.png";
 

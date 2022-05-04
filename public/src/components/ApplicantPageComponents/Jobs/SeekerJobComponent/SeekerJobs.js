@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import FilterPanel from "../../../FilterPanelComponent";
-import ListComponent from "../../../ListComponent";
+import ListComponent from "../ListComponent/index";
 import SearchBar from "../SearchbarComponent";
 import {
   ContentHolder,
@@ -10,7 +9,8 @@ import {
 } from "./JobComponents";
 import { dataList } from "../SearchbarComponent/Constants";
 import { SearchInput } from "../SearchbarComponent/Components";
-import EmptyView from "../../../EmptyView";
+import EmptyView from "../EmptyView/index";
+import FilterPanel from "../FilterPanelComponent";
 
 function SeekerJobs() {
   const [selectedType, setSelectedType] = useState(null);
