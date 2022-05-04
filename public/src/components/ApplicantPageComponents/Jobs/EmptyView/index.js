@@ -1,5 +1,5 @@
 import React from "react";
-import empty from "../../images/empty.gif";
+import empty from "../../../../images/empty.gif";
 import { EmptyViewWrap } from "./EmptyViewComponent";
 
 function EmptyView() {
