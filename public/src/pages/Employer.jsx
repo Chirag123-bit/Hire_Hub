@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Footer from "../components/Common/Footer";
+import EventsBar from "../components/EmployerComponents/Common/EventsBar";
+import Navbar from "../components/EmployerComponents/Common/Navbar";
 import Sidebar from "../components/EmployerComponents/Common/Sidebar";
 import Dashboard from "../components/EmployerComponents/Dashboard";
 import "./Employer.css";
@@ -10,14 +12,16 @@ export default function Employer() {
   const toggle = () => setIsOpen(!isOpen);
   return (
     <>
-      {/* <Sidebar isOpen={isOpen} toggle={toggle} />
-      <SeekerNav toggle={toggle} /> */}
-
-      <Sidebar>
-        <Routes>
-          <Route path="/dashboard" element={<Dashboard id="dashboard" />} />
-        </Routes>
-      </Sidebar>
+      <div className="main-container">
+        <Sidebar isOpen={isOpen} toggle={toggle} />
+        <Navbar />
+        <div className="sideContent">
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard id="dashboard" />} />
+          </Routes>
+          <EventsBar isOpen={isOpen} />
+        </div>
+      </div>
 
       {/* <Footer /> */}
     </>

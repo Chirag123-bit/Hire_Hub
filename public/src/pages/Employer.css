@@ -8,12 +8,20 @@ a {
 }
 .main-container {
   display: flex;
+  justify-content: space-between;
 }
 
 .sideBar {
-  background: rgb(0, 7, 61);
+  background-color: #242933;
   color: white;
   height: 100vh;
+  z-index: 10;
+}
+.eventsBar {
+  background-color: #1d1e26;
+  color: white;
+  height: 100vh;
+  z-index: 10;
 }
 
 .top_section {
@@ -21,6 +29,7 @@ a {
   align-items: flex-start;
   justify-content: space-between;
   padding: 15px 10px;
+  background-color: #2b303b;
 }
 
 .logo {
@@ -62,4 +71,52 @@ main {
 .icon,
 .link_text {
   font-size: 1.3rem;
+}
+
+.sideContent {
+  display: flex;
+  justify-content: space-between;
+  flex: 4;
+  padding-top: 6rem;
+  background-color: rgb(29, 30, 38);
+}
+
+.navBar {
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: #242933;
+  color: white;
+  padding-bottom: 0;
+}
+
+.userContainer {
+  display: flex;
+  /* width: 50%; */
+  justify-content: space-between;
+}
+
+.user {
+  text-align: center;
+  flex: 2;
+}
+
+.iconsContainer {
+  font-size: 1.5rem;
+}
+.iconsContainer svg {
+  margin: 0 1rem;
+}
+
+.navBarContainer {
+  display: flex;
+  width: 30%;
+  justify-content: space-around;
+}
+
+.user h4 {
+  margin-bottom: 0;
+  margin-right: 0.8rem;
 }
