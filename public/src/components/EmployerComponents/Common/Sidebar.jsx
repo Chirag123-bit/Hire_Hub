@@ -89,7 +89,7 @@ const Sidebar = ({ isOpen, toggle }) => {
           </AnimatePresence>
         </NavLink>
         <NavLink
-          activeClassName="active"
+          activeClassName="actives"
           to="/employer/candidates"
           key="Candidates"
           className="link"
@@ -109,7 +109,7 @@ const Sidebar = ({ isOpen, toggle }) => {
           )}
         </NavLink>
         <NavLink
-          activeClassName="active"
+          activeClassName="actives"
           to="/employer/career"
           key="Career"
           className="link"
@@ -129,7 +129,7 @@ const Sidebar = ({ isOpen, toggle }) => {
           )}
         </NavLink>
         <NavLink
-          activeClassName="active"
+          activeClassName="actives"
           to="/employer/setting"
           key="Setting"
           className="link"
