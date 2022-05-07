@@ -15,12 +15,13 @@ export default function Employer() {
       <div className="main-container">
         <Sidebar isOpen={isOpen} toggle={toggle} />
         <Navbar />
-        <div className="sideContent">
-          <Routes>
-            <Route path="/dashboard" element={<Dashboard id="dashboard" />} />
-          </Routes>
-          <EventsBar isOpen={isOpen} />
-        </div>
+
+        <Routes>
+          <Route
+            path="/dashboard"
+            element={<Dashboard id="dashboard" isOpen={isOpen} />}
+          />
+        </Routes>
       </div>
 
       {/* <Footer /> */}

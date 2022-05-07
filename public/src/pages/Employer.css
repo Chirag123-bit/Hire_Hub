@@ -20,7 +20,7 @@ a {
   background-color: #1d1e26;
   color: white;
   z-index: 10;
-  margin: 0 2rem;
+  /* margin-right: 2rem; */
 }
 
 .top_section {
@@ -74,10 +74,12 @@ main {
 
 .sideContent {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex: 4;
   padding-top: 6rem;
   background-color: rgb(29, 30, 38);
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .navBar {
@@ -122,6 +124,8 @@ main {
 
 .EventsContainer {
   display: flex;
+  max-width: 100%;
+  overflow: hidden;
   flex-direction: column;
   justify-content: space-around;
   margin-bottom: 2rem !important;
