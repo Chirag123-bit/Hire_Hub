@@ -127,7 +127,6 @@ export const JobStatusCards = styled.div`
     height: 6px;
     width: 6px;
     visibility: hidden;
-    /* display: none; */
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 5px;

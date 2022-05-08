@@ -1,6 +1,10 @@
 .full-height {
   height: 100vh;
 }
+
+.min-height {
+  margin-top: 8rem;
+}
 .react-tabs__tab-list li {
   color: #ccc;
   /* margin-bottom: -2px !important; */
