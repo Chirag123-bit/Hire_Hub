@@ -42,7 +42,7 @@ const Sidebar = ({ isOpen, toggle }) => {
   return (
     <motion.div
       animate={{
-        width: isOpen ? "200px" : "75px",
+        width: isOpen ? "230px" : "85px",
         transition: { duration: 0.5, type: "spring", damping: 10 },
       }}
       className="sideBar"

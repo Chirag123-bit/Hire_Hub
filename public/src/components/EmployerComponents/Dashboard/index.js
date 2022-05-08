@@ -129,7 +129,193 @@ function Dashboard({ isOpen }) {
                     Edit
                   </DropLink>
                   <DropLink href="#" class="dropdown-item px-4 py-2">
-                    Edit job post
+                    Sharable link
+                  </DropLink>
+                  <DropLink href="#" class="dropdown-item px-4 py-2">
+                    Deactivate
+                  </DropLink>
+                  <DropLink href="#" class="dropdown-item px-4 py-2">
+                    Delete
+                  </DropLink>
+                </ActionsDropDown>
+              </JobInfoSide>
+            </JobCardHeader>
+            <JobCardBody className="p-4">
+              <JobStatusCards className="d-flex overflow-auto ">
+                <NewCandidateCard
+                  className="card-widget candidates card"
+                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
+                >
+                  <p
+                    className="text-size-15 default-font-color mb-0"
+                    style={{ color: "#cccdcd" }}
+                  >
+                    0
+                  </p>
+                  <p className="text-size-13 text-muted mb-0 text-capitalize">
+                    New
+                  </p>
+                </NewCandidateCard>
+                <InterviewCard
+                  className="card-widget candidates card"
+                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
+                >
+                  <p
+                    className="text-size-15 default-font-color mb-0"
+                    style={{ color: "#cccdcd" }}
+                  >
+                    1
+                  </p>
+                  <p className="text-size-13 text-muted mb-0 text-capitalize">
+                    Interview
+                  </p>
+                </InterviewCard>
+                <NegotiationCard
+                  className="card-widget candidates card"
+                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
+                >
+                  <p
+                    className="text-size-15 default-font-color mb-0"
+                    style={{ color: "#cccdcd" }}
+                  >
+                    7
+                  </p>
+                  <p className="text-size-13 text-muted mb-0 text-capitalize">
+                    Negotiation
+                  </p>
+                </NegotiationCard>
+                <ShortlistCard
+                  className="card-widget candidates card"
+                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
+                >
+                  <p
+                    className="text-size-15 default-font-color mb-0"
+                    style={{ color: "#cccdcd" }}
+                  >
+                    4
+                  </p>
+                  <p className="text-size-13 text-muted mb-0 text-capitalize">
+                    Shortlist
+                  </p>
+                </ShortlistCard>
+                <TaskCard
+                  className="card-widget candidates card"
+                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
+                >
+                  <p
+                    className="text-size-15 default-font-color mb-0"
+                    style={{ color: "#cccdcd" }}
+                  >
+                    4
+                  </p>
+                  <p className="text-size-13 text-muted mb-0 text-capitalize">
+                    Task Phase
+                  </p>
+                </TaskCard>
+                <HiredCard
+                  className="card-widget candidates card"
+                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
+                >
+                  <p
+                    className="text-size-15 default-font-color mb-0"
+                    style={{ color: "#cccdcd" }}
+                  >
+                    6
+                  </p>
+                  <p className="text-size-13 text-muted mb-0 text-capitalize">
+                    Hired
+                  </p>
+                </HiredCard>
+                <RejectCard
+                  className="card-widget candidates card"
+                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
+                >
+                  <p
+                    className="text-size-15 default-font-color mb-0"
+                    style={{ color: "#cccdcd" }}
+                  >
+                    8
+                  </p>
+                  <p className="text-size-13 text-muted mb-0 text-capitalize">
+                    Rejected
+                  </p>
+                </RejectCard>
+                <DisqualifyCard
+                  className="card-widget candidates card"
+                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
+                >
+                  <p
+                    className="text-size-15 default-font-color mb-0"
+                    style={{ color: "#cccdcd" }}
+                  >
+                    5
+                  </p>
+                  <p className="text-size-13 text-muted mb-0 text-capitalize">
+                    Disqualified
+                  </p>
+                </DisqualifyCard>
+              </JobStatusCards>
+              <div className="mt-3">
+                <a
+                  href="job-post/1"
+                  style={{ color: "inherit", textDecoration: "inherit" }}
+                >
+                  <button
+                    type="button"
+                    class="text-size-13 btn btn-sm btn-outline-primary px-3"
+                  >
+                    Overview
+                  </button>
+                </a>
+              </div>
+            </JobCardBody>
+          </JobContainer>
+          <JobContainer className="col-12">
+            <JobCardHeader className="bg-transparent d-flex justify-content-between align-items-center p-4">
+              <JobInfoTop className="d-flex flex-column">
+                <JobTitle className="text-capitalize mr-2">
+                  Backend Developer
+                </JobTitle>
+                <p className="text-secondary mb-1">
+                  Last Submission Date: 2022-04-21
+                </p>
+                <div className="text-secondary small d-inline-flex align-items-center">
+                  <span style={{ marginRight: "0.3rem" }}>
+                    <BiTimeFive />
+                    Full Time
+                  </span>
+                  <span style={{ marginRight: "0.3rem" }}>
+                    <BiMap />
+                    Kathmandu
+                  </span>
+                  <span style={{ marginRight: "0.3rem" }}>
+                    <BiHome />
+                    Python
+                  </span>
+                  <span style={{ marginRight: "0.3rem" }}>
+                    <BiDollar />
+                    30,000/month
+                  </span>
+                  <span style={{ marginRight: "0.3rem" }}>
+                    <BiUser />5
+                  </span>
+                </div>
+              </JobInfoTop>
+              <JobInfoSide className="dropdown options-dropdown">
+                <DropBtn
+                  type="button"
+                  data-toggle="dropdown"
+                  class="btn-option btn d-flex align-items-center justify-content-center"
+                  aria-expanded="false"
+                >
+                  <ThreeDots />
+                </DropBtn>
+                <ActionsDropDown className="dropdown-menu dropdown-menu-right py-2 mt-1">
+                  <DropLink href="#" class="dropdown-item px-4 py-2">
+                    Preview
+                  </DropLink>
+                  <DropLink href="#" class="dropdown-item px-4 py-2">
+                    Edit
                   </DropLink>
                   <DropLink href="#" class="dropdown-item px-4 py-2">
                     Sharable link
@@ -259,12 +445,17 @@ function Dashboard({ isOpen }) {
                 </DisqualifyCard>
               </JobStatusCards>
               <div className="mt-3">
-                <button
-                  type="button"
-                  class="text-size-13 btn btn-sm btn-outline-primary px-3"
+                <a
+                  href="job-post/2"
+                  style={{ color: "inherit", textDecoration: "inherit" }}
                 >
-                  Overview
-                </button>
+                  <button
+                    type="button"
+                    class="text-size-13 btn btn-sm btn-outline-primary px-3"
+                  >
+                    Overview
+                  </button>
+                </a>
               </div>
             </JobCardBody>
           </JobContainer>
@@ -446,199 +637,17 @@ function Dashboard({ isOpen }) {
                 </DisqualifyCard>
               </JobStatusCards>
               <div className="mt-3">
-                <button
-                  type="button"
-                  class="text-size-13 btn btn-sm btn-outline-primary px-3"
+                <a
+                  href="job-post/3"
+                  style={{ color: "inherit", textDecoration: "inherit" }}
                 >
-                  Overview
-                </button>
-              </div>
-            </JobCardBody>
-          </JobContainer>
-          <JobContainer className="col-12">
-            <JobCardHeader className="bg-transparent d-flex justify-content-between align-items-center p-4">
-              <JobInfoTop className="d-flex flex-column">
-                <JobTitle className="text-capitalize mr-2">
-                  Backend Developer
-                </JobTitle>
-                <p className="text-secondary mb-1">
-                  Last Submission Date: 2022-04-21
-                </p>
-                <div className="text-secondary small d-inline-flex align-items-center">
-                  <span style={{ marginRight: "0.3rem" }}>
-                    <BiTimeFive />
-                    Full Time
-                  </span>
-                  <span style={{ marginRight: "0.3rem" }}>
-                    <BiMap />
-                    Kathmandu
-                  </span>
-                  <span style={{ marginRight: "0.3rem" }}>
-                    <BiHome />
-                    Python
-                  </span>
-                  <span style={{ marginRight: "0.3rem" }}>
-                    <BiDollar />
-                    30,000/month
-                  </span>
-                  <span style={{ marginRight: "0.3rem" }}>
-                    <BiUser />5
-                  </span>
-                </div>
-              </JobInfoTop>
-              <JobInfoSide className="dropdown options-dropdown">
-                <DropBtn
-                  type="button"
-                  data-toggle="dropdown"
-                  class="btn-option btn d-flex align-items-center justify-content-center"
-                  aria-expanded="false"
-                >
-                  <ThreeDots />
-                </DropBtn>
-                <ActionsDropDown className="dropdown-menu dropdown-menu-right py-2 mt-1">
-                  <DropLink href="#" class="dropdown-item px-4 py-2">
-                    Preview
-                  </DropLink>
-                  <DropLink href="#" class="dropdown-item px-4 py-2">
-                    Edit
-                  </DropLink>
-                  <DropLink href="#" class="dropdown-item px-4 py-2">
-                    Edit job post
-                  </DropLink>
-                  <DropLink href="#" class="dropdown-item px-4 py-2">
-                    Sharable link
-                  </DropLink>
-                  <DropLink href="#" class="dropdown-item px-4 py-2">
-                    Deactivate
-                  </DropLink>
-                  <DropLink href="#" class="dropdown-item px-4 py-2">
-                    Delete
-                  </DropLink>
-                </ActionsDropDown>
-              </JobInfoSide>
-            </JobCardHeader>
-            <JobCardBody className="p-4">
-              <JobStatusCards className="d-flex overflow-auto ">
-                <NewCandidateCard
-                  className="card-widget candidates card"
-                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
-                >
-                  <p
-                    className="text-size-15 default-font-color mb-0"
-                    style={{ color: "#cccdcd" }}
+                  <button
+                    type="button"
+                    class="text-size-13 btn btn-sm btn-outline-primary px-3"
                   >
-                    0
-                  </p>
-                  <p className="text-size-13 text-muted mb-0 text-capitalize">
-                    New
-                  </p>
-                </NewCandidateCard>
-                <InterviewCard
-                  className="card-widget candidates card"
-                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
-                >
-                  <p
-                    className="text-size-15 default-font-color mb-0"
-                    style={{ color: "#cccdcd" }}
-                  >
-                    1
-                  </p>
-                  <p className="text-size-13 text-muted mb-0 text-capitalize">
-                    Interview
-                  </p>
-                </InterviewCard>
-                <NegotiationCard
-                  className="card-widget candidates card"
-                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
-                >
-                  <p
-                    className="text-size-15 default-font-color mb-0"
-                    style={{ color: "#cccdcd" }}
-                  >
-                    7
-                  </p>
-                  <p className="text-size-13 text-muted mb-0 text-capitalize">
-                    Negotiation
-                  </p>
-                </NegotiationCard>
-                <ShortlistCard
-                  className="card-widget candidates card"
-                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
-                >
-                  <p
-                    className="text-size-15 default-font-color mb-0"
-                    style={{ color: "#cccdcd" }}
-                  >
-                    4
-                  </p>
-                  <p className="text-size-13 text-muted mb-0 text-capitalize">
-                    Shortlist
-                  </p>
-                </ShortlistCard>
-                <TaskCard
-                  className="card-widget candidates card"
-                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
-                >
-                  <p
-                    className="text-size-15 default-font-color mb-0"
-                    style={{ color: "#cccdcd" }}
-                  >
-                    4
-                  </p>
-                  <p className="text-size-13 text-muted mb-0 text-capitalize">
-                    Task Phase
-                  </p>
-                </TaskCard>
-                <HiredCard
-                  className="card-widget candidates card"
-                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
-                >
-                  <p
-                    className="text-size-15 default-font-color mb-0"
-                    style={{ color: "#cccdcd" }}
-                  >
-                    6
-                  </p>
-                  <p className="text-size-13 text-muted mb-0 text-capitalize">
-                    Hired
-                  </p>
-                </HiredCard>
-                <RejectCard
-                  className="card-widget candidates card"
-                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
-                >
-                  <p
-                    className="text-size-15 default-font-color mb-0"
-                    style={{ color: "#cccdcd" }}
-                  >
-                    8
-                  </p>
-                  <p className="text-size-13 text-muted mb-0 text-capitalize">
-                    Rejected
-                  </p>
-                </RejectCard>
-                <DisqualifyCard
-                  className="card-widget candidates card"
-                  style={{ marginBottom: "1rem", marginRight: "1rem" }}
-                >
-                  <p
-                    className="text-size-15 default-font-color mb-0"
-                    style={{ color: "#cccdcd" }}
-                  >
-                    5
-                  </p>
-                  <p className="text-size-13 text-muted mb-0 text-capitalize">
-                    Disqualified
-                  </p>
-                </DisqualifyCard>
-              </JobStatusCards>
-              <div className="mt-3">
-                <button
-                  type="button"
-                  class="text-size-13 btn btn-sm btn-outline-primary px-3"
-                >
-                  Overview
-                </button>
+                    Overview
+                  </button>
+                </a>
               </div>
             </JobCardBody>
           </JobContainer>

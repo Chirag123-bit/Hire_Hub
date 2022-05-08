@@ -1,0 +1,26 @@
+.full-height {
+  height: 100vh;
+}
+.react-tabs__tab-list li {
+  color: #ccc;
+  /* margin-bottom: -2px !important; */
+  padding: 2rem !important;
+}
+
+.react-tabs__tab-list .react-tabs__tab--selected {
+  background-color: transparent;
+  border: none;
+  color: #4466f2;
+  border-bottom: 1px solid #4466f2 !important;
+}
+
+.react-tabs__tab-list {
+  border-bottom: 1px solid #aaa !important;
+}
+.react-tabs__tab-list .react-tabs__tab--selected:active {
+  outline: none;
+}
+
+.react-tabs__tab:focus:after {
+  background: none;
+}

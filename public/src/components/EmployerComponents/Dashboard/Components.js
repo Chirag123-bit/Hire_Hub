@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 export const DashboardContainer = styled.div`
-  padding: 2rem;
+  /* padding: 2rem; */
   padding-top: 0;
   width: 65%;
 `;

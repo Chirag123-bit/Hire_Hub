@@ -5,6 +5,7 @@ import EventsBar from "../components/EmployerComponents/Common/EventsBar";
 import Navbar from "../components/EmployerComponents/Common/Navbar";
 import Sidebar from "../components/EmployerComponents/Common/Sidebar";
 import Dashboard from "../components/EmployerComponents/Dashboard";
+import JobApplicants from "../components/EmployerComponents/JobApplicants";
 import "./Employer.css";
 
 export default function Employer() {
@@ -21,6 +22,7 @@ export default function Employer() {
             path="/dashboard"
             element={<Dashboard id="dashboard" isOpen={isOpen} />}
           />
+          <Route path="/job-post/:id" element={<JobApplicants />} />
         </Routes>
       </div>
 

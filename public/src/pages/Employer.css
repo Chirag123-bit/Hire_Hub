@@ -9,6 +9,8 @@ a {
 .main-container {
   display: flex;
   justify-content: space-between;
+  background-color: #1d1e26;
+  /* height: 100vh; */
 }
 
 .sideBar {
