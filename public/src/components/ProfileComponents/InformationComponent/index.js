@@ -15,9 +15,8 @@ import {
   TitleListing,
   TypeDateListing,
 } from "./Component";
-import { IoSchoolOutline } from "react-icons/io5";
+import { IoSchoolOutline, IoLocationSharp } from "react-icons/io5";
 import { BsCalendar2Date } from "react-icons/bs";
-import { GrLocation } from "react-icons/gr";
 import { FaBus } from "react-icons/fa";
 
 function CandidateDescription() {
@@ -54,7 +53,7 @@ function CandidateDescription() {
                   <FaBus /> Apple Inc
                 </Company>
                 <Address>
-                  <GrLocation /> Los Angeles
+                  <IoLocationSharp /> Los Angeles
                 </Address>
               </Location>
             </TitleListing>
@@ -73,7 +72,7 @@ function CandidateDescription() {
                   <FaBus /> Apple Inc
                 </Company>
                 <Address>
-                  <GrLocation /> Los Angeles
+                  <IoLocationSharp /> Los Angeles
                 </Address>
               </Location>
             </TitleListing>
@@ -92,7 +91,7 @@ function CandidateDescription() {
                   <FaBus /> Apple Inc
                 </Company>
                 <Address>
-                  <GrLocation /> Los Angeles
+                  <IoLocationSharp /> Los Angeles
                 </Address>
               </Location>
             </TitleListing>

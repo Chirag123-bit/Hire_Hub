@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Overview from "../Overview";
 import "./style.css";
-const TabsComponent = () => {
+const TabsComponent = ({ isOpen }) => {
   return (
     <Tabs style={{ backgroundColor: "#262b34" }}>
       <TabList>

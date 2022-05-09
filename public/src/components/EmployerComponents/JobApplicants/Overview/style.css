@@ -5,12 +5,12 @@
   color: #fff;
   overflow-x: scroll;
   justify-content: flex-start;
-  min-height: 50vh;
+  min-height: 60vh;
   margin-bottom: 6.1rem;
 }
 
 .OverviewContainerClass .column {
-  min-width: 260px;
+  min-width: 20rem;
 }
 
 .OverviewContainerClass .column h3 {
