@@ -1,7 +1,9 @@
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import CandidateOverview from "../Candidates/CandidatesOverview";
 import Overview from "../Overview";
+import { Applicants } from "../Overview/Constants";
 import "./style.css";
 const TabsComponent = ({ isOpen }) => {
   return (
@@ -12,10 +14,10 @@ const TabsComponent = ({ isOpen }) => {
       </TabList>
 
       <TabPanel className="OverviewContainerClass">
-        <Overview />
+        <Overview Applicants={Applicants} />
       </TabPanel>
       <TabPanel>
-        <h2>Any content 2</h2>
+        <CandidateOverview Applicants={Applicants} />
       </TabPanel>
     </Tabs>
   );

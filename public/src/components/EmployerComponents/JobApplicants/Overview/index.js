@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { Applicants } from "./Constants";
 import _ from "lodash";
 import "./style.css";
 import ReactRoundedImage from "react-rounded-image";
 import Profile from "../../../../images/profile.jpg";
 import { ApplicantModal } from "../Candidates/Modal/modal";
 
-function Overview() {
+function Overview({ Applicants }) {
   const [showModal, setShowModal] = useState(false);
   const [modalId, setModalId] = useState(null);
 

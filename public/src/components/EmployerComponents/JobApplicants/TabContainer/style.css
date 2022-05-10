@@ -7,7 +7,6 @@
 }
 .react-tabs__tab-list li {
   color: #ccc;
-  /* margin-bottom: -2px !important; */
   padding: 2rem !important;
 }
 
@@ -16,6 +15,12 @@
   border: none;
   color: #4466f2;
   border-bottom: 1px solid #4466f2 !important;
+}
+
+.react-tabs__tab-panel--selected {
+  min-height: 60vh;
+  margin-bottom: 6.1rem;
+  overflow-x: scroll;
 }
 
 .react-tabs__tab-list {

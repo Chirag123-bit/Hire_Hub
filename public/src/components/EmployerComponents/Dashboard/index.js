@@ -257,7 +257,7 @@ function Dashboard({ isOpen }) {
               </JobStatusCards>
               <div className="mt-3">
                 <a
-                  href="job-post/1"
+                  href="dashboard/job-post/1"
                   style={{ color: "inherit", textDecoration: "inherit" }}
                 >
                   <button
@@ -446,7 +446,7 @@ function Dashboard({ isOpen }) {
               </JobStatusCards>
               <div className="mt-3">
                 <a
-                  href="job-post/2"
+                  href="dashboard/job-post/2"
                   style={{ color: "inherit", textDecoration: "inherit" }}
                 >
                   <button
@@ -638,7 +638,7 @@ function Dashboard({ isOpen }) {
               </JobStatusCards>
               <div className="mt-3">
                 <a
-                  href="job-post/3"
+                  href="dashboard/job-post/3"
                   style={{ color: "inherit", textDecoration: "inherit" }}
                 >
                   <button

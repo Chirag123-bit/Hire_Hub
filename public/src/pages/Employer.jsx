@@ -23,7 +23,7 @@ export default function Employer() {
             element={<Dashboard id="dashboard" isOpen={isOpen} />}
           />
           <Route
-            path="/job-post/:id"
+            path="/dashboard/job-post/:id"
             element={<JobApplicants isOpen={isOpen} />}
           />
         </Routes>

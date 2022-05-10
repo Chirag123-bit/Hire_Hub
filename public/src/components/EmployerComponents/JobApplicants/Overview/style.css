@@ -1,12 +1,9 @@
 .OverviewContainerClass {
   display: flex;
   justify-content: space-around;
-  /* width: 100%; */
   color: #fff;
-  overflow-x: scroll;
+
   justify-content: flex-start;
-  min-height: 60vh;
-  margin-bottom: 6.1rem;
 }
 
 .OverviewContainerClass .column {

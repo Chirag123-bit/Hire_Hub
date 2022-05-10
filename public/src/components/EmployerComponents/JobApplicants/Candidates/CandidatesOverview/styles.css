@@ -1,0 +1,13 @@
+tr th {
+  border: 0;
+  color: #6c757d !important;
+  padding: 2rem 1rem !important;
+  vertical-align: top !important;
+  text-align: center;
+}
+
+tr td {
+  text-align: center;
+  padding: 1.5rem 1rem !important;
+  vertical-align: middle !important;
+}
