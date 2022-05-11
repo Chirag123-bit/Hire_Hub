@@ -35,12 +35,6 @@ function getStatus(st){
   }
 }
 
-// function getDrops(username){
-
-//   return(
-
-//   );
-// }
 function CandidateOverview({ Applicants }) {
   const [showModal, setShowModal] = useState(false);
   const openModal = (username) => {
@@ -55,7 +49,7 @@ function CandidateOverview({ Applicants }) {
       <Table style={{ color: "#ccc" }}>
         <thead>
           <tr>
-            <th>Profile</th>
+            <th style={{width:"max-content !important"}}>Profile</th>
             <th>Status</th>
             <th>Current Stage</th>
             <th>Actions</th>
@@ -69,7 +63,7 @@ function CandidateOverview({ Applicants }) {
  
                 return(<tr>
                   <td>
-                    <div className="d-flex align-items-center " >
+                    <div className="d-flex align-items-center justify-content-around" style={{width:"80%", margin:"auto"}}>
                                     <div className="avatars-w-50">
                                       <ReactRoundedImage
                                         image={Profile}

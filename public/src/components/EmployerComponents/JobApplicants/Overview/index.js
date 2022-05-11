@@ -8,10 +8,8 @@ import { ApplicantModal } from "../Candidates/Modal/modal";
 
 function Overview({ Applicants }) {
   const [showModal, setShowModal] = useState(false);
-  const [modalId, setModalId] = useState(null);
 
   const openModal = (id) => {
-    setModalId(id);
     setShowModal((prev) => !prev);
   };
 
