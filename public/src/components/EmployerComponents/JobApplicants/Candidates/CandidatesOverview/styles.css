@@ -3,11 +3,24 @@ tr th {
   color: #6c757d !important;
   padding: 2rem 1rem !important;
   vertical-align: top !important;
-  text-align: center;
+  /* text-align: center; */
+  width: 0;
+  border-color: #1C1E27;
 }
 
 tr td {
-  text-align: center;
+  width: 0;
+  /* text-align: center; */
   padding: 1.5rem 1rem !important;
   vertical-align: middle !important;
+}
+
+.table>:not(caption)>*>*{
+  border-color: #1C1E27;
+}
+
+thead{
+  /* border-color: #1C1E27 !important; */
+  /* border-color: #1C1E27; */
+  border-bottom: 2px solid #1C1E27 !important;
 }

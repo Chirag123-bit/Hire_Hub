@@ -4,8 +4,52 @@ import Table from "react-bootstrap/Table";
 import "./styles.css";
 import ReactRoundedImage from "react-rounded-image";
 import Profile from "../../../../../images/profile.jpg";
+import Badge from 'react-bootstrap/Badge'
+import { ActionsDropDown, DropBtn, DropLink, JobInfoSide, ThreeDots } from "../../../Dashboard/Components";
+import { ApplicantModal } from "../Modal/modal";
+
+
+  
+
+function getStatus(st){
+  if(st === "New" || st === "Shortlist"){
+    return <Badge pill bg="primary">
+    Under Review
+  </Badge>
+  }
+  else if(st==="Rejected" || st==="Disqualified"){
+    return <Badge pill bg="danger">
+    Not Selected
+  </Badge>
+  }
+
+  else if(st==="Hired"){
+    return <Badge pill bg="success">
+    Hired
+  </Badge>
+  }
+  else{
+    return <Badge pill bg="warning" text="dark">
+    In Process
+  </Badge>
+  }
+}
+
+// function getDrops(username){
+
+//   return(
+
+//   );
+// }
 function CandidateOverview({ Applicants }) {
-  // setState(Applicants.keys);
+  const [showModal, setShowModal] = useState(false);
+  const openModal = (username) => {
+      setShowModal((prev) => !prev);
+    };
+
+  const closeModel = () => {
+    setShowModal(false);
+  };
   return (
     <div>
       <Table style={{ color: "#ccc" }}>
@@ -25,13 +69,13 @@ function CandidateOverview({ Applicants }) {
  
                 return(<tr>
                   <td>
-                    <div className="d-flex align-items-center justify-content-around">
+                    <div className="d-flex align-items-center " >
                                     <div className="avatars-w-50">
                                       <ReactRoundedImage
                                         image={Profile}
                                         roundedColor="rgb(4,93,233)"
-                                        imageWidth="30"
-                                        imageHeight="30"
+                                        imageWidth="40"
+                                        imageHeight="40"
                                         roundedSize="0"
                                         hoverColor="#DD1144"
                                       />
@@ -46,9 +90,35 @@ function CandidateOverview({ Applicants }) {
                                     </div>
                                   </div>
                   </td>
-                  <td>{el.full_name}</td>
-                  <td>{el.full_name}</td>
-                  <td>{el.full_name}</td>
+                  <td>{
+                      getStatus(data.title)
+                    }</td>
+                  <td>{data.title}</td>
+                  <td>  <JobInfoSide className="dropdown options-dropdown">
+                <DropBtn
+                  type="button"
+                  data-toggle="dropdown"
+                  class="btn-option btn d-flex align-items-center justify-content-center"
+                  aria-expanded="false"
+                >
+                  <ThreeDots />
+                </DropBtn>
+                <ActionsDropDown className="dropdown-menu dropdown-menu-right py-2 mt-1">
+                  <DropLink href="#" class="dropdown-item px-4 py-2" onClick={() => openModal(data.username)}>
+                    View Candidate
+                  </DropLink>
+                  <DropLink href="#" class="dropdown-item px-4 py-2">
+                    Hire
+                  </DropLink>
+                  <DropLink href="#" class="dropdown-item px-4 py-2">
+                    Disqualify
+                  </DropLink>
+                  <DropLink href="#" class="dropdown-item px-4 py-2">
+                    Delete
+                  </DropLink>
+                </ActionsDropDown>
+              </JobInfoSide>
+              </td>
                 </tr>)
                 
               }))
@@ -56,6 +126,9 @@ function CandidateOverview({ Applicants }) {
           })}
         </tbody>
       </Table>
+      {showModal && (
+        <ApplicantModal showModal={showModal} setShowModal={closeModel} />
+      )}
     </div>
   );
 }

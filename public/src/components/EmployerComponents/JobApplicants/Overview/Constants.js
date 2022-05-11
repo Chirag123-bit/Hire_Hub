@@ -42,7 +42,7 @@ export const Applicants = {
     items: [],
   },
   negotiation: {
-    title: "Negotiation ",
+    title: "Negotiation",
     background: "#332E33",
     items: [],
   },
