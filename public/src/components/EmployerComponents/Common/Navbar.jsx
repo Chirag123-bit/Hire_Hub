@@ -17,14 +17,14 @@ function Navbar() {
         <div className="userContainer">
           <div className="user">
             <h4>Chirag Simkhada</h4>
-            <p>Microsoft</p>
+            <p className="mb-1">Microsoft</p>
           </div>
           <div className="profilePic">
             <ReactRoundedImage
               image={Profile}
               roundedColor="rgb(4,93,233)"
-              imageWidth="50"
-              imageHeight="50"
+              imageWidth="40"
+              imageHeight="40"
               roundedSize="0"
               hoverColor="#DD1144"
             />

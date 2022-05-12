@@ -43,16 +43,13 @@ function Dashboard({ isOpen }) {
     <motion.div
       className="sideContent"
       animate={{
-        maxWidth: isOpen ? "82%" : "90%",
-        marginLeft: isOpen ? "16rem" : "7rem",
-        // maxWidth: isOpen ? "82%" : "91%",
-        // marginLeft: isOpen ? "5rem !important" : "",
+        maxWidth: isOpen ? "82%" : "92%",
         transition: { duration: 0.5, type: "spring", damping: 10 },
       }}
     >
       <DashboardContainer
         className="col-lg-7 col-xl-8 mb-4 mb-lg-0"
-        style={{ width: "68%" }}
+        style={{ width: "66%" }}
       >
         <HeadContainer>
           <UpperHead className="d-flex  justify-content-between">

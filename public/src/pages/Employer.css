@@ -33,7 +33,7 @@ a {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 15px 10px;
+  padding: 2.1px 10px;
   background-color: #2b303b;
 }
 
@@ -84,7 +84,7 @@ main {
   padding-top: 6rem;
   background-color: rgb(29, 30, 38);
 
-  margin: auto;
+  margin-left: auto;
   margin-right: 1rem;
   /* overflow: hidden; */
 }
@@ -112,10 +112,11 @@ main {
 }
 
 .iconsContainer {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 .iconsContainer svg {
   margin: 0 1rem;
+  cursor: pointer;
 }
 
 .navBarContainer {
@@ -342,4 +343,12 @@ main {
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
   transition: all 0.25s ease-in-out;
+}
+
+.user h4 {
+  font-size: 1.2rem;
+}
+
+.user p {
+  font-size: 0.8rem;
 }

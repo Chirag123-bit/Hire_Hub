@@ -33,3 +33,18 @@
 .career-footer {
   text-align: center;
 }
+
+.box1 {
+  /* max-width: 100% !important; */
+  vertical-align: middle;
+}
+
+.box1 img {
+  width: 100%;
+  vertical-align: middle;
+  /* margin-right: 0.5rem; */
+}
+
+.career-card {
+  max-width: 28% !important;
+}

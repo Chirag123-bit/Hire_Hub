@@ -14,14 +14,22 @@ import {
   Muted,
   Sallary,
 } from "../../ApplicantPageComponents/Home/SeekerJob/JobElements";
-import { FcBrokenLink } from "react-icons/fc";
 import { JobTitle } from "../Dashboard/Components";
 import { JobType } from "../../ProfileComponents/InformationComponent/Component";
+import { motion } from "framer-motion";
 
 function Careers({ isOpen }) {
   return (
-    <div className="CareerContainer">
-      <div className="CareerContentHolder">
+    <motion.div className="CareerContainer">
+      {console.log(isOpen)}
+      <motion.div
+        className="CareerContentHolder"
+        animate={{
+          width: isOpen ? "98%" : "95%",
+
+          transition: { duration: 0.5, type: "spring", damping: 10 },
+        }}
+      >
         <div className="CareerHead">
           <div className="logo-container mb-2">
             <img src={Image} alt="ss" />
@@ -45,10 +53,17 @@ function Careers({ isOpen }) {
           <div>
             <h4>Current Openings</h4>
             <JobCardsHoler>
-              <JobCard style={{ backgroundColor: "#242933" }}>
-                <CompanyInfoHoler style={{ backgroundColor: "#242933" }}>
-                  <div className="box1">
-                    <FcBrokenLink style={{ fontSize: "1.5rem" }} />
+              <JobCard
+                style={{ backgroundColor: "#242933" }}
+                className="career-card"
+              >
+                <CompanyInfoHoler
+                  style={{ backgroundColor: "#242933", alignItems: "center" }}
+                >
+                  <div className="box1 ">
+                    <img src={Image} alt="ss" />
+
+                    {/* <FcBrokenLink style={{ fontSize: "1.5rem" }} /> */}
                   </div>
                   <div className="box2">
                     <h6>Microsoft</h6>
@@ -76,10 +91,17 @@ function Careers({ isOpen }) {
                   </ApplyButton>
                 </JobFooter>
               </JobCard>
-              <JobCard style={{ backgroundColor: "#242933" }}>
-                <CompanyInfoHoler style={{ backgroundColor: "#242933" }}>
-                  <div className="box1">
-                    <FcBrokenLink style={{ fontSize: "1.5rem" }} />
+              <JobCard
+                style={{ backgroundColor: "#242933" }}
+                className="career-card"
+              >
+                <CompanyInfoHoler
+                  style={{ backgroundColor: "#242933", alignItems: "center" }}
+                >
+                  <div className="box1 ">
+                    <img src={Image} alt="ss" />
+
+                    {/* <FcBrokenLink style={{ fontSize: "1.5rem" }} /> */}
                   </div>
                   <div className="box2">
                     <h6>Microsoft</h6>
@@ -107,10 +129,17 @@ function Careers({ isOpen }) {
                   </ApplyButton>
                 </JobFooter>
               </JobCard>
-              <JobCard style={{ backgroundColor: "#242933" }}>
-                <CompanyInfoHoler style={{ backgroundColor: "#242933" }}>
-                  <div className="box1">
-                    <FcBrokenLink style={{ fontSize: "1.5rem" }} />
+              <JobCard
+                style={{ backgroundColor: "#242933" }}
+                className="career-card"
+              >
+                <CompanyInfoHoler
+                  style={{ backgroundColor: "#242933", alignItems: "center" }}
+                >
+                  <div className="box1 ">
+                    <img src={Image} alt="ss" />
+
+                    {/* <FcBrokenLink style={{ fontSize: "1.5rem" }} /> */}
                   </div>
                   <div className="box2">
                     <h6>Microsoft</h6>
@@ -150,8 +179,8 @@ function Careers({ isOpen }) {
           </p>
           <p style={{ color: "white" }}> &copy; {company.name}, 2022</p>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

@@ -37,13 +37,7 @@ function EventsBar({ isOpen }) {
   };
 
   return (
-    <motion.div
-      className="eventsBar"
-      animate={{
-        width: isOpen ? "29%" : "30%",
-        
-      }}
-    >
+    <div className="eventsBar" style={{ width: "30%" }}>
       <div className="EventsContainer">
         <div className="headTitleSection">
           <h5 className="titleStyle">Your events</h5>
@@ -224,7 +218,7 @@ function EventsBar({ isOpen }) {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
