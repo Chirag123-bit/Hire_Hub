@@ -9,6 +9,7 @@ import Dashboard from "../components/EmployerComponents/Dashboard";
 import JobApplicants from "../components/EmployerComponents/JobApplicants";
 import "./Employer.css";
 import { Applicants } from "../components/EmployerComponents/JobApplicants/Overview/Constants";
+import Careers from "../components/EmployerComponents/Career";
 
 export default function Employer() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,17 @@ export default function Employer() {
           />
           <Route
             path="/candidates"
-            element={<Candidates id="dashboard" isOpen={isOpen} Applicants={Applicants}/>}
+            element={
+              <Candidates
+                id="dashboard"
+                isOpen={isOpen}
+                Applicants={Applicants}
+              />
+            }
+          />
+          <Route
+            path="/career"
+            element={<Careers id="dashboard" isOpen={isOpen} />}
           />
         </Routes>
       </div>

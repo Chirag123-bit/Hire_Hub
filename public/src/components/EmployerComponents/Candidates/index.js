@@ -60,7 +60,7 @@ function Candidates({ Applicants, isOpen }) {
         maxWidth: isOpen ? "83%" : "93%",
         marginLeft: isOpen ? "5rem !important" : "",
 
-        transition: { duration: 0.5, type: "spring", damping: 9 },
+        transition: { duration: 0.5, type: "spring", damping: 10 },
       }}
     >
       <Title className="mb-0">Complete Details of Applicants</Title>

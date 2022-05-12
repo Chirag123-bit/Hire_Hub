@@ -8,7 +8,6 @@ import {
   ListWrap,
 } from "./JobComponents";
 import { dataList } from "../SearchbarComponent/Constants";
-import { SearchInput } from "../SearchbarComponent/Components";
 import EmptyView from "../EmptyView/index";
 import FilterPanel from "../FilterPanelComponent";
 
