@@ -186,9 +186,6 @@ export const ApplicantModal = ({ showModal, setShowModal }) => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            {/* <Button variant="secondary" onClick={setShowModal}>
-              Close
-            </Button> */}
             <Button variant="primary" onClick={setShowModal}>
               Close
             </Button>

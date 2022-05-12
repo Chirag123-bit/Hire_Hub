@@ -17,6 +17,10 @@ a {
   background-color: #242933;
   color: white;
   z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
 }
 .eventsBar {
   background-color: #1d1e26;
@@ -76,12 +80,14 @@ main {
 
 .sideContent {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex: 4;
   padding-top: 6rem;
   background-color: rgb(29, 30, 38);
-  max-width: 100%;
-  overflow: hidden;
+  
+  margin:auto;
+  margin-right: 1rem;
+  /* overflow: hidden; */
 }
 
 .navBar {

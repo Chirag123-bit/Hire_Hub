@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { AiOutlineUser, AiOutlinePlus, AiTwotoneDelete } from "react-icons/ai";
 import { FiClock } from "react-icons/fi";
 import { MdOutlineClear } from "react-icons/md";
@@ -40,8 +40,8 @@ function EventsBar({ isOpen }) {
     <motion.div
       className="eventsBar"
       animate={{
-        width: isOpen ? "28%" : "30%",
-        transition: { duration: 0.5, type: "spring", damping: 10 },
+        width: isOpen ? "29%" : "30%",
+        
       }}
     >
       <div className="EventsContainer">

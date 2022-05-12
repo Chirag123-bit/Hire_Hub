@@ -14,8 +14,8 @@ export default function Employer() {
   return (
     <>
       <div className="main-container">
-        <Sidebar isOpen={isOpen} toggle={toggle} />
         <Navbar />
+        <Sidebar isOpen={isOpen} toggle={toggle} />
 
         <Routes>
           <Route
