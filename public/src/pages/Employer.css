@@ -42,7 +42,7 @@ a {
 }
 
 .bars {
-  font-size: 2rem;
+  font-size: 1.9rem;
 }
 .bars_low {
   font-size: 1.5rem;
@@ -52,23 +52,22 @@ a {
   display: flex;
   color: white;
   gap: 10px;
-  padding: 5px 10px;
+  padding: 25px 10px;
   border: 4px solid transparent;
   white-space: nowrap;
   transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 
 .link:hover {
-  color: white;
-  border-right: 4px solid white;
+  color: blue;
+  border-right: 2px solid blue;
   transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
-  background: rgb(45, 51, 89);
+  /* background: rgb(45, 51, 89); */
 }
 .routes .active {
-  color: white;
-  border-right: 4px solid white;
+  color: blue;
+  border-right: 2px solid blue;
   transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
-  background: rgb(45, 51, 89);
 }
 main {
   padding: 20px;
@@ -84,8 +83,8 @@ main {
   flex: 4;
   padding-top: 6rem;
   background-color: rgb(29, 30, 38);
-  
-  margin:auto;
+
+  margin: auto;
   margin-right: 1rem;
   /* overflow: hidden; */
 }

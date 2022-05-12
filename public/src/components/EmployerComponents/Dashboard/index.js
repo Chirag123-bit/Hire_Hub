@@ -40,13 +40,20 @@ import { motion } from "framer-motion";
 
 function Dashboard({ isOpen }) {
   return (
-    <motion.div className="sideContent"
-    animate={{
-        maxWidth: isOpen? "82%":"90%",marginLeft:isOpen?"16rem":"7rem",
-        transition: { duration: 0.2, type: "spring", damping: 10 },
+    <motion.div
+      className="sideContent"
+      animate={{
+        maxWidth: isOpen ? "82%" : "90%",
+        marginLeft: isOpen ? "16rem" : "7rem",
+        // maxWidth: isOpen ? "82%" : "91%",
+        // marginLeft: isOpen ? "5rem !important" : "",
+        transition: { duration: 0.5, type: "spring", damping: 10 },
       }}
     >
-      <DashboardContainer className="col-lg-7 col-xl-8 mb-4 mb-lg-0" style={{width: isOpen?"65" :"68%"}}>
+      <DashboardContainer
+        className="col-lg-7 col-xl-8 mb-4 mb-lg-0"
+        style={{ width: "68%" }}
+      >
         <HeadContainer>
           <UpperHead className="d-flex  justify-content-between">
             <Title className="mb-0">Dashboard</Title>

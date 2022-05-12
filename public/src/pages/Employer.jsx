@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Footer from "../components/Common/Footer";
+import Candidates from "../components/EmployerComponents/Candidates";
 import EventsBar from "../components/EmployerComponents/Common/EventsBar";
 import Navbar from "../components/EmployerComponents/Common/Navbar";
 import Sidebar from "../components/EmployerComponents/Common/Sidebar";
 import Dashboard from "../components/EmployerComponents/Dashboard";
 import JobApplicants from "../components/EmployerComponents/JobApplicants";
 import "./Employer.css";
+import { Applicants } from "../components/EmployerComponents/JobApplicants/Overview/Constants";
 
 export default function Employer() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +27,10 @@ export default function Employer() {
           <Route
             path="/dashboard/job-post/:id"
             element={<JobApplicants isOpen={isOpen} />}
+          />
+          <Route
+            path="/candidates"
+            element={<Candidates id="dashboard" isOpen={isOpen} Applicants={Applicants}/>}
           />
         </Routes>
       </div>

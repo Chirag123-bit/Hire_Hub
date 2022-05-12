@@ -42,7 +42,7 @@ const Sidebar = ({ isOpen, toggle }) => {
   return (
     <motion.div
       animate={{
-        width: isOpen ? "230px" : "85px",
+        width: isOpen ? "230px" : "80px",
         transition: { duration: 0.5, type: "spring", damping: 10 },
       }}
       className="sideBar"
@@ -61,7 +61,7 @@ const Sidebar = ({ isOpen, toggle }) => {
           )}
         </AnimatePresence>
         <div className={isOpen ? "bars_low" : "bars"}>
-          <FaBars onClick={toggle} />
+          <FaBars onClick={toggle} style={{ cursor: "pointer" }} />
         </div>
       </div>
 
