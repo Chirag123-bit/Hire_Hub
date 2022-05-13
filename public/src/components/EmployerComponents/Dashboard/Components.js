@@ -78,6 +78,7 @@ export const JobInfoTop = styled.div``;
 export const JobInfoSide = styled.div``;
 export const JobTitle = styled.h5`
   color: #cccdcd;
+  text-align: center;
 `;
 
 export const ThreeDots = styled(BsThreeDotsVertical)``;

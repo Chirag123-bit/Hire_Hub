@@ -52,7 +52,7 @@ function Careers({ isOpen }) {
           </div>
           <div>
             <h4>Current Openings</h4>
-            <JobCardsHoler>
+            <JobCardsHoler style={{ width: "100%" }}>
               <JobCard
                 style={{ backgroundColor: "#242933" }}
                 className="career-card"
