@@ -1,0 +1,32 @@
+.modal-backdrop.show {
+  opacity: 0.4 !important;
+}
+
+.ModalHead {
+  width: 28%;
+}
+
+.modal-content {
+  background-color: #272b35 !important;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 80% !important;
+  }
+}
+
+.ModalHead .btn-close {
+  outline: none;
+}
+
+
+.modal-body>div{
+  width: 95%;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+.modal-body>div>p,.sc-hFrEEg, .modal-body ul{
+  max-width: 80% !important;
+  margin-left: 8rem ;
+}

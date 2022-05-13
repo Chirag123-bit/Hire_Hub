@@ -1,0 +1,62 @@
+table {
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+th {
+  border: 0;
+  color: #ccc !important;
+  padding: 2rem 1rem !important;
+  vertical-align: top !important;
+  text-align: center !important;
+  width: 0;
+  border-color: #1C1E27;
+  width: max-content !important;
+}
+
+ td {
+  width: 0;
+  text-align: center;
+  padding: 1.5rem 1rem !important;
+  vertical-align: middle !important;
+  width: max-content !important;
+ 
+}
+
+.table>:not(caption)>*>*{
+  border-color: #1C1E27;
+}
+
+thead{
+  /* border-color: #1C1E27 !important; */
+  /* border-color: #1C1E27; */
+  border-bottom: 2px solid #1C1E27 !important;
+}
+
+.react-tabs::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+  /* visibility: hidden; */
+}
+
+.OverviewContainerClass::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  /* visibility: hidden; */
+  height: 6px;
+  width: 6px;
+}
+
+.react-tabs::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.OverviewContainerClass:hover .OverviewContainerClass::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
+.OverviewContainerClass:hover .OverviewContainerClass::-webkit-scrollbar-track {
+  visibility: visible;
+}
+
+.react-tabs__tab-panel--selected{
+  overflow-x: auto !important;
+}

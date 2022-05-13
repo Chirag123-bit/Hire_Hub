@@ -1,0 +1,35 @@
+.full-height {
+  height: 100vh;
+}
+
+.min-height {
+  margin-top: 8rem;
+}
+.react-tabs__tab-list li {
+  color: #ccc;
+  padding: 2rem !important;
+}
+
+.react-tabs__tab-list .react-tabs__tab--selected {
+  background-color: transparent;
+  border: none;
+  color: #4466f2;
+  border-bottom: 1px solid #4466f2 !important;
+}
+
+.react-tabs__tab-panel--selected {
+  min-height: 60vh;
+  margin-bottom: 6.1rem;
+  overflow-x: scroll;
+}
+
+.react-tabs__tab-list {
+  border-bottom: 1px solid #aaa !important;
+}
+.react-tabs__tab-list .react-tabs__tab--selected:active {
+  outline: none;
+}
+
+.react-tabs__tab:focus:after {
+  background: none;
+}

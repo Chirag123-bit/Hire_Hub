@@ -1,0 +1,354 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none !important;
+}
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: #1c1e27;
+  /* height: 100vh; */
+}
+
+.sideBar {
+  background-color: #242933;
+  color: white;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}
+.eventsBar {
+  background-color: #1d1e26;
+  color: white;
+  z-index: 10;
+  /* margin-right: 2rem; */
+}
+
+.top_section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 2.1px 10px;
+  background-color: #2b303b;
+}
+
+.logo {
+  font-size: 2.2rem;
+}
+
+.bars {
+  font-size: 1.9rem;
+}
+.bars_low {
+  font-size: 1.5rem;
+}
+
+.link {
+  display: flex;
+  color: white;
+  gap: 10px;
+  padding: 25px 10px;
+  border: 4px solid transparent;
+  white-space: nowrap;
+  transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.link:hover {
+  color: blue;
+  border-right: 2px solid blue;
+  transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  /* background: rgb(45, 51, 89); */
+}
+.routes .active {
+  color: blue;
+  border-right: 2px solid blue;
+  transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+main {
+  padding: 20px;
+}
+.icon,
+.link_text {
+  font-size: 1.3rem;
+}
+
+.sideContent {
+  display: flex;
+  justify-content: space-between;
+  flex: 4;
+  padding-top: 6rem;
+  background-color: rgb(29, 30, 38);
+
+  margin-left: auto;
+  margin-right: 1rem;
+  /* overflow: hidden; */
+}
+
+.navBar {
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: #242933;
+  color: white;
+  padding-bottom: 0;
+}
+
+.userContainer {
+  display: flex;
+  /* width: 50%; */
+  justify-content: space-between;
+}
+
+.user {
+  text-align: center;
+  flex: 2;
+}
+
+.iconsContainer {
+  font-size: 1.3rem;
+}
+.iconsContainer svg {
+  margin: 0 1rem;
+  cursor: pointer;
+}
+
+.navBarContainer {
+  display: flex;
+  width: 30%;
+  justify-content: space-around;
+}
+
+.user h4 {
+  margin-bottom: 0;
+  margin-right: 0.8rem;
+}
+
+.EventsContainer {
+  display: flex;
+  max-width: 100%;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 2rem !important;
+  font-family: "Poppins", sans-serif;
+}
+
+.headTitleSection {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.viewAll {
+  background-color: #4466f2;
+  border-color: #4466f2;
+  color: #fff;
+  transition: all 0.25s ease-in-out;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2) !important;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.2rem;
+}
+
+.viewAll:hover {
+  background-color: #3258f0;
+}
+
+.titleStyle {
+  align-self: center;
+}
+
+.calendar {
+  position: relative;
+  width: 32%;
+  padding: 1rem;
+}
+
+.event {
+  display: flex;
+  justify-content: space-between;
+  background-color: #262b34;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+.calendar .calendar-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #1d1f27;
+  /* border-right: 1px solid rgba(255, 255, 255, 0.1); */
+  box-shadow: 0 5px 25px rgb(1 1 1/ 15%);
+  text-align: center;
+  flex: 1;
+}
+
+.calendar .calendar-body .month {
+  color: #fff;
+  background: #4567f2;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.calendar .calendar-body .day {
+  color: #afb1b6 !important;
+  font-weight: 400;
+  margin-bottom: 0;
+  font-size: 80%;
+  margin-bottom: 0.4rem;
+  padding-top: 0;
+}
+
+.calendar .calendar-body .date {
+  color: #afb1b6 !important;
+  font-size: 1.2em;
+  font-weight: 600;
+  /* font-size: 16px; */
+  font-size: 16px;
+  margin-bottom: 0.4rem;
+}
+
+.event-details {
+  border-left: 1px solid #2f3541;
+  flex-grow: 1;
+  padding: 1rem;
+  flex: 2;
+  width: 50%;
+}
+
+.event-details .event-name {
+  margin-bottom: 0;
+  font-size: 0.935rem;
+}
+.event-details .event-participant,
+.event-details .event-time,
+.event-details .event-name {
+  color: #afb1b6 !important;
+}
+
+.event-details .event-participant,
+.event-details .event-time {
+  font-size: 13px;
+}
+.TodoContainer {
+  background-color: #262b34;
+}
+
+.todoAdd {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #262b34;
+}
+
+.todoAdd input {
+  width: 90%;
+  background-color: #21252c;
+  outline: none;
+  color: white;
+  border: none;
+  padding: 10px 40px 10px 14px !important;
+}
+.todoAdd {
+  z-index: 1;
+  border-bottom: 1px solid #2f3541;
+  padding: 1rem;
+  /* position: absolute; */
+}
+
+.todo-info {
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+.todos {
+  padding: 1rem;
+  color: #ccc;
+  font-family: Poppins, sans-serif;
+  font-size: 0.935rem;
+}
+
+.todo-list {
+  margin-bottom: 30px;
+  padding: 0;
+}
+
+.todo-list li {
+  align-items: center;
+  background: rgba(68, 102, 242, 0.08);
+  border-radius: 0.25rem;
+  display: flex;
+  list-style-type: none;
+  margin: 10px 0;
+  overflow: hidden;
+  padding: 1rem;
+  position: relative;
+}
+
+/* .todo-checkbox {
+  display: none;
+  opacity: 0;
+} */
+.todo-checkbox {
+  /* align-items: center; */
+  /* border: 1px solid #2f3541 !important; */
+  border-radius: 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+  height: 1.2rem;
+  justify-content: center;
+  position: relative;
+  margin: 0 10px 0 0;
+  width: 1.2rem;
+  background-color: #20242c !important;
+}
+
+.todo-checkbox + label {
+  display: inline-block;
+  padding: 0 0.5em;
+  position: relative;
+}
+
+.delete-btn {
+  background-color: #fc2c10;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  transition: all 0.25s ease-in-out;
+  width: 0;
+}
+
+.todo-list li:hover .delete-btn {
+  opacity: 1;
+  width: 15%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  transition: all 0.25s ease-in-out;
+}
+
+.user h4 {
+  font-size: 1.2rem;
+}
+
+.user p {
+  font-size: 0.8rem;
+}

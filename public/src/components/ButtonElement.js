@@ -16,11 +16,11 @@ export const Button = styled(Link)`
   align-items: center;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
+  border: 2px solid #423edd;
 
   &:hover {
     background: white;
     color: #423edd;
     transform: all 0.2s ease-in-out;
-    border: 2px solid #423edd;
   }
 `;

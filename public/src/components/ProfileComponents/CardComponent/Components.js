@@ -61,8 +61,8 @@ export const SkillHolder = styled.ul`
 export const Skill = styled.li`
   /* background-color: #045de9; */
   color: black;
-  padding: 0.2rem;
-  margin: 0.4rem;
+  padding: 0 0.2rem;
+  margin: 0 0.4rem;
   border-radius: 0.7rem;
   cursor: pointer;
 `;

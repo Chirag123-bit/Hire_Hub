@@ -84,16 +84,16 @@ export const SocialMediaWrap = styled.div`
 `;
 
 export const SocialLogo = styled(Link)`
-    color: #fff;
-    justify-self: start;
-    cursor: pointer;
-    text-decoration: none;
-    font-sizeL 1.5rem;
-    display: flex;
-    align-items: center;
-    margin-bottom: center;
-    font-weight: bold;
-  `;
+  color: #fff;
+  justify-self: start;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: center;
+  font-weight: bold;
+`;
 
 export const WebsiteRights = styled.small`
   color: #fff;

@@ -1,0 +1,58 @@
+.OverviewContainerClass {
+  display: flex;
+  justify-content: space-around;
+  color: #fff;
+
+  justify-content: flex-start;
+}
+
+.OverviewContainerClass .column {
+  min-width: 20rem;
+}
+
+.OverviewContainerClass .column h3 {
+  text-align: center;
+}
+
+.droppable-col {
+  padding: 10px 10px 0 10px;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+}
+
+.itemDrop {
+  margin-bottom: 10px;
+  /* border: 1px solid white; */
+  padding: 5px;
+  border-radius: 7px;
+  background-color: #1c1e27;
+}
+
+.card-body-drag {
+  padding: 1rem 1.5rem !important;
+}
+
+.OverviewContainerClass::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+  /* visibility: hidden; */
+}
+
+.OverviewContainerClass::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  /* visibility: hidden; */
+  height: 6px;
+  width: 6px;
+}
+.OverviewContainerClass::-webkit-scrollbar-track {
+  background: transparent;
+}
+.OverviewContainerClass:hover .OverviewContainerClass::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+.OverviewContainerClass:hover .OverviewContainerClass::-webkit-scrollbar-track {
+  visibility: visible;
+}

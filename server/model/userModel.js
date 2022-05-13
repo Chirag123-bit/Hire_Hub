@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     max: 50,
-    unique: true,
+    // unique: true,
   },
   password: {
     type: String,
@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
   avatarImage: {
     type: String,
     default: "",
+  },
+  isVerified: {
+    type: Boolean,
+    default: false,
   },
 });
 
