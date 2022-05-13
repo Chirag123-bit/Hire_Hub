@@ -25,7 +25,7 @@ const Register = () => {
 
   useEffect(() => {
     if (localStorage.getItem("user")) {
-      navigate("/chat");
+      navigate("/applicant/home");
     }
   });
 
@@ -74,7 +74,7 @@ const Register = () => {
         <form onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
             <img src={Logo} alt="Logo" />
-            <h1>Snappy</h1>
+            <h1>Hire Hub</h1>
           </div>
           <input
             type="text"
@@ -118,7 +118,7 @@ const FormContainer = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #131324;
+  background-color: #242933;
 
   .brand {
     display: flex;
@@ -137,24 +137,24 @@ const FormContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    background-color: #00000076;
+    background-color: #1d1e26;
     border-radius: 2rem;
     padding: 3rem 5rem;
     input {
       background-color: transparent;
       padding: 1rem;
-      border: 0.1rem solid #4e0eff;
+      border: 1px solid #f6f6fd;
       border-radius: 0.4rem;
       color: white;
       width: 100%;
       font-size: 1rem;
       &:focus {
-        border: 0.1rem solid #997af0;
+        border: 0.1rem solid #4567f2;
         outline: none;
       }
     }
     button {
-      background-color: #997af0;
+      background-color: #4567f2;
       color: white;
       padding: 1rem 2rem;
       border: none;

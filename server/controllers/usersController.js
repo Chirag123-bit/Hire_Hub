@@ -35,7 +35,7 @@ const sendVerificationEmail = ({ _id, email }, res) => {
       <p> This link expires in <b>6 hours</b> </p>
 
       <p> Press <a href=${
-        currentUrl + "user/verify/" + _id + "/" + uniqueString
+        currentUrl + "/api/auth/verify/" + _id + "/" + uniqueString
       }> Here </a> to verify your email  </p>
     `,
   };
@@ -90,9 +90,11 @@ module.exports.verify = (req, res) => {
   let { userId, uniqueString } = req.params;
 
   userVerification
-    .find(userId)
+    .find({ userId })
     .then((result) => {
-      if (result.len > 0) {
+      console.log(userId);
+      console.log(result.length);
+      if (result.length > 0) {
         const { expiresAt } = result[0];
         const hashedUniqueString = result[0].uniqueString;
         if (expiresAt < Date.now()) {
@@ -102,18 +104,24 @@ module.exports.verify = (req, res) => {
               User.deleteOne({ _id: userId })
                 .then(() => {
                   let message = "The link has expired. Please Sign up again";
-                  res.redirect(`/user/verified/error=true&message=${message}`);
+                  res.redirect(
+                    `/api/auth/user/verified/?error=true&message=${message}`
+                  );
                 })
                 .catch((error) => {
                   let message =
                     "An error occured while deliting user with expired token";
-                  res.redirect(`/user/verified/error=true&message=${message}`);
+                  res.redirect(
+                    `/api/auth/user/verified/?error=true&message=${message}`
+                  );
                 });
             })
             .catch((error) => {
               console.log(error);
               let message = "Error deleting expired token";
-              res.redirect(`/user/verified/error=true&message=${message}`);
+              res.redirect(
+                `/api/auth/user/verified/?error=true&message=${message}`
+              );
             });
         } else {
           bcrypt
@@ -132,35 +140,39 @@ module.exports.verify = (req, res) => {
                         let message =
                           "An error occured while deleting user verification record";
                         res.redirect(
-                          `/user/verified/error=true&message=${message}`
+                          `/api/auth/user/verified/?error=true&message=${message}`
                         );
                       });
                   })
                   .catch((e) => {
                     let message = "An error occured while updating records";
                     res.redirect(
-                      `/user/verified/error=true&message=${message}`
+                      `/api/auth/user/verified/?error=true&message=${message}`
                     );
                   });
               } else {
                 let message = "Incorrect verification details";
-                res.redirect(`/user/verified/error=true&message=${message}`);
+                res.redirect(
+                  `/api/auth/user/verified/?error=true&message=${message}`
+                );
               }
             })
             .catch((error) => {
               let message = "An error occured while comparing unique strings";
-              res.redirect(`/user/verified/error=true&message=${message}`);
+              res.redirect(
+                `/api/auth/user/verified/?error=true&message=${message}`
+              );
             });
         }
       } else {
         let message = "Account Record does not exist";
-        res.redirect(`/user/verified/error=true&message=${message}`);
+        res.redirect(`/api/auth/user/verified/?error=true&message=${message}`);
       }
     })
     .catch((e) => {
       console.log(e);
       let message = "An error occured while checking validation of user";
-      res.redirect(`/user/verified/error=true&message=${message}`);
+      res.redirect(`/api/auth/user/verified/?error=true&message=${message}`);
     });
 };
 
@@ -178,20 +190,22 @@ module.exports.register = async (req, res, next) => {
     if (emailCheck)
       return res.json({ msg: "Email already used", status: false });
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({
+    const user = new User({
       email,
       username,
       password: hashedPassword,
       isVerified: false,
-    })
+    });
+
+    user
+      .save()
       .then((result) => {
         sendVerificationEmail(result, res);
-        return res.json({ status: true, user });
       })
       .catch((error) => {
         console.log(error);
         res.json({
-          status: "Failed",
+          status: false,
           message: "An Error Occured",
         });
       });
@@ -208,11 +222,18 @@ module.exports.login = async (req, res, next) => {
     if (!user) {
       return res.json({ msg: "Incorrect Username or Password", status: false });
     }
+    if (!user[0].isVerified) {
+      return res.json({
+        status: false,
+        message: "User email Unverified",
+      });
+    }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       console.log("Invalid");
       return res.json({ msg: "Incorrect Username or Password", status: false });
     }
+
     delete user.password;
     return res.json({
       status: true,

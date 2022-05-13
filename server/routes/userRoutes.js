@@ -13,7 +13,7 @@ router.post("/register", register);
 router.post("/login", login);
 router.post("/setAvatar/:id", setAvatar);
 router.get("/allusers/:id", getAllUsers);
-router.get("/users/verify/:userId/:uniqueString", verify);
-router.get("/users/verified", verified);
+router.get("/verify/:userId/:uniqueString", verify);
+router.get("/user/verified/", verified);
 
 module.exports = router;
