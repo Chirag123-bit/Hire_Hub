@@ -1,10 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
+
 const userRoutes = require("./routes/userRoutes");
 const messageRoute = require("./routes/messagesRoute");
 const videoRoute = require("./routes/videoRoute");
 const socket = require("socket.io");
+require("./database/connection");
 
 const app = express();
 require("dotenv").config();
@@ -16,21 +17,10 @@ app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoute);
 app.use("/api/video", videoRoute);
 
-mongoose
-  .connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Database Connected Sucessfully");
-  })
-  .catch(() => {
-    console.log(err.message);
-  });
-
 const server = app.listen(process.env.PORT, () =>
   console.log(`Server started on ${process.env.PORT}`)
 );
+
 const io = socket(server, {
   cors: {
     origin: "http://localhost:3000",

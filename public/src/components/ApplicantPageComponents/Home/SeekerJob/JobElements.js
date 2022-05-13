@@ -55,6 +55,7 @@ export const JobCard = styled.div`
   justify-content: space-between;
   transition: box-shadow 0.3s ease-in;
   margin: 1rem;
+  cursor: pointer;
   &:hover {
     box-shadow: 1px 8px 20px rgba(69, 65, 221, 0.75);
     transition: box-shadow 0.3s ease-in;
