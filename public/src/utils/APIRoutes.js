@@ -8,3 +8,4 @@ export const getAllMessageRoute = `${host}/api/messages/getmsg`;
 export const videoCall = `${host}/api/video/call`;
 
 export const emailVerify = `${host}/api/auth/verify`;
+export const sendVerification = `${host}/api/auth/sendVerification`;

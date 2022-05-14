@@ -3,18 +3,47 @@ import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Navbar from "../components/OnboardingPageComponents/Navbar";
-import { emailVerify } from "../utils/APIRoutes";
+import { emailVerify, sendVerification } from "../utils/APIRoutes";
+import { toast } from "react-toastify";
 
 export default function CodeSent() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(undefined);
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "dark",
+  };
 
+  function callToast(msg, status) {
+    console.log(status);
+    if (status === false) {
+      console.log("false");
+      toast.error(msg, toastOptions);
+    } else {
+      console.log("true");
+      toast.success(msg, toastOptions);
+    }
+  }
   useEffect(() => {
     async function sUser() {
       if (!localStorage.getItem("user")) {
         navigate("/login");
+        toast.error("User got", toastOptions);
       } else {
         setCurrentUser(await JSON.parse(localStorage.getItem("user")));
+
+        axios
+          .post(sendVerification, {
+            id: JSON.parse(localStorage.getItem("user"))._id,
+            email: JSON.parse(localStorage.getItem("user")).email,
+          })
+          .then((data) => {
+            console.log(data.data);
+            callToast(data.data.msg, data.data.status);
+          });
       }
     }
     sUser();
@@ -63,6 +92,7 @@ export default function CodeSent() {
     const { data } = await axios.post(
       `${emailVerify}/${currentUser._id}/${code + currentUser._id}`
     );
+    toast.error(data.msg, toastOptions);
 
     console.log(data);
   }

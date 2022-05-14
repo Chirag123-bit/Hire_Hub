@@ -60,7 +60,7 @@ const Register = () => {
         toast.error(data.msg, toastOptions);
       } else {
         localStorage.setItem("user", JSON.stringify(data.user));
-        navigate("/");
+        navigate("/chat");
       }
     }
   };
