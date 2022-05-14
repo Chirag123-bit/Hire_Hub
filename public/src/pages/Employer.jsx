@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Footer from "../components/Common/Footer";
 import Candidates from "../components/EmployerComponents/Candidates";
-import EventsBar from "../components/EmployerComponents/Common/EventsBar";
 import Navbar from "../components/EmployerComponents/Common/Navbar";
 import Sidebar from "../components/EmployerComponents/Common/Sidebar";
 import Dashboard from "../components/EmployerComponents/Dashboard";

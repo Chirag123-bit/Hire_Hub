@@ -5,6 +5,7 @@ const {
   getAllUsers,
   verify,
   verified,
+  codeSent,
 } = require("../controllers/usersController");
 
 const router = require("express").Router();
@@ -15,5 +16,6 @@ router.post("/setAvatar/:id", setAvatar);
 router.get("/allusers/:id", getAllUsers);
 router.get("/verify/:userId/:uniqueString", verify);
 router.get("/user/verified/", verified);
+router.get("/user/codesent/", codeSent);
 
 module.exports = router;

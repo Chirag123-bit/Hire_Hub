@@ -43,6 +43,9 @@ export const Chat = ({ inCall, setInCall }) => {
         } else {
           navigate("/setAvatar");
         }
+        if (!currentUser.isVerified) {
+          navigate(`/codesent/${currentUser._id}`);
+        }
       }
       cUser(currentUser);
     }

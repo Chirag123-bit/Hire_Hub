@@ -25,7 +25,9 @@ transporter.verify((error, success) => {
 
 const sendVerificationEmail = ({ _id, email }, res) => {
   const currentUrl = "http://localhost:5000";
-  const uniqueString = uuidv4() + _id;
+  const code = Math.floor(Math.random() * (999999 - 100000 + 1) + 100000);
+
+  const uniqueString = code + _id;
 
   const mailOptions = {
     from: process.env.AUTH_EMAIL,
@@ -33,12 +35,13 @@ const sendVerificationEmail = ({ _id, email }, res) => {
     subject: "Verify Your Email",
     html: `<p>Verify your email address to complete signin process.</p> 
       <p> This link expires in <b>6 hours</b> </p>
-
-      <p> Press <a href=${
-        currentUrl + "/api/auth/verify/" + _id + "/" + uniqueString
-      }> Here </a> to verify your email  </p>
+      <p> Your Unique code is <b>${code}</b> </p>
     `,
   };
+
+  // <p> Press <a href=${
+  //   currentUrl + "/api/auth/verify/" + _id + "/" + uniqueString
+  // }> Here </a> to verify your email  </p>
 
   const saltRounds = 10;
   bcrypt
@@ -56,32 +59,32 @@ const sendVerificationEmail = ({ _id, email }, res) => {
           transporter
             .sendMail(mailOptions)
             .then(() => {
-              res.json({
-                status: "Pending",
-                message: "Verification Email Sent",
+              return res.json({
+                msg: "Verification Email Sent",
+                status: true,
               });
             })
             .catch((error) => {
               console.log(error);
-              res.json({
-                status: "Failed",
-                message: "An Error Occured",
+              return res.json({
+                msg: "Error sending verifiation mail",
+                status: false,
               });
             });
         })
         .catch((e) => {
           console.log(e);
-          res.json({
-            status: "Failed",
-            message: "An Error Occured",
+          return res.json({
+            msg: "Failed to save unique token",
+            status: false,
           });
         });
     })
     .catch((e) => {
       console.log(e);
-      res.json({
-        status: "Failed",
-        message: "An Error Occured",
+      return res.json({
+        msg: "Failed to hash token",
+        status: false,
       });
     });
 };
@@ -180,6 +183,10 @@ module.exports.verified = (req, res) => {
   res.sendFile(path.join(__dirname, "./../views/verified.html"));
 };
 
+module.exports.codeSent = (req, res) => {
+  res.sendFile(path.join(__dirname, "./../views/code_sent.html"));
+};
+
 module.exports.register = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
@@ -221,12 +228,6 @@ module.exports.login = async (req, res, next) => {
     const user = await User.findOne({ username });
     if (!user) {
       return res.json({ msg: "Incorrect Username or Password", status: false });
-    }
-    if (!user[0].isVerified) {
-      return res.json({
-        status: false,
-        message: "User email Unverified",
-      });
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
