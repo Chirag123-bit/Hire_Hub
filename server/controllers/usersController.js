@@ -6,13 +6,7 @@ const { v4: uuidv4 } = require("uuid");
 const userVerification = require("../model/UserVerification");
 require("dotenv").config();
 const path = require("path");
-const joi = require("@hapi/joi");
-
-const schema = joi.object({
-  username: joi.string().min(3).required(),
-  email: joi.string().min(6).required().email(),
-  password: joi.string().min(3).required(),
-});
+const { register_schema } = require("../validators/register_validator");
 
 // Node Mail Service Transporter
 let transporter = nodemailer.createTransport({
@@ -221,9 +215,11 @@ module.exports.verify = (req, res) => {
                   .then(() => {
                     UserVerification.deleteOne({ userId })
                       .then(() => {
-                        res.sendFile(
-                          path.join(__dirname, "./../views/verified.html")
-                        );
+                        let message = "Successfully Verified the account";
+                        return res.json({
+                          msg: message,
+                          status: "completed",
+                        });
                       })
                       .catch((e) => {
                         let message =
@@ -242,7 +238,7 @@ module.exports.verify = (req, res) => {
                     });
                   });
               } else {
-                let message = "Incorrect verification details";
+                let message = "Incorrect verification code";
                 return res.json({
                   msg: message,
                   status: false,
@@ -258,10 +254,10 @@ module.exports.verify = (req, res) => {
             });
         }
       } else {
-        let message = "Account Record does not exist";
+        let message = "Successfully Verified the account";
         return res.json({
           msg: message,
-          status: false,
+          status: "completed",
         });
       }
     })
@@ -285,7 +281,7 @@ module.exports.codeSent = (req, res) => {
 
 module.exports.register = async (req, res, next) => {
   try {
-    const { error } = schema.validate(req.body);
+    const { error } = register_schema.validate(req.body);
     if (error) {
       return res.json({ msg: error.details[0].message, status: false });
     }

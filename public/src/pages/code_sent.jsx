@@ -20,11 +20,15 @@ export default function CodeSent() {
   function callToast(msg, status) {
     console.log(status);
     if (status === false) {
-      console.log("false");
       toast.error(msg, toastOptions);
-    } else {
-      console.log("true");
+    } else if (status === true) {
       toast.success(msg, toastOptions);
+    } else {
+      const user = JSON.parse(localStorage.getItem("user"));
+      user.isVerified = true;
+      localStorage.setItem("user", JSON.stringify(user));
+      toast.success(msg, toastOptions);
+      navigate("/verified");
     }
   }
   useEffect(() => {
@@ -92,7 +96,7 @@ export default function CodeSent() {
     const { data } = await axios.post(
       `${emailVerify}/${currentUser._id}/${code + currentUser._id}`
     );
-    toast.error(data.msg, toastOptions);
+    callToast(data.msg, data.status);
 
     console.log(data);
   }

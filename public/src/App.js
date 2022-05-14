@@ -12,6 +12,7 @@ import VideoCall from "./components/Meeting/VideoCall";
 import Seeker from "./pages/Seeker";
 import Employer from "./pages/Employer";
 import Code_sent from "./pages/code_sent";
+import EmailVerified from "./components/Common/Email/EmailVerified";
 // import VideoApp from "./components/videoCall";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
 
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/verified" element={<EmailVerified />} />
         <Route path="/setAvatar" element={<SetAvatar />} />
         <Route
           path="/chat"
