@@ -7,6 +7,7 @@ const {
   verified,
   codeSent,
   sendVerificationEmail,
+  resendVerification,
 } = require("../controllers/usersController");
 
 const router = require("express").Router();
@@ -19,5 +20,6 @@ router.post("/verify/:userId/:uniqueString", verify);
 router.get("/user/verified/", verified);
 router.get("/user/codesent/", codeSent);
 router.post("/sendVerification/", sendVerificationEmail);
+router.post("/reSendVerification/", resendVerification);
 
 module.exports = router;

@@ -3,12 +3,18 @@ import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Navbar from "../components/OnboardingPageComponents/Navbar";
-import { emailVerify, sendVerification } from "../utils/APIRoutes";
+import {
+  emailVerify,
+  reSendVerification,
+  sendVerification,
+} from "../utils/APIRoutes";
 import { toast } from "react-toastify";
 
 export default function CodeSent() {
   const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState(undefined);
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("user"))
+  );
   const toastOptions = {
     position: "bottom-right",
     autoClose: 8000,
@@ -31,6 +37,16 @@ export default function CodeSent() {
       navigate("/verified");
     }
   }
+  const reSendVerificationCode = () => {
+    axios
+      .post(reSendVerification, {
+        id: JSON.parse(localStorage.getItem("user"))._id,
+        email: JSON.parse(localStorage.getItem("user")).email,
+      })
+      .then((data) => {
+        callToast(data.data.msg, data.data.status);
+      });
+  };
   useEffect(() => {
     async function sUser() {
       if (!localStorage.getItem("user")) {
@@ -45,7 +61,6 @@ export default function CodeSent() {
             email: JSON.parse(localStorage.getItem("user")).email,
           })
           .then((data) => {
-            console.log(data.data);
             callToast(data.data.msg, data.data.status);
           });
       }
@@ -108,8 +123,9 @@ export default function CodeSent() {
         <div className="container">
           <h2>Verify Your Account</h2>
           <p>
-            We emailed you the six digit code to your email address <br />
-            Enter the code below to confirm your email address.
+            We emailed you the six digit code to your email address{" "}
+            <b>{currentUser.email}</b> <br />
+            Enter the code you recieved to confirm your email address.
           </p>
           <form
             className="code-container flex-column"
@@ -177,11 +193,18 @@ export default function CodeSent() {
                 required
               />
             </div>
+            <small className="info mb-2">
+              Didn't recieve the code? Click{" "}
+              <a href="#" onClick={reSendVerificationCode}>
+                here
+              </a>{" "}
+              to resend
+            </small>
             <button type="submit" className="sbmtBtn btn btn-primary d-block">
               Submit
             </button>
           </form>
-          <small className="info mt-4">
+          <small className="info mt-1">
             Please Check your email for the code. Your account will be
             <b> terminated</b> if the account is not verified within{" "}
             <b>6 hours</b>!

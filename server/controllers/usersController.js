@@ -89,7 +89,10 @@ module.exports.sendVerificationEmail = async (req, res) => {
         UserVerification.findOne({ userId: _id })
           .then((reUser) => {
             if (reUser) {
-              return this.resendVerification(req, res);
+              return res.json({
+                msg: "Please confirm your email address to continue",
+                status: true,
+              });
             } else {
               const mailOptions = {
                 from: process.env.AUTH_EMAIL,
@@ -150,11 +153,6 @@ module.exports.sendVerificationEmail = async (req, res) => {
           .catch((e) => {
             console.log("Here");
           });
-        // if (reUser) {
-        //   console.log(result);
-        //   return;
-        // }
-        //
       }
     })
     .catch((e) => {

@@ -9,3 +9,4 @@ export const videoCall = `${host}/api/video/call`;
 
 export const emailVerify = `${host}/api/auth/verify`;
 export const sendVerification = `${host}/api/auth/sendVerification`;
+export const reSendVerification = `${host}/api/auth/reSendVerification`;
