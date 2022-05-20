@@ -81,23 +81,6 @@ export default function CodeSent() {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
 
-  window.onload = () => {
-    const codes = document.querySelectorAll(".code");
-
-    codes[0].focus();
-
-    codes.forEach((code, idx) => {
-      code.addEventListener("keydown", (e) => {
-        if (e.key >= 0 && e.key <= 9) {
-          codes[idx].value = "";
-          setTimeout(() => codes[idx + 1].focus(), 10);
-        } else if (e.key === "Backspace") {
-          setTimeout(() => codes[idx - 1].focus(), 10);
-        }
-      });
-    });
-  };
-
   async function handleSubmit(event) {
     event.preventDefault();
     const code =
@@ -115,6 +98,22 @@ export default function CodeSent() {
 
     console.log(data);
   }
+  useEffect(() => {
+    const codes = document.querySelectorAll(".code");
+
+    codes[0].focus();
+
+    codes.forEach((code, idx) => {
+      code.addEventListener("keydown", (e) => {
+        if (e.key >= 0 && e.key <= 9) {
+          codes[idx].value = "";
+          setTimeout(() => codes[idx + 1].focus(), 10);
+        } else if (e.key === "Backspace") {
+          setTimeout(() => codes[idx - 1].focus(), 10);
+        }
+      });
+    });
+  });
 
   return (
     <>
@@ -125,7 +124,7 @@ export default function CodeSent() {
           <p>
             We emailed you the six digit code to your email address{" "}
             <b>{currentUser.email}</b> <br />
-            Enter the code you recieved to confirm your email address.
+            Enter the code below to confirm your email address.
           </p>
           <form
             className="code-container flex-column"

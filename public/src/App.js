@@ -13,6 +13,8 @@ import Seeker from "./pages/Seeker";
 import Employer from "./pages/Employer";
 import Code_sent from "./pages/code_sent";
 import EmailVerified from "./components/Common/Email/EmailVerified";
+
+import Auth from "./pages/Auth";
 // import VideoApp from "./components/videoCall";
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
 
         <Route path="/register" element={<Register />} />
+        <Route path="/auth/*" element={<Auth />} />
         <Route path="/login" element={<Login />} />
         <Route path="/verified" element={<EmailVerified />} />
         <Route path="/setAvatar" element={<SetAvatar />} />
