@@ -4,6 +4,7 @@ import { Styles } from "./styles";
 import PropTypes from "prop-types";
 import { withStyles } from "@mui/styles";
 import { renderText } from "../DisplayComponent";
+import { toast } from "react-toastify";
 
 import { Step, StepLabel, Stepper } from "@mui/material";
 import PersonalBio from "./FormSteps/PersonalBio";
@@ -11,6 +12,79 @@ import AdditionlInfo from "./FormSteps/AdditionalInformation";
 import ProfessionalInfo from "./FormSteps/ProfessionalInformation";
 
 class RegistrationForm extends Component {
+  toastOptions = {
+    position: "bottom-right",
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "dark",
+  };
+  handleValidation = () => {
+    const { skillSet, educationSet, sector, summary, gender, type } =
+      this.state.data;
+    console.log(skillSet);
+    if (skillSet.length < 1 || skillSet[0].skill === "") {
+      toast.error("Please add atleast one skill", this.toastOptions);
+      return false;
+    } else if (educationSet.length < 1 || educationSet[0].skill === "") {
+      toast.error(
+        "Please add atleast one education background",
+        this.toastOptions
+      );
+      return false;
+    } else if (sector === "") {
+      toast.error("Please specify your sector", this.toastOptions);
+      return false;
+    } else if (summary === "") {
+      toast.error("Please tell us about yourself(Summary)", this.toastOptions);
+      return false;
+    } else if (gender === "") {
+      toast.error("Please select your gender", this.toastOptions);
+      return false;
+    } else if (type === "") {
+      toast.error("Please specify your user type", this.toastOptions);
+      return false;
+    }
+    return true;
+  };
+  extractSkills = () => {
+    const { data } = this.state;
+    data.skillSet.forEach(function (value) {
+      if (value.skill !== "") data.skills.push(value.skill);
+    });
+    this.setState({ data });
+  };
+  extractWorks = () => {
+    const { data } = this.state;
+    data.workSet.forEach(function (value) {
+      data.work.push(value.skill);
+    });
+    this.setState({ data });
+  };
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    // console.log(this.handleValidation());
+    const data = this.state.data;
+    if (data.type === "Applicant") {
+      // console.log(data.skillSet);
+      // console.log(data.educationSet);
+      console.log(data.workSet);
+      this.extractSkills();
+    }
+    // if (handleValidation()) {
+    //   const { data } = await axios.post(registerRoute, {
+    //     username,
+    //     email,
+    //     password,
+    //   });
+    //   if (data.status === false) {
+    //     toast.error(data.msg, toastOptions);
+    //   } else {
+    //     localStorage.setItem("user", JSON.stringify(data.user));
+    //     navigate("/chat");
+    //   }
+    // }
+  };
   state = {
     data: {
       firstName: "",
@@ -89,12 +163,13 @@ class RegistrationForm extends Component {
       this.setState({ data, errors });
     };
     const handleOnEduChange = (e, property, index) => {
-      const { data, errors } = this.state;
-      e.target.value.length <= 0
-        ? (errors[e.target.name] = ` ${e.target.name} must not be null`)
-        : (errors[e.target.name] = "");
+      const { data } = this.state;
+
+      // e.target.value.length <= 0
+      //   ? (errors[e.target.name] = ` ${e.target.name} must not be null`)
+      //   : (errors[e.target.name] = "");
       data.educationSet[index][property] = e.target.value;
-      this.setState({ data, errors });
+      this.setState({ data });
     };
     const setProfile = (file) => {
       const { data, errors } = this.state;
@@ -113,6 +188,21 @@ class RegistrationForm extends Component {
       data.educationSet = [
         ...data.educationSet,
         { etitle: "", ecollege: "", estart: "", eend: "" },
+      ];
+      this.setState({ data, errors });
+    };
+    const handleAddWork = () => {
+      const { data, errors } = this.state;
+      data.workSet = [
+        ...data.workSet,
+        {
+          wtitle: "",
+          wcompany: "",
+          wlocation: "",
+          wtype: "",
+          wstart: "",
+          wend: "",
+        },
       ];
       this.setState({ data, errors });
     };
@@ -213,6 +303,7 @@ class RegistrationForm extends Component {
               handleDateWork={handleDateWork}
               handleRemoveWork={handleRemoveWork}
               handleOnEduChange={handleOnEduChange}
+              handleAddWork={handleAddWork}
             />
           );
         default:
@@ -248,7 +339,10 @@ class RegistrationForm extends Component {
             </Paper>
 
             <Box mb={16} component={Paper}>
-              <form className={classes.form}>
+              <form
+                className={classes.form}
+                onSubmit={(event) => this.handleSubmit(event)}
+              >
                 {getStepsItems(this.state.currentStep)}
               </form>
             </Box>

@@ -62,7 +62,7 @@ const userSchema = new mongoose.Schema({
       sector: {
         type: String,
       },
-      skill: [
+      skills: [
         {
           type: String,
         },

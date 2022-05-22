@@ -97,6 +97,7 @@ export const renderSelect = ({ label, name, color, state, handleOnChange }) => {
       // color={color ? color : "primary"}
       error={errors[name] ? true : false}
       style={{ width: "100%" }}
+      size="small"
     >
       {genders.map((option) => (
         <MenuItem key={option.value} value={option.value}>
@@ -127,6 +128,7 @@ export const renderSelectType = ({
       color={color ? color : "primary"}
       error={errors[name] ? true : false}
       style={{ width: "100%" }}
+      size="small"
     >
       {types.map((option) => (
         <MenuItem key={option.value} value={option.value}>
@@ -157,6 +159,7 @@ export const renderSelectSector = ({
       color={color ? color : "primary"}
       error={errors[name] ? true : false}
       style={{ width: "100%" }}
+      size="small"
     >
       {sectors.map((option) => (
         <MenuItem key={option.value} value={option.value}>
@@ -167,12 +170,13 @@ export const renderSelectSector = ({
   );
 };
 
-export const renderButton = ({ label, variant, handleNext, color }) => {
+export const renderButton = ({ label, variant, handleNext, color, type }) => {
   return (
     <Button
       variant={variant}
       onClick={handleNext}
       color={color ? color : "primary"}
+      type={type ? type : "button"}
     >
       {label}
     </Button>

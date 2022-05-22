@@ -5,12 +5,12 @@ import {
   renderButton,
   renderText,
   renderSelectSector,
-  renderSelectSectorApp,
 } from "../../DisplayComponent";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { Button, IconButton, TextField } from "@mui/material";
 import RemoveButton from "@material-ui/icons/Remove";
 import AddButton from "@material-ui/icons/Add";
+import { v4 as uuid } from "uuid";
 
 export default function AdditionlInfo({
   state,
@@ -143,15 +143,16 @@ export default function AdditionlInfo({
           <Grid item xs={12}>
             {state.data.skillSet.map((skills, index) => {
               return (
-                <div key={index} style={{ display: "flex" }}>
+                <div style={{ display: "flex", marginBottom: "1rem" }}>
                   <TextField
+                    size="small"
                     name="skill"
                     label="Skill"
                     value={skills.skill}
                     onChange={(e) => {
                       handleOnSkillChange(e, index);
                     }}
-                    style={{ width: "90%" }}
+                    style={{ width: "90%", textTransform: "capitalize" }}
                   />
                   <IconButton onClick={() => handleRemoveSkill(index)}>
                     <RemoveButton />

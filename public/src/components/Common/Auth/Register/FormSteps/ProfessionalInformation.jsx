@@ -5,8 +5,8 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Button,
   IconButton,
+  MenuItem,
   TextField,
   Typography,
 } from "@mui/material";
@@ -15,6 +15,17 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import RemoveButton from "@material-ui/icons/Remove";
 import AddButton from "@material-ui/icons/Add";
+
+const workTypes = [
+  {
+    value: "Full Time",
+    label: "Full Time",
+  },
+  {
+    value: "Part Time",
+    label: "Part Time",
+  },
+];
 
 export default function ProfessionalInfo({
   state,
@@ -181,7 +192,7 @@ export default function ProfessionalInfo({
                             justifyContent: "space-between",
                           }}
                         >
-                          <h6>Start Date</h6>
+                          <h6>End Date</h6>
                           <ReactDatePicker
                             selected={education.eend}
                             onChange={(date) =>
@@ -275,6 +286,34 @@ export default function ProfessionalInfo({
                           display: "flex",
                           justifyContent: "space-between",
                           marginBottom: "1rem",
+                          marginTop: "1rem",
+                        }}
+                      >
+                        <TextField
+                          id="outlined-select-type"
+                          select
+                          label="Work Type"
+                          name="wtype"
+                          value={work.wtype}
+                          onChange={(e) => {
+                            handleOnWorkChange(e, "wtype", index);
+                          }}
+                          variant="outlined"
+                          style={{ width: "100%" }}
+                          size="small"
+                        >
+                          {workTypes.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                              {option.label}
+                            </MenuItem>
+                          ))}
+                        </TextField>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          marginBottom: "1rem",
                         }}
                       >
                         <div
@@ -350,6 +389,7 @@ export default function ProfessionalInfo({
               label: "Submit",
               variant: "outlined",
               handleNext: handleNext,
+              type: "submit",
             })}
           </Box>
         </Grid>
