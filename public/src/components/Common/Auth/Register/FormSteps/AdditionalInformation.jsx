@@ -22,6 +22,7 @@ export default function AdditionlInfo({
   handleOnSkillChange,
   handleRemoveSkill,
   handleAddSkill,
+  setProfile,
 }) {
   if (state.data.type == "Company")
     return (
@@ -75,14 +76,16 @@ export default function AdditionlInfo({
             <input
               accept="image/*"
               id="raised-button-file"
-              multiple
               type="file"
+              onChange={(e) => {
+                setProfile(e.target.files[0]);
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <label htmlFor="raised-button-file">
               <Button variant="outlined" component="span" color="secondary">
-                Upload
+                Upload Your Profile Picture
               </Button>
             </label>
           </Grid>
@@ -173,6 +176,25 @@ export default function AdditionlInfo({
               value={state.data.summary}
               onChange={handleOnChange}
             />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} style={{ marginTop: "1rem" }}>
+          <Grid item xs={12} sm={6}>
+            <input
+              accept="image/*"
+              id="raised-button-file"
+              type="file"
+              onChange={(e) => {
+                setProfile(e.target.files[0]);
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <label htmlFor="raised-button-file">
+              <Button variant="outlined" component="span" color="secondary">
+                Upload Your Profile Picture
+              </Button>
+            </label>
           </Grid>
         </Grid>
 

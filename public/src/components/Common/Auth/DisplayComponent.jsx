@@ -62,6 +62,7 @@ export const renderInputText = ({
   color,
   state,
   handleOnChange,
+  type,
 }) => {
   const { data, errors } = state;
   return (
@@ -76,6 +77,8 @@ export const renderInputText = ({
       error={errors[name] ? true : false}
       helperText={errors[name]}
       onChange={handleOnChange}
+      type={type ? type : ""}
+      required
     />
   );
 };

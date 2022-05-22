@@ -53,6 +53,25 @@ export default function PersonalBio({ state, handleOnChange, handleNext }) {
       <Grid container spacing={2} style={{ marginTop: "1rem" }}>
         <Grid item xs={12} sm={6}>
           {renderInputText({
+            label: "Username",
+            name: "username",
+            state,
+            handleOnChange,
+          })}
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          {renderInputText({
+            label: "Password",
+            name: "password",
+            state,
+            handleOnChange,
+            type: "password",
+          })}
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} style={{ marginTop: "1rem" }}>
+        <Grid item xs={12} sm={6}>
+          {renderInputText({
             label: "Phone Number",
             name: "phone",
             state,

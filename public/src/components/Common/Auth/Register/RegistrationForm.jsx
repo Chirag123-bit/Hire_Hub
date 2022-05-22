@@ -18,7 +18,9 @@ class RegistrationForm extends Component {
       gender: "",
       phone: "",
       email: "",
-      type: "Applicant",
+      type: "",
+      username: "",
+      password: "",
 
       cname: "",
       country: "",
@@ -26,7 +28,7 @@ class RegistrationForm extends Component {
       cabout: "",
       cdesc: "",
 
-      clogo: "",
+      avatar: "",
       csector: "",
 
       title: "",
@@ -93,6 +95,12 @@ class RegistrationForm extends Component {
         : (errors[e.target.name] = "");
       data.educationSet[index][property] = e.target.value;
       this.setState({ data, errors });
+    };
+    const setProfile = (file) => {
+      const { data, errors } = this.state;
+      data.avatar = file;
+      this.setState({ data, errors });
+      console.log(file);
     };
 
     const handleAddSkill = () => {
@@ -188,6 +196,7 @@ class RegistrationForm extends Component {
               handleOnSkillChange={handleOnSkillChange}
               handleAddSkill={handleAddSkill}
               handleRemoveSkill={handleRemoveSkill}
+              setProfile={setProfile}
             />
           );
         case 2:

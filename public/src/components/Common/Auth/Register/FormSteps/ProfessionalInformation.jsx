@@ -21,7 +21,7 @@ export default function ProfessionalInfo({
   handleOnChange,
   handleNext,
   handlePrev,
-  handleOnSkillChange,
+
   handleDateEdu,
   handleRemoveEdu,
   handleAddEdu,
@@ -95,6 +95,7 @@ export default function ProfessionalInfo({
         <Box mt={2} mb={4}>
           {renderText({ label: "Please Fill The Professional Details" })}
         </Box>
+
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Box mt={2} mb={1}>
