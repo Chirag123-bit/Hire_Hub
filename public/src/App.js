@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Chat } from "./pages/Chat";
 import Home from "./pages/index";
-import { Login } from "./pages/Login";
+
 import Register from "./pages/Register";
 import SigninPage from "./pages/signin";
 import { ToastContainer } from "react-toastify";
@@ -15,6 +15,7 @@ import Code_sent from "./pages/code_sent";
 import EmailVerified from "./components/Common/Email/EmailVerified";
 
 import Auth from "./pages/Auth";
+import { Login } from "./components/Common/Auth/Login/Login";
 // import VideoApp from "./components/videoCall";
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
 
         <Route path="/register" element={<Register />} />
         <Route path="/auth/*" element={<Auth />} />
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/verified" element={<EmailVerified />} />
         <Route path="/setAvatar" element={<SetAvatar />} />
         <Route

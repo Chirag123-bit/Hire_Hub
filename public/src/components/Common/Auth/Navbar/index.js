@@ -44,56 +44,6 @@ const AuthNavbar = ({ toggle }) => {
             <MobileIcon onClick={toggle}>
               <FaBars />
             </MobileIcon>
-            {/* <NavMenu>
-              <NavItem>
-                <NavLinks
-                  to="about"
-                  smooth={true}
-                  duration={500}
-                  spy={true}
-                  exact="true"
-                  offset={-80}
-                >
-                  About
-                </NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks
-                  to="discover"
-                  smooth={true}
-                  duration={500}
-                  spy={true}
-                  exact="true"
-                  offset={-80}
-                >
-                  Discover
-                </NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks
-                  to="services"
-                  smooth={true}
-                  duration={500}
-                  spy={true}
-                  exact="true"
-                  offset={-80}
-                >
-                  Services
-                </NavLinks>
-              </NavItem>
-              <NavItem>
-                <NavLinks
-                  to="explore"
-                  smooth={true}
-                  duration={500}
-                  spy={true}
-                  exact="true"
-                  offset={-80}
-                >
-                  Explore
-                </NavLinks>
-              </NavItem>
-            </NavMenu> */}
             <NavBtn>
               <NavBtnLink to="/reg">Register</NavBtnLink>
               <NavBtnLink to="/login">Login</NavBtnLink>

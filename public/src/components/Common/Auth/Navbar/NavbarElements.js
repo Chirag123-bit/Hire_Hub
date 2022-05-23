@@ -45,6 +45,9 @@ export const NavLogo = styled(LinkScroll)`
   margin-left: 24px;
   font-weight: bold;
   text-decoration: none;
+  &:hover {
+    color: orange;
+  }
 `;
 
 export const MobileIcon = styled.div`
@@ -100,6 +103,7 @@ export const NavLinks = styled(LinkScroll)`
 export const NavBtn = styled.nav`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   @media screen and (max-width: 768px) {
     display: none;
   }
@@ -107,6 +111,7 @@ export const NavBtn = styled.nav`
 
 export const NavBtnLink = styled(Link)`
   border-radius: 50px;
+  margin: 0 1rem;
   background: #423edd;
   white-space: nowrap;
   padding: 10px 24px;
@@ -120,7 +125,7 @@ export const NavBtnLink = styled(Link)`
   text-decoration: none;
   &:hover {
     transition: all 0.2 ease-in-out;
-    background-color: white;
+    background-color: orange;
     color: black;
   }
 `;
