@@ -1,15 +1,18 @@
 import { Box, Grid, Paper } from "@material-ui/core";
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import { Styles } from "./styles";
 import PropTypes from "prop-types";
 import { withStyles } from "@mui/styles";
 import { renderText } from "../DisplayComponent";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 import { Step, StepLabel, Stepper } from "@mui/material";
 import PersonalBio from "./FormSteps/PersonalBio";
 import AdditionlInfo from "./FormSteps/AdditionalInformation";
 import ProfessionalInfo from "./FormSteps/ProfessionalInformation";
+import { registerRoute } from "../../../../utils/APIRoutes";
 
 class RegistrationForm extends Component {
   toastOptions = {
@@ -19,7 +22,8 @@ class RegistrationForm extends Component {
     draggable: true,
     theme: "dark",
   };
-  handleValidation = () => {
+
+  handleUserValidation = () => {
     const { skillSet, educationSet, sector, summary, gender, type } =
       this.state.data;
     console.log(skillSet);
@@ -47,6 +51,37 @@ class RegistrationForm extends Component {
     }
     return true;
   };
+
+  handleCompanyValidation = () => {
+    const { gender, type, cabout, cdesc, cname, country, csector, region } =
+      this.state.data;
+    if (csector === "") {
+      toast.error("Please specify your sector", this.toastOptions);
+      return false;
+    } else if (gender === "") {
+      toast.error("Please specify your sector", this.toastOptions);
+      return false;
+    } else if (type === "") {
+      toast.error("Please specify your user type", this.toastOptions);
+      return false;
+    } else if (cabout === "") {
+      toast.error("Please tell us about your company", this.toastOptions);
+      return false;
+    } else if (cdesc === "") {
+      toast.error("Please describe your company", this.toastOptions);
+      return false;
+    } else if (cname === "") {
+      toast.error("Please enter your company's name", this.toastOptions);
+      return false;
+    } else if (country === "") {
+      toast.error("Please select your company", this.toastOptions);
+      return false;
+    } else if (region === "") {
+      toast.error("Please select your region", this.toastOptions);
+      return false;
+    }
+    return true;
+  };
   extractSkills = () => {
     const { data } = this.state;
     data.skillSet.forEach(function (value) {
@@ -63,27 +98,93 @@ class RegistrationForm extends Component {
   };
   handleSubmit = async (event) => {
     event.preventDefault();
-    // console.log(this.handleValidation());
-    const data = this.state.data;
-    if (data.type === "Applicant") {
-      // console.log(data.skillSet);
-      // console.log(data.educationSet);
-      console.log(data.workSet);
-      this.extractSkills();
+    const stateData = this.state.data;
+    let firstName = stateData.firstName;
+    let lastName = stateData.lastName;
+    let gender = stateData.gender;
+    let phone = stateData.phone;
+    let email = stateData.email;
+    let type = stateData.type;
+    let username = stateData.username;
+    let password = stateData.password;
+    console.log("Type");
+    console.log(type);
+    if (type === "Applicant") {
+      if (this.handleUserValidation()) {
+        this.extractSkills();
+        let title = stateData.title;
+        let skills = stateData.skills;
+        let sector = stateData.sector;
+        let summary = stateData.summary;
+        let workSet = stateData.workSet;
+        let educationSet = stateData.educationSet;
+
+        const { data } = await axios.post(registerRoute, {
+          firstName,
+          lastName,
+          gender,
+          phone,
+          email,
+          type,
+          username,
+          password,
+
+          title,
+          skills,
+          sector,
+          summary,
+          workSet,
+          educationSet,
+        });
+        if (data.status === false) {
+          toast.error(data.msg, this.toastOptions);
+        } else {
+          toast.success(data.msg, this.toastOptions);
+          localStorage.setItem("user", JSON.stringify(data.user));
+
+          return <Navigate to="/login" />;
+        }
+      }
+    } else if (type === "Company") {
+      if (this.handleCompanyValidation()) {
+        let c_name = stateData.cname;
+        let csector = stateData.csector;
+        let country = stateData.country;
+        let region = stateData.region;
+        let cabout = stateData.cabout;
+        let cdesc = stateData.cdesc;
+        let workSet = stateData.workSet;
+        let educationSet = stateData.educationSet;
+
+        const { data } = await axios.post(registerRoute, {
+          firstName,
+          lastName,
+          gender,
+          phone,
+          email,
+          type,
+          username,
+          password,
+
+          c_name,
+          csector,
+          country,
+          region,
+          cabout,
+          cdesc,
+          workSet,
+          educationSet,
+        });
+        if (data.status === false) {
+          toast.error(data.msg, this.toastOptions);
+        } else {
+          toast.success(data.msg, this.toastOptions);
+          localStorage.setItem("user", JSON.stringify(data.user));
+          localStorage.setItem("company", JSON.stringify(data.company));
+          return <Navigate to="/login" />;
+        }
+      }
     }
-    // if (handleValidation()) {
-    //   const { data } = await axios.post(registerRoute, {
-    //     username,
-    //     email,
-    //     password,
-    //   });
-    //   if (data.status === false) {
-    //     toast.error(data.msg, toastOptions);
-    //   } else {
-    //     localStorage.setItem("user", JSON.stringify(data.user));
-    //     navigate("/chat");
-    //   }
-    // }
   };
   state = {
     data: {
@@ -102,7 +203,6 @@ class RegistrationForm extends Component {
       cabout: "",
       cdesc: "",
 
-      avatar: "",
       csector: "",
 
       title: "",
@@ -128,6 +228,7 @@ class RegistrationForm extends Component {
     },
     errors: {},
     currentStep: 0,
+    redirect: null,
   };
   render() {
     const { classes } = this.props;
@@ -163,19 +264,12 @@ class RegistrationForm extends Component {
       this.setState({ data, errors });
     };
     const handleOnEduChange = (e, property, index) => {
-      const { data } = this.state;
-
-      // e.target.value.length <= 0
-      //   ? (errors[e.target.name] = ` ${e.target.name} must not be null`)
-      //   : (errors[e.target.name] = "");
+      const { data, errors } = this.state;
+      e.target.value.length <= 0
+        ? (errors[e.target.name] = ` ${e.target.name} must not be null`)
+        : (errors[e.target.name] = "");
       data.educationSet[index][property] = e.target.value;
       this.setState({ data });
-    };
-    const setProfile = (file) => {
-      const { data, errors } = this.state;
-      data.avatar = file;
-      this.setState({ data, errors });
-      console.log(file);
     };
 
     const handleAddSkill = () => {
@@ -286,7 +380,6 @@ class RegistrationForm extends Component {
               handleOnSkillChange={handleOnSkillChange}
               handleAddSkill={handleAddSkill}
               handleRemoveSkill={handleRemoveSkill}
-              setProfile={setProfile}
             />
           );
         case 2:

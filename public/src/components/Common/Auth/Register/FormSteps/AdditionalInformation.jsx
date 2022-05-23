@@ -10,7 +10,6 @@ import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import { Button, IconButton, TextField } from "@mui/material";
 import RemoveButton from "@material-ui/icons/Remove";
 import AddButton from "@material-ui/icons/Add";
-import { v4 as uuid } from "uuid";
 
 export default function AdditionlInfo({
   state,
@@ -71,25 +70,7 @@ export default function AdditionlInfo({
             />
           </Grid>
         </Grid>
-        <Grid container spacing={2} style={{ marginTop: "1rem" }}>
-          <Grid item xs={12} sm={6}>
-            <input
-              accept="image/*"
-              id="raised-button-file"
-              type="file"
-              onChange={(e) => {
-                setProfile(e.target.files[0]);
-              }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <label htmlFor="raised-button-file">
-              <Button variant="outlined" component="span" color="secondary">
-                Upload Your Profile Picture
-              </Button>
-            </label>
-          </Grid>
-        </Grid>
+
         <Grid
           container
           spacing={2}
@@ -177,25 +158,6 @@ export default function AdditionlInfo({
               value={state.data.summary}
               onChange={handleOnChange}
             />
-          </Grid>
-        </Grid>
-        <Grid container spacing={2} style={{ marginTop: "1rem" }}>
-          <Grid item xs={12} sm={6}>
-            <input
-              accept="image/*"
-              id="raised-button-file"
-              type="file"
-              onChange={(e) => {
-                setProfile(e.target.files[0]);
-              }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <label htmlFor="raised-button-file">
-              <Button variant="outlined" component="span" color="secondary">
-                Upload Your Profile Picture
-              </Button>
-            </label>
           </Grid>
         </Grid>
 

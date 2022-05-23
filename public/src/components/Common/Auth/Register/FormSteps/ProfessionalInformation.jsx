@@ -95,6 +95,7 @@ export default function ProfessionalInfo({
               label: "Submit",
               variant: "outlined",
               handleNext: handleNext,
+              type: "submit",
             })}
           </Box>
         </Grid>

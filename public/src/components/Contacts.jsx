@@ -24,7 +24,7 @@ export const Contacts = ({ contacts, currentUser, changeChat }) => {
         <Container>
           <div className="brand">
             <img src={Logo} alt="logo" />
-            <h3>Snappy</h3>
+            <h3>HireHub</h3>
           </div>
           <div className="contacts">
             {contacts.map((contact, index) => {
@@ -37,10 +37,7 @@ export const Contacts = ({ contacts, currentUser, changeChat }) => {
                   onClick={() => changeCurrentChat(index, contact)}
                 >
                   <div className="avatar">
-                    <img
-                      src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                      alt="avatar"
-                    />
+                    <img src={contact.avatarImage} alt="avatar" />
                   </div>
                   <div className="username">
                     <h3>{contact.username}</h3>
@@ -51,10 +48,7 @@ export const Contacts = ({ contacts, currentUser, changeChat }) => {
           </div>
           <div className="current-user">
             <div className="avatar">
-              <img
-                src={`data:image/svg+xml;base64,${currentUserImage}`}
-                alt="avatar"
-              />
+              <img src={currentUserImage} alt="avatar" />
             </div>
             <div className="username">
               <h2>{currentUsername}</h2>

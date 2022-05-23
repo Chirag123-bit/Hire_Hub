@@ -1,8 +1,9 @@
 const User = require("../model/userModel");
+const Company = require("../model/CompanyModel");
 const bcrypt = require("bcrypt");
 const UserVerification = require("../model/UserVerification");
 const nodemailer = require("nodemailer");
-const { v4: uuidv4 } = require("uuid");
+
 const userVerification = require("../model/UserVerification");
 require("dotenv").config();
 const path = require("path");
@@ -279,12 +280,29 @@ module.exports.codeSent = (req, res) => {
 
 module.exports.register = async (req, res, next) => {
   try {
-    const { error } = register_schema.validate(req.body);
-    if (error) {
-      return res.json({ msg: error.details[0].message, status: false });
-    }
-
-    const { username, email, password } = req.body;
+    const {
+      firstName,
+      lastName,
+      gender,
+      phone,
+      email,
+      type,
+      username,
+      password,
+      avatar,
+      title,
+      skills,
+      sector,
+      summary,
+      workSet,
+      educationSet,
+      c_name,
+      csector,
+      country,
+      region,
+      cabout,
+      cdesc,
+    } = req.body;
     const usernameCheck = await User.findOne({ username });
 
     //Username and Email Validation
@@ -294,13 +312,45 @@ module.exports.register = async (req, res, next) => {
     if (emailCheck)
       return res.json({ msg: "Email already used", status: false });
 
+    const companyNameCheck = await Company.findOne({ name: c_name });
+
     // Hashing the user's password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Creating new user based on user's input
     const user = new User({
-      email,
-      username,
+      firstName: firstName,
+      lastName: lastName,
+      gender: gender,
+      phone: phone,
+      email: email,
+      type: type,
+      username: username,
+      avatar: avatar,
+
+      professional: {
+        title: title,
+        sector: sector,
+        skills: skills,
+        summary: summary,
+      },
+      additional: {
+        education: educationSet.map((edu) => ({
+          degree: edu.etitle,
+          college: edu.ecollege,
+          startDate: edu.estart,
+          endDate: edu.eend,
+        })),
+        experience: workSet.map((work) => ({
+          job_title: work.wtitle,
+          company: work.wcompany,
+          company_location: work.wlocation,
+          work_type: work.wtype,
+          startDate: work.wstart,
+          endDate: work.wend,
+        })),
+      },
+
       password: hashedPassword,
       isVerified: false,
     });
@@ -309,10 +359,48 @@ module.exports.register = async (req, res, next) => {
     user
       .save()
       .then((result) => {
-        return res.json({
-          status: true,
-          user: result,
-        });
+        if (result.type === "Company") {
+          if (companyNameCheck) {
+            result.deleteOne();
+            return res.json({
+              msg: "Company Name already exists",
+              status: false,
+            });
+          }
+          const company = new Company({
+            user: result._id,
+            name: c_name,
+            sector: csector,
+            country: country,
+            region: region,
+            about: cabout,
+            desc: cdesc,
+            phone: phone,
+          });
+          company
+            .save()
+            .then((company) => {
+              return res.json({
+                status: true,
+                user: result,
+                company: company,
+                msg: "Successfully created account",
+              });
+            })
+            .catch((e) => {
+              result.deleteOne();
+              return res.json({
+                status: false,
+                msg: "Failed to create account",
+              });
+            });
+        } else {
+          return res.json({
+            status: true,
+            user: result,
+            msg: "Successfully created account",
+          });
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -341,6 +429,14 @@ module.exports.login = async (req, res, next) => {
     }
 
     delete user.password;
+    if (user.type === "Company") {
+      const company = await Company.findOne({ user: user._id });
+      return res.json({
+        status: true,
+        user,
+        company,
+      });
+    }
     return res.json({
       status: true,
       user,

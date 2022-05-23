@@ -8,12 +8,12 @@ const userSchema = new mongoose.Schema({
     max: 20,
     unique: true,
   },
-  firstname: {
+  firstName: {
     type: String,
     required: true,
     min: 3,
   },
-  lastname: {
+  lastName: {
     type: String,
     required: true,
     min: 3,
@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  user_type: {
+  type: {
     type: String,
     required: true,
   },
@@ -44,34 +44,34 @@ const userSchema = new mongoose.Schema({
   },
   isAvatarImageSet: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   avatarImage: {
     type: String,
-    default: "",
+    default:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Breezeicons-actions-22-im-user.svg/1200px-Breezeicons-actions-22-im-user.svg.png",
   },
   isVerified: {
     type: Boolean,
-    default: false,
+    default: true,
   },
-  professional: [
-    {
-      title: {
-        type: String,
-      },
-      sector: {
-        type: String,
-      },
-      skills: [
-        {
-          type: String,
-        },
-      ],
-      description: {
-        type: String,
-      },
+  professional: {
+    title: {
+      type: String,
     },
-  ],
+    sector: {
+      type: String,
+    },
+    skills: [
+      {
+        type: String,
+      },
+    ],
+    description: {
+      type: String,
+    },
+  },
+
   additional: [
     {
       education: [
@@ -99,6 +99,9 @@ const userSchema = new mongoose.Schema({
             type: String,
           },
           company_location: {
+            type: String,
+          },
+          work_type: {
             type: String,
           },
           startDate: {

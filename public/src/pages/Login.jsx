@@ -23,7 +23,15 @@ export const Login = () => {
 
   useEffect(() => {
     if (localStorage.getItem("user")) {
-      navigate("/chat");
+      const currUser = JSON.parse(localStorage.getItem("user"));
+      if (currUser.type === "Company") {
+        navigate("/employer/dashboard");
+        if (!localStorage.getItem("company")) {
+          localStorage.clear();
+        }
+      } else {
+        navigate("/applicant/home");
+      }
     }
   });
 
@@ -50,8 +58,15 @@ export const Login = () => {
       if (data.status === false) {
         toast.error(data.msg, toastOptions);
       } else {
-        localStorage.setItem("user", JSON.stringify(data.user));
-        navigate("/chat");
+        if (data.user.type === "Company") {
+          localStorage.setItem("user", JSON.stringify(data.user));
+          localStorage.setItem("company", JSON.stringify(data.company));
+          navigate("/employer/dashboard");
+        }
+        if (data.user.type === "Applicant") {
+          localStorage.setItem("user", JSON.stringify(data.user));
+          navigate("/applicant/home");
+        }
       }
     }
   };
@@ -65,7 +80,7 @@ export const Login = () => {
         <form onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
             <img src={Logo} alt="Logo" />
-            <h1>Snappy</h1>
+            <h1>HireHub</h1>
           </div>
           <input
             type="text"
