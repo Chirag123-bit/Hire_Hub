@@ -1,5 +1,5 @@
 import { Typography } from "@material-ui/core";
-import { Button, MenuItem } from "@mui/material";
+import { Button, createMuiTheme, MenuItem, ThemeProvider } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
 const genders = [
@@ -47,9 +47,11 @@ const sectors = [
 export const renderText = ({ label, color, align, variant }) => {
   return (
     <Typography
-      color={color ? color : "primary"}
+      // color={color ? color : "primary"}
+      // color="white !important"
       align={align ? align : "center"}
       variant={variant ? variant : "h6"}
+      style={{ color: "white" }}
     >
       {label}
     </Typography>
@@ -66,20 +68,26 @@ export const renderInputText = ({
 }) => {
   const { data, errors } = state;
   return (
-    <TextField
-      label={label}
-      // color={color ? color : "primary"}
-      variant="outlined"
-      fullWidth={true}
-      size="small"
-      name={name}
-      value={data[name]}
-      error={errors[name] ? true : false}
-      helperText={errors[name]}
-      onChange={handleOnChange}
-      type={type ? type : ""}
-      required
-    />
+    <ThemeProvider theme={theme}>
+      <TextField
+        label={label}
+        // color={color ? color : "primary"}
+        variant="outlined"
+        fullWidth={true}
+        size="small"
+        name={name}
+        value={data[name]}
+        error={errors[name] ? true : false}
+        helperText={errors[name]}
+        onChange={handleOnChange}
+        type={type ? type : ""}
+        required
+        style={{ color: "white" }}
+        InputLabelProps={{
+          style: { color: "#fff" },
+        }}
+      />
+    </ThemeProvider>
   );
 };
 export const renderSelect = ({ label, name, color, state, handleOnChange }) => {
@@ -98,6 +106,9 @@ export const renderSelect = ({ label, name, color, state, handleOnChange }) => {
       error={errors[name] ? true : false}
       style={{ width: "100%" }}
       size="small"
+      InputLabelProps={{
+        style: { color: "#fff" },
+      }}
     >
       {genders.map((option) => (
         <MenuItem key={option.value} value={option.value}>
@@ -129,6 +140,9 @@ export const renderSelectType = ({
       error={errors[name] ? true : false}
       style={{ width: "100%" }}
       size="small"
+      InputLabelProps={{
+        style: { color: "#fff" },
+      }}
     >
       {types.map((option) => (
         <MenuItem key={option.value} value={option.value}>
@@ -160,6 +174,9 @@ export const renderSelectSector = ({
       error={errors[name] ? true : false}
       style={{ width: "100%" }}
       size="small"
+      InputLabelProps={{
+        style: { color: "#fff" },
+      }}
     >
       {sectors.map((option) => (
         <MenuItem key={option.value} value={option.value}>
@@ -173,12 +190,21 @@ export const renderSelectSector = ({
 export const renderButton = ({ label, variant, handleNext, color, type }) => {
   return (
     <Button
-      variant={variant}
+      variant="contained"
       onClick={handleNext}
       color={color ? color : "primary"}
       type={type ? type : "button"}
+      style={{ color: "white" }}
     >
       {label}
     </Button>
   );
 };
+
+const theme = createMuiTheme({
+  palette: {
+    error: {
+      main: "#e9e7eb", // change the error color to pink
+    },
+  },
+});

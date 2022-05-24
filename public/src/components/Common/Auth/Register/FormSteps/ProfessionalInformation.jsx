@@ -1,6 +1,7 @@
-import React from "react";
 import { Box, Grid } from "@material-ui/core";
-import { renderButton, renderText } from "../../DisplayComponent";
+import AddButton from "@material-ui/icons/Add";
+import RemoveButton from "@material-ui/icons/Remove";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   Accordion,
   AccordionDetails,
@@ -10,11 +11,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import React from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import RemoveButton from "@material-ui/icons/Remove";
-import AddButton from "@material-ui/icons/Add";
+import { renderButton, renderText } from "../../DisplayComponent";
+import "./styles.css";
 
 const workTypes = [
   {
@@ -59,6 +60,9 @@ export default function ProfessionalInfo({
               style={{ width: "100%" }}
               value={state.data.cabout}
               onChange={handleOnChange}
+              InputLabelProps={{
+                style: { color: "#fff" },
+              }}
             />
           </Grid>
         </Grid>
@@ -73,6 +77,9 @@ export default function ProfessionalInfo({
               style={{ width: "100%" }}
               value={state.data.cdesc}
               onChange={handleOnChange}
+              InputLabelProps={{
+                style: { color: "#fff" },
+              }}
             />
           </Grid>
         </Grid>
@@ -122,13 +129,21 @@ export default function ProfessionalInfo({
                     marginBottom: "1rem",
                   }}
                 >
-                  <Accordion style={{ width: "85%" }}>
+                  <Accordion
+                    style={{
+                      width: "85%",
+                      background: "inherit",
+                      border: "1px solid white",
+                    }}
+                  >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel1a-content"
                       id="panel1a-header"
                     >
-                      <Typography>Education details</Typography>
+                      <Typography style={{ color: "white" }}>
+                        Education details
+                      </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                       <div
@@ -147,6 +162,9 @@ export default function ProfessionalInfo({
                           }}
                           style={{ width: "45%" }}
                           size="small"
+                          InputLabelProps={{
+                            style: { color: "#fff" },
+                          }}
                         />
                         <TextField
                           name="ecollege"
@@ -157,6 +175,9 @@ export default function ProfessionalInfo({
                           }}
                           style={{ width: "45%" }}
                           size="small"
+                          InputLabelProps={{
+                            style: { color: "#fff" },
+                          }}
                         />
                       </div>
                       <div
@@ -173,7 +194,7 @@ export default function ProfessionalInfo({
                             justifyContent: "space-between",
                           }}
                         >
-                          <h6>Start Date</h6>
+                          <h6 style={{ color: "white" }}>Start Date</h6>
                           <ReactDatePicker
                             selected={education.estart}
                             onChange={(date) =>
@@ -184,6 +205,10 @@ export default function ProfessionalInfo({
                             showYearDropdown
                             showMonthDropdown
                             scrollableMonthYearDropdown
+                            // style={{
+                            //   background: "inherit",
+                            //   backgroundColor: "transparent",
+                            // }}
                           />
                         </div>
                         <div
@@ -209,12 +234,16 @@ export default function ProfessionalInfo({
                       </div>
                     </AccordionDetails>
                   </Accordion>
-                  <IconButton onClick={() => handleRemoveEdu(index)}>
-                    <RemoveButton />
-                  </IconButton>
-                  <IconButton onClick={handleAddEdu}>
-                    <AddButton />
-                  </IconButton>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <IconButton onClick={() => handleRemoveEdu(index)}>
+                      <RemoveButton />
+                    </IconButton>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <IconButton onClick={handleAddEdu}>
+                      <AddButton />
+                    </IconButton>
+                  </div>
                 </div>
               );
             })}
@@ -234,13 +263,21 @@ export default function ProfessionalInfo({
                     marginBottom: "1rem",
                   }}
                 >
-                  <Accordion style={{ width: "85%" }}>
+                  <Accordion
+                    style={{
+                      width: "85%",
+                      background: "inherit",
+                      border: "1px solid white",
+                    }}
+                  >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel1a-content"
                       id="panel1a-header"
                     >
-                      <Typography>Job Detail</Typography>
+                      <Typography style={{ color: "white" }}>
+                        Job Detail
+                      </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                       <TextField
@@ -252,6 +289,9 @@ export default function ProfessionalInfo({
                         }}
                         style={{ width: "100%" }}
                         size="small"
+                        InputLabelProps={{
+                          style: { color: "#fff" },
+                        }}
                       />
                       <div
                         style={{
@@ -270,6 +310,9 @@ export default function ProfessionalInfo({
                           }}
                           style={{ width: "45%" }}
                           size="small"
+                          InputLabelProps={{
+                            style: { color: "#fff" },
+                          }}
                         />
                         <TextField
                           name="wlocation"
@@ -280,6 +323,9 @@ export default function ProfessionalInfo({
                           }}
                           style={{ width: "45%" }}
                           size="small"
+                          InputLabelProps={{
+                            style: { color: "#fff" },
+                          }}
                         />
                       </div>
                       <div
@@ -302,6 +348,9 @@ export default function ProfessionalInfo({
                           variant="outlined"
                           style={{ width: "100%" }}
                           size="small"
+                          InputLabelProps={{
+                            style: { color: "#fff" },
+                          }}
                         >
                           {workTypes.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
@@ -324,7 +373,7 @@ export default function ProfessionalInfo({
                             justifyContent: "space-between",
                           }}
                         >
-                          <h6>Start Date</h6>
+                          <h6 style={{ color: "white" }}>Start Date</h6>
                           <ReactDatePicker
                             selected={work.wstart}
                             onChange={(date) =>
@@ -344,7 +393,7 @@ export default function ProfessionalInfo({
                             justifyContent: "space-between",
                           }}
                         >
-                          <h6>End Date</h6>
+                          <h6 style={{ color: "white" }}>End Date</h6>
                           <ReactDatePicker
                             selected={work.wend}
                             onChange={(date) =>
@@ -360,12 +409,16 @@ export default function ProfessionalInfo({
                       </div>
                     </AccordionDetails>
                   </Accordion>
-                  <IconButton onClick={() => handleRemoveWork(index)}>
-                    <RemoveButton />
-                  </IconButton>
-                  <IconButton onClick={handleAddWork}>
-                    <AddButton />
-                  </IconButton>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <IconButton onClick={() => handleRemoveWork(index)}>
+                      <RemoveButton />
+                    </IconButton>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <IconButton onClick={handleAddWork}>
+                      <AddButton />
+                    </IconButton>
+                  </div>
                 </div>
               );
             })}

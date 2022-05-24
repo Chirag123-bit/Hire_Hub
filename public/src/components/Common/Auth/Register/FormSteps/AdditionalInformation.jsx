@@ -1,15 +1,15 @@
-import React from "react";
 import { Box, Grid } from "@material-ui/core";
-import {
-  renderInputText,
-  renderButton,
-  renderText,
-  renderSelectSector,
-} from "../../DisplayComponent";
-import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
-import { Button, IconButton, TextField } from "@mui/material";
-import RemoveButton from "@material-ui/icons/Remove";
 import AddButton from "@material-ui/icons/Add";
+import RemoveButton from "@material-ui/icons/Remove";
+import { IconButton, TextField } from "@mui/material";
+import React from "react";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import {
+  renderButton,
+  renderInputText,
+  renderSelectSector,
+  renderText,
+} from "../../DisplayComponent";
 
 export default function AdditionlInfo({
   state,
@@ -56,7 +56,12 @@ export default function AdditionlInfo({
               label="country"
               value={state.data.country}
               onChange={(val) => selectCountry(val)}
-              style={{ width: "100%", padding: "8.5px 14px" }}
+              style={{
+                width: "100%",
+                padding: "8.5px 14px",
+                background: "inherit",
+                borderColor: "white",
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -66,7 +71,12 @@ export default function AdditionlInfo({
               country={state.data.country}
               value={state.data.region}
               onChange={(val) => selectRegion(val)}
-              style={{ width: "100%", padding: "8.5px 14px" }}
+              style={{
+                width: "100%",
+                padding: "8.5px 14px",
+                background: "inherit",
+                borderColor: "white",
+              }}
             />
           </Grid>
         </Grid>
@@ -134,6 +144,9 @@ export default function AdditionlInfo({
                       handleOnSkillChange(e, index);
                     }}
                     style={{ width: "90%", textTransform: "capitalize" }}
+                    InputLabelProps={{
+                      style: { color: "#fff" },
+                    }}
                   />
                   <IconButton onClick={() => handleRemoveSkill(index)}>
                     <RemoveButton />
@@ -157,6 +170,9 @@ export default function AdditionlInfo({
               style={{ width: "100%" }}
               value={state.data.summary}
               onChange={handleOnChange}
+              InputLabelProps={{
+                style: { color: "#fff" },
+              }}
             />
           </Grid>
         </Grid>

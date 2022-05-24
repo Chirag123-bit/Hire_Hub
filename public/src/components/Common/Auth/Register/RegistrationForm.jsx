@@ -1,18 +1,17 @@
 import { Box, Grid, Paper } from "@material-ui/core";
-import React, { Component } from "react";
-import { Styles } from "./styles";
-import PropTypes from "prop-types";
-import { withStyles } from "@mui/styles";
-import { renderText } from "../DisplayComponent";
-import { toast } from "react-toastify";
-import axios from "axios";
-import { Navigate } from "react-router-dom";
-
 import { Step, StepLabel, Stepper } from "@mui/material";
-import PersonalBio from "./FormSteps/PersonalBio";
-import AdditionlInfo from "./FormSteps/AdditionalInformation";
-import ProfessionalInfo from "./FormSteps/ProfessionalInformation";
+import { withStyles } from "@mui/styles";
+import axios from "axios";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { toast } from "react-toastify";
+import background from "../../../../images/background.png";
 import { registerRoute } from "../../../../utils/APIRoutes";
+import { renderText } from "../DisplayComponent";
+import AdditionlInfo from "./FormSteps/AdditionalInformation";
+import PersonalBio from "./FormSteps/PersonalBio";
+import ProfessionalInfo from "./FormSteps/ProfessionalInformation";
+import { Styles } from "./styles";
 
 class RegistrationForm extends Component {
   toastOptions = {
@@ -107,8 +106,11 @@ class RegistrationForm extends Component {
     let type = stateData.type;
     let username = stateData.username;
     let password = stateData.password;
-    console.log("Type");
-    console.log(type);
+
+    if (type === "") {
+      toast.error("Please select your type", this.toastOptions);
+    }
+
     if (type === "Applicant") {
       if (this.handleUserValidation()) {
         this.extractSkills();
@@ -141,8 +143,8 @@ class RegistrationForm extends Component {
         } else {
           toast.success(data.msg, this.toastOptions);
           localStorage.setItem("user", JSON.stringify(data.user));
-
-          return <Navigate to="/login" />;
+          window.location.replace("localhost:3000/auth/login");
+          window.location.href = "localhost:3000/auth/login";
         }
       }
     } else if (type === "Company") {
@@ -181,7 +183,8 @@ class RegistrationForm extends Component {
           toast.success(data.msg, this.toastOptions);
           localStorage.setItem("user", JSON.stringify(data.user));
           localStorage.setItem("company", JSON.stringify(data.company));
-          return <Navigate to="/login" />;
+          window.location.replace("localhost:3000/auth/login");
+          window.location.href = "localhost:3000/auth/login";
         }
       }
     }
@@ -411,10 +414,21 @@ class RegistrationForm extends Component {
     };
     return (
       <div>
-        <Grid container className={classes.formContainer}>
+        <Grid
+          container
+          className={classes.formContainer}
+          style={{
+            background: `url(${background})`,
+          }}
+        >
           <Grid item xs={12} sm={7}>
-            <Paper>
-              <Box p={2} mb={2} component={Paper}>
+            <Paper className={classes.transparent}>
+              <Box
+                p={2}
+                mb={2}
+                component={Paper}
+                className={classes.transparent}
+              >
                 <Box mb={1}>
                   {renderText({
                     label: "HireHub Registration Form",
@@ -424,14 +438,16 @@ class RegistrationForm extends Component {
                 <Stepper activeStep={this.state.currentStep} alternativeLabel>
                   {steps.map((item, i) => (
                     <Step key={i}>
-                      <StepLabel>{item.label}</StepLabel>
+                      <StepLabel style={{ color: "white" }}>
+                        {item.label}
+                      </StepLabel>
                     </Step>
                   ))}
                 </Stepper>
               </Box>
             </Paper>
 
-            <Box mb={16} component={Paper}>
+            <Box mb={16} component={Paper} className={classes.transparent}>
               <form
                 className={classes.form}
                 onSubmit={(event) => this.handleSubmit(event)}

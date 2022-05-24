@@ -1,12 +1,13 @@
-import React from "react";
 import { Box, Grid } from "@material-ui/core";
+import React from "react";
 import {
-  renderInputText,
   renderButton,
+  renderInputText,
   renderSelect,
   renderSelectType,
   renderText,
 } from "../../DisplayComponent";
+import "./styles.css";
 
 export default function PersonalBio({ state, handleOnChange, handleNext }) {
   return (
