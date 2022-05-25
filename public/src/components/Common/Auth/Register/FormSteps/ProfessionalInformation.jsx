@@ -165,6 +165,7 @@ export default function ProfessionalInfo({
                           InputLabelProps={{
                             style: { color: "#fff" },
                           }}
+                          sx={{ input: { color: "orange !important" } }}
                         />
                         <TextField
                           name="ecollege"
@@ -178,6 +179,7 @@ export default function ProfessionalInfo({
                           InputLabelProps={{
                             style: { color: "#fff" },
                           }}
+                          sx={{ input: { color: "orange !important" } }}
                         />
                       </div>
                       <div
@@ -205,10 +207,6 @@ export default function ProfessionalInfo({
                             showYearDropdown
                             showMonthDropdown
                             scrollableMonthYearDropdown
-                            // style={{
-                            //   background: "inherit",
-                            //   backgroundColor: "transparent",
-                            // }}
                           />
                         </div>
                         <div
@@ -292,6 +290,7 @@ export default function ProfessionalInfo({
                         InputLabelProps={{
                           style: { color: "#fff" },
                         }}
+                        sx={{ input: { color: "orange !important" } }}
                       />
                       <div
                         style={{
@@ -313,6 +312,7 @@ export default function ProfessionalInfo({
                           InputLabelProps={{
                             style: { color: "#fff" },
                           }}
+                          sx={{ input: { color: "orange !important" } }}
                         />
                         <TextField
                           name="wlocation"
@@ -326,6 +326,7 @@ export default function ProfessionalInfo({
                           InputLabelProps={{
                             style: { color: "#fff" },
                           }}
+                          sx={{ input: { color: "orange !important" } }}
                         />
                       </div>
                       <div
@@ -351,6 +352,7 @@ export default function ProfessionalInfo({
                           InputLabelProps={{
                             style: { color: "#fff" },
                           }}
+                          sx={{ input: { color: "orange !important" } }}
                         >
                           {workTypes.map((option) => (
                             <MenuItem key={option.value} value={option.value}>

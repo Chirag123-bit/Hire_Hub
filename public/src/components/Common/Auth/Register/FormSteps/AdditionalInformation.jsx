@@ -10,6 +10,7 @@ import {
   renderSelectSector,
   renderText,
 } from "../../DisplayComponent";
+import "./styles.css";
 
 export default function AdditionlInfo({
   state,
@@ -27,7 +28,9 @@ export default function AdditionlInfo({
     return (
       <>
         <Box mt={2} mb={4}>
-          {renderText({ label: "Please Fill The Additional Details" })}
+          {renderText({
+            label: "Please Fill The Additional Details",
+          })}
         </Box>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -39,7 +42,7 @@ export default function AdditionlInfo({
             })}
           </Grid>
         </Grid>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} style={{ marginTop: "1rem" }}>
           <Grid item xs={12}>
             {renderSelectSector({
               label: "Sector",
@@ -61,6 +64,7 @@ export default function AdditionlInfo({
                 padding: "8.5px 14px",
                 background: "inherit",
                 borderColor: "white",
+                color: "orange",
               }}
             />
           </Grid>
@@ -76,6 +80,7 @@ export default function AdditionlInfo({
                 padding: "8.5px 14px",
                 background: "inherit",
                 borderColor: "white",
+                color: "orange",
               }}
             />
           </Grid>
@@ -147,12 +152,13 @@ export default function AdditionlInfo({
                     InputLabelProps={{
                       style: { color: "#fff" },
                     }}
+                    sx={{ input: { color: "orange !important" } }}
                   />
                   <IconButton onClick={() => handleRemoveSkill(index)}>
-                    <RemoveButton />
+                    <RemoveButton style={{ color: "orange" }} />
                   </IconButton>
                   <IconButton onClick={handleAddSkill}>
-                    <AddButton />
+                    <AddButton style={{ color: "orange" }} />
                   </IconButton>
                 </div>
               );
@@ -170,6 +176,7 @@ export default function AdditionlInfo({
               style={{ width: "100%" }}
               value={state.data.summary}
               onChange={handleOnChange}
+              sx={{ input: { color: "orange !important" } }}
               InputLabelProps={{
                 style: { color: "#fff" },
               }}

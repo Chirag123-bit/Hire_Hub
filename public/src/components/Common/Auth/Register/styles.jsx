@@ -5,7 +5,7 @@ export const Styles = {
     flexFlow: "row wrap",
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: "6rem",
+    paddingTop: "7rem",
   },
   form: {
     minHeight: "22rem",
@@ -13,18 +13,14 @@ export const Styles = {
   },
 
   transparent: {
-    backgroundColor: "rgba(181, 175, 175, 0.2)  !important",
+    backgroundColor: "rgba(0, 0, 0, 0.3)  !important",
     borderRadius: "10px",
-    // border: "1px solid rgba(255, 255, 255, 0.18)",
   },
-  transparentBorder: {
-    backgroundColor: "rgba(181, 175, 175, 0.2) !important",
-    borderRadius: "10px",
-    border: "1px solid rgba(255, 255, 255, 0.18)",
-  },
+
   input: {
     "&::placeholder": {
       color: "white",
     },
+    MuiSelected: { color: "orange" },
   },
 };

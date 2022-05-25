@@ -86,6 +86,7 @@ export const renderInputText = ({
         InputLabelProps={{
           style: { color: "#fff" },
         }}
+        sx={{ input: { color: "orange" } }}
       />
     </ThemeProvider>
   );
@@ -109,6 +110,7 @@ export const renderSelect = ({ label, name, color, state, handleOnChange }) => {
       InputLabelProps={{
         style: { color: "#fff" },
       }}
+      sx={{ input: { color: "orange" } }}
     >
       {genders.map((option) => (
         <MenuItem key={option.value} value={option.value}>

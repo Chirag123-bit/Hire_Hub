@@ -4,9 +4,25 @@
 }
 
 .MuiStepLabel-label {
-  color: white !important;
+  color: orange !important;
 }
 
 input:-internal-autofill-selected {
   background-color: transparent !important;
+}
+
+.MuiSelect-select {
+  color: orange !important;
+}
+
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color: white;
+}
+.MuiMenuItem-root,
+.react-datepicker__input-container input,
+#outlined-multiline-flexible12,
+#outlined-multiline-flexible,
+#outlined-multiline-flexible1 {
+  color: orange !important;
 }

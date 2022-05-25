@@ -1,6 +1,6 @@
-import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Link as LinkScroll } from "react-scroll";
+import styled from "styled-components";
 
 /*======== CSS Variables: ========*/
 const varHeaderHeight = "5rem";
@@ -10,7 +10,9 @@ const firstAltColor = "#009955";
 /*======== Components: ========*/
 export const Nav = styled.nav`
   //If user scroll than the background is black. If not, it's transparent:
-  background: ${({ scrollNav }) => (scrollNav ? "#000" : "transparent")};
+  background: ${({ scrollNav }) =>
+    scrollNav ? "#000" : "rgba(0, 0, 0, 0.2) !important"};
+  // backgroundColor: "rgba(0, 0, 0, 0.2) !important",
   height: ${varHeaderHeight};
   margin-top: -${varHeaderHeight};
   display: flex;

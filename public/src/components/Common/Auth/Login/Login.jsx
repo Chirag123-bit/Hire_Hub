@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 // import Logo from "../images/logo.svg";
 import background from "../../../../images/background.png";
-import { toast } from "react-toastify";
-import axios from "axios";
 import { loginRoute } from "../../../../utils/APIRoutes";
 
 export const Login = () => {
@@ -115,7 +115,7 @@ export const Login = () => {
           <button type="submit">Login</button>
           <span>
             Don't Have an account?{" "}
-            <Link to="/register" style={{ color: "orange" }}>
+            <Link to="/auth/register" style={{ color: "orange" }}>
               Register
             </Link>{" "}
           </span>
@@ -153,7 +153,7 @@ const FormContainer = styled.div`
     gap: 2rem;
     border-radius: 2rem;
     padding: 3rem 5rem;
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 

@@ -427,7 +427,8 @@ class RegistrationForm extends Component {
                 p={2}
                 mb={2}
                 component={Paper}
-                className={classes.transparent}
+                style={{ background: "transparent" }}
+                // className={classes.transparent}
               >
                 <Box mb={1}>
                   {renderText({
@@ -438,7 +439,7 @@ class RegistrationForm extends Component {
                 <Stepper activeStep={this.state.currentStep} alternativeLabel>
                   {steps.map((item, i) => (
                     <Step key={i}>
-                      <StepLabel style={{ color: "white" }}>
+                      <StepLabel style={{ color: "orange !important" }}>
                         {item.label}
                       </StepLabel>
                     </Step>
