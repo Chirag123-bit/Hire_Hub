@@ -1,6 +1,5 @@
+import { motion } from "framer-motion";
 import React from "react";
-import { company } from "./constants";
-import "./styles.css";
 import Image from "../../../images/google_logo.png";
 import {
   ApplyButton,
@@ -14,11 +13,11 @@ import {
   Muted,
   Sallary,
 } from "../../ApplicantPageComponents/Home/SeekerJob/JobElements";
-import { JobTitle } from "../Dashboard/Components";
 import { JobType } from "../../ProfileComponents/InformationComponent/Component";
-import { motion } from "framer-motion";
+import { JobTitle } from "../Dashboard/Components";
+import "./styles.css";
 
-function Careers({ isOpen }) {
+function Careers({ isOpen, user, company }) {
   return (
     <motion.div className="CareerContainer">
       {console.log(isOpen)}
@@ -32,7 +31,7 @@ function Careers({ isOpen }) {
       >
         <div className="CareerHead">
           <div className="logo-container mb-2">
-            <img src={Image} alt="ss" />
+            <img src={company.avatarImage} alt="ss" />
           </div>
           <h3 style={{ color: "white" }}>{company.name}</h3>
           <h5 style={{ color: "white" }}>{company.location}</h5>
@@ -47,7 +46,7 @@ function Careers({ isOpen }) {
           <div>
             <h4>Our Services</h4>
             <div className="CareerAbout">
-              <p>{company.services}</p>
+              <p>{company.desc}</p>
             </div>
           </div>
           <div>
@@ -172,7 +171,7 @@ function Careers({ isOpen }) {
         </div>
         <div className="career-footer">
           <div className="logo-container mb-2">
-            <img src={Image} alt="ss" />
+            <img src={company.avatarImage} alt="ss" />
           </div>
           <p style={{ color: "white" }} className="text-capitalize">
             {company.sector} based company

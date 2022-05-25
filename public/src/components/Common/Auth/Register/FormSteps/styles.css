@@ -26,3 +26,7 @@ input:-internal-autofill-selected {
 #outlined-multiline-flexible1 {
   color: orange !important;
 }
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
+  color: orange !important;
+}

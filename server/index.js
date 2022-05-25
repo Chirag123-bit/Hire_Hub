@@ -2,6 +2,7 @@
 const userRoutes = require("./routes/userRoutes");
 const messageRoute = require("./routes/messagesRoute");
 const videoRoute = require("./routes/videoRoute");
+const companyRoute = require("./routes/companyRoute");
 
 //Socket Connection
 const socket = require("socket.io");
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoute);
 app.use("/api/video", videoRoute);
+app.use("/api/company", companyRoute);
 
 // Server Initialization
 const server = app.listen(process.env.PORT, () =>

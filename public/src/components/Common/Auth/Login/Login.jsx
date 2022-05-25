@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
-// import Logo from "../images/logo.svg";
 import background from "../../../../images/background.png";
 import { loginRoute } from "../../../../utils/APIRoutes";
 
@@ -13,6 +12,7 @@ export const Login = () => {
     username: "",
     password: "",
   });
+  const [user, setUser] = useState("");
 
   const toastOptions = {
     position: "bottom-right",
@@ -61,12 +61,13 @@ export const Login = () => {
       } else {
         if (data.user.type === "Company") {
           localStorage.setItem("user", JSON.stringify(data.user));
+          setUser(data.user);
           localStorage.setItem("company", JSON.stringify(data.company));
           toast.success(
             "Welcome to HireHub, " + data.user.firstName,
             toastOptions
           );
-
+          // auth.login();
           navigate("/employer/dashboard");
         }
         if (data.user.type === "Applicant") {
