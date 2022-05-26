@@ -8,10 +8,6 @@ const companySchema = new mongoose.Schema({
     max: 20,
     unique: true,
   },
-  user: {
-    type: String,
-    required: true,
-  },
   sector: {
     type: String,
     required: true,

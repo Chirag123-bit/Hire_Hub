@@ -1,44 +1,90 @@
-import React from "react";
+import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
+import { BiDollar, BiHome, BiMap, BiTimeFive, BiUser } from "react-icons/bi";
+import { FiSearch } from "react-icons/fi";
+import EventsBar from "../Common/EventsBar";
 import {
-  DashboardContainer,
-  HeadContainer,
-  UpperHead,
-  LowerHead,
-  Title,
+  ActionsDropDown,
   CreateButton,
+  DashboardContainer,
+  DisqualifyCard,
+  DropBtn,
   DropDown,
   DropItem,
-  SearchContainer,
-  SearchBar,
-  JobContainer,
-  JobsContainerRow,
-  JobCardHeader,
-  JobInfoTop,
-  JobInfoSide,
-  JobTitle,
-  ThreeDots,
-  DropBtn,
-  ActionsDropDown,
   DropLink,
-  JobCardBody,
-  JobStatusCards,
-  NewCandidateCard,
+  HeadContainer,
+  HiredCard,
   InterviewCard,
+  JobCardBody,
+  JobCardHeader,
+  JobContainer,
+  JobInfoSide,
+  JobInfoTop,
+  JobsContainerRow,
+  JobStatusCards,
+  JobTitle,
+  LowerHead,
   NegotiationCard,
+  NewCandidateCard,
+  RejectCard,
+  SearchBar,
+  SearchContainer,
   ShortlistCard,
   TaskCard,
-  HiredCard,
-  DisqualifyCard,
-  RejectCard,
+  ThreeDots,
+  Title,
+  UpperHead,
 } from "./Components";
-
-import { FiSearch } from "react-icons/fi";
-import { AiOutlinePlus } from "react-icons/ai";
-import { BiTimeFive, BiHome, BiDollar, BiUser, BiMap } from "react-icons/bi";
-import EventsBar from "../Common/EventsBar";
-import { motion } from "framer-motion";
+import { JobModal } from "./JobModal/modal";
 
 function Dashboard({ isOpen }) {
+  const [showModal, setShowModal] = useState(false);
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
+
+  const closeModel = () => {
+    setShowModal(false);
+  };
+
+  //Fields required for adding Job
+  const [addJob, setAddJob] = useState({
+    title: "",
+    about: "",
+    sallary: "",
+    description: "",
+    skill: [],
+    skillSet: [{ skill: "" }],
+    responsibilities: [],
+    responsibilitiesSet: [{ responsibility: "" }],
+    requirements: [],
+    requirementsSet: [{ requirement: "" }],
+  });
+
+  const handleJobInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setAddJob({ ...addJob, name: value });
+  };
+
+  const handleAddSkill = () => {
+    var newSkills = addJob.skillSet;
+    newSkills.push({ skill: "" });
+    setAddJob({ ...addJob, skillSet: newSkills });
+  };
+  const handleOnSkillChange = (e, index) => {
+    var newSkills = addJob.skillSet;
+    newSkills[index].skill = e.target.value;
+    setAddJob({ ...addJob, skillSet: newSkills });
+  };
+  const handleRemoveSkill = (index) => {
+    var newSkills = addJob.skillSet;
+    newSkills.splice(index, 1);
+    setAddJob({ ...addJob, skillSet: newSkills });
+  };
+
   return (
     <motion.div
       className="sideContent"
@@ -57,6 +103,7 @@ function Dashboard({ isOpen }) {
             <CreateButton
               type="button"
               className="btn btn-success btn-with-shadow mb-4"
+              onClick={() => openModal("sth")}
             >
               <AiOutlinePlus /> Create New Job
             </CreateButton>
@@ -664,6 +711,17 @@ function Dashboard({ isOpen }) {
         </JobsContainerRow>
       </DashboardContainer>
       <EventsBar isOpen={isOpen} />
+      {showModal && (
+        <JobModal
+          showModal={showModal}
+          setShowModal={closeModel}
+          job={addJob}
+          handleJobInput={handleJobInput}
+          handleAddSkill={handleAddSkill}
+          handleRemoveSkill={handleRemoveSkill}
+          handleOnSkillChange={handleOnSkillChange}
+        />
+      )}
     </motion.div>
   );
 }

@@ -368,7 +368,6 @@ module.exports.register = async (req, res, next) => {
             });
           }
           const company = new Company({
-            user: result._id,
             name: c_name,
             sector: csector,
             country: country,
@@ -380,15 +379,29 @@ module.exports.register = async (req, res, next) => {
           company
             .save()
             .then((company) => {
-              return res.json({
-                status: true,
-                user: result,
-                company: company,
-                msg: "Successfully created account",
-              });
+              result
+                .updateOne({ company: company._id })
+                .then(() => {
+                  return res.json({
+                    status: true,
+                    user: result,
+                    company: company,
+                    msg: "Successfully created account",
+                  });
+                })
+                .catch((e) => {
+                  result.deleteOne();
+                  company.deleteOne();
+                  return res.json({
+                    status: false,
+                    msg: "Failed to bind user info with company",
+                  });
+                });
             })
             .catch((e) => {
+              console.log(e);
               result.deleteOne();
+              company.deleteOne();
               return res.json({
                 status: false,
                 msg: "Failed to create account",

@@ -1,10 +1,10 @@
+import { motion } from "framer-motion";
 import _ from "lodash";
 import React, { useState } from "react";
+import Badge from "react-bootstrap/Badge";
 import Table from "react-bootstrap/Table";
-import "./styles.css";
 import ReactRoundedImage from "react-rounded-image";
 import Profile from "../../../images/profile.jpg";
-import Badge from "react-bootstrap/Badge";
 import {
   ActionsDropDown,
   DropBtn,
@@ -13,8 +13,8 @@ import {
   ThreeDots,
 } from "../Dashboard/Components";
 import { ApplicantModal } from "../JobApplicants/Candidates/Modal/modal";
-import { motion } from "framer-motion";
 import { Title } from "./Components";
+import "./styles.css";
 
 function getStatus(st) {
   if (st === "New" || st === "Shortlist") {
@@ -46,7 +46,7 @@ function getStatus(st) {
 
 function Candidates({ Applicants, isOpen }) {
   const [showModal, setShowModal] = useState(false);
-  const openModal = (username) => {
+  const openModal = () => {
     setShowModal((prev) => !prev);
   };
 

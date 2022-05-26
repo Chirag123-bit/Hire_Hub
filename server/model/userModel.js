@@ -8,6 +8,9 @@ const userSchema = new mongoose.Schema({
     max: 20,
     unique: true,
   },
+  company: {
+    type: String,
+  },
   firstName: {
     type: String,
     required: true,
