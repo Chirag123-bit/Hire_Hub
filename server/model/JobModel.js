@@ -34,6 +34,22 @@ const jobSchema = new mongoose.Schema({
       type: String,
     },
   ],
+  company: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Company",
+  },
+  openDate: {
+    type: Date,
+    default: Date.now,
+  },
+  closeDate: {
+    type: Date,
+    required: true,
+  },
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 module.exports = mongoose.model("Job", jobSchema);

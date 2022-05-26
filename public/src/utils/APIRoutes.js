@@ -12,3 +12,4 @@ export const sendVerification = `${host}/api/auth/sendVerification`;
 export const reSendVerification = `${host}/api/auth/reSendVerification`;
 
 export const getCompanyData = `${host}/api/company/getCompanyData`;
+export const addNewJob = `${host}/api/job/addJob`;

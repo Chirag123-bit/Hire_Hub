@@ -58,7 +58,9 @@ export default function Employer() {
         <Routes>
           <Route
             path="/dashboard"
-            element={<Dashboard id="dashboard" isOpen={isOpen} />}
+            element={
+              <Dashboard id="dashboard" isOpen={isOpen} company={com._id} />
+            }
           />
           <Route
             path="/dashboard/job-post/:id"

@@ -1,8 +1,11 @@
+import axios from "axios";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiDollar, BiHome, BiMap, BiTimeFive, BiUser } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
+import { toast } from "react-toastify";
+import { addNewJob } from "../../../utils/APIRoutes";
 import EventsBar from "../Common/EventsBar";
 import {
   ActionsDropDown,
@@ -38,7 +41,20 @@ import {
 } from "./Components";
 import { JobModal } from "./JobModal/modal";
 
-function Dashboard({ isOpen }) {
+function Dashboard({ isOpen, company }) {
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "dark",
+  };
+
+  // const [skills, requirements, responsibilities] = [];
+  var skills = [];
+  var requirements = [];
+  var responsibilities = [];
+
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setShowModal((prev) => !prev);
@@ -54,19 +70,24 @@ function Dashboard({ isOpen }) {
     about: "",
     sallary: "",
     description: "",
-    skill: [],
+
     skillSet: [{ skill: "" }],
-    responsibilities: [],
+
     responsibilitiesSet: [{ responsibility: "" }],
-    requirements: [],
+
     requirementsSet: [{ requirement: "" }],
+    closeTime: "",
   });
 
   const handleJobInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
 
-    setAddJob({ ...addJob, name: value });
+    setAddJob({ ...addJob, [name]: value });
+  };
+
+  const handleDateInput = (e) => {
+    setAddJob({ ...addJob, closeTime: e });
   };
 
   const handleAddSkill = () => {
@@ -74,15 +95,138 @@ function Dashboard({ isOpen }) {
     newSkills.push({ skill: "" });
     setAddJob({ ...addJob, skillSet: newSkills });
   };
+
+  const handleRemoveSkill = (index) => {
+    var newSkills = addJob.skillSet;
+    newSkills.splice(index, 1);
+    setAddJob({ ...addJob, skillSet: newSkills });
+  };
+
   const handleOnSkillChange = (e, index) => {
     var newSkills = addJob.skillSet;
     newSkills[index].skill = e.target.value;
     setAddJob({ ...addJob, skillSet: newSkills });
   };
-  const handleRemoveSkill = (index) => {
-    var newSkills = addJob.skillSet;
+
+  const handleAddRequirement = () => {
+    var newSkills = addJob.requirementsSet;
+    newSkills.push({ requirement: "" });
+    setAddJob({ ...addJob, requirementsSet: newSkills });
+  };
+
+  const handleRemoveRequirement = (index) => {
+    var newSkills = addJob.requirementsSet;
     newSkills.splice(index, 1);
-    setAddJob({ ...addJob, skillSet: newSkills });
+    setAddJob({ ...addJob, requirementsSet: newSkills });
+  };
+
+  const handleOnResponsibilityChange = (e, index) => {
+    var newSkills = addJob.responsibilitiesSet;
+    newSkills[index].responsibility = e.target.value;
+    setAddJob({ ...addJob, responsibilitiesSet: newSkills });
+  };
+
+  const handleAddResponsibility = () => {
+    var newSkills = addJob.responsibilitiesSet;
+    newSkills.push({ responsibility: "" });
+    setAddJob({ ...addJob, responsibilitiesSet: newSkills });
+  };
+
+  const handleRemoveResponsibility = (index) => {
+    var newSkills = addJob.responsibilitiesSet;
+    newSkills.splice(index, 1);
+    setAddJob({ ...addJob, responsibilitiesSet: newSkills });
+  };
+
+  const handleOnRequirementChange = (e, index) => {
+    var newSkills = addJob.requirementsSet;
+    newSkills[index].requirement = e.target.value;
+    setAddJob({ ...addJob, requirementsSet: newSkills });
+  };
+
+  //Functions for extracting inputs
+  const extractSkills = () => {
+    addJob.skillSet.forEach(function (value) {
+      if (value.skill !== "") skills.push(value.skill);
+    });
+  };
+  const extractRequirements = () => {
+    addJob.requirementsSet.forEach(function (value) {
+      console.log(value);
+      if (value.requirement !== "") requirements.push(value.requirement);
+    });
+  };
+  const extractResponsibilities = () => {
+    addJob.responsibilitiesSet.forEach(function (value) {
+      if (value.responsibility !== "")
+        responsibilities.push(value.responsibility);
+    });
+  };
+
+  const validateInputedData = () => {
+    if (
+      addJob.title === "" ||
+      addJob.about === "" ||
+      addJob.sallary === "" ||
+      addJob.description === "" ||
+      skills.length === 0 ||
+      requirements.length === 0 ||
+      responsibilities.length === 0 ||
+      addJob.closeTime === ""
+    ) {
+      toast.error("Please Fill all the fields", toastOptions);
+      return false;
+    } else {
+      return true;
+    }
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    extractSkills();
+    extractRequirements();
+    extractResponsibilities();
+
+    const title = addJob.title;
+    const about = addJob.about;
+    const sallary = addJob.sallary;
+    const description = addJob.description;
+    const closeTime = addJob.closeTime;
+
+    if (validateInputedData()) {
+      const response = await axios.post(addNewJob, {
+        title,
+        about,
+        sallary,
+        description,
+        skills,
+        requirements,
+        responsibilities,
+        closeTime,
+        company,
+      });
+      console.log(response.data);
+      if (response.data.success) {
+        toast.success(response.data.msg, toastOptions);
+        setAddJob({
+          title: "",
+          about: "",
+          sallary: "",
+          description: "",
+
+          skillSet: [{ skill: "" }],
+
+          responsibilitiesSet: [{ responsibility: "" }],
+
+          requirementsSet: [{ requirement: "" }],
+          closeTime: "",
+        });
+        skills = [];
+        responsibilities = [];
+        requirements = [];
+      } else {
+        toast.error(response.data.msg, toastOptions);
+      }
+    }
   };
 
   return (
@@ -719,7 +863,15 @@ function Dashboard({ isOpen }) {
           handleJobInput={handleJobInput}
           handleAddSkill={handleAddSkill}
           handleRemoveSkill={handleRemoveSkill}
+          handleAddRequirement={handleAddRequirement}
+          handleRemoveRequirement={handleRemoveRequirement}
           handleOnSkillChange={handleOnSkillChange}
+          handleOnRequirementChange={handleOnRequirementChange}
+          handleOnResponsibilityChange={handleOnResponsibilityChange}
+          handleAddResponsibility={handleAddResponsibility}
+          handleRemoveResponsibility={handleRemoveResponsibility}
+          handleDateInput={handleDateInput}
+          handleSubmit={handleSubmit}
         />
       )}
     </motion.div>
