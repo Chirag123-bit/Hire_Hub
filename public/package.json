@@ -59,6 +59,7 @@
     "tsparticles": "^2.0.6",
     "tsparticles-plugin-polygon-mask": "^2.0.6",
     "tsparticles-preset-triangles": "^2.0.6",
+    "universal-cookie": "^4.0.4",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },

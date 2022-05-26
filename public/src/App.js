@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthProvider } from "./auth/auth";
 import EmailVerified from "./components/Common/Email/EmailVerified";
 import VideoCall from "./components/Meeting/VideoCall";
 import Auth from "./pages/Auth";
@@ -17,7 +18,7 @@ import SetAvatar from "./pages/SetAvatar";
 function App() {
   const [inCall, setInCall] = useState(false);
   return (
-    <>
+    <AuthProvider>
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/auth/*" element={<Auth />} />
@@ -33,16 +34,14 @@ function App() {
           element={<VideoCall setInCall={setInCall} />}
         />
 
-        {/* <Route element={<ProtectedRoutes />}> */}
         <Route exact path="/employer/*" element={<Employer />} />
-        {/* </Route> */}
 
         <Route exact path="/applicant/*" element={<Seeker />} />
         <Route exact path="/codesent/:id" element={<Code_sent />} />
       </Routes>
 
       <ToastContainer autoClose={500} />
-    </>
+    </AuthProvider>
   );
 }
 

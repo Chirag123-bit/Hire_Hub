@@ -146,13 +146,13 @@ function Dashboard({ isOpen, company }) {
 
   //Functions for extracting inputs
   const extractSkills = () => {
+    console.log(addJob.skillSet);
     addJob.skillSet.forEach(function (value) {
       if (value.skill !== "") skills.push(value.skill);
     });
   };
   const extractRequirements = () => {
     addJob.requirementsSet.forEach(function (value) {
-      console.log(value);
       if (value.requirement !== "") requirements.push(value.requirement);
     });
   };

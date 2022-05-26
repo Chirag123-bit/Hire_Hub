@@ -1,10 +1,10 @@
 const express = require("express");
 const router = new express.Router();
 const Job = require("../model/JobModel");
+const Company = require("../model/CompanyModel");
 
 module.exports.addJob = async (req, res, next) => {
   try {
-    console.log("Hre");
     const {
       title,
       about,
@@ -30,14 +30,29 @@ module.exports.addJob = async (req, res, next) => {
     job
       .save()
       .then((result) => {
-        console.log(result);
-        return res.json({
-          success: true,
-          data: result,
-          msg: "The Job was added successfully",
-        });
+        // CompanyModel.update({ _id: company }, { $push: { jobs: result._id } });
+        Company.findOne({ _id: company })
+          .then((result) => {
+            result.jobs.push(job);
+            result.save();
+            console.log("Done");
+            return res.json({
+              success: true,
+              data: result,
+              msg: "The Job was added successfully",
+            });
+          })
+
+          .catch((err) => {
+            result.deleteOne();
+            return res.json({
+              success: false,
+              msg: "The Job was not added successfully",
+            });
+          });
       })
       .catch((error) => {
+        console.log(error);
         return res.json({
           success: false,
           error: error,
@@ -49,6 +64,26 @@ module.exports.addJob = async (req, res, next) => {
       success: false,
       error: error,
       msg: "Something went wrong",
+    });
+  }
+};
+
+module.exports.getCompanyJobs = async (req, res, next) => {
+  try {
+    //get jobs of company using company id
+    const jobArray = req.query.jobsArray;
+
+    const jobs = await Job.find({ _id: { $in: jobArray } });
+
+    return res.json({
+      success: true,
+      data: jobs,
+    });
+  } catch (error) {
+    return res.json({
+      success: false,
+      error: error,
+      msg: error,
     });
   }
 };

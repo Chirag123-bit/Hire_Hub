@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Candidates from "../components/EmployerComponents/Candidates";
 import Careers from "../components/EmployerComponents/Career";
@@ -23,31 +23,32 @@ export default function Employer() {
     theme: "dark",
   };
 
-  useEffect(() => {
-    if (localStorage.getItem("company") === null) {
-      navigate("/auth/login");
-      localStorage.clear();
-    }
-    // const { data } = axios.post(getCompanyData, {
-    //   id: com._id,
-    // });
-    // if (data.status === false) {
-    //   toast.error(data.msg, toastOptions);
-    // } else {
-    //   com = data.data;
-    // }
-  }, []);
+  // useEffect(() => {
+  // if (localStorage.getItem("company") === null) {
+  //   navigate("/auth/login");
+  //   localStorage.clear();
+  // }
+  // const { data } = axios.post(getCompanyData, {
+  //   id: com._id,
+  // });
+  // if (data.status === false) {
+  //   toast.error(data.msg, toastOptions);
+  // } else {
+  //   com = data.data;
+  // }
+  // }, []);
 
   if (localStorage.getItem("user")) {
     cu = JSON.parse(localStorage.getItem("user"));
     com = JSON.parse(localStorage.getItem("company"));
 
-    if (currUser.type === "Applicant") {
-      navigate("/applicant/home");
-    }
-  } else {
-    navigate("/auth/login");
+    // if (currUser.type === "Applicant") {
+    //   navigate("/applicant/home");
+    // }
   }
+  //  else {
+  //   navigate("/auth/login");
+  // }
 
   return (
     <>

@@ -8,6 +8,7 @@ const userVerification = require("../model/UserVerification");
 require("dotenv").config();
 const path = require("path");
 const { register_schema } = require("../validators/register_validator");
+const jwt = require("jsonwebtoken");
 
 // Node Mail Service Transporter
 let transporter = nodemailer.createTransport({
@@ -442,17 +443,27 @@ module.exports.login = async (req, res, next) => {
     }
 
     delete user.password;
+    const token = jwt.sign(
+      {
+        userId: user._id,
+      },
+      "RANDOM-TOKEN",
+      { expiresIn: "24h" }
+    );
     if (user.type === "Company") {
       const company = await Company.findOne({ user: user._id });
+
       return res.json({
         status: true,
         user,
         company,
+        token,
       });
     }
     return res.json({
       status: true,
       user,
+      token,
     });
   } catch (ex) {
     next(ex);

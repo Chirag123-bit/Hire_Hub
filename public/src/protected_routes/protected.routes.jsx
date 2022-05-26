@@ -1,18 +1,37 @@
-import { Navigate, Outlet } from "react-router-dom";
+import React from "react";
+import { Route, useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
-const useAuth = async () => {
-  var user;
-  try {
-    user = await JSON.parse(localStorage.getItem("user"));
-  } catch (e) {
-    user = null;
-    console.log(e);
-  }
-  return { ...user };
-};
-const ProtectedRoutes = async () => {
-  const data = await useAuth();
-  return data.type === "Company" ? <Outlet /> : <Navigate to="/" />;
-};
+// receives component and any other props represented by ...rest
+export default function ProtectedRoutes({ component: Component, ...rest }) {
+  const navigate = useNavigate();
+  return (
+    // this route takes other route assigned to it from the App.js and return the same route if condition is met
+    <Route
+      {...rest}
+      render={(props) => {
+        // get cookie from browser if logged in
+        const token = cookies.get("TOKEN");
 
-export default ProtectedRoutes;
+        // return route if there is a valid token set in the cookie
+        if (token) {
+          return <Component {...props} />;
+        } else {
+          // return the user to the landing page if there is no valid token set
+          return (
+            <navigate
+              to={{
+                pathname: "/",
+                state: {
+                  // sets the location a user was about to assess before being redirected to login
+                  from: props.location,
+                },
+              }}
+            />
+          );
+        }
+      }}
+    />
+  );
+}

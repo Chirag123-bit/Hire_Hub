@@ -1,18 +1,23 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
+import Cookies from "universal-cookie";
+import { useAuth } from "../../../../auth/auth";
 import background from "../../../../images/background.png";
 import { loginRoute } from "../../../../utils/APIRoutes";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const cookies = new Cookies();
+
   const [values, setValues] = useState({
     username: "",
     password: "",
   });
   const [user, setUser] = useState("");
+  const auth = useAuth();
 
   const toastOptions = {
     position: "bottom-right",
@@ -22,19 +27,19 @@ export const Login = () => {
     theme: "dark",
   };
 
-  useEffect(() => {
-    if (localStorage.getItem("user")) {
-      const currUser = JSON.parse(localStorage.getItem("user"));
-      if (currUser.type === "Company") {
-        navigate("/employer/dashboard");
-        if (!localStorage.getItem("company")) {
-          localStorage.clear();
-        }
-      } else {
-        navigate("/applicant/home");
-      }
-    }
-  });
+  // useEffect(() => {
+  //   if (localStorage.getItem("user")) {
+  //     const currUser = JSON.parse(localStorage.getItem("user"));
+  //     if (currUser.type === "Company") {
+  //       navigate("/employer/dashboard");
+  //       if (!localStorage.getItem("company")) {
+  //         localStorage.clear();
+  //       }
+  //     } else {
+  //       navigate("/applicant/home");
+  //     }
+  //   }
+  // });
 
   const handleValidation = () => {
     const { password, username } = values;
@@ -67,8 +72,10 @@ export const Login = () => {
             "Welcome to HireHub, " + data.user.firstName,
             toastOptions
           );
-          // auth.login();
-          navigate("/employer/dashboard");
+          cookies.set("TOKEN", data.token, {
+            path: "/",
+          });
+          navigate("/employer/dashboard", { replace: true });
         }
         if (data.user.type === "Applicant") {
           localStorage.setItem("user", JSON.stringify(data.user));
@@ -76,7 +83,11 @@ export const Login = () => {
             "Welcome to HireHub, " + data.user.firstName,
             toastOptions
           );
-          navigate("/applicant/home");
+          cookies.set("TOKEN", data.token, {
+            path: "/",
+          });
+
+          navigate("/applicant/home", { replace: true });
         }
       }
     }

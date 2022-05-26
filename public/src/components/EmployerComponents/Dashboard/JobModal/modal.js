@@ -80,12 +80,18 @@ export const JobModal = ({
                   }}
                 />
                 <div>
-                  <label style={{ color: "#ccc" }}>Expires On: </label>
+                  <h4
+                    style={{ marginBottom: 0, color: "#ccc" }}
+                    className="mb-2"
+                  >
+                    Expires On:
+                  </h4>
                   <DateTimePicker
                     onChange={handleDateInput}
                     value={job.closeTime}
                     name="closeTime"
                     style={{ width: "100%" }}
+                    minDate={new Date()}
                   />
                 </div>
               </div>
