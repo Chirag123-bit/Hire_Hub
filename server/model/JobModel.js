@@ -11,6 +11,9 @@ const jobSchema = new mongoose.Schema({
     required: true,
     min: 3,
   },
+  sector: {
+    type: String,
+  },
   skills: [
     {
       type: String,

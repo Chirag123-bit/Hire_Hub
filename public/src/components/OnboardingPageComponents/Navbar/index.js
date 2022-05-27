@@ -3,15 +3,15 @@ import { FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { animateScroll as scroll } from "react-scroll";
 import {
+  MobileIcon,
   Nav,
   NavbarContainer,
-  NavLogo,
-  NavMenu,
-  NavItem,
-  NavLinks,
-  MobileIcon,
   NavBtn,
   NavBtnLink,
+  NavItem,
+  NavLinks,
+  NavLogo,
+  NavMenu
 } from "./NavbarElements";
 
 const Navbar = ({ toggle }) => {
@@ -95,7 +95,7 @@ const Navbar = ({ toggle }) => {
               </NavItem>
             </NavMenu>
             <NavBtn>
-              <NavBtnLink to="/login">Sign In</NavBtnLink>
+              <NavBtnLink to="auth/login">Sign In</NavBtnLink>
             </NavBtn>
           </NavbarContainer>
         </Nav>

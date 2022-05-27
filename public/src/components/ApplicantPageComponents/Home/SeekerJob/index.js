@@ -1,27 +1,38 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { FcBrokenLink } from "react-icons/fc";
+import { getAllJobs } from "../../../../utils/APIRoutes";
+import { ColoredSlogan, Slogan } from "../SeekerHero/seekerHeroElements";
 import {
-  JobsContainer,
-  ContentHolder,
-  TitleHolder,
+  ApplyButton,
   CompanyInfoHoler,
+  ContentHolder,
   JobCard,
   JobCardsHoler,
+  JobDescription,
+  JobDescriptionBox,
+  JobFooter,
+  JobsContainer,
   JobTitle,
   JobTitleHolder,
   JobType,
-  JobDescription,
-  JobDescriptionBox,
-  ApplyButton,
-  JobFooter,
   Muted,
   Sallary,
+  TitleHolder,
 } from "./JobElements";
-import { Slogan, ColoredSlogan } from "../SeekerHero/seekerHeroElements";
-import { FcBrokenLink } from "react-icons/fc";
 import ParticleBackground from "./ParticleBackground";
 import "./style.css";
 
 function SeekerJob() {
+  var [ready, setIsReady] = useState(false);
+  var [jobs, setJobs] = useState([]);
+  useEffect(() => {
+    axios.get(getAllJobs).then((result) => {
+      jobs = result.data.data;
+      setJobs(jobs);
+      setIsReady(true);
+    });
+  }, []);
   return (
     <JobsContainer>
       <ParticleBackground />
@@ -32,168 +43,39 @@ function SeekerJob() {
           </Slogan>
         </TitleHolder>
         <JobCardsHoler>
-          <JobCard>
-            <CompanyInfoHoler>
-              <div className="box1">
-                <FcBrokenLink style={{ fontSize: "1.5rem" }} />
-              </div>
-              <div className="box2">
-                <h6>Microsoft</h6>
-                <p>Kathmandu, Nepal</p>
-              </div>
-            </CompanyInfoHoler>
-            <JobTitleHolder>
-              <JobTitle>Backend Developer</JobTitle>
-              <JobType>Full Time</JobType>
-            </JobTitleHolder>
-            <JobDescriptionBox>
-              <JobDescription>
-                You will be expected to manage and lead a fleet of developers in
-                order to achieve the company goals.
-              </JobDescription>
-            </JobDescriptionBox>
-            <JobFooter>
-              <Sallary>
-                $2500<Muted>/month</Muted>
-              </Sallary>
-              <ApplyButton>Apply Now</ApplyButton>
-            </JobFooter>
-          </JobCard>
-          <JobCard>
-            <CompanyInfoHoler>
-              <div className="box1">
-                <FcBrokenLink style={{ fontSize: "1.5rem" }} />
-              </div>
-              <div className="box2">
-                <h6>Microsoft</h6>
-                <p>Kathmandu, Nepal</p>
-              </div>
-            </CompanyInfoHoler>
-            <JobTitleHolder>
-              <JobTitle>Backend Developer</JobTitle>
-              <JobType>Full Time</JobType>
-            </JobTitleHolder>
-            <JobDescriptionBox>
-              <JobDescription>
-                You will be expected to manage and lead a fleet of developers in
-                order to achieve the company goals.
-              </JobDescription>
-            </JobDescriptionBox>
-            <JobFooter>
-              <Sallary>
-                $2500<Muted>/month</Muted>
-              </Sallary>
-              <ApplyButton>Apply Now</ApplyButton>
-            </JobFooter>
-          </JobCard>
-          <JobCard>
-            <CompanyInfoHoler>
-              <div className="box1">
-                <FcBrokenLink style={{ fontSize: "1.5rem" }} />
-              </div>
-              <div className="box2">
-                <h6>Microsoft</h6>
-                <p>Kathmandu, Nepal</p>
-              </div>
-            </CompanyInfoHoler>
-            <JobTitleHolder>
-              <JobTitle>Backend Developer</JobTitle>
-              <JobType>Full Time</JobType>
-            </JobTitleHolder>
-            <JobDescriptionBox>
-              <JobDescription>
-                You will be expected to manage and lead a fleet of developers in
-                order to achieve the company goals.
-              </JobDescription>
-            </JobDescriptionBox>
-            <JobFooter>
-              <Sallary>
-                $2500<Muted>/month</Muted>
-              </Sallary>
-              <ApplyButton>Apply Now</ApplyButton>
-            </JobFooter>
-          </JobCard>
-          <JobCard>
-            <CompanyInfoHoler>
-              <div className="box1">
-                <FcBrokenLink style={{ fontSize: "1.5rem" }} />
-              </div>
-              <div className="box2">
-                <h6>Microsoft</h6>
-                <p>Kathmandu, Nepal</p>
-              </div>
-            </CompanyInfoHoler>
-            <JobTitleHolder>
-              <JobTitle>Backend Developer</JobTitle>
-              <JobType>Full Time</JobType>
-            </JobTitleHolder>
-            <JobDescriptionBox>
-              <JobDescription>
-                You will be expected to manage and lead a fleet of developers in
-                order to achieve the company goals.
-              </JobDescription>
-            </JobDescriptionBox>
-            <JobFooter>
-              <Sallary>
-                $2500<Muted>/month</Muted>
-              </Sallary>
-              <ApplyButton>Apply Now</ApplyButton>
-            </JobFooter>
-          </JobCard>
-          <JobCard>
-            <CompanyInfoHoler>
-              <div className="box1">
-                <FcBrokenLink style={{ fontSize: "1.5rem" }} />
-              </div>
-              <div className="box2">
-                <h6>Microsoft</h6>
-                <p>Kathmandu, Nepal</p>
-              </div>
-            </CompanyInfoHoler>
-            <JobTitleHolder>
-              <JobTitle>Backend Developer</JobTitle>
-              <JobType>Full Time</JobType>
-            </JobTitleHolder>
-            <JobDescriptionBox>
-              <JobDescription>
-                You will be expected to manage and lead a fleet of developers in
-                order to achieve the company goals.
-              </JobDescription>
-            </JobDescriptionBox>
-            <JobFooter>
-              <Sallary>
-                $2500<Muted>/month</Muted>
-              </Sallary>
-              <ApplyButton>Apply Now</ApplyButton>
-            </JobFooter>
-          </JobCard>
-          <JobCard>
-            <CompanyInfoHoler>
-              <div className="box1">
-                <FcBrokenLink style={{ fontSize: "1.5rem" }} />
-              </div>
-              <div className="box2">
-                <h6>Microsoft</h6>
-                <p>Kathmandu, Nepal</p>
-              </div>
-            </CompanyInfoHoler>
-            <JobTitleHolder>
-              <JobTitle>Backend Developer</JobTitle>
-              <JobType>Full Time</JobType>
-            </JobTitleHolder>
-            <JobDescriptionBox>
-              <JobDescription>
-                You will be expected to manage and lead a fleet of developers in
-                order to achieve the company goals.
-              </JobDescription>
-            </JobDescriptionBox>
-            <JobFooter>
-              <Sallary>
-                $2500<Muted>/month</Muted>
-              </Sallary>
-              <ApplyButton>Apply Now</ApplyButton>
-            </JobFooter>
-          </JobCard>
+          {ready ? (
+            jobs.map((job) => (
+              <JobCard>
+                <CompanyInfoHoler>
+                  <div className="box1">
+                    <FcBrokenLink style={{ fontSize: "1.5rem" }} />
+                  </div>
+                  <div className="box2">
+                    <h6>{job.company.name}</h6>
+                    <p>
+                      {job.company.region}, {job.company.country}
+                    </p>
+                  </div>
+                </CompanyInfoHoler>
+                <JobTitleHolder>
+                  <JobTitle>{job.title}</JobTitle>
+                  <JobType>Full Time</JobType>
+                </JobTitleHolder>
+                <JobDescriptionBox>
+                  <JobDescription>{job.description}</JobDescription>
+                </JobDescriptionBox>
+                <JobFooter>
+                  <Sallary>
+                    ${job.sallary}
+                    <Muted>/month</Muted>
+                  </Sallary>
+                  <ApplyButton>Apply Now</ApplyButton>
+                </JobFooter>
+              </JobCard>
+            ))
+          ) : (
+            <div>Hello</div>
+          )}
         </JobCardsHoler>
       </ContentHolder>
     </JobsContainer>

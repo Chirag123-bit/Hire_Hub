@@ -1,17 +1,30 @@
-import React from "react";
-import {
-  SolutionsContainer,
-  CardsContainer,
-  CategoryCard,
-  FcAdvertisment,
-} from "./ComapnyElements";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { getAllCompanies } from "../../../../utils/APIRoutes";
 import {
   ColoredSlogan,
   Slogan,
   TextContent,
 } from "../SeekerHero/seekerHeroElements";
+import {
+  CardsContainer,
+  CategoryCard,
+  FcAdvertisment,
+  SolutionsContainer,
+} from "./ComapnyElements";
 
 function Companies() {
+  var [ready, setIsReady] = useState(false);
+  var [companies, setCompanies] = useState([]);
+  useEffect(() => {
+    axios.get(getAllCompanies).then((result) => {
+      companies = result.data.data.slice(0, 9);
+      setCompanies(companies);
+      setIsReady(true);
+      console.log(companies);
+    });
+  }, []);
+
   return (
     <SolutionsContainer>
       <TextContent>
@@ -21,87 +34,23 @@ function Companies() {
         </Slogan>
       </TextContent>
       <CardsContainer>
-        <CategoryCard>
-          <div className="box1">
-            <FcAdvertisment />
-          </div>
-          <div className="box2">
-            <h6>Google Inc.</h6>
-            <p>Silicon Valley, California</p>
-          </div>
-        </CategoryCard>
-        <CategoryCard>
-          <div className="box1">
-            <FcAdvertisment />
-          </div>
-          <div className="box2">
-            <h6>Google Inc.</h6>
-            <p>Silicon Valley, California</p>
-          </div>
-        </CategoryCard>
-        <CategoryCard>
-          <div className="box1">
-            <FcAdvertisment />
-          </div>
-          <div className="box2">
-            <h6>Google Inc.</h6>
-            <p>Silicon Valley, California</p>
-          </div>
-        </CategoryCard>
-        <CategoryCard>
-          <div className="box1">
-            <FcAdvertisment />
-          </div>
-          <div className="box2">
-            <h6>Google Inc.</h6>
-            <p>Silicon Valley, California</p>
-          </div>
-        </CategoryCard>
-        <CategoryCard>
-          <div className="box1">
-            <FcAdvertisment />
-          </div>
-          <div className="box2">
-            <h6>Google Inc.</h6>
-            <p>Silicon Valley, California</p>
-          </div>
-        </CategoryCard>
-        <CategoryCard>
-          <div className="box1">
-            <FcAdvertisment />
-          </div>
-          <div className="box2">
-            <h6>Google Inc.</h6>
-            <p>Silicon Valley, California</p>
-          </div>
-        </CategoryCard>
-        <CategoryCard>
-          <div className="box1">
-            <FcAdvertisment />
-          </div>
-          <div className="box2">
-            <h6>Google Inc.</h6>
-            <p>Silicon Valley, California</p>
-          </div>
-        </CategoryCard>
-        <CategoryCard>
-          <div className="box1">
-            <FcAdvertisment />
-          </div>
-          <div className="box2">
-            <h6>Google Inc.</h6>
-            <p>Silicon Valley, California</p>
-          </div>
-        </CategoryCard>
-        <CategoryCard>
-          <div className="box1">
-            <FcAdvertisment />
-          </div>
-          <div className="box2">
-            <h6>Google Inc.</h6>
-            <p>Silicon Valley, California</p>
-          </div>
-        </CategoryCard>
+        {ready ? (
+          companies.map((company) => (
+            <CategoryCard>
+              <div className="box1">
+                <FcAdvertisment />
+              </div>
+              <div className="box2">
+                <h6>{company.name}</h6>
+                <p>
+                  {company.region}, {company.country}
+                </p>
+              </div>
+            </CategoryCard>
+          ))
+        ) : (
+          <div></div>
+        )}
       </CardsContainer>
     </SolutionsContainer>
   );

@@ -22,12 +22,11 @@ import "./styles.css";
 function Careers({ isOpen, user, company }) {
   const [isLoading, setIsLoading] = useState(true);
   const [jobs, setJobs] = useState([]);
-  const [error, setError] = useState(null);
   useEffect(() => {
     axios
       .get(getCompanyJobs, {
         params: {
-          jobsArray: company.jobs,
+          user: company._id,
         },
       })
       .then((result) => {

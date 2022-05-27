@@ -70,6 +70,7 @@ function Dashboard({ isOpen, company }) {
     about: "",
     sallary: "",
     description: "",
+    sector: "",
 
     skillSet: [{ skill: "" }],
 
@@ -172,7 +173,8 @@ function Dashboard({ isOpen, company }) {
       skills.length === 0 ||
       requirements.length === 0 ||
       responsibilities.length === 0 ||
-      addJob.closeTime === ""
+      addJob.closeTime === "" ||
+      addJob.sector === ""
     ) {
       toast.error("Please Fill all the fields", toastOptions);
       return false;
@@ -191,6 +193,7 @@ function Dashboard({ isOpen, company }) {
     const sallary = addJob.sallary;
     const description = addJob.description;
     const closeTime = addJob.closeTime;
+    const sector = addJob.sector;
 
     if (validateInputedData()) {
       const response = await axios.post(addNewJob, {
@@ -203,6 +206,7 @@ function Dashboard({ isOpen, company }) {
         responsibilities,
         closeTime,
         company,
+        sector,
       });
       console.log(response.data);
       if (response.data.success) {
@@ -212,6 +216,7 @@ function Dashboard({ isOpen, company }) {
           about: "",
           sallary: "",
           description: "",
+          sector: "",
 
           skillSet: [{ skill: "" }],
 

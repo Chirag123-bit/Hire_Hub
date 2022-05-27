@@ -4,14 +4,14 @@ import {
   Slogan,
   SloganSubtext,
 } from "../Home/SeekerHero/seekerHeroElements";
+import "../Home/SeekerHero/style.css";
 import {
-  HeadSectionContainer,
   ContentHolder,
+  HeadSectionContainer,
   HeadSubtitle,
   HeadTitle,
 } from "./CategoryElements";
 import ParticleBackground from "./ParticleBackground";
-import "../Home/SeekerHero/style.css";
 
 function CategoryDescription() {
   return (

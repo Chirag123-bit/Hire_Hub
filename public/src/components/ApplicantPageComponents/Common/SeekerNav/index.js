@@ -3,18 +3,18 @@ import { FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { animateScroll as scroll } from "react-scroll";
 import {
-  Nav,
-  NavbarContainer,
-  NavLogo,
-  NavMenu,
-  NavItem,
-  NavLinks,
-  MobileIcon,
-  NavImp,
-  NavBtnLink,
-  Notification,
   Down,
   Message,
+  MobileIcon,
+  Nav,
+  NavbarContainer,
+  NavBtnLink,
+  NavImp,
+  NavItem,
+  NavLinks,
+  NavLogo,
+  NavMenu,
+  Notification,
 } from "./NavbarElements";
 
 const SeekerNav = ({ toggle }) => {
@@ -98,13 +98,13 @@ const SeekerNav = ({ toggle }) => {
               </NavItem>
             </NavMenu>
             <NavImp>
-              <NavBtnLink to="/signin">
+              <NavBtnLink to="/auth/login">
                 <Notification size={18} />
               </NavBtnLink>
-              <NavBtnLink to="/signin">
+              <NavBtnLink to="/auth/login">
                 <Message size={18} />
               </NavBtnLink>
-              <NavBtnLink to="/signin">
+              <NavBtnLink to="/auth/login">
                 <Down size={18} />
               </NavBtnLink>
             </NavImp>

@@ -5,7 +5,7 @@ export const CategoryContainer = styled.div`
   flex-direction: column;
   /* justify-content: space-between; */
 
-  height: 400px;
+  min-height: 400px;
   background-color: ${({ white }) => (white ? "#FFFEFE" : "#F6F6FD")};
 `;
 
@@ -40,6 +40,7 @@ export const CategoryCard = styled.div`
   justify-content: center;
   width: 30%;
   border-radius: 10px;
+  cursor: pointer;
 `;
 
 export const ImageSection = styled.div`

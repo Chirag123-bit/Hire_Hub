@@ -15,6 +15,7 @@ module.exports.addJob = async (req, res, next) => {
       responsibilities,
       closeTime,
       company,
+      sector,
     } = req.body;
     const job = new Job({
       title: title,
@@ -26,6 +27,7 @@ module.exports.addJob = async (req, res, next) => {
       responsibilities: responsibilities,
       closeDate: closeTime,
       company: company,
+      sector: sector,
     });
     job
       .save()
@@ -70,19 +72,70 @@ module.exports.addJob = async (req, res, next) => {
 
 module.exports.getCompanyJobs = async (req, res, next) => {
   try {
-    //get jobs of company using company id
-    const jobArray = req.query.jobsArray;
+    Company.findById(req.query.user)
+      .select("jobs")
+      .then((result) => {
+        const jobArray = result["jobs"];
+        Job.find({ _id: { $in: jobArray } })
+          .then((result) => {
+            return res.json({
+              success: true,
+              data: result,
+            });
+          })
+          .catch((err) => {
+            return res.json({
+              success: false,
+              msg: err,
+            });
+          });
+      });
+  } catch (error) {
+    return res.json({
+      success: false,
+      error: error,
+      msg: error,
+    });
+  }
+};
 
-    const jobs = await Job.find({ _id: { $in: jobArray } });
+module.exports.getAllJobs = async (req, res, next) => {
+  try {
+    Job.find()
+      .populate("company")
+      .then((result) => {
+        return res.json({
+          success: true,
+          data: result,
+        });
+      })
+      .catch((err) => {
+        return res.json({
+          success: false,
+          msg: err,
+        });
+      });
+  } catch (error) {
+    return res.json({
+      success: false,
+      error: error,
+      msg: error,
+    });
+  }
+};
 
+module.exports.getJobsForSpecificSector = async (req, res, next) => {
+  try {
+    const jobs = await Job.find({ sector: req.query.sector });
+    console.log(jobs);
     return res.json({
       success: true,
       data: jobs,
     });
   } catch (error) {
+    console.log(error);
     return res.json({
       success: false,
-      error: error,
       msg: error,
     });
   }

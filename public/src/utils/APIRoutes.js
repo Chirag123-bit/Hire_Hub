@@ -14,3 +14,8 @@ export const reSendVerification = `${host}/api/auth/reSendVerification`;
 export const getCompanyData = `${host}/api/company/getCompanyData`;
 export const addNewJob = `${host}/api/job/addJob`;
 export const getCompanyJobs = `${host}/api/job/getCompanyJobs`;
+export const getAllJobs = `${host}/api/job/getAllJobs`;
+export const getSectorJob = `${host}/api/job/getSectorJob`;
+
+export const getAllCompanies = `${host}/api/company/getCompanies`;
+export const getSectorCompany = `${host}/api/company/getSectorCompany`;

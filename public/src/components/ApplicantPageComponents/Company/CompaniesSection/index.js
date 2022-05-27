@@ -1,73 +1,181 @@
-import React from "react";
-import { ColoredSlogan } from "../../Home/SeekerHero/seekerHeroElements";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { getSectorCompany } from "../../../../utils/APIRoutes";
 import {
-  CategoryContainer,
-  Title,
-  TitleContainer,
-  CatImage,
   CategoryCard,
-  CategorySubtitle,
+  CategoryContainer,
   CategoryTitle,
+  CatImage,
+  ContentHolder,
   HContainer,
   ImageSection,
-  SubTitleSection,
+  Title,
+  TitleContainer,
   TitleSection,
-  ContentHolder,
 } from "../../Home/CategorySection/CategoryElements";
+import { ColoredSlogan } from "../../Home/SeekerHero/seekerHeroElements";
 
-import google from "../../../../images/google.png";
-// import brook from "../../images/brook.png";
-// import cleveland from "../../images/cleveland.png";
+function Categories({ white }) {
+  var [isTechReady, setIsTechReady] = useState(false);
+  var [tech, setTech] = useState([]);
+  var [isHealthReady, setIsHealthReady] = useState(false);
+  var [health, setHealth] = useState([]);
+  var [isEntReady, setIsEntReady] = useState(false);
+  var [ent, setEnt] = useState([]);
+  var [isRealReady, setIsRealReady] = useState(false);
+  var [real, setReal] = useState([]);
+  useEffect(() => {
+    axios
+      .get(getSectorCompany, {
+        params: {
+          sector: "Information Technology",
+        },
+      })
+      .then((result) => {
+        tech = result.data.data.slice(0, 3);
+        setTech(tech);
+        setIsTechReady(true);
+        console.log(tech);
+      });
 
-function Categories({ Sector, Company_Name, no_of_jobs, white }) {
+    axios
+      .get(getSectorCompany, {
+        params: {
+          sector: "Health",
+        },
+      })
+      .then((result) => {
+        health = result.data.data.slice(0, 3);
+        setHealth(health);
+        setIsHealthReady(true);
+        console.log(tech);
+      });
+
+    axios
+      .get(getSectorCompany, {
+        params: {
+          sector: "Entertainment",
+        },
+      })
+      .then((result) => {
+        ent = result.data.data.slice(0, 3);
+        setEnt(ent);
+        setIsEntReady(true);
+        console.log(ent);
+      });
+    axios
+      .get(getSectorCompany, {
+        params: {
+          sector: "Real Estate",
+        },
+      })
+      .then((result) => {
+        real = result.data.data.slice(0, 3);
+        setReal(real);
+        setIsRealReady(true);
+      });
+  }, []);
   return (
     <CategoryContainer white={white}>
       <ContentHolder>
         <TitleContainer>
           <Title>
-            Companies Focused in <ColoredSlogan>{Sector}</ColoredSlogan>
+            Companies Focused in <ColoredSlogan>Technology</ColoredSlogan>
           </Title>
         </TitleContainer>
         <HContainer>
-          <CategoryCard white={white}>
-            <ImageSection>
-              <CatImage src={google} alt="Backend" />
-            </ImageSection>
-            <TitleSection>
-              <CategoryTitle style={{ "font-size": "20px" }}>
-                {Company_Name}
-              </CategoryTitle>
-            </TitleSection>
-            <SubTitleSection>
-              <CategorySubtitle>{no_of_jobs} Jobs Available</CategorySubtitle>
-            </SubTitleSection>
-          </CategoryCard>
-          <CategoryCard white={white}>
-            <ImageSection>
-              <CatImage src={google} alt="Backend" />
-            </ImageSection>
-            <TitleSection>
-              <CategoryTitle style={{ "font-size": "20px" }}>
-                {Company_Name}
-              </CategoryTitle>
-            </TitleSection>
-            <SubTitleSection>
-              <CategorySubtitle>{no_of_jobs} Jobs Available</CategorySubtitle>
-            </SubTitleSection>
-          </CategoryCard>
-          <CategoryCard white={white}>
-            <ImageSection>
-              <CatImage src={google} alt="Backend" />
-            </ImageSection>
-            <TitleSection>
-              <CategoryTitle style={{ "font-size": "20px" }}>
-                {Company_Name}
-              </CategoryTitle>
-            </TitleSection>
-            <SubTitleSection>
-              <CategorySubtitle>{no_of_jobs} Jobs Available</CategorySubtitle>
-            </SubTitleSection>
-          </CategoryCard>
+          {isTechReady ? (
+            tech.map((company) => (
+              <CategoryCard white={white}>
+                <ImageSection>
+                  <CatImage src={company.avatarImage} alt="Backend" />
+                </ImageSection>
+                <TitleSection>
+                  <CategoryTitle style={{ "font-size": "20px" }}>
+                    {company.name}
+                  </CategoryTitle>
+                </TitleSection>
+              </CategoryCard>
+            ))
+          ) : (
+            <div></div>
+          )}
+        </HContainer>
+      </ContentHolder>
+      <ContentHolder>
+        <TitleContainer>
+          <Title>
+            Companies Focused in <ColoredSlogan>Health Care</ColoredSlogan>
+          </Title>
+        </TitleContainer>
+        <HContainer>
+          {isHealthReady ? (
+            health.map((company) => (
+              <CategoryCard white={white}>
+                <ImageSection>
+                  <CatImage src={company.avatarImage} alt="Backend" />
+                </ImageSection>
+                <TitleSection>
+                  <CategoryTitle style={{ "font-size": "20px" }}>
+                    {company.name}
+                  </CategoryTitle>
+                </TitleSection>
+              </CategoryCard>
+            ))
+          ) : (
+            <div></div>
+          )}
+        </HContainer>
+      </ContentHolder>
+      <ContentHolder>
+        <TitleContainer>
+          <Title>
+            Companies Focused in{" "}
+            <ColoredSlogan>Entertainment Industry</ColoredSlogan>
+          </Title>
+        </TitleContainer>
+        <HContainer>
+          {isEntReady ? (
+            ent.map((company) => (
+              <CategoryCard white={white}>
+                <ImageSection>
+                  <CatImage src={company.avatarImage} alt="Backend" />
+                </ImageSection>
+                <TitleSection>
+                  <CategoryTitle style={{ "font-size": "20px" }}>
+                    {company.name}
+                  </CategoryTitle>
+                </TitleSection>
+              </CategoryCard>
+            ))
+          ) : (
+            <div></div>
+          )}
+        </HContainer>
+      </ContentHolder>
+      <ContentHolder>
+        <TitleContainer>
+          <Title>
+            Companies Focused in <ColoredSlogan>Real Estates</ColoredSlogan>
+          </Title>
+        </TitleContainer>
+        <HContainer style={{ marginBottom: "2rem" }}>
+          {isRealReady ? (
+            real.map((company) => (
+              <CategoryCard white={white}>
+                <ImageSection>
+                  <CatImage src={company.avatarImage} alt="Backend" />
+                </ImageSection>
+                <TitleSection>
+                  <CategoryTitle style={{ "font-size": "20px" }}>
+                    {company.name}
+                  </CategoryTitle>
+                </TitleSection>
+              </CategoryCard>
+            ))
+          ) : (
+            <div></div>
+          )}
         </HContainer>
       </ContentHolder>
     </CategoryContainer>

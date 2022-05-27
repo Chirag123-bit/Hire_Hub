@@ -43,6 +43,10 @@ const sectors = [
     value: "Real Estate",
     label: "Real Estate",
   },
+  {
+    value: "Finance",
+    label: "Finance",
+  },
 ];
 export const renderText = ({ label, color, align, variant }) => {
   return (

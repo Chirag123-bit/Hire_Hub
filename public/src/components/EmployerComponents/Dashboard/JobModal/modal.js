@@ -1,12 +1,35 @@
 import AddButton from "@material-ui/icons/Add";
 import RemoveButton from "@material-ui/icons/Remove";
-import { IconButton, TextField } from "@mui/material";
+import { IconButton, MenuItem, TextField } from "@mui/material";
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import DateTimePicker from "react-datetime-picker";
 import { SkillHolder } from "../../../ProfileComponents/CardComponent/Components";
 import "./style.css";
+
+const sectors = [
+  {
+    value: "Information Technology",
+    label: "Information Technology",
+  },
+  {
+    value: "Health",
+    label: "Health",
+  },
+  {
+    value: "Entertainment",
+    label: "Entertainment",
+  },
+  {
+    value: "Real Estate",
+    label: "Real Estate",
+  },
+  {
+    value: "Finance",
+    label: "Finance",
+  },
+];
 
 export const JobModal = ({
   showModal,
@@ -79,6 +102,29 @@ export const JobModal = ({
                     },
                   }}
                 />
+                <TextField
+                  id="outlined-select-type"
+                  select
+                  label="Job Sector"
+                  name="sector"
+                  value={job.sector}
+                  onChange={handleJobInput}
+                  variant="outlined"
+                  style={{ width: "100%" }}
+                  size="small"
+                  InputLabelProps={{
+                    style: {
+                      color: "#fff",
+                      borderColor: "#fff",
+                    },
+                  }}
+                >
+                  {sectors.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
                 <div>
                   <h4
                     style={{ marginBottom: 0, color: "#ccc" }}

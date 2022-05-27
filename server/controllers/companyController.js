@@ -17,3 +17,36 @@ module.exports.getCompanyInfo = async (req, res, next) => {
     });
   }
 };
+
+module.exports.getAllCompanies = async (req, res, next) => {
+  try {
+    const companies = await companyModel.find();
+    console.log(companies);
+    return res.json({
+      success: true,
+      data: companies,
+    });
+  } catch (error) {
+    return res.json({
+      success: false,
+      msg: error,
+    });
+  }
+};
+
+module.exports.getCompaniesForSpecificSector = async (req, res, next) => {
+  try {
+    const companies = await companyModel.find({ sector: req.query.sector });
+    console.log(companies);
+    return res.json({
+      success: true,
+      data: companies,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      success: false,
+      msg: error,
+    });
+  }
+};
