@@ -500,3 +500,26 @@ module.exports.getAllUsers = async (req, res, next) => {
     next(e);
   }
 };
+
+//validate that the user has not applied to the job before
+module.exports.applyJob = async (req, res, next) => {
+  try {
+    const { jobId, userId } = req.query;
+    const user = await User.findById(userId);
+    user.appliedJobs.forEach((job) => {
+      if (job.job.toString() === jobId) {
+        return res.json({
+          status: false,
+          msg: "You have already applied to this job",
+          data: job,
+        });
+      }
+    });
+    return res.json({
+      status: true,
+      msg: "You can apply to this job",
+    });
+  } catch (e) {
+    // next(e);
+  }
+};

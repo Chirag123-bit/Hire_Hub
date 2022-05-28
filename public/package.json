@@ -30,6 +30,7 @@
     "framer-motion": "^6.3.3",
     "horizontal-scroll": "^1.1.0",
     "lodash": "^4.17.21",
+    "moment": "^2.29.3",
     "mongoose": "^6.2.10",
     "mui": "^0.0.1",
     "nodemon": "^2.0.15",

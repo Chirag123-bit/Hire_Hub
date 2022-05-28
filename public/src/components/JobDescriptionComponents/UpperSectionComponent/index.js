@@ -1,6 +1,5 @@
+import Skeleton from "@mui/material/Skeleton";
 import React, { useState } from "react";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import {
   ArrowForward,
   ArrowRight,
@@ -21,8 +20,6 @@ import {
 function JobInfoSection({ job, isLoading }) {
   const [hover, setHover] = useState(false);
   const onHover = () => setHover(!hover);
-  console.log(job);
-  console.log(isLoading);
   return (
     <SectionContainer>
       <ContentHolder>
@@ -37,7 +34,11 @@ function JobInfoSection({ job, isLoading }) {
             </ColoredTitle>
           </JobInfoTitle>
           <JobInfoSub>
-            {isLoading ? <Skeleton count={6} /> : job.about}
+            {isLoading ? (
+              <Skeleton variant="rectangular" height="15vh" />
+            ) : (
+              job.about
+            )}
           </JobInfoSub>
         </TextContentSection>
         <ButtonGroup>
@@ -49,16 +50,27 @@ function JobInfoSection({ job, isLoading }) {
             View Company
           </CompanyButton>
           {isLoading ? (
-            <Skeleton />
+            <Skeleton variant="rectangular">
+              <ApplyButton
+                onMouseEnter={onHover}
+                onMouseLeave={onHover}
+                primary="true"
+                dark="true"
+              >
+                Apply {hover ? <ArrowForward /> : <ArrowRight />}
+              </ApplyButton>
+            </Skeleton>
           ) : (
             <ApplyButton
-              to={`applicant/company/${job.company._id}`}
+              onClick={(event) => {
+                window.location.href = `/applicant/company/${job.company._id}`;
+              }}
               onMouseEnter={onHover}
               onMouseLeave={onHover}
               primary="true"
               dark="true"
             >
-              Apply {hover ? <ArrowForward /> : <ArrowRight />}
+              Explore {hover ? <ArrowForward /> : <ArrowRight />}
             </ApplyButton>
           )}
         </ButtonGroup>

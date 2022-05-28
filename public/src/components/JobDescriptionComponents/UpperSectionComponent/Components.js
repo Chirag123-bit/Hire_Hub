@@ -47,10 +47,15 @@ export const ButtonGroup = styled.div`
 
 export const CompanyButton = styled.button`
   padding: 12px 30px;
-  background-color: white;
+  background-color: orange;
   outline: #423edd;
   border: none;
   border-radius: 50px;
+  color: white;
+
+  &:hover {
+    background-color: #423edd;
+  }
 `;
 
 export const ApplyButton = styled.button`
@@ -60,4 +65,8 @@ export const ApplyButton = styled.button`
   border: none;
   border-radius: 50px;
   color: white;
+
+  &:hover {
+    background-color: orange;
+  }
 `;

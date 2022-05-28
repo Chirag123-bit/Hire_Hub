@@ -1,6 +1,5 @@
+import Skeleton from "@mui/material/Skeleton";
 import React from "react";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import {
   AboutContent,
   AboutSection,
@@ -37,14 +36,14 @@ function JobDescriptionSection({ job, isLoading }) {
             <CompanyInfo>
               <LogoContainer>
                 {isLoading ? (
-                  <Skeleton />
+                  <Skeleton variant="circular" height="60px" width="60px" />
                 ) : (
                   <Logo src={job.company.avatarImage} alt="logo" />
                 )}
               </LogoContainer>
               <TextContent>
                 {isLoading ? (
-                  <Skeleton />
+                  <Skeleton variant="rectangular" width="100px" />
                 ) : (
                   <Title>
                     {job.title} {"("}Full Time{")"}
@@ -52,7 +51,7 @@ function JobDescriptionSection({ job, isLoading }) {
                 )}
 
                 {isLoading ? (
-                  <Skeleton />
+                  <Skeleton variant="rectangular" />
                 ) : (
                   <Address>
                     {job.company.region}, {job.company.country}
@@ -67,7 +66,7 @@ function JobDescriptionSection({ job, isLoading }) {
             </CompanyInfo>
             <CompanyDescription>
               {isLoading ? (
-                <Skeleton count={10} />
+                <Skeleton variant="rectangular" height="30vh" />
               ) : (
                 <Description>{job.about}</Description>
               )}
@@ -78,21 +77,27 @@ function JobDescriptionSection({ job, isLoading }) {
         <SkillSection>
           <SectionTitle>Skills</SectionTitle>
 
-          <Skills>
-            {isLoading ? (
-              <Skeleton count={2} />
-            ) : (
-              job.skills.map((skill) => {
+          {isLoading ? (
+            <div>
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+            </div>
+          ) : (
+            <Skills>
+              {job.skills.map((skill) => {
                 return <Skill>{skill}</Skill>;
-              })
-            )}
-          </Skills>
+              })}
+            </Skills>
+          )}
         </SkillSection>
         <DescSection>
           <SectionTitle>Description</SectionTitle>
           <Desc>
             {isLoading ? (
-              <Skeleton count={10} />
+              <Skeleton variant="rectangular" height="50vh" />
             ) : (
               <Section>{job.description}</Section>
             )}
@@ -102,7 +107,13 @@ function JobDescriptionSection({ job, isLoading }) {
           <SectionTitle>Key Responsibilities</SectionTitle>
           <Responsibilities>
             {isLoading ? (
-              <Skeleton count={5} />
+              <div>
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+              </div>
             ) : (
               job.responsibilities.map((resp) => {
                 return <Responsibility>{resp}</Responsibility>;
@@ -114,7 +125,13 @@ function JobDescriptionSection({ job, isLoading }) {
           <SectionTitle>Key Requirements</SectionTitle>
           <Responsibilities>
             {isLoading ? (
-              <Skeleton count={5} />
+              <div>
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+              </div>
             ) : (
               job.requirements.map((resp) => {
                 return <Responsibility>{resp}</Responsibility>;

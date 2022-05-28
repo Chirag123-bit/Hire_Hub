@@ -14,11 +14,29 @@ export const ApplyButton = styled.button`
   padding: 12px 30px;
   background-color: #423edd;
   outline: white;
-  border: none;
+  border: 1px solid #423edd;
   border-radius: 5px;
   color: white;
   width: 100%;
   margin: auto;
+  cursor: pointer;
+
+  &:hover {
+    background-color: transparent;
+    color: #423edd;
+    border: 1px solid #423edd;
+  }
+`;
+export const DisabledApplyButton = styled.button`
+  padding: 12px 30px;
+  background-color: #3dbeee;
+  outline: white;
+  border: 1px solid #3dbeee;
+  border-radius: 5px;
+  color: black;
+  width: 100%;
+  margin: auto;
+  cursor: pointer;
 `;
 
 export const ButtonContainer = styled.div`
@@ -53,11 +71,18 @@ export const MessageButton = styled.button`
 
 export const SaveButton = styled.button`
   padding: 12px 30px;
-  background-color: #fbc02d;
+  background-color: orange;
+  border: 1px solid orange;
   outline: white;
-  border: none;
   border-radius: 5px;
   color: white;
   width: 100%;
   margin-top: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: transparent;
+    color: #423edd;
+    border: 1px solid orange;
+  }
 `;

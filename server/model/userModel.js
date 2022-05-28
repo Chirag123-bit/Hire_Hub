@@ -117,6 +117,22 @@ const userSchema = new mongoose.Schema({
       ],
     },
   ],
+  appliedJobs: [
+    {
+      job: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Job",
+      },
+      appliedDate: {
+        type: Date,
+        default: Date.now,
+      },
+      status: {
+        type: String,
+        default: "New",
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model("Users", userSchema);

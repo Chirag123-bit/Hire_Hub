@@ -4,6 +4,7 @@ const {
   getAllJobs,
   getJobsForSpecificSector,
   getJob,
+  applyForJob,
 } = require("../controllers/jobController");
 
 const router = require("express").Router();
@@ -13,5 +14,6 @@ router.get("/getCompanyJobs", getCompanyJobs);
 router.get("/getAllJobs", getAllJobs);
 router.get("/getSectorJob", getJobsForSpecificSector);
 router.get("/getJob", getJob);
+router.post("/applyForJob", applyForJob);
 
 module.exports = router;

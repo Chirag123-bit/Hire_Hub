@@ -2,6 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const Job = require("../model/JobModel");
 const Company = require("../model/CompanyModel");
+const userModel = require("../model/userModel");
 
 module.exports.addJob = async (req, res, next) => {
   try {
@@ -147,6 +148,48 @@ module.exports.getJob = async (req, res, next) => {
     return res.json({
       success: true,
       data: job,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      success: false,
+      msg: error,
+    });
+  }
+};
+
+module.exports.applyForJob = async (req, res, next) => {
+  try {
+    const { user, job } = req.body.params;
+    const appliedJob = await Job.findById(job);
+    const appliedUser = await userModel.findById(user);
+    //find if the user has already applied for this job
+    // console.log(appliedUser, job);
+    if (appliedJob.applicants) {
+      appliedJob.applicants.forEach((applicant) => {
+        if (applicant.applicant == user) {
+          return res.json({
+            success: false,
+            msg: "You have already applied for this job",
+          });
+        }
+      });
+    }
+    appliedJob.applicants.push({
+      applicant: user,
+      status: "New",
+      appliedDate: new Date(),
+    });
+    appliedUser.appliedJobs.push({
+      job: job,
+      status: "New",
+      appliedDate: new Date(),
+    });
+    appliedJob.save();
+    appliedUser.save();
+    return res.json({
+      success: true,
+      msg: "You have applied for this job",
     });
   } catch (error) {
     console.log(error);

@@ -53,6 +53,22 @@ const jobSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  applicants: [
+    {
+      applicant: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Users",
+      },
+      status: {
+        type: String,
+        default: "New",
+      },
+      appliedDate: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model("Job", jobSchema);
