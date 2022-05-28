@@ -1,11 +1,11 @@
 import axios from "axios";
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiDollar, BiHome, BiMap, BiTimeFive, BiUser } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { addNewJob } from "../../../utils/APIRoutes";
+import { addNewJob, getCompanyJobDetail } from "../../../utils/APIRoutes";
 import EventsBar from "../Common/EventsBar";
 import {
   ActionsDropDown,
@@ -50,6 +50,22 @@ function Dashboard({ isOpen, company }) {
     theme: "dark",
   };
 
+  const [isLoading, setIsLoading] = useState(true);
+  const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(getCompanyJobDetail, {
+        params: {
+          user: company,
+        },
+      })
+      .then((result) => {
+        console.log(result.data.data);
+        setJobs(result.data.data);
+        setIsLoading(false);
+      });
+  }, []);
   // const [skills, requirements, responsibilities] = [];
   var skills = [];
   var requirements = [];
@@ -147,7 +163,6 @@ function Dashboard({ isOpen, company }) {
 
   //Functions for extracting inputs
   const extractSkills = () => {
-    console.log(addJob.skillSet);
     addJob.skillSet.forEach(function (value) {
       if (value.skill !== "") skills.push(value.skill);
     });
@@ -208,7 +223,7 @@ function Dashboard({ isOpen, company }) {
         company,
         sector,
       });
-      console.log(response.data);
+
       if (response.data.success) {
         toast.success(response.data.msg, toastOptions);
         setAddJob({
@@ -286,7 +301,7 @@ function Dashboard({ isOpen, company }) {
           </LowerHead>
         </HeadContainer>
 
-        <JobsContainerRow class="row">
+        <JobsContainerRow className="row">
           <JobContainer className="col-12">
             <JobCardHeader className="bg-transparent d-flex justify-content-between align-items-center p-4">
               <JobInfoTop className="d-flex flex-column">
@@ -322,25 +337,25 @@ function Dashboard({ isOpen, company }) {
                 <DropBtn
                   type="button"
                   data-toggle="dropdown"
-                  class="btn-option btn d-flex align-items-center justify-content-center"
+                  className="btn-option btn d-flex align-items-center justify-content-center"
                   aria-expanded="false"
                 >
                   <ThreeDots />
                 </DropBtn>
                 <ActionsDropDown className="dropdown-menu dropdown-menu-right py-2 mt-1">
-                  <DropLink href="#" class="dropdown-item px-4 py-2">
+                  <DropLink href="#" className="dropdown-item px-4 py-2">
                     Preview
                   </DropLink>
-                  <DropLink href="#" class="dropdown-item px-4 py-2">
+                  <DropLink href="#" className="dropdown-item px-4 py-2">
                     Edit
                   </DropLink>
-                  <DropLink href="#" class="dropdown-item px-4 py-2">
+                  <DropLink href="#" className="dropdown-item px-4 py-2">
                     Sharable link
                   </DropLink>
-                  <DropLink href="#" class="dropdown-item px-4 py-2">
+                  <DropLink href="#" className="dropdown-item px-4 py-2">
                     Deactivate
                   </DropLink>
-                  <DropLink href="#" class="dropdown-item px-4 py-2">
+                  <DropLink href="#" className="dropdown-item px-4 py-2">
                     Delete
                   </DropLink>
                 </ActionsDropDown>

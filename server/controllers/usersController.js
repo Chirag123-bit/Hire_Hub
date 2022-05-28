@@ -451,7 +451,7 @@ module.exports.login = async (req, res, next) => {
       { expiresIn: "24h" }
     );
     if (user.type === "Company") {
-      const company = await Company.findOne({ user: user._id });
+      const company = await Company.findOne({ _id: user.company });
 
       return res.json({
         status: true,

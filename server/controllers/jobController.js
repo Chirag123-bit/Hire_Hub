@@ -199,3 +199,51 @@ module.exports.applyForJob = async (req, res, next) => {
     });
   }
 };
+
+module.exports.getCompanyJobDetail = async (req, res, next) => {
+  try {
+    Company.findById(req.query.user)
+      .select("jobs")
+      .then((result) => {
+        const jobArray = result["jobs"];
+        Job.find({ _id: { $in: jobArray } })
+          .then((res) => {
+            res.forEach((jb) => {
+              jb.aggregate([
+                {
+                  $facet: {
+                    featured: [
+                      {
+                        $match: {
+                          "$applicants.status": "New",
+                        },
+                      },
+                    ],
+                    trending: [
+                      {
+                        $match: {
+                          trending: true,
+                        },
+                      },
+                    ],
+                  },
+                },
+              ]);
+              console.log(jb);
+            });
+          })
+          .catch((err) => {
+            return res.json({
+              success: false,
+              msg: err,
+            });
+          });
+      });
+  } catch (error) {
+    return res.json({
+      success: false,
+      error: error,
+      msg: error,
+    });
+  }
+};
