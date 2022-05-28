@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const SectionContainer = styled.div`
   width: 100%;
-  height: 450px;
+  min-height: 450px;
   background-color: #3dbeee;
   padding-top: 6rem;
 `;
@@ -15,7 +15,7 @@ export const ContentHolder = styled.div`
 
 export const TextContentSection = styled.div`
   padding-top: 3rem;
-  text-align: left;
+  text-align: justify;
 `;
 
 export const JobInfoTitle = styled.p`

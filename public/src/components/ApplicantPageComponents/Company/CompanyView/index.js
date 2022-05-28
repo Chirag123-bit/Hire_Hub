@@ -70,12 +70,14 @@ function Careers() {
                 <JobCardsHoler style={{ width: "100%" }}>
                   {company.jobs.map((job) => (
                     <JobCard
-                      style={{ backgroundColor: "#242933" }}
+                      style={{ width: "25%" }}
                       className="career-card"
+                      onClick={(event) =>
+                        (window.location.href = `/applicant/job/${job._id}`)
+                      }
                     >
                       <CompanyInfoHoler
                         style={{
-                          backgroundColor: "#242933",
                           alignItems: "center",
                         }}
                       >
@@ -93,11 +95,11 @@ function Careers() {
                       </CompanyInfoHoler>
                       <JobTitleHolder>
                         <JobTitle>{job.title}</JobTitle>
-                        <JobType style={{ backgroundColor: "#242933" }}>
+                        <JobType style={{ width: "70%", margin: "auto" }}>
                           Full Time
                         </JobType>
                       </JobTitleHolder>
-                      <JobDescriptionBox>
+                      <JobDescriptionBox style={{ width: "100%" }}>
                         <JobDescription>{job.description}</JobDescription>
                       </JobDescriptionBox>
                       <JobFooter>
@@ -105,9 +107,7 @@ function Careers() {
                           ${job.sallary}
                           <Muted>/month</Muted>
                         </Sallary>
-                        <ApplyButton style={{ backgroundColor: "#242933" }}>
-                          Edit
-                        </ApplyButton>
+                        <ApplyButton>View</ApplyButton>
                       </JobFooter>
                     </JobCard>
                   ))}

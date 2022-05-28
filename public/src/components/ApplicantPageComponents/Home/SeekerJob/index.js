@@ -45,7 +45,11 @@ function SeekerJob() {
         <JobCardsHoler>
           {ready ? (
             jobs.map((job) => (
-              <JobCard>
+              <JobCard
+                onClick={(event) =>
+                  (window.location.href = `/applicant/job/${job._id}`)
+                }
+              >
                 <CompanyInfoHoler>
                   <div className="box1">
                     <FcBrokenLink style={{ fontSize: "1.5rem" }} />

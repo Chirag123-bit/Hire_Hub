@@ -27,7 +27,7 @@ export default function Seeker() {
         <Route path="/company/:id" element={<Careers />} />
         <Route path="/jobs" element={<SeekerJobs />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/job" element={<JobDescription />} />
+        <Route path="/job/:id" element={<JobDescription />} />
       </Routes>
 
       <Footer />

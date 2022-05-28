@@ -140,3 +140,19 @@ module.exports.getJobsForSpecificSector = async (req, res, next) => {
     });
   }
 };
+
+module.exports.getJob = async (req, res, next) => {
+  try {
+    const job = await Job.findById(req.query.id).populate("company");
+    return res.json({
+      success: true,
+      data: job,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      success: false,
+      msg: error,
+    });
+  }
+};

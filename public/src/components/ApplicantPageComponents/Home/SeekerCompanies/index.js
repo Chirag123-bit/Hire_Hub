@@ -36,7 +36,11 @@ function Companies() {
       <CardsContainer>
         {ready ? (
           companies.map((company) => (
-            <CategoryCard>
+            <CategoryCard
+              onClick={(event) =>
+                (window.location.href = `/applicant/company/${company._id}`)
+              }
+            >
               <div className="box1">
                 <FcAdvertisment />
               </div>

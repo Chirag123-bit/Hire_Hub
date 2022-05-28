@@ -15,6 +15,7 @@ export const addNewJob = `${host}/api/job/addJob`;
 export const getCompanyJobs = `${host}/api/job/getCompanyJobs`;
 export const getAllJobs = `${host}/api/job/getAllJobs`;
 export const getSectorJob = `${host}/api/job/getSectorJob`;
+export const getJob = `${host}/api/job/getJob`;
 
 export const getCompanyData = `${host}/api/company/getCompanyData`;
 export const getAllCompanies = `${host}/api/company/getCompanies`;
