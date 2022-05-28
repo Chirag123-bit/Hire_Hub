@@ -86,7 +86,12 @@ function Categories({ white }) {
         <HContainer>
           {isTechReady ? (
             tech.map((company) => (
-              <CategoryCard white={white}>
+              <CategoryCard
+                white={white}
+                onClick={(event) =>
+                  (window.location.href = `/applicant/company/${company._id}`)
+                }
+              >
                 <ImageSection>
                   <CatImage src={company.avatarImage} alt="Backend" />
                 </ImageSection>
@@ -111,7 +116,12 @@ function Categories({ white }) {
         <HContainer>
           {isHealthReady ? (
             health.map((company) => (
-              <CategoryCard white={white}>
+              <CategoryCard
+                white={white}
+                onClick={(event) =>
+                  (window.location.href = `/applicant/company/${company._id}`)
+                }
+              >
                 <ImageSection>
                   <CatImage src={company.avatarImage} alt="Backend" />
                 </ImageSection>
@@ -137,7 +147,12 @@ function Categories({ white }) {
         <HContainer>
           {isEntReady ? (
             ent.map((company) => (
-              <CategoryCard white={white}>
+              <CategoryCard
+                white={white}
+                onClick={(event) =>
+                  (window.location.href = `/applicant/company/${company._id}`)
+                }
+              >
                 <ImageSection>
                   <CatImage src={company.avatarImage} alt="Backend" />
                 </ImageSection>
@@ -162,7 +177,12 @@ function Categories({ white }) {
         <HContainer style={{ marginBottom: "2rem" }}>
           {isRealReady ? (
             real.map((company) => (
-              <CategoryCard white={white}>
+              <CategoryCard
+                white={white}
+                onClick={(event) =>
+                  (window.location.href = `/applicant/company/${company._id}`)
+                }
+              >
                 <ImageSection>
                   <CatImage src={company.avatarImage} alt="Backend" />
                 </ImageSection>

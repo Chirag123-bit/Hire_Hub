@@ -11,11 +11,12 @@ export const emailVerify = `${host}/api/auth/verify`;
 export const sendVerification = `${host}/api/auth/sendVerification`;
 export const reSendVerification = `${host}/api/auth/reSendVerification`;
 
-export const getCompanyData = `${host}/api/company/getCompanyData`;
 export const addNewJob = `${host}/api/job/addJob`;
 export const getCompanyJobs = `${host}/api/job/getCompanyJobs`;
 export const getAllJobs = `${host}/api/job/getAllJobs`;
 export const getSectorJob = `${host}/api/job/getSectorJob`;
 
+export const getCompanyData = `${host}/api/company/getCompanyData`;
 export const getAllCompanies = `${host}/api/company/getCompanies`;
 export const getSectorCompany = `${host}/api/company/getSectorCompany`;
+export const getCompanyDetails = `${host}/api/company/getCompanyDetails`;

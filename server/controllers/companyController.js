@@ -50,3 +50,19 @@ module.exports.getCompaniesForSpecificSector = async (req, res, next) => {
     });
   }
 };
+
+module.exports.getCompanyDetails = async (req, res, next) => {
+  try {
+    const company = await companyModel.findById(req.query.id).populate("jobs");
+    console.log(company);
+    return res.status(200).json({
+      success: true,
+      data: company,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: error,
+    });
+  }
+};

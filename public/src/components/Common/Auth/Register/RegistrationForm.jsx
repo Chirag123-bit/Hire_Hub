@@ -121,6 +121,23 @@ class RegistrationForm extends Component {
         let workSet = stateData.workSet;
         let educationSet = stateData.educationSet;
 
+        console.log(
+          firstName,
+          lastName,
+          gender,
+          phone,
+          email,
+          type,
+          username,
+          password,
+          title,
+          skills,
+          sector,
+          summary,
+          workSet,
+          educationSet
+        );
+
         const { data } = await axios.post(registerRoute, {
           firstName,
           lastName,
