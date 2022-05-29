@@ -3,6 +3,7 @@ const router = new express.Router();
 const Job = require("../model/JobModel");
 const Company = require("../model/CompanyModel");
 const userModel = require("../model/userModel");
+const util = require("util");
 
 module.exports.addJob = async (req, res, next) => {
   try {
@@ -202,48 +203,51 @@ module.exports.applyForJob = async (req, res, next) => {
 
 module.exports.getCompanyJobDetail = async (req, res, next) => {
   try {
-    Company.findById(req.query.user)
-      .select("jobs")
-      .then((result) => {
-        const jobArray = result["jobs"];
-        Job.find({ _id: { $in: jobArray } })
-          .then((res) => {
-            res.forEach((jb) => {
-              jb.aggregate([
-                {
-                  $facet: {
-                    featured: [
-                      {
-                        $match: {
-                          "$applicants.status": "New",
-                        },
-                      },
-                    ],
-                    trending: [
-                      {
-                        $match: {
-                          trending: true,
-                        },
-                      },
-                    ],
-                  },
-                },
-              ]);
-              console.log(jb);
-            });
-          })
-          .catch((err) => {
-            return res.json({
-              success: false,
-              msg: err,
-            });
-          });
-      });
+    const result = await Company.findById(req.query.user).select("jobs");
+    // .populate("applicants.$applicant")
+    const jobArray = result["jobs"];
+    var op = [];
+    for (job_id in jobArray) {
+      const objId = jobArray[job_id];
+      var dat = await getReusableJobDetail(objId);
+      op.push({ [objId]: dat });
+    }
+    return res.json({
+      success: true,
+      data: op,
+    });
   } catch (error) {
+    console.log(error);
     return res.json({
       success: false,
       error: error,
       msg: error,
     });
   }
+};
+
+const getReusableJobDetail = async (job_id) => {
+  var res;
+  await Job.aggregate([
+    { $match: { _id: job_id } },
+    {
+      $lookup: {
+        from: "users",
+        localField: "applicants.applicant",
+        foreignField: "_id",
+        as: "user_detail",
+      },
+    },
+    { $unwind: "$applicants" },
+    {
+      $group: {
+        _id: "$applicants.status",
+        applicants: { $push: "$user_detail" },
+      },
+    },
+  ]).then((result) => {
+    res = result;
+    return result;
+  });
+  return res;
 };
