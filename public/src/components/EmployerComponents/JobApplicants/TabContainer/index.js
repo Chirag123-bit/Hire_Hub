@@ -1,11 +1,11 @@
 import React from "react";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import CandidateOverview from "../Candidates/CandidatesOverview";
 import Overview from "../Overview";
 import { Applicants } from "../Overview/Constants";
 import "./style.css";
-const TabsComponent = ({ isOpen }) => {
+const TabsComponent = ({ isOpen, selectedJob }) => {
   return (
     <Tabs style={{ backgroundColor: "#262b34" }}>
       <TabList>
@@ -14,10 +14,10 @@ const TabsComponent = ({ isOpen }) => {
       </TabList>
 
       <TabPanel className="OverviewContainerClass">
-        <Overview Applicants={Applicants} />
+        <Overview Applicants={Applicants} selectedJob={selectedJob} />
       </TabPanel>
       <TabPanel>
-        <CandidateOverview Applicants={Applicants} />
+        <CandidateOverview Applicants={Applicants} selectedJob={selectedJob} />
       </TabPanel>
     </Tabs>
   );

@@ -7,8 +7,13 @@ export const HeroContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: transparent;
-
+  background: radial-gradient(
+      111% 111% at 74.29% -11%,
+      #a93300 0%,
+      #005570 100%
+    ),
+    linear-gradient(127.43deg, #00d5c8 0%, #2200aa 100%);
+  background-blend-mode: difference, normal;
   @media screen and (max-width: 768px) {
     height: 1100px;
   }

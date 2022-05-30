@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Companies from "./ApplicantPageComponents/Home/SeekerCompanies";
 import SeekerHero from "./ApplicantPageComponents/Home/SeekerHero";
 import SeekerJob from "./ApplicantPageComponents/Home/SeekerJob";

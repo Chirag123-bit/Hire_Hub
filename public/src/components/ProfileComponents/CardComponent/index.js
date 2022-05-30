@@ -1,34 +1,33 @@
 import React from "react";
-import {
-  Card,
-  ContentHolder,
-  ImageContainer,
-  IntroContainer,
-  IntroTextHolder,
-  Name,
-  Title,
-  SkillHolder,
-  Skill,
-  Info,
-  InfoHolder,
-  IconHolder,
-} from "./Components";
-import ReactRoundedImage from "react-rounded-image";
-
-import Profile from "../../../images/profile.jpg";
-import { MdOutlineEmail } from "react-icons/md";
 import { GrLocation } from "react-icons/gr";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import { IoSchoolOutline } from "react-icons/io5";
+import { MdOutlineEmail } from "react-icons/md";
+import ReactRoundedImage from "react-rounded-image";
+import {
+  Card,
+  ContentHolder,
+  IconHolder,
+  ImageContainer,
+  Info,
+  InfoHolder,
+  IntroContainer,
+  IntroTextHolder,
+  Name,
+  Skill,
+  SkillHolder,
+  Title,
+} from "./Components";
 
-function ProfileCard() {
+function ProfileCard({ user }) {
+  console.log(user);
   return (
     <Card>
       <ContentHolder>
         <IntroContainer>
           <ImageContainer>
             <ReactRoundedImage
-              image={Profile}
+              image={user.avatarImage}
               roundedColor="rgb(4,93,233)"
               imageWidth="150"
               imageHeight="150"
@@ -38,21 +37,24 @@ function ProfileCard() {
           </ImageContainer>
           <IntroTextHolder>
             <Name>
-              Chirag <br /> Simkhada
+              {user.firstName} {user.lastName}
             </Name>
-            <Title>Backend Developer</Title>
+            <Title>{user.professional.title}</Title>
           </IntroTextHolder>
         </IntroContainer>
 
         <SkillHolder>
-          <Skill>Python</Skill>
+          {user.professional.skills.map((skill) => (
+            <Skill key={skill}>{skill}</Skill>
+          ))}
+          {/* <Skill>Python</Skill>
           <Skill>Django</Skill>
           <Skill>React</Skill>
           <Skill>HTML</Skill>
           <Skill>CSS</Skill>
           <Skill>JavaScript</Skill>
           <Skill>Node</Skill>
-          <Skill>Java</Skill>
+          <Skill>Java</Skill> */}
         </SkillHolder>
 
         <InfoHolder>
@@ -60,7 +62,7 @@ function ProfileCard() {
             <IconHolder>
               <MdOutlineEmail />
             </IconHolder>
-            chiragsimkhada@gmail.com
+            {user.email}
           </Info>
           <Info>
             <IconHolder>
@@ -78,7 +80,7 @@ function ProfileCard() {
             <IconHolder>
               <IoSchoolOutline />
             </IconHolder>
-            Information Technology
+            {user.professional.sector}
           </Info>
         </InfoHolder>
       </ContentHolder>

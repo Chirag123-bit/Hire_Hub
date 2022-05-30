@@ -201,16 +201,103 @@ module.exports.applyForJob = async (req, res, next) => {
   }
 };
 
+// module.exports.getCompanyJobDetail = async (req, res, next) => {
+//   try {
+//     const result = await Company.findById(req.query.user).select("jobs");
+//     // .populate("applicants.$applicant")
+//     const jobArray = result["jobs"];
+//     var op = [];
+//     for (job_id in jobArray) {
+//       const objId = jobArray[job_id];
+//       var dat = await getReusableJobDetail(objId);
+//       var jobData = await Job.findById(objId);
+//       op.push({ data: dat, job: jobData });
+//     }
+//     return res.json({
+//       success: true,
+//       data: op,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     return res.json({
+//       success: false,
+//       error: error,
+//       msg: error,
+//     });
+//   }
+// };
+
+const getReusableJobDetail = async (job_id) => {
+  var res;
+  // const Jobs = await Job.findById(job_id).populate({
+  //   path: "applicants",
+  //   populate: {
+  //     path: "applicant",
+  //     model: "Users",
+  //   },
+  // });
+  // console.log(Jobs);
+  await Job.aggregate([
+    { $match: { _id: job_id } },
+    {
+      $lookup: {
+        from: "users",
+        localField: "applicants.applicant",
+        foreignField: "_id",
+        as: "user_detail",
+      },
+    },
+
+    { $unwind: "$applicants" },
+    {
+      $group: {
+        _id: {
+          status: "$applicants.status",
+        },
+
+        data: { $push: "$user_detail" },
+      },
+    },
+  ]).then((result) => {
+    res = result;
+    return result;
+  });
+  return res;
+};
+
+const getReusableJobDetail1 = async (job_id) => {
+  // const Jobs = await Job.findById(job_id).populate({
+  //   path: "applicants",
+  //   populate: {
+  //     path: "applicant",
+  //     model: "Users",
+  //   },
+  // });
+  // console.log(Jobs);
+  const Jobs = await Job.findById(job_id).populate({
+    path: "applicants",
+    populate: {
+      path: "applicant",
+      model: "Users",
+    },
+  });
+  console.log(Jobs);
+
+  return Jobs;
+};
+
 module.exports.getCompanyJobDetail = async (req, res, next) => {
+  var op = [];
+
   try {
     const result = await Company.findById(req.query.user).select("jobs");
-    // .populate("applicants.$applicant")
+
+    //get details of all the jobs
     const jobArray = result["jobs"];
-    var op = [];
     for (job_id in jobArray) {
       const objId = jobArray[job_id];
-      var dat = await getReusableJobDetail(objId);
-      op.push({ [objId]: dat });
+      var dat = await getReusableJobDetail1(objId);
+      op.push({ data: dat });
     }
     return res.json({
       success: true,
@@ -226,28 +313,35 @@ module.exports.getCompanyJobDetail = async (req, res, next) => {
   }
 };
 
-const getReusableJobDetail = async (job_id) => {
-  var res;
-  await Job.aggregate([
-    { $match: { _id: job_id } },
-    {
-      $lookup: {
-        from: "users",
-        localField: "applicants.applicant",
-        foreignField: "_id",
-        as: "user_detail",
-      },
-    },
-    { $unwind: "$applicants" },
-    {
-      $group: {
-        _id: "$applicants.status",
-        applicants: { $push: "$user_detail" },
-      },
-    },
-  ]).then((result) => {
-    res = result;
-    return result;
-  });
-  return res;
+module.exports.updateJobStatus = async (req, res, next) => {
+  try {
+    const { job_id, user_id, status } = req.body;
+    const job = await Job.findById(job_id);
+    const user = await userModel.findById(user_id);
+
+    if (job.applicants) {
+      job.applicants.forEach((applicant) => {
+        if (applicant.applicant == user_id) {
+          applicant.status = status;
+          user.appliedJobs.forEach((appliedJob) => {
+            if (appliedJob.job == job_id) {
+              appliedJob.status = status;
+            }
+          });
+        }
+      });
+    }
+    job.save();
+    user.save();
+    return res.json({
+      success: true,
+      msg: "Job Status Updated Successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      success: false,
+      msg: error,
+    });
+  }
 };

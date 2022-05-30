@@ -6,6 +6,7 @@ const {
   getJob,
   applyForJob,
   getCompanyJobDetail,
+  updateJobStatus,
 } = require("../controllers/jobController");
 
 const router = require("express").Router();
@@ -17,5 +18,6 @@ router.get("/getAllJobs", getAllJobs);
 router.get("/getSectorJob", getJobsForSpecificSector);
 router.get("/getJob", getJob);
 router.post("/applyForJob", applyForJob);
+router.post("/updateJobStatus", updateJobStatus);
 
 module.exports = router;

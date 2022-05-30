@@ -1,23 +1,36 @@
+import axios from "axios";
+import _ from "lodash";
+import Moment from "moment";
 import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import _ from "lodash";
-import "./style.css";
 import ReactRoundedImage from "react-rounded-image";
-import Profile from "../../../../images/profile.jpg";
+import { toast } from "react-toastify";
+import { updateJobStatus } from "../../../../utils/APIRoutes";
 import { ApplicantModal } from "../Candidates/Modal/modal";
+import "./style.css";
 
-function Overview({ Applicants }) {
+function Overview({ selectedJob }) {
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "dark",
+  };
   const [showModal, setShowModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState({});
+  const [appliedDate, setAppliedDate] = useState({});
 
-  const openModal = (id) => {
+  const openModal = (applicant) => {
+    setSelectedUser(applicant);
     setShowModal((prev) => !prev);
   };
 
   const closeModel = () => {
     setShowModal(false);
   };
-  const [state, setState] = useState(Applicants);
-  const handleDragEnd = ({ destination, source }) => {
+  const [state, setState] = useState(selectedJob.applicants);
+  const handleDragEnd = async ({ destination, source }) => {
     if (!destination) {
       return;
     }
@@ -27,23 +40,38 @@ function Overview({ Applicants }) {
     ) {
       return;
     }
-    const itemCopy = { ...state[source.droppableId].items[source.index] };
+    const itemCopy = { ...state[source.droppableId][source.index] };
+    const user_id = itemCopy.applicant._id;
+    const status = destination.droppableId;
+    const job_id = selectedJob.job._id;
+    axios
+      .post(updateJobStatus, {
+        job_id,
+        user_id,
+        status,
+      })
+      .then((rest) => {
+        if (rest.data.success) {
+          toast.success(rest.data.msg, toastOptions);
+          const newState = [...state];
+          newState[source.droppableId][source.index].status = status;
+          setState(newState);
+        } else {
+          toast.error(rest.data.msg, toastOptions);
+        }
+      });
     setState((prev) => {
       prev = { ...prev };
-      prev[source.droppableId].items.splice(source.index, 1);
+      prev[source.droppableId].splice(source.index, 1);
 
-      prev[destination.droppableId].items.splice(
-        destination.index,
-        0,
-        itemCopy
-      );
-
+      prev[destination.droppableId].splice(destination.index, 0, itemCopy);
       return prev;
     });
   };
   return (
     <DragDropContext onDragEnd={handleDragEnd} className="d-flex">
       {_.map(state, (data, key) => {
+        // console.log(data);
         return (
           <div className={"column"} key="key">
             <div className="d-flex align-items-center text-center justify-content-center">
@@ -52,7 +80,7 @@ function Overview({ Applicants }) {
                 className="text-capitalize mb-0 text-center"
                 style={{ color: "#ccc" }}
               >
-                {data.title}
+                {key}
               </h6>
               <span
                 className="rounded  px-2 py-1 d-inline-flex align-items-center justify-content-center"
@@ -61,7 +89,7 @@ function Overview({ Applicants }) {
                   color: "#6c757d!important",
                 }}
               >
-                {data.items.length}
+                {data.length}
               </span>
             </div>
             <Droppable droppableId={key}>
@@ -72,12 +100,13 @@ function Overview({ Applicants }) {
                     {...provided.droppableProps}
                     className={"droppable-col"}
                   >
-                    {data.items.map((el, index) => {
+                    {data.map((el, index) => {
+                      // console.log(el, index);
                       return (
                         <Draggable
-                          key={el.username}
+                          key={el._id}
                           index={index}
-                          draggableId={el.username}
+                          draggableId={el.applicant._id}
                         >
                           {(provided) => {
                             return (
@@ -89,13 +118,20 @@ function Overview({ Applicants }) {
                               >
                                 <div
                                   className="card-body-drag"
-                                  id={el.username + "div"}
-                                  onClick={() => openModal(el.username)}
+                                  id={el._id + "div"}
+                                  onClick={() => {
+                                    setAppliedDate(
+                                      Moment(el.appliedDate).format(
+                                        "MMM Do YYYY"
+                                      )
+                                    );
+                                    openModal(el.applicant);
+                                  }}
                                 >
                                   <div className="d-flex align-items-center justify-content-around">
                                     <div className="mr-2 avatars-w-50">
                                       <ReactRoundedImage
-                                        image={Profile}
+                                        image={el.applicant.avatarImage}
                                         roundedColor="rgb(4,93,233)"
                                         imageWidth="30"
                                         imageHeight="30"
@@ -105,10 +141,11 @@ function Overview({ Applicants }) {
                                     </div>
                                     <div>
                                       <p className="mb-0 text-primary">
-                                        {el.full_name}
+                                        {el.applicant.firstName}{" "}
+                                        {el.applicant.firstLame}
                                       </p>
                                       <small className="text-muted">
-                                        {el.email}
+                                        {el.applicant.email}
                                       </small>
                                     </div>
                                   </div>
@@ -128,7 +165,12 @@ function Overview({ Applicants }) {
         );
       })}
       {showModal && (
-        <ApplicantModal showModal={showModal} setShowModal={closeModel} />
+        <ApplicantModal
+          showModal={showModal}
+          setShowModal={closeModel}
+          selectedUser={selectedUser}
+          appliedDate={appliedDate}
+        />
       )}
     </DragDropContext>
   );

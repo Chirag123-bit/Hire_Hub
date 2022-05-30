@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { FcAdvertising } from "react-icons/fc";
+import styled from "styled-components";
 
 export const SolutionsContainer = styled.div`
   height: 700px;
@@ -11,7 +11,15 @@ export const SolutionsContainer = styled.div`
   /* background: #010606;
   background-color: rgb(246, 246, 253); */
   padding: 5rem 0;
-  background: transparent;
+  /* background: linear-gradient(
+      42.52deg,
+      rgba(255, 77, 0, 0.5) 14.06%,
+      rgba(0, 117, 255, 0.5) 96.79%
+    ),
+    radial-gradient(82.5% 115.5% at 23.57% 109.25%, #c4fffb 0%, #3300ff 100%),
+    radial-gradient(70.71% 99% at 100% 39.75%, #d50d00 0%, #520027 100%),
+    radial-gradient(80.18% 112.25% at 29.46% -2.5%, #00d5c8 0%, #2200aa 100%);
+  background-blend-mode: soft-light, difference, difference, normal; */
   @media screen and (max-width: 768px) {
     height: 1100px;
   }

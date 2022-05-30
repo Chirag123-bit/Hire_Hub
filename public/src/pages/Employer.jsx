@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Candidates from "../components/EmployerComponents/Candidates";
 import Careers from "../components/EmployerComponents/Career";
@@ -7,6 +8,7 @@ import Sidebar from "../components/EmployerComponents/Common/Sidebar";
 import Dashboard from "../components/EmployerComponents/Dashboard";
 import JobApplicants from "../components/EmployerComponents/JobApplicants";
 import { Applicants } from "../components/EmployerComponents/JobApplicants/Overview/Constants";
+import { getCompanyJobDetail } from "../utils/APIRoutes";
 import "./Employer.css";
 
 export default function Employer() {
@@ -23,6 +25,58 @@ export default function Employer() {
     theme: "dark",
   };
 
+  const [loading, setLoading] = useState(true);
+  var [jobInfo, setJobInfo] = useState([]);
+  const [selectedJob, setSelectedJob] = useState([]);
+
+  useEffect(() => {
+    if (loading)
+      axios
+        .get(getCompanyJobDetail, {
+          params: {
+            user: com._id,
+          },
+        })
+        .then((result) => {
+          // console.log(result.data.data);
+          for (var info in result.data.data) {
+            var comp = result.data.data[info].data;
+            var applicants = {};
+            //filter new applicants
+            applicants.New = comp.applicants.filter(
+              (applicant) => applicant.status === "New"
+            );
+            applicants.Shortlist = comp.applicants.filter(
+              (applicant) => applicant.status === "Shortlist"
+            );
+            applicants.Interview = comp.applicants.filter(
+              (applicant) => applicant.status === "Interview"
+            );
+            applicants.Negotiation = comp.applicants.filter(
+              (applicant) => applicant.status === "Negotiation"
+            );
+            applicants.TaskPhase = comp.applicants.filter(
+              (applicant) => applicant.status === "Task Phase"
+            );
+            applicants.Hired = comp.applicants.filter(
+              (applicant) => applicant.status === "Hired"
+            );
+            applicants.Disqualified = comp.applicants.filter(
+              (applicant) => applicant.status === "Disqualified"
+            );
+            applicants.Rejected = comp.applicants.filter(
+              (applicant) => applicant.status === "Rejected"
+            );
+            setJobInfo((oldArray) => [
+              ...oldArray,
+              { job: comp, applicants: applicants },
+            ]);
+          }
+          setLoading(false);
+          // setSelectedJob(jobInfo[0]);
+        });
+  }, []);
+
   // useEffect(() => {
   // if (localStorage.getItem("company") === null) {
   //   navigate("/auth/login");
@@ -34,7 +88,7 @@ export default function Employer() {
   // if (data.status === false) {
   //   toast.error(data.msg, toastOptions);
   // } else {
-  //   com = data.data;
+  // com = data.data;
   // }
   // }, []);
 
@@ -53,19 +107,29 @@ export default function Employer() {
   return (
     <>
       <div className="main-container">
-        <Navbar user={cu} company={com} />
+        <Navbar user={cu} company={com} loading={loading} jobInfo={jobInfo} />
         <Sidebar isOpen={isOpen} toggle={toggle} />
 
         <Routes>
           <Route
             path="/dashboard"
             element={
-              <Dashboard id="dashboard" isOpen={isOpen} company={com._id} />
+              <Dashboard
+                id="dashboard"
+                isOpen={isOpen}
+                // company={com._id}
+                loading={loading}
+                jobInfo={jobInfo}
+                company={com}
+                setSelectedJob={setSelectedJob}
+              />
             }
           />
           <Route
-            path="/dashboard/job-post/:id"
-            element={<JobApplicants isOpen={isOpen} />}
+            path="/dashboard/job-post/"
+            element={
+              <JobApplicants isOpen={isOpen} selectedJob={selectedJob} />
+            }
           />
           <Route
             path="/candidates"

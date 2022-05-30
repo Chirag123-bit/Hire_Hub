@@ -41,12 +41,16 @@ export const IntroTextHolder = styled.div`
   justify-content: center;
 `;
 
-export const Name = styled.h2`
+export const Name = styled.p`
   color: #045de9;
+  font-size: 2rem;
+  margin-bottom: 0;
 `;
 
-export const Title = styled.h4`
+export const Title = styled.p`
+  font-size: 1.2rem;
   color: #98a0be;
+  margin-top: 0;
 `;
 
 export const SkillHolder = styled.ul`
@@ -72,8 +76,6 @@ export const InfoHolder = styled.div`
   flex-direction: column;
   justify-content: space-between;
   text-align: left;
-
-  margin: auto;
 `;
 
 export const Info = styled.h5`

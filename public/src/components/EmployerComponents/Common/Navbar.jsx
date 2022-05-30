@@ -4,7 +4,10 @@ import { IoNotifications } from "react-icons/io5";
 import { MdOutlineLightMode } from "react-icons/md";
 import ReactRoundedImage from "react-rounded-image";
 
-function Navbar({ user, company }) {
+function Navbar({ user, company, loading, jobInfo }) {
+  if (!loading) {
+    console.log(jobInfo);
+  }
   return (
     <div className="navBar">
       <div className="navBarContainer">
