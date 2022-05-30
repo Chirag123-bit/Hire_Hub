@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSpring } from "react-spring";
+import { v4 as uuid } from "uuid";
 import { getAllCompanies } from "../../../../utils/APIRoutes";
 import {
   ColoredSlogan,
@@ -13,6 +15,14 @@ import {
   SolutionsContainer,
 } from "./ComapnyElements";
 
+const calc = (x, y) => [
+  -(y - window.innerHeight / 2) / 20,
+  (x - window.innerWidth / 2) / 20,
+  1,
+];
+const trans = (x, y, s) =>
+  `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
+
 function Companies() {
   var [ready, setIsReady] = useState(false);
   var [companies, setCompanies] = useState([]);
@@ -24,6 +34,11 @@ function Companies() {
       console.log(companies);
     });
   }, []);
+
+  const [props, set] = useSpring(() => ({
+    xys: [0, 0, 1],
+    config: { mass: 10, tension: 200, friction: 50 },
+  }));
 
   return (
     <SolutionsContainer>
@@ -37,14 +52,20 @@ function Companies() {
         {ready ? (
           companies.map((company) => (
             <CategoryCard
-              onClick={(event) =>
-                (window.location.href = `/applicant/company/${company._id}`)
-              }
+              // onClick={(event) =>
+              //   (window.location.href = `/applicant/company/${company._id}`)
+              // }
+              // onMouseMove={({ clientX: x, clientY: y }) =>
+              //   set({ xys: calc(x, y) })
+              // }
+              // onMouseLeave={() => set({ xys: [0, 0, 1] })}
+              // style={{ transform: props.xys.interpolate(trans) }}
+              id={uuid()}
             >
-              <div className="box1">
+              <div className="box1" id={uuid()}>
                 <FcAdvertisment />
               </div>
-              <div className="box2">
+              <div className="box2" id={uuid()}>
                 <h6>{company.name}</h6>
                 <p>
                   {company.region}, {company.country}

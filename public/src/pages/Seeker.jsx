@@ -19,16 +19,17 @@ export default function Seeker() {
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <SeekerNav toggle={toggle} />
-
-      <Routes>
-        <Route path="/home" element={<ApplicantHome id="home" />} />
-        <Route path="/category" element={<SeekerCategory />} />
-        <Route path="/company" element={<SeekerCompany />} />
-        <Route path="/company/:id" element={<Careers />} />
-        <Route path="/jobs" element={<SeekerJobs />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/job/:id" element={<JobDescription />} />
-      </Routes>
+      <div className="seeker-gradient">
+        <Routes>
+          <Route path="/home" element={<ApplicantHome id="home" />} />
+          <Route path="/category" element={<SeekerCategory />} />
+          <Route path="/company" element={<SeekerCompany />} />
+          <Route path="/company/:id" element={<Careers />} />
+          <Route path="/jobs" element={<SeekerJobs />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/job/:id" element={<JobDescription />} />
+        </Routes>
+      </div>
 
       <Footer />
     </>

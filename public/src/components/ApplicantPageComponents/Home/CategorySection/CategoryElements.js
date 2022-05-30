@@ -6,7 +6,7 @@ export const CategoryContainer = styled.div`
   /* justify-content: space-between; */
 
   min-height: 400px;
-  background-color: ${({ white }) => (white ? "#FFFEFE" : "#F6F6FD")};
+  /* background-color: ${({ white }) => (white ? "#FFFEFE" : "#F6F6FD")}; */
 `;
 
 export const ContentHolder = styled.div`

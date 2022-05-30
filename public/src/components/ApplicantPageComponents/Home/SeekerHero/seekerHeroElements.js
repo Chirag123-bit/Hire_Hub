@@ -7,13 +7,13 @@ export const HeroContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(
-      111% 111% at 74.29% -11%,
-      #a93300 0%,
-      #005570 100%
-    ),
-    linear-gradient(127.43deg, #00d5c8 0%, #2200aa 100%);
-  background-blend-mode: difference, normal;
+  /* background: radial-gradient(50% 123.47% at 50% 50%, #00ff94 0%, #720059 100%),
+    linear-gradient(121.28deg, #669600 0%, #ff0000 100%),
+    linear-gradient(360deg, #0029ff 0%, #8fff00 100%),
+    radial-gradient(100% 164.72% at 100% 100%, #6100ff 0%, #00ff57 100%),
+    radial-gradient(100% 148.07% at 0% 0%, #fff500 0%, #51d500 100%);
+  background-blend-mode: screen, color-dodge, overlay, difference, normal; */
+
   @media screen and (max-width: 768px) {
     height: 1100px;
   }
@@ -45,13 +45,14 @@ export const Slogan = styled.h1`
   width: 81%;
   margin: auto;
   line-height: 3.2rem;
+  color: white;
 `;
 export const ColoredSlogan = styled.span`
   color: #423edd;
 `;
 
 export const SloganSubtext = styled.h6`
-  color: gray;
+  /* color: gray; */
   text-align: center;
 `;
 

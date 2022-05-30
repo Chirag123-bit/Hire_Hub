@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
+import styled from "styled-components";
 
 export const SolutionsContainer = styled.div`
   height: 700px;
@@ -30,14 +30,14 @@ export const CardsContainer = styled.div`
   width: 75%;
   margin: 1rem 0;
   padding: 1rem 0;
-  border-radius: 1.2rem;
-  cursor: pointer;
 `;
 export const FcAdvertisment = styled(FcGoogle)`
   font-size: 3rem;
   cursor: pointer;
 `;
 export const CategoryCard = styled(CardsContainer)`
+  border-radius: 1.2rem;
+
   display: grid;
   grid-template-columns: [image-row] 1fr [context] 3fr;
   width: 30%;

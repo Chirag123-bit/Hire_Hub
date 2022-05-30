@@ -1,4 +1,5 @@
 import { FcAdvertising } from "react-icons/fc";
+import { animated } from "react-spring";
 import styled from "styled-components";
 
 export const SolutionsContainer = styled.div`
@@ -8,18 +9,8 @@ export const SolutionsContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background: #010606;
-  background-color: rgb(246, 246, 253); */
   padding: 5rem 0;
-  /* background: linear-gradient(
-      42.52deg,
-      rgba(255, 77, 0, 0.5) 14.06%,
-      rgba(0, 117, 255, 0.5) 96.79%
-    ),
-    radial-gradient(82.5% 115.5% at 23.57% 109.25%, #c4fffb 0%, #3300ff 100%),
-    radial-gradient(70.71% 99% at 100% 39.75%, #d50d00 0%, #520027 100%),
-    radial-gradient(80.18% 112.25% at 29.46% -2.5%, #00d5c8 0%, #2200aa 100%);
-  background-blend-mode: soft-light, difference, difference, normal; */
+
   @media screen and (max-width: 768px) {
     height: 1100px;
   }
@@ -39,12 +30,13 @@ export const CardsContainer = styled.div`
   padding: 1rem 0;
   border-radius: 1.2rem;
   cursor: pointer;
+  font-family: "Source Sans Pro", sans-serif;
 `;
 export const FcAdvertisment = styled(FcAdvertising)`
   font-size: 3rem;
   cursor: pointer;
 `;
-export const CategoryCard = styled(CardsContainer)`
+export const CategoryCard = styled(animated.div)`
   display: grid;
   grid-template-columns: [image-row] 1fr [context] 3fr;
   width: 30%;
@@ -56,11 +48,16 @@ export const CategoryCard = styled(CardsContainer)`
   padding-left: 0;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.32);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(4.4px);
-  -webkit-backdrop-filter: blur(4.4px);
+  /* background: rgba(255, 255, 255, 0.32); */
+  background: #c7d2fe66;
+  border: 0.1px solid transparent;
+  border-radius: 10px;
+  z-index: 1;
+  position: relative;
+  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+  backdrop-filter: blur(10px);
+
+  background-clip: border-box;
 
   .box1 {
     grid-column-start: image-row;
@@ -85,7 +82,7 @@ export const CategoryCard = styled(CardsContainer)`
       background: transparent;
     }
   }
-  &:hover {
+  /* &:hover {
     transition: all 0.2s ease-in-out;
     background-color: #423edd;
     .box2 {
@@ -102,5 +99,5 @@ export const CategoryCard = styled(CardsContainer)`
         fill: rgb(255, 254, 254);
       }
     }
-  }
+  } */
 `;
