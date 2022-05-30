@@ -1,10 +1,9 @@
 import { motion } from "framer-motion";
-import _ from "lodash";
+import Moment from "moment";
 import React, { useState } from "react";
 import Badge from "react-bootstrap/Badge";
 import Table from "react-bootstrap/Table";
 import ReactRoundedImage from "react-rounded-image";
-import Profile from "../../../images/profile.jpg";
 import {
   ActionsDropDown,
   DropBtn,
@@ -44,9 +43,13 @@ function getStatus(st) {
   }
 }
 
-function Candidates({ Applicants, isOpen }) {
+function Candidates({ Applicants, isOpen, jobInfo }) {
+  console.log(jobInfo);
+  const [selectedUser, setSelectedUser] = useState({});
+  const [appliedDate, setAppliedDate] = useState({});
   const [showModal, setShowModal] = useState(false);
-  const openModal = () => {
+  const openModal = (applicant) => {
+    setSelectedUser(applicant);
     setShowModal((prev) => !prev);
   };
 
@@ -63,7 +66,117 @@ function Candidates({ Applicants, isOpen }) {
         transition: { duration: 0.5, type: "spring", damping: 10 },
       }}
     >
-      <Title className="mb-0">Complete Details of Applicants</Title>
+      {jobInfo.map((job) => {
+        return (
+          <div>
+            <Title className="mb-0">
+              Candidates of{" "}
+              <span style={{ color: "#045DE9" }}>{job.job.title}</span>
+            </Title>
+            <div>
+              <Table style={{ color: "#ccc" }}>
+                <thead>
+                  <tr>
+                    <th style={{ width: "max-content !important" }}>Profile</th>
+                    <th>Status</th>
+                    <th>Current Stage</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {job.job.applicants.map((jb) => {
+                    return (
+                      <tr>
+                        <td>
+                          <div
+                            className="d-flex align-items-center justify-content-around"
+                            style={{ width: "80%", margin: "auto" }}
+                          >
+                            <div className="avatars-w-50">
+                              <ReactRoundedImage
+                                image={jb.applicant.avatarImage}
+                                roundedColor="rgb(4,93,233)"
+                                imageWidth="40"
+                                imageHeight="40"
+                                roundedSize="0"
+                                hoverColor="#DD1144"
+                              />
+                            </div>
+                            <div>
+                              <p className="mb-0 text-primary text-left">
+                                {jb.applicant.firstName} {jb.applicant.lastName}
+                              </p>
+                              <small className="text-muted text-left">
+                                {jb.applicant.email}
+                              </small>
+                            </div>
+                          </div>
+                        </td>
+                        <td>{getStatus(jb.status)}</td>
+                        <td>{jb.applicant.professional.title}</td>
+                        <td>
+                          {" "}
+                          <JobInfoSide className="dropdown options-dropdown">
+                            <DropBtn
+                              type="button"
+                              data-toggle="dropdown"
+                              class="btn-option btn d-flex align-items-center justify-content-center"
+                              aria-expanded="false"
+                            >
+                              <ThreeDots />
+                            </DropBtn>
+                            <ActionsDropDown className="dropdown-menu dropdown-menu-right py-2 mt-1">
+                              <DropLink
+                                href="#"
+                                class="dropdown-item px-4 py-2"
+                                onClick={() => {
+                                  setAppliedDate(
+                                    Moment(jb.appliedDate).format("MMM Do YYYY")
+                                  );
+                                  openModal(jb.applicant);
+                                }}
+                              >
+                                View Candidate
+                              </DropLink>
+                              <DropLink
+                                href="#"
+                                class="dropdown-item px-4 py-2"
+                              >
+                                Hire
+                              </DropLink>
+                              <DropLink
+                                href="#"
+                                class="dropdown-item px-4 py-2"
+                              >
+                                Disqualify
+                              </DropLink>
+                              <DropLink
+                                href="#"
+                                class="dropdown-item px-4 py-2"
+                              >
+                                Delete
+                              </DropLink>
+                            </ActionsDropDown>
+                          </JobInfoSide>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+              {showModal && (
+                <ApplicantModal
+                  showModal={showModal}
+                  setShowModal={closeModel}
+                  selectedUser={selectedUser}
+                  appliedDate={appliedDate}
+                />
+              )}
+            </div>
+          </div>
+        );
+      })}
+      {/* <Title className="mb-0">Complete Details of Applicants</Title>
       <Table
         style={{
           color: "#ccc",
@@ -151,9 +264,14 @@ function Candidates({ Applicants, isOpen }) {
             }
           })}
         </tbody>
-      </Table>
+      </Table> */}
       {showModal && (
-        <ApplicantModal showModal={showModal} setShowModal={closeModel} />
+        <ApplicantModal
+          showModal={showModal}
+          setShowModal={closeModel}
+          selectedUser={selectedUser}
+          appliedDate={appliedDate}
+        />
       )}
     </motion.div>
   );

@@ -138,6 +138,7 @@ export default function Employer() {
                 id="dashboard"
                 isOpen={isOpen}
                 Applicants={Applicants}
+                jobInfo={jobInfo}
               />
             }
           />
