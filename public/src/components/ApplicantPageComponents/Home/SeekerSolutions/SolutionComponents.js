@@ -1,9 +1,7 @@
 import { FcAdvertising } from "react-icons/fc";
-import { animated } from "react-spring";
 import styled from "styled-components";
 
 export const SolutionsContainer = styled.div`
-  height: 700px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -29,27 +27,25 @@ export const CardsContainer = styled.div`
   margin: 1rem 0;
   padding: 1rem 0;
   border-radius: 1.2rem;
-  cursor: pointer;
   font-family: "Source Sans Pro", sans-serif;
 `;
 export const FcAdvertisment = styled(FcAdvertising)`
   font-size: 3rem;
   cursor: pointer;
 `;
-export const CategoryCard = styled(animated.div)`
-  display: grid;
-  grid-template-columns: [image-row] 1fr [context] 3fr;
+export const CategoryCard = styled.div`
   width: 30%;
   justify-content: space-between;
-  /* background-color: white; */
-  padding: 1.5rem 2rem;
+
+  padding: 1.5rem;
   text-align: center;
   margin: 1rem 0;
-  padding-left: 0;
+  /* padding-left: 0; */
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   /* background: rgba(255, 255, 255, 0.32); */
-  background: #c7d2fe66;
+  background: rgba(255, 255, 255, 0.2);
+  /* background: #c7d2fe66; */
   border: 0.1px solid transparent;
   border-radius: 10px;
   z-index: 1;
@@ -59,27 +55,40 @@ export const CategoryCard = styled(animated.div)`
 
   background-clip: border-box;
 
+  &:hover {
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.1);
+    background: rgba(0, 0, 0, 0.2);
+    color: whitesmoke;
+  }
+
   .box1 {
     grid-column-start: image-row;
+    width: max-content;
+    margin: auto;
     /* From https://css.glass */
     background: transparent;
-    transition: all 0.2s ease-in-out;
+    /* transition: all 0.2s ease-in-out; */
   }
   .box2 {
     grid-column-start: context;
     /* From https://css.glass */
     background: transparent;
-
+    width: max-content;
+    margin: auto;
     p {
       /* From https://css.glass */
       background: transparent;
 
       font-size: 14px;
-      margin: 0;
+      width: max-content;
+      margin: auto;
     }
     h6 {
       /* From https://css.glass */
       background: transparent;
+      width: max-content;
+      margin: auto;
     }
   }
   /* &:hover {
