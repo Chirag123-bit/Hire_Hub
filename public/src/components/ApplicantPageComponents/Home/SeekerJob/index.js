@@ -20,7 +20,6 @@ import {
   Sallary,
   TitleHolder,
 } from "./JobElements";
-import ParticleBackground from "./ParticleBackground";
 import "./style.css";
 
 function SeekerJob() {
@@ -35,7 +34,7 @@ function SeekerJob() {
   }, []);
   return (
     <JobsContainer>
-      <ParticleBackground />
+      {/* <ParticleBackground /> */}
       <ContentHolder>
         <TitleHolder>
           <Slogan>

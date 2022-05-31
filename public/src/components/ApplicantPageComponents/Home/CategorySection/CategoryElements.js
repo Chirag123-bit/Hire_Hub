@@ -6,14 +6,16 @@ export const CategoryContainer = styled.div`
   /* justify-content: space-between; */
 
   min-height: 400px;
-  /* background-color: ${({ white }) => (white ? "#FFFEFE" : "#F6F6FD")}; */
+  backdrop-filter: blur(100px);
 `;
 
 export const ContentHolder = styled.div`
   width: 90%;
   margin: auto;
 `;
-
+export const ColoredSlogan = styled.span`
+  color: whitesmoke;
+`;
 export const TitleContainer = styled.div`
   margin: 1rem;
   text-align: left;
@@ -33,7 +35,8 @@ export const HContainer = styled.div`
 export const CategoryCard = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${({ white }) => (white ? "#F6F6FD" : "#FFFEFE")};
+  background: rgba(255, 255, 255, 0.2);
+  border: 0.1px solid transparent;
 
   padding: 2rem 3rem;
   text-align: center;
@@ -41,6 +44,14 @@ export const CategoryCard = styled.div`
   width: 30%;
   border-radius: 10px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.1);
+    background: rgba(0, 0, 0, 0.2);
+    color: whitesmoke;
+  }
 `;
 
 export const ImageSection = styled.div`

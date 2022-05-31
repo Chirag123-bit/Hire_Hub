@@ -8,6 +8,7 @@ export const SolutionsContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 5rem 0;
+  backdrop-filter: blur(100px);
 
   @media screen and (max-width: 768px) {
     height: 1100px;
@@ -43,15 +44,13 @@ export const CategoryCard = styled.div`
   /* padding-left: 0; */
   transition: all 0.2s ease-in-out;
   cursor: pointer;
-  /* background: rgba(255, 255, 255, 0.32); */
   background: rgba(255, 255, 255, 0.2);
-  /* background: #c7d2fe66; */
   border: 0.1px solid transparent;
   border-radius: 10px;
   z-index: 1;
   position: relative;
   /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(100px);
 
   background-clip: border-box;
 

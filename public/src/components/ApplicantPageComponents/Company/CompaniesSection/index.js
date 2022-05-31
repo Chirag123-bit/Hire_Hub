@@ -80,7 +80,10 @@ function Categories({ white }) {
       <ContentHolder>
         <TitleContainer>
           <Title>
-            Companies Focused in <ColoredSlogan>Technology</ColoredSlogan>
+            Companies Focused in{" "}
+            <ColoredSlogan style={{ color: "whitesmoke" }}>
+              Technology
+            </ColoredSlogan>
           </Title>
         </TitleContainer>
         <HContainer>
@@ -110,7 +113,10 @@ function Categories({ white }) {
       <ContentHolder>
         <TitleContainer>
           <Title>
-            Companies Focused in <ColoredSlogan>Health Care</ColoredSlogan>
+            Companies Focused in{" "}
+            <ColoredSlogan style={{ color: "whitesmoke" }}>
+              Health Care
+            </ColoredSlogan>
           </Title>
         </TitleContainer>
         <HContainer>
@@ -141,7 +147,9 @@ function Categories({ white }) {
         <TitleContainer>
           <Title>
             Companies Focused in{" "}
-            <ColoredSlogan>Entertainment Industry</ColoredSlogan>
+            <ColoredSlogan style={{ color: "whitesmoke" }}>
+              Entertainment Industry
+            </ColoredSlogan>
           </Title>
         </TitleContainer>
         <HContainer>
@@ -171,7 +179,10 @@ function Categories({ white }) {
       <ContentHolder>
         <TitleContainer>
           <Title>
-            Companies Focused in <ColoredSlogan>Real Estates</ColoredSlogan>
+            Companies Focused in{" "}
+            <ColoredSlogan style={{ color: "whitesmoke" }}>
+              Real Estates
+            </ColoredSlogan>
           </Title>
         </TitleContainer>
         <HContainer style={{ marginBottom: "2rem" }}>

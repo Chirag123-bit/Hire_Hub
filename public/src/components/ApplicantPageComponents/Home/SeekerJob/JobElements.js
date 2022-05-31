@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const JobsContainer = styled.div`
-  height: 900px;
+  /* height: 900px; */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -9,6 +9,7 @@ export const JobsContainer = styled.div`
   align-items: center;
   background: #010606;
   background-color: transparent;
+  backdrop-filter: blur(100px);
 
   @media screen and (max-width: 768px) {
     height: 1100px;
@@ -26,7 +27,7 @@ export const ContentHolder = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: absolute;
+  /* position: absolute; */
 `;
 
 export const TitleHolder = styled.div`
