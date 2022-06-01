@@ -4,6 +4,7 @@ const messageRoute = require("./routes/messagesRoute");
 const videoRoute = require("./routes/videoRoute");
 const companyRoute = require("./routes/companyRoute");
 const jobRoute = require("./routes/jobRoute");
+const chatRoute = require("./routes/chatRoute");
 
 //Socket Connection
 const socket = require("socket.io");
@@ -29,6 +30,7 @@ app.use("/api/messages", messageRoute);
 app.use("/api/video", videoRoute);
 app.use("/api/company", companyRoute);
 app.use("/api/job", jobRoute);
+app.use("/api/chat", chatRoute);
 
 // Server Initialization
 const server = app.listen(process.env.PORT, () =>

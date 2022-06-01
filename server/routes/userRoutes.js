@@ -9,7 +9,9 @@ const {
   sendVerificationEmail,
   resendVerification,
   applyJob,
+  allUsers,
 } = require("../controllers/usersController");
+const { protect } = require("../middleware/authMiddleware");
 
 const router = require("express").Router();
 
@@ -23,5 +25,8 @@ router.get("/user/codesent/", codeSent);
 router.post("/sendVerification/", sendVerificationEmail);
 router.post("/reSendVerification/", resendVerification);
 router.get("/applyJob/", applyJob);
+
+router.route("/getAllUsers").get(protect, allUsers);
+// router.get("/getAllUsers", (protect, allUsers));
 
 module.exports = router;

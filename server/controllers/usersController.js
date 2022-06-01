@@ -9,6 +9,7 @@ require("dotenv").config();
 const path = require("path");
 const { register_schema } = require("../validators/register_validator");
 const jwt = require("jsonwebtoken");
+const generateToken = require("../config/generateToken");
 
 // Node Mail Service Transporter
 let transporter = nodemailer.createTransport({
@@ -387,6 +388,7 @@ module.exports.register = async (req, res, next) => {
                     status: true,
                     user: result,
                     company: company,
+                    token: generateToken(result._id),
                     msg: "Successfully created account",
                   });
                 })
@@ -412,6 +414,7 @@ module.exports.register = async (req, res, next) => {
           return res.json({
             status: true,
             user: result,
+            token: generateToken(result._id),
             msg: "Successfully created account",
           });
         }
@@ -443,13 +446,6 @@ module.exports.login = async (req, res, next) => {
     }
 
     delete user.password;
-    const token = jwt.sign(
-      {
-        userId: user._id,
-      },
-      "RANDOM-TOKEN",
-      { expiresIn: "24h" }
-    );
     if (user.type === "Company") {
       const company = await Company.findOne({ _id: user.company });
 
@@ -457,13 +453,13 @@ module.exports.login = async (req, res, next) => {
         status: true,
         user,
         company,
-        token,
+        token: generateToken(user._id),
       });
     }
     return res.json({
       status: true,
       user,
-      token,
+      token: generateToken(user._id),
     });
   } catch (ex) {
     next(ex);
@@ -522,4 +518,20 @@ module.exports.applyJob = async (req, res, next) => {
   } catch (e) {
     // next(e);
   }
+};
+
+module.exports.allUsers = async (req, res, next) => {
+  const keyword = req.query.search
+    ? {
+        $or: [
+          { firstName: { $regex: req.query.search, $options: "i" } },
+          { lastName: { $regex: req.query.search, $options: "i" } },
+          { username: { $regex: req.query.search, $options: "i" } },
+          { email: { $regex: req.query.search, $options: "i" } },
+        ],
+      }
+    : {};
+
+  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  res.send(users);
 };
