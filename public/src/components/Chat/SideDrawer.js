@@ -49,13 +49,13 @@ const SideDrawer = () => {
       setLoadingChat(true);
       const config = {
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       };
       const { data } = await axios.post(accessUserChat, { userId }, config);
 
-      if (!chats.find((c) => c._id === data._id)) setSelectedChat(data);
+      if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
 
       setLoadingChat(false);
       setSelectedChat(data);

@@ -22,7 +22,8 @@ const MyChats = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await axios.get(accessUserChat, { userId }, config);
+
+      const { data } = await axios.get(accessUserChat, config, { userId });
 
       console.log(data);
       setChats(data);
