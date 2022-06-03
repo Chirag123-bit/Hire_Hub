@@ -12,16 +12,16 @@ export const JobsContainer = styled.div`
   backdrop-filter: blur(100px);
 
   @media screen and (max-width: 768px) {
-    height: 1100px;
+    min-height: 1100px;
   }
 
   @media screen and (max-width: 480px) {
-    height: 1300px;
+    min-height: 1300px;
   }
 `;
 
 export const ContentHolder = styled.div`
-  padding: 0.5rem 1rem;
+  padding: 5rem 0;
   width: 90%;
   margin: auto;
   display: flex;

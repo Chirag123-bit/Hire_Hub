@@ -72,9 +72,8 @@ export const Login = () => {
             "Welcome to HireHub, " + data.user.firstName,
             toastOptions
           );
-          cookies.set("TOKEN", data.token, {
-            path: "/",
-          });
+          localStorage.setItem("token", JSON.stringify(data.token));
+
           navigate("/employer/dashboard", { replace: true });
         }
         if (data.user.type === "Applicant") {
@@ -83,9 +82,7 @@ export const Login = () => {
             "Welcome to HireHub, " + data.user.firstName,
             toastOptions
           );
-          cookies.set("TOKEN", data.token, {
-            path: "/",
-          });
+          localStorage.setItem("token", JSON.stringify(data.token));
 
           navigate("/applicant/home", { replace: true });
         }
