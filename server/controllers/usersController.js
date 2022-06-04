@@ -34,7 +34,6 @@ module.exports.resendVerification = async (req, res) => {
   const email = req.body["email"];
   User.findOne({ _id })
     .then((user) => {
-      console.log(user);
       if (!user.isVerified) {
         const code = Math.floor(Math.random() * (999999 - 100000 + 1) + 100000);
 
@@ -173,8 +172,6 @@ module.exports.verify = (req, res) => {
   userVerification
     .find({ userId })
     .then((result) => {
-      console.log(userId);
-      console.log(result.length);
       if (result.length > 0) {
         const { expiresAt } = result[0];
         const hashedUniqueString = result[0].uniqueString;

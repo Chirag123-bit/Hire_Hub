@@ -6,7 +6,6 @@ import EmailVerified from "./components/Common/Email/EmailVerified";
 import VideoCall from "./components/Meeting/VideoCall";
 import ChatProvider from "./context/ChatProvider";
 import Auth from "./pages/Auth";
-import { Chat } from "./pages/Chat";
 import ChatPage from "./pages/ChatPage";
 import Code_sent from "./pages/code_sent";
 import Employer from "./pages/Employer";
@@ -25,10 +24,10 @@ function App() {
         <Route path="/auth/*" element={<Auth />} />
         <Route path="/verified" element={<EmailVerified />} />
         <Route path="/setAvatar" element={<SetAvatar />} />
-        <Route
+        {/* <Route
           path="/chat"
           element={<Chat inCall={inCall} setInCall={setInCall} />}
-        />
+        /> */}
 
         {/* <Route path="/videoCall/" element={<VideoApp />} /> */}
         <Route

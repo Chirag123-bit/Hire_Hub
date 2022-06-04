@@ -39,7 +39,6 @@ module.exports.addJob = async (req, res, next) => {
           .then((result) => {
             result.jobs.push(job);
             result.save();
-            console.log("Done");
             return res.json({
               success: true,
               data: result,
@@ -129,7 +128,6 @@ module.exports.getAllJobs = async (req, res, next) => {
 module.exports.getJobsForSpecificSector = async (req, res, next) => {
   try {
     const jobs = await Job.find({ sector: req.query.sector });
-    console.log(jobs);
     return res.json({
       success: true,
       data: jobs,
@@ -165,7 +163,7 @@ module.exports.applyForJob = async (req, res, next) => {
     const appliedJob = await Job.findById(job);
     const appliedUser = await userModel.findById(user);
     //find if the user has already applied for this job
-    // console.log(appliedUser, job);
+
     if (appliedJob.applicants) {
       appliedJob.applicants.forEach((applicant) => {
         if (applicant.applicant == user) {
@@ -236,7 +234,7 @@ const getReusableJobDetail = async (job_id) => {
   //     model: "Users",
   //   },
   // });
-  // console.log(Jobs);
+
   await Job.aggregate([
     { $match: { _id: job_id } },
     {
