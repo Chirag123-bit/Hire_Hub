@@ -24,7 +24,8 @@ const animationData = require("../../animations/typing.json");
 const ENDPOINT = "http://localhost:5000";
 var socket, selectedChatCompare;
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
-  const { user, selectedChat, setSelectedChat } = ChatState();
+  const { user, selectedChat, setSelectedChat, notification, setNotification } =
+    ChatState();
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState();
@@ -69,7 +70,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         config
       );
       socket.emit("join chat", selectedChat._id);
-      console.log(data);
       setMessages(data);
       setLoading(false);
     } catch (e) {
@@ -88,13 +88,18 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     selectedChatCompare = selectedChat;
   }, [selectedChat]);
 
+  console.log(notification, "-------------------------");
+
   useEffect(() => {
     socket.on("message recieved", (newMessageRecieved) => {
       if (
         !selectedChatCompare ||
         selectedChatCompare._id !== newMessageRecieved.chat._id
       ) {
-        //Give Notification
+        if (!notification.includes(newMessageRecieved)) {
+          setNotification([...notification, newMessageRecieved]);
+          setFetchAgain(!fetchAgain);
+        }
       } else {
         setMessages([...messages, newMessageRecieved]);
       }
@@ -121,8 +126,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           config
         );
 
-        socket.emit("new message", data);
         setMessages([...messages, data]);
+        socket.emit("new message", data);
       } catch (e) {
         console.log(e);
         toast({
@@ -143,7 +148,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       setTyping(true);
       socket.emit("typing", selectedChat._id);
     }
-    console.log(typing);
     let lastTypingTime = new Date().getTime();
     var timerLength = 3000;
     setTimeout(() => {

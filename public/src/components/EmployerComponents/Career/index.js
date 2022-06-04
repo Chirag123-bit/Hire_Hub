@@ -46,7 +46,9 @@ function Careers({ isOpen, user, company }) {
         }}
       >
         {isLoading ? (
-          <img src={LoadingImage} alt="loading" style={{ width: "100%" }} />
+          <div style={{ width: "max-content", margin: "auto" }}>
+            <img src={LoadingImage} alt="loading" />
+          </div>
         ) : (
           <>
             <div className="CareerHead">
