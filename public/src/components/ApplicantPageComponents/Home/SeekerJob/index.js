@@ -49,70 +49,33 @@ function SeekerJob() {
                   (window.location.href = `/applicant/job/${job._id}`)
                 }
               >
-                <CompanyInfoHoler>
-                  <div className="box1">
-                    <FcBrokenLink style={{ fontSize: "1.5rem" }} />
-                  </div>
-                  <div className="box2">
-                    <h6>{job.company.name}</h6>
-                    <p>
-                      {job.company.region}, {job.company.country}
-                    </p>
-                  </div>
-                </CompanyInfoHoler>
-                <JobTitleHolder>
-                  <JobTitle>{job.title}</JobTitle>
-                  <JobType>Full Time</JobType>
-                </JobTitleHolder>
-                <JobDescriptionBox>
-                  <JobDescription>{job.description}</JobDescription>
-                </JobDescriptionBox>
-                <JobFooter>
-                  <Sallary>
-                    ${job.sallary}
-                    <Muted>/month</Muted>
-                  </Sallary>
-                  <ApplyButton>Apply Now</ApplyButton>
-                </JobFooter>
-              </JobCard>
-            ))
-          ) : (
-            <div>Hello</div>
-          )}
-        </JobCardsHoler>
-        <JobCardsHoler>
-          {ready ? (
-            jobs.map((job) => (
-              <JobCard
-                onClick={(event) =>
-                  (window.location.href = `/applicant/job/${job._id}`)
-                }
-              >
-                <CompanyInfoHoler>
-                  <div className="box1">
-                    <FcBrokenLink style={{ fontSize: "1.5rem" }} />
-                  </div>
-                  <div className="box2">
-                    <h6>{job.company.name}</h6>
-                    <p>
-                      {job.company.region}, {job.company.country}
-                    </p>
-                  </div>
-                </CompanyInfoHoler>
-                <JobTitleHolder>
-                  <JobTitle>{job.title}</JobTitle>
-                  <JobType>Full Time</JobType>
-                </JobTitleHolder>
-                <JobDescriptionBox>
-                  <JobDescription>{job.description}</JobDescription>
-                </JobDescriptionBox>
-                <JobFooter>
-                  <Sallary>
-                    ${job.sallary}
-                    <Muted>/month</Muted>
-                  </Sallary>
-                  <ApplyButton>Apply Now</ApplyButton>
-                </JobFooter>
+                <div style={{ zIndex: 1 }}>
+                  <CompanyInfoHoler>
+                    <div className="box1">
+                      <FcBrokenLink style={{ fontSize: "1.5rem" }} />
+                    </div>
+                    <div className="box2">
+                      <h6>{job.company.name}</h6>
+                      <p>
+                        {job.company.region}, {job.company.country}
+                      </p>
+                    </div>
+                  </CompanyInfoHoler>
+                  <JobTitleHolder>
+                    <JobTitle>{job.title}</JobTitle>
+                    <JobType>Full Time</JobType>
+                  </JobTitleHolder>
+                  <JobDescriptionBox>
+                    <JobDescription>{job.description}</JobDescription>
+                  </JobDescriptionBox>
+                  <JobFooter>
+                    <Sallary>
+                      ${job.sallary}
+                      <Muted>/month</Muted>
+                    </Sallary>
+                    <ApplyButton>Apply Now</ApplyButton>
+                  </JobFooter>
+                </div>
               </JobCard>
             ))
           ) : (

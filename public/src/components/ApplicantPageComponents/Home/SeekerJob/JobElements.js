@@ -47,7 +47,6 @@ export const JobCardsHoler = styled.div`
 export const JobCard = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: rgba(66, 62, 221, 0.1);
   box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 7px 7px 22px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 7px 7px 22px 0px rgba(0, 0, 0, 0.75);
@@ -55,14 +54,52 @@ export const JobCard = styled.div`
   max-width: 25%;
   min-height: 307.5px;
   justify-content: space-between;
-  transition: all 0.2s ease-in;
+  transition: all 0.1s ease-in-out;
   margin: 1rem;
+  backdrop-filter: blur(10px);
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10%;
+
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     box-shadow: 1px 8px 20px rgba(69, 65, 221, 0.75);
-    transition: all 0.2s ease-in;
-    color: whitesmoke;
+    transition: all 0.1s ease-in-out;
+    /* color: whitesmoke; */
+    backdrop-filter: blur(50px);
+    /* background-color: rgba(0, 0, 0, 0.5); */
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    height: 130%;
+    width: 40%;
+    top: -15%;
+    right: 0;
+    left: 0;
+    margin: auto;
+
+    background: linear-gradient(#00e5ff, #b400fb);
+    animation: animate 10s linear infinite;
+
+    @keyframes animate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    background: #29303f;
+    border-radius: 10%;
   }
 `;
 
@@ -73,6 +110,7 @@ export const CompanyInfoHoler = styled.div`
   justify-content: space-between;
   padding: 1rem 2rem;
   text-align: center;
+  color: whitesmoke;
 
   padding-left: 0;
   /* transition: all 0.2s ease-in-out; */
@@ -102,6 +140,7 @@ export const CompanyInfoHoler = styled.div`
 
 export const JobTitleHolder = styled.div`
   margin: 0.5rem 0;
+  color: #fff;
 `;
 
 export const JobTitle = styled.h4`
@@ -111,12 +150,13 @@ export const JobTitle = styled.h4`
 
 export const JobType = styled.p`
   font-size: 15px;
-  /* color: gray; */
+  color: whitesmoke;
   font-family: "Encode Sans Expanded", sans-serif;
 `;
 
 export const JobDescriptionBox = styled.div`
   width: inherit;
+  color: whitesmoke;
 `;
 
 export const JobDescription = styled.p`
@@ -138,6 +178,7 @@ export const JobFooter = styled.div`
 
 export const Sallary = styled.h5`
   font-weight: bold;
+  color: whitesmoke;
 `;
 export const Muted = styled.span`
   font-size: 12px;
@@ -145,17 +186,30 @@ export const Muted = styled.span`
 `;
 
 export const ApplyButton = styled.button`
-  border: none;
+  /* border: 1px solid white;
+  border-radius: 0.4rem;
   outline: none;
   color: rgb(69, 65, 221);
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 0.2rem 0.5rem;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; */
+
+  /* width: 80%; */
+  padding: 0.2rem 0.7rem;
+  margin: auto;
+  background-color: #3a3636;
+  color: #fff;
+  border-radius: 7px;
+  border: 2px solid #fff;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 1.3px;
+  transition: all 0.1s ease-in-out;
 
   &:hover {
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 
-    background-color: rgb(66, 62, 221);
-    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* color: white; */
   }
 `;
