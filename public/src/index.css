@@ -17,75 +17,24 @@
 }
 
 .seeker-gradient {
-  /* background: radial-gradient(50% 123.47% at 50% 50%, #00ff94 0%, #720059 100%),
-    linear-gradient(121.28deg, #669600 0%, #ff0000 100%),
-    linear-gradient(360deg, #0029ff 0%, #8fff00 100%),
-    radial-gradient(100% 164.72% at 100% 100%, #6100ff 0%, #00ff57 100%),
-    radial-gradient(100% 148.07% at 0% 0%, #fff500 0%, #51d500 100%);
-  background-blend-mode: screen, color-dodge, overlay, difference, normal; */
-  /* background: radial-gradient(
-      111% 111% at 74.29% -11%,
-      #a93300 0%,
-      #005570 100%
-    ),
-    linear-gradient(127.43deg, #00d5c8 0%, #2200aa 100%);
-  background-blend-mode: difference, normal; */
-  /* Chrome 10-25, Safari 5.1-6 */
-  /* background: -webkit-linear-gradient(
-    to right,
-    rgba(102, 126, 234, 0.5),
-    rgba(118, 75, 162, 0.5)
-  ); */
+  background-image: url("images/background.png");
 
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: radial-gradient(
-        ellipse at 50% 50%,
-        rgba(160, 74, 245, 1) 0%,
-        rgba(151, 74, 245, 0) 69.85%
-      )
-      351px -198px / 813px 854px no-repeat no-repeat,
-    /* Center purple (copy) */
-      radial-gradient(
-        ellipse at 50% 50%,
-        rgba(160, 74, 245, 1) 0%,
-        rgba(160, 74, 245, 0.21) 58.79%,
-        rgba(255, 255, 255, 0) 67.59%
-      )
-      657px 1px / 949px 1023px no-repeat no-repeat,
-    /* Center purple */
-      radial-gradient(
-        ellipse at 50% 50%,
-        rgba(255, 154, 61, 1) 0%,
-        rgba(255, 187, 124, 0) 68.34%
-      )
-      1103px 157px / 579px 518px no-repeat no-repeat,
-    /* Center right range */
-      radial-gradient(
-        ellipse at 50% 50%,
-        rgba(255, 123, 0, 1) 0%,
-        rgba(255, 187, 124, 0) 68.34%
-      )
-      607px 60px / 1392px 1204px no-repeat no-repeat,
-    /* Bottom right orange */
-      radial-gradient(
-        ellipse at 50% 50%,
-        rgba(121, 43, 218, 1) 0%,
-        rgba(255, 255, 255, 0) 69.85%
-      )
-      745px -407px / 1251px 1038px no-repeat no-repeat,
-    /* Upper right purple */
-      radial-gradient(
-        ellipse at 50% 50%,
-        rgba(121, 43, 218, 1) 0%,
-        rgba(255, 255, 255, 0) 69.85%
-      ) -499px -394px / 1187px 1027px no-repeat no-repeat,
-    /* Upper left purple */
-      linear-gradient(
-        0deg,
-        rgba(117, 59, 188, 1) 0%,
-        rgba(117, 59, 188, 1) 100%
-      )
-      0px -1px / 1450px 764px; /* New Background */
   background-attachment: fixed;
-  /* background-size: cover; */
+}
+
+.seeker-gradient-two {
+  /* background-image: url("images/background.png"); */
+  /* background-image: linear-gradient(
+    83.2deg,
+    rgba(150, 93, 233, 1) 10.8%,
+    rgba(99, 88, 238, 1) 94.3%
+  );
+
+  background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-position: center;
+  backdrop-filter: blur(50px);
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: url("images/back1.jpg");
 }

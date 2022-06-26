@@ -7,10 +7,9 @@ export const SolutionsContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #010606;
+  /* background: #010606; */
   background-color: transparent;
   padding: 5rem 0;
-  backdrop-filter: blur(100px);
 
   @media screen and (max-width: 768px) {
     height: 1100px;
@@ -41,7 +40,7 @@ export const CategoryCard = styled(CardsContainer)`
   grid-template-columns: [image-row] 1fr [context] 3fr;
   width: 30%;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(66, 62, 221, 0.4);
   border: 0.1px solid transparent;
   padding: 1.5rem 2rem;
   text-align: center;

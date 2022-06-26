@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import SeekerNav from "../components/ApplicantPageComponents/Common/SeekerNav";
 import Careers from "../components/ApplicantPageComponents/Company/CompanyView";
@@ -19,9 +19,10 @@ export default function Seeker() {
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <SeekerNav toggle={toggle} />
-      <div className="seeker-gradient">
+      <div className="seeker-gradient-two">
         <Routes>
           <Route path="/home" element={<ApplicantHome id="home" />} />
+
           <Route path="/category" element={<SeekerCategory />} />
           <Route path="/company" element={<SeekerCompany />} />
           <Route path="/company/:id" element={<Careers />} />

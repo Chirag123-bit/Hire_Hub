@@ -13,7 +13,7 @@ export const HeroContainer = styled.div`
     radial-gradient(100% 164.72% at 100% 100%, #6100ff 0%, #00ff57 100%),
     radial-gradient(100% 148.07% at 0% 0%, #fff500 0%, #51d500 100%);
   background-blend-mode: screen, color-dodge, overlay, difference, normal; */
-  backdrop-filter: blur(100px);
+  /* backdrop-filter: blur(100px); */
 
   @media screen and (max-width: 768px) {
     height: 1100px;

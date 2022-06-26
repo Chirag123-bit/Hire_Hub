@@ -302,14 +302,21 @@ module.exports.register = async (req, res, next) => {
       cabout,
       cdesc,
     } = req.body;
+    console.log(req.body);
     const usernameCheck = await User.findOne({ username });
 
     //Username and Email Validation
     if (usernameCheck)
-      return res.json({ msg: "Username already used", status: false });
+      return res.status(500).json({
+        msg: "Username already used",
+        status: false,
+      });
     const emailCheck = await User.findOne({ email });
     if (emailCheck)
-      return res.json({ msg: "Email already used", status: false });
+      return res.status(500).json({
+        msg: "Email already used",
+        status: false,
+      });
 
     const companyNameCheck = await Company.findOne({ name: c_name });
 
@@ -361,7 +368,7 @@ module.exports.register = async (req, res, next) => {
         if (result.type === "Company") {
           if (companyNameCheck) {
             result.deleteOne();
-            return res.json({
+            return res.status(500).json({
               msg: "Company Name already exists",
               status: false,
             });
@@ -381,7 +388,7 @@ module.exports.register = async (req, res, next) => {
               result
                 .updateOne({ company: company._id })
                 .then(() => {
-                  return res.json({
+                  return res.status(200).json({
                     status: true,
                     user: result,
                     company: company,
@@ -392,7 +399,7 @@ module.exports.register = async (req, res, next) => {
                 .catch((e) => {
                   result.deleteOne();
                   company.deleteOne();
-                  return res.json({
+                  return res.status(500).json({
                     status: false,
                     msg: "Failed to bind user info with company",
                   });
@@ -402,13 +409,13 @@ module.exports.register = async (req, res, next) => {
               console.log(e);
               result.deleteOne();
               company.deleteOne();
-              return res.json({
+              return res.status(500).json({
                 status: false,
                 msg: "Failed to create account",
               });
             });
         } else {
-          return res.json({
+          return res.status(200).json({
             status: true,
             user: result,
             token: generateToken(result._id),
@@ -418,7 +425,7 @@ module.exports.register = async (req, res, next) => {
       })
       .catch((error) => {
         console.log(error);
-        res.json({
+        res.status(500).json({
           status: false,
           message: "An Error Occured",
         });
@@ -434,26 +441,30 @@ module.exports.login = async (req, res, next) => {
     var { username, password } = req.body;
     const user = await User.findOne({ username });
     if (!user) {
-      return res.json({ msg: "Incorrect Username or Password", status: false });
+      return res
+        .status(500)
+        .json({ msg: "Incorrect Username or Password", status: false });
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       console.log("Invalid");
-      return res.json({ msg: "Incorrect Username or Password", status: false });
+      return res
+        .status(500)
+        .json({ msg: "Incorrect Username or Password", status: false });
     }
 
     delete user.password;
     if (user.type === "Company") {
       const company = await Company.findOne({ _id: user.company });
 
-      return res.json({
+      return res.status(200).json({
         status: true,
         user,
         company,
         token: generateToken(user._id),
       });
     }
-    return res.json({
+    return res.status(200).json({
       status: true,
       user,
       token: generateToken(user._id),

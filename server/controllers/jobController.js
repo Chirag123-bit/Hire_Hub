@@ -104,6 +104,7 @@ module.exports.getAllJobs = async (req, res, next) => {
   try {
     Job.find()
       .populate("company")
+      .populate("sector")
       .then((result) => {
         return res.json({
           success: true,
@@ -111,12 +112,15 @@ module.exports.getAllJobs = async (req, res, next) => {
         });
       })
       .catch((err) => {
+        console.log(err);
+
         return res.json({
           success: false,
           msg: err,
         });
       });
   } catch (error) {
+    console.log(error);
     return res.json({
       success: false,
       error: error,

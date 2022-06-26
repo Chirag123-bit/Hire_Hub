@@ -8,7 +8,7 @@ export const SolutionsContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 5rem 0;
-  backdrop-filter: blur(100px);
+  /* backdrop-filter: blur(100px); */
 
   @media screen and (max-width: 768px) {
     height: 1100px;
@@ -37,29 +37,19 @@ export const FcAdvertisment = styled(FcAdvertising)`
 export const CategoryCard = styled.div`
   width: 30%;
   justify-content: space-between;
-
   padding: 1.5rem;
   text-align: center;
   margin: 1rem 0;
-  /* padding-left: 0; */
   transition: all 0.2s ease-in-out;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.2);
-  border: 0.1px solid transparent;
+  /* background: rgba(66, 62, 221, 0.6); */
+  border: 2px solid #fff;
   border-radius: 10px;
   z-index: 1;
   position: relative;
-  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
-  backdrop-filter: blur(100px);
+  backdrop-filter: blur(20px);
 
   background-clip: border-box;
-
-  &:hover {
-    transition: all 0.2s ease-in-out;
-    transform: scale(1.1);
-    background: rgba(0, 0, 0, 0.2);
-    color: whitesmoke;
-  }
 
   .box1 {
     grid-column-start: image-row;
@@ -82,30 +72,14 @@ export const CategoryCard = styled.div`
       font-size: 14px;
       width: max-content;
       margin: auto;
+      color: white;
     }
     h6 {
       /* From https://css.glass */
       background: transparent;
       width: max-content;
       margin: auto;
+      color: white;
     }
   }
-  /* &:hover {
-    transition: all 0.2s ease-in-out;
-    background-color: #423edd;
-    .box2 {
-      transition: all 0.2s ease-in-out;
-      p,
-      h6 {
-        color: white;
-        transition: all 0.2s ease-in-out;
-      }
-    }
-    ${FcAdvertisment} {
-      g,
-      path {
-        fill: rgb(255, 254, 254);
-      }
-    }
-  } */
 `;

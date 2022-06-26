@@ -6,7 +6,7 @@ export const CategoryContainer = styled.div`
   /* justify-content: space-between; */
 
   min-height: 400px;
-  backdrop-filter: blur(100px);
+  /* backdrop-filter: blur(100px); */
 `;
 
 export const ContentHolder = styled.div`

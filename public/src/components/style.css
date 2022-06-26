@@ -1,0 +1,43 @@
+.cardTest {
+  width: 350px;
+  height: 75vh;
+  padding: 20px;
+  backdrop-filter: blur(20px);
+  border: 2px solid #fff;
+  border-radius: 20px;
+  display: grid;
+  align-content: center;
+}
+.proImg {
+  width: 200px;
+  margin: auto;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  margin: 30px auto 40px auto;
+}
+.name {
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+}
+.cardTest p {
+  color: #fff;
+  text-align: center;
+  margin: 20px 0;
+}
+.cardTest button {
+  width: 80%;
+  padding: 8px 0;
+  margin: auto;
+  background-color: #3a3636;
+  color: #fff;
+  border-radius: 7px;
+  border: 2px solid #fff;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  transition: 0.3s;
+}
+.cardTest button:hover {
+  background: #000;
+}

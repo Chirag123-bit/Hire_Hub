@@ -9,7 +9,7 @@ export const JobsContainer = styled.div`
   align-items: center;
   background: #010606;
   background-color: transparent;
-  backdrop-filter: blur(100px);
+  /* backdrop-filter: blur(100px); */
 
   @media screen and (max-width: 768px) {
     min-height: 1100px;
@@ -47,21 +47,21 @@ export const JobCardsHoler = styled.div`
 export const JobCard = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 254, 254, 0.2);
-  box-shadow: 7px 7px 22px 0px rgba(0, 0, 0, 0.75);
+  background-color: rgba(66, 62, 221, 0.1);
+  box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 7px 7px 22px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 7px 7px 22px 0px rgba(0, 0, 0, 0.75);
   padding: 0 1rem;
   max-width: 25%;
   min-height: 307.5px;
   justify-content: space-between;
-  transition: all 0.3s ease-in;
+  transition: all 0.2s ease-in;
   margin: 1rem;
   cursor: pointer;
   &:hover {
     transform: scale(1.1);
     box-shadow: 1px 8px 20px rgba(69, 65, 221, 0.75);
-    transition: all 0.3s ease-in;
+    transition: all 0.2s ease-in;
     color: whitesmoke;
   }
 `;
