@@ -1,15 +1,14 @@
-import React from "react";
+import {
+  ContentHolder,
+  HeadSectionContainer,
+  HeadSubtitle,
+  HeadTitle,
+} from "../../CategoryLoadSection/CategoryElements";
 import {
   ColoredSlogan,
   Slogan,
   SloganSubtext,
 } from "../../Home/SeekerHero/seekerHeroElements";
-import {
-  HeadSectionContainer,
-  ContentHolder,
-  HeadSubtitle,
-  HeadTitle,
-} from "../../CategoryLoadSection/CategoryElements";
 import "../../Home/SeekerHero/style.css";
 import ParticleBackground from "./ParticleBackground";
 
@@ -25,7 +24,7 @@ function CompanyHeadSection() {
           </Slogan>
         </HeadTitle>
         <HeadSubtitle>
-          <SloganSubtext>
+          <SloganSubtext style={{ color: "white" }}>
             Find the companies best suited to your intrests. Anything from
             Real-Estate to Health, Technology to Social Work
           </SloganSubtext>

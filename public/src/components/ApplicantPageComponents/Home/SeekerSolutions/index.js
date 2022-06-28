@@ -17,13 +17,22 @@ import {
 } from "../SeekerHero/seekerHeroElements";
 import { CardsContainer, SolutionsContainer } from "./SolutionComponents";
 
-import { useEffect } from "react";
-import entertainment from "../../../../images/health.png";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { getCategories, host } from "../../../../utils/APIRoutes";
 import "../../../style.css";
 
 function SeekerSolutions() {
+  const [categories, setCategories] = useState([]);
+  const [ready, setIsReady] = useState(false);
+  // useEffect(() => {
+  //   import("./glass");
+  // });
   useEffect(() => {
-    import("./glass");
+    axios.get(getCategories).then((result) => {
+      setCategories(result.data.data);
+      setIsReady(true);
+    });
   });
   return (
     <SolutionsContainer>
@@ -33,45 +42,33 @@ function SeekerSolutions() {
         </Slogan>
       </TextContent>
       <CardsContainer>
-        <div
-          data-tilt
-          data-tilt-glare
-          data-tilt-max-glare="0.3"
-          class="cardTest"
-          id={uuid()}
-        >
-          <img src={entertainment} class="proImg" alt="srh" />
+        {!ready ? (
+          <div className="loading" />
+        ) : (
+          categories.slice(0, 6).map(
+            (category) => (
+              <div
+                data-tilt
+                data-tilt-glare
+                data-tilt-max-glare="0.3"
+                className="cardTest"
+                id={uuid()}
+                style={{ marginBottom: "1rem" }}
+              >
+                <img
+                  src={host + "/" + category.category.image}
+                  class="proImg"
+                  alt="srh"
+                />
 
-          <h2 class="name">Marketing and Communication</h2>
-          <p>100 Jobs Available</p>
-          <button>Explore Now</button>
-        </div>
-        <div
-          data-tilt
-          data-tilt-glare
-          data-tilt-max-glare="0.3"
-          class="cardTest"
-          id={uuid()}
-        >
-          <img src={entertainment} class="proImg" alt="srh" />
-
-          <h2 class="name">Marketing and Communication</h2>
-          <p>100 Jobs Available</p>
-          <button>Explore Now</button>
-        </div>
-        <div
-          data-tilt
-          data-tilt-glare
-          data-tilt-max-glare="0.3"
-          class="cardTest"
-          id={uuid()}
-        >
-          <img src={entertainment} class="proImg" alt="srh" />
-
-          <h2 class="name">Marketing and Communication</h2>
-          <p>100 Jobs Available</p>
-          <button>Explore Now</button>
-        </div>
+                <h2 class="name">{category.category.title}</h2>
+                <p>{category.jobs} Jobs Available</p>
+                <button>Explore Now</button>
+              </div>
+            ),
+            import("./glass")
+          )
+        )}
       </CardsContainer>
     </SolutionsContainer>
   );
