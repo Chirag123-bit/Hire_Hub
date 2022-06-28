@@ -1,16 +1,14 @@
-import React from "react";
 import CheckboxComponent from "../CheckboxComponent";
-import { FilterListSelect } from "../FilterListToggle";
-import { categoryList, typeList } from "../SearchbarComponent/Constants";
+import { typeList } from "../SearchbarComponent/Constants";
 import SliderComponent from "../SliderComponent";
 
 import {
-  Label,
-  InputGroup,
-  FilterContainer,
-  Togglegroup,
   Countrydropdown,
+  FilterContainer,
+  InputGroup,
+  Label,
   Regiondropdown,
+  Togglegroup,
 } from "./FilterComponents";
 
 function FilterPanel({
@@ -29,11 +27,13 @@ function FilterPanel({
     <FilterContainer>
       <InputGroup>
         <Label>Job Type</Label>
-        <Togglegroup
-          options={typeList}
-          value={selectedType}
-          selectToggle={selectToggle}
-        />
+        <div style={{ width: "100%" }}>
+          <Togglegroup
+            options={typeList}
+            value={selectedType}
+            selectToggle={selectToggle}
+          />
+        </div>
       </InputGroup>
 
       <InputGroup>
@@ -43,6 +43,7 @@ function FilterPanel({
             key={category.id}
             options={category}
             changeChecked={changeChecked}
+            style={{ color: "white" }}
           />
         ))}
       </InputGroup>

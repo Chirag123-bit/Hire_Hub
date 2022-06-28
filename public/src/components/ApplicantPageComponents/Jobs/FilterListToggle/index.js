@@ -1,9 +1,7 @@
-import React from "react";
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import { makeStyles } from "@material-ui/core/styles";
-import { Formcontrol, SelectBox, ToggleGroup } from "./Components";
 import { FormControl, InputLabel, MenuItem } from "@material-ui/core";
-
+import { makeStyles } from "@material-ui/core/styles";
+import ToggleButton from "@material-ui/lab/ToggleButton";
+import { SelectBox, ToggleGroup } from "./Components";
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -55,7 +53,7 @@ function FilterListToggle({ options, value, selectToggle }) {
           className={classes.toggle}
           key={id}
           value={value}
-          style={{ fontWeight: 500 }}
+          style={{ fontWeight: 500, color: "white", borderColor: "white" }}
         >
           {label}
         </ToggleButton>

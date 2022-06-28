@@ -1,7 +1,6 @@
 import Checkbox from "@material-ui/core/Checkbox";
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   root: {
@@ -49,7 +48,7 @@ function CheckboxComponent({ options, changeChecked }) {
         }
         label={label}
         style={{
-          color: checked ? "#045DE9" : "#212529",
+          color: checked ? "#045DE9" : "white !important",
           fontWeight: "bold",
           transition: "background-color 0.5s ease",
         }}

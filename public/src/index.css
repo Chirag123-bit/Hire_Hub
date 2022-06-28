@@ -38,3 +38,17 @@
   background-attachment: fixed;
   background-image: url("images/back1.jpg");
 }
+
+.makeStyles-root-1 {
+  margin-left: 0;
+}
+
+.MuiCheckbox-root {
+  color: white !important;
+}
+
+.sc-eTgnfb .jGQbXH option {
+  /* backdrop-filter: blur(20px); */
+  /* background: transparent !important; */
+  background-color: red !important;
+}

@@ -13,7 +13,12 @@ export const InputGroup = styled.div`
 `;
 
 export const FilterContainer = styled.div`
-  height: 100vh;
+  /* height: 100vh; */
+  backdrop-filter: blur(20px);
+  color: white;
+  padding-left: 1rem;
+  padding-right: 0.2rem;
+  padding-top: 1rem;
 `;
 
 export const LabelRange = styled.p`
@@ -22,7 +27,13 @@ export const LabelRange = styled.p`
 
 export const Togglegroup = styled(ToggleGroup)`
   display: flex;
-  justify-content: space-around !important;
+  justify-content: space-between !important;
+  margin-left: 0 !important;
+
+  button {
+    border-color: white !important;
+    /* border-color: white; */
+  }
 `;
 
 export const Countrydropdown = styled(CountryDropdown)`
@@ -34,9 +45,14 @@ export const Countrydropdown = styled(CountryDropdown)`
   background-color: transparent;
   width: max-content;
   border-radius: 0.8rem;
+  color: white;
+  border-color: white !important;
 
   option {
     text-align: left;
+    backdrop-filter: blur(20px);
+    color: black;
+    background-color: white;
   }
 `;
 
@@ -48,8 +64,13 @@ export const Regiondropdown = styled(RegionDropdown)`
   outline: none;
   background-color: transparent;
   border-radius: 0.8rem;
+  color: white;
+  border-color: white !important;
 
   option {
     text-align: left;
+    backdrop-filter: blur(20px);
+    color: black;
+    background-color: white;
   }
 `;
