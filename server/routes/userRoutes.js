@@ -10,6 +10,10 @@ const {
   resendVerification,
   applyJob,
   allUsers,
+  addEvent,
+  markEventCompleted,
+  markTodoCompleted,
+  addTodos,
 } = require("../controllers/usersController");
 const { protect } = require("../middleware/authMiddleware");
 
@@ -27,6 +31,10 @@ router.post("/reSendVerification/", resendVerification);
 router.get("/applyJob/", applyJob);
 
 router.route("/getAllUsers").get(protect, allUsers);
+router.route("/addEvent").post(protect, addEvent);
+router.route("/addTodo").post(protect, addTodos);
+router.route("/completeEvent").put(protect, markEventCompleted);
+router.route("/completeTodo").put(protect, markTodoCompleted);
 // router.get("/getAllUsers", (protect, allUsers));
 
 module.exports = router;

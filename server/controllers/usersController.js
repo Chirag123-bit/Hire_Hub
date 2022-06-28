@@ -10,6 +10,8 @@ const path = require("path");
 const { register_schema } = require("../validators/register_validator");
 const jwt = require("jsonwebtoken");
 const generateToken = require("../config/generateToken");
+const Event = require("../model/EventModel");
+const Todo = require("../model/TodoModels");
 
 // Node Mail Service Transporter
 let transporter = nodemailer.createTransport({
@@ -542,4 +544,93 @@ module.exports.allUsers = async (req, res, next) => {
 
   const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
   res.send(users);
+};
+
+module.exports.addEvent = async (req, res, next) => {
+  try {
+    const { title, note, color, date, startTime, endTime, remind, repeat } =
+      req.body;
+    const user = req.user;
+    const event = new Event({
+      title,
+      note,
+      color,
+      date,
+      startTime,
+      endTime,
+      remind,
+      repeat,
+    });
+    await event.save();
+    user.events.push(event);
+    await user.save();
+    return res.json({
+      status: true,
+      msg: "Event added successfully",
+      event,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+module.exports.addTodos = async (req, res, next) => {
+  try {
+    const { title, note, color, isCompleted } = req.body;
+
+    const user = req.user;
+    const todo = new Todo({
+      title,
+      note,
+      color,
+      isCompleted,
+    });
+    await todo.save();
+    user.todos.push(todo);
+    await user.save();
+    return res.json({
+      status: true,
+      msg: "Todo added successfully",
+      todo,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+//mark event completed
+module.exports.markEventCompleted = async (req, res, next) => {
+  try {
+    const { eventId } = req.body;
+    console.log(eventId);
+    const user = req.user;
+    const event = await Event.findById(eventId);
+    event.isCompleted = true;
+    await event.save();
+    return res.json({
+      status: true,
+      msg: "Event marked completed successfully",
+      event,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+//mark todo completed
+module.exports.markTodoCompleted = async (req, res, next) => {
+  try {
+    const { todoId } = req.body;
+    const user = req.user;
+    const todo = await Todo.findById(todoId);
+    todo.isCompleted = true;
+    await todo.save();
+    return res.json({
+      status: true,
+      msg: "Todo marked completed successfully",
+      todo,
+    });
+  } catch (e) {
+    next(e);
+  }
 };
