@@ -35,12 +35,15 @@ export const FcAdvertisment = styled(FcGoogle)`
 `;
 export const CategoryCard = styled(CardsContainer)`
   border-radius: 1.2rem;
-
   display: grid;
   grid-template-columns: [image-row] 1fr [context] 3fr;
   width: 30%;
   justify-content: space-between;
-  background: rgba(66, 62, 221, 0.4);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
   border: 0.1px solid transparent;
   padding: 1.5rem 2rem;
   text-align: center;
@@ -48,6 +51,8 @@ export const CategoryCard = styled(CardsContainer)`
   padding-left: 0;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
   .box1 {
     grid-column-start: image-row;
@@ -56,10 +61,13 @@ export const CategoryCard = styled(CardsContainer)`
   .box2 {
     grid-column-start: context;
     transition: all 0.2s ease-in-out;
+    h6 {
+      color: #fff;
+    }
 
     p {
       transition: all 0.2s ease-in-out;
-
+      color: #fff;
       font-size: 14px;
       margin: 0;
     }

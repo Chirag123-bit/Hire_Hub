@@ -1,15 +1,16 @@
-import styled from "styled-components";
 import { Link as LinkR } from "react-router-dom";
+import styled from "styled-components";
 
 import {
-  BiNotification,
-  BiMessageRounded,
   BiDownArrowAlt,
+  BiMessageRounded,
+  BiNotification,
 } from "react-icons/bi";
 
 export const Nav = styled.nav`
   background: ${({ scrollNav }) =>
     scrollNav ? "rgba(0,0,0, 0.3)" : "transparent"};
+  backdrop-filter: ${({ scrollNav }) => (scrollNav ? "blur(20px);" : "")};
   height: 80px;
   margin-top: -80px;
   display: flex;
@@ -40,7 +41,7 @@ export const NavbarContainer = styled.div`
 `;
 
 export const NavLogo = styled(LinkR)`
-  color: #045de9;
+  /* color: #045de9; */
   justify-self: flex-start;
   cursor: pointer;
   font-size: 1.5rem;
@@ -49,6 +50,7 @@ export const NavLogo = styled(LinkR)`
   margin-left: 24px;
   font-weight: bold;
   text-decoration: none;
+  color: ${({ scrollNav }) => (scrollNav ? "white" : "orange")};
 `;
 
 export const MobileIcon = styled.div`
@@ -61,7 +63,6 @@ export const MobileIcon = styled.div`
     transform: translate(-100%, 60%);
     font-size: 1.8rem;
     cursor: pointer;
-    color: #fff;
   }
 `;
 
@@ -82,7 +83,6 @@ export const NavItem = styled.li`
 `;
 
 export const NavLinks = styled(LinkR)`
-  color: #000;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -90,6 +90,8 @@ export const NavLinks = styled(LinkR)`
   font-weight: 600;
   height: 100%;
   cursor: pointer;
+  /* color: white; */
+  color: ${({ scrollNav }) => (scrollNav ? "white" : "black")};
 
   &:hover {
     color: #045de9;
@@ -130,11 +132,14 @@ export const NavBtnLink = styled(LinkR)`
 `;
 
 export const Notification = styled(BiNotification)`
-  color: black !important;
+  color: ${({ scrollNav }) =>
+    scrollNav ? "white !important" : "black !important"};
 `;
 export const Message = styled(BiMessageRounded)`
-  color: black !important;
+  color: ${({ scrollNav }) =>
+    scrollNav ? "white !important" : "black !important"};
 `;
 export const Down = styled(BiDownArrowAlt)`
-  color: black !important;
+  color: ${({ scrollNav }) =>
+    scrollNav ? "white !important" : "black !important"};
 `;

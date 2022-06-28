@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSpring } from "react-spring";
 import { v4 as uuid } from "uuid";
 import { getAllCompanies } from "../../../../utils/APIRoutes";
@@ -51,17 +51,7 @@ function Companies() {
       <CardsContainer>
         {ready ? (
           companies.map((company) => (
-            <CategoryCard
-              // onClick={(event) =>
-              //   (window.location.href = `/applicant/company/${company._id}`)
-              // }
-              // onMouseMove={({ clientX: x, clientY: y }) =>
-              //   set({ xys: calc(x, y) })
-              // }
-              // onMouseLeave={() => set({ xys: [0, 0, 1] })}
-              // style={{ transform: props.xys.interpolate(trans) }}
-              id={uuid()}
-            >
+            <CategoryCard id={uuid()}>
               <div className="box1" id={uuid()}>
                 <FcAdvertisment />
               </div>

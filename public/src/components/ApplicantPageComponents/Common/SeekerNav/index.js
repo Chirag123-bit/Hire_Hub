@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { animateScroll as scroll } from "react-scroll";
@@ -41,7 +41,7 @@ const SeekerNav = ({ toggle }) => {
       <IconContext.Provider value={{ color: "#01bf71" }}>
         <Nav scrollNav={scrollNav}>
           <NavbarContainer>
-            <NavLogo to="/" onClick={toggleHome}>
+            <NavLogo to="/" onClick={toggleHome} scrollNav={scrollNav}>
               HireHub
             </NavLogo>
             <MobileIcon onClick={toggle}>
@@ -56,6 +56,7 @@ const SeekerNav = ({ toggle }) => {
                   spy={true}
                   exact="true"
                   onClick={toggleHome}
+                  scrollNav={scrollNav}
                 >
                   Home
                 </NavLinks>
@@ -67,6 +68,7 @@ const SeekerNav = ({ toggle }) => {
                   duration={500}
                   spy={true}
                   exact="true"
+                  scrollNav={scrollNav}
                   // offset={-80}
                 >
                   Categories
@@ -79,6 +81,7 @@ const SeekerNav = ({ toggle }) => {
                   duration={500}
                   spy={true}
                   exact="true"
+                  scrollNav={scrollNav}
                   // offset={-80}
                 >
                   Jobs
@@ -91,6 +94,7 @@ const SeekerNav = ({ toggle }) => {
                   duration={500}
                   spy={true}
                   exact="true"
+                  scrollNav={scrollNav}
                   // offset={-80}
                 >
                   Companies
@@ -99,13 +103,13 @@ const SeekerNav = ({ toggle }) => {
             </NavMenu>
             <NavImp>
               <NavBtnLink to="/auth/login">
-                <Notification size={18} />
+                <Notification size={18} scrollNav={scrollNav} />
               </NavBtnLink>
               <NavBtnLink to="/auth/login">
-                <Message size={18} />
+                <Message size={18} scrollNav={scrollNav} />
               </NavBtnLink>
               <NavBtnLink to="/auth/login">
-                <Down size={18} />
+                <Down size={18} scrollNav={scrollNav} />
               </NavBtnLink>
             </NavImp>
           </NavbarContainer>

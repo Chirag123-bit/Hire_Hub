@@ -47,28 +47,29 @@ export const JobCardsHoler = styled.div`
 export const JobCard = styled.div`
   display: flex;
   flex-direction: column;
-  box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 7px 7px 22px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 7px 7px 22px 0px rgba(0, 0, 0, 0.75);
   padding: 0 1rem;
   max-width: 25%;
   min-height: 307.5px;
   justify-content: space-between;
   transition: all 0.1s ease-in-out;
   margin: 1rem;
-  backdrop-filter: blur(10px);
   cursor: pointer;
   position: relative;
   overflow: hidden;
   border-radius: 10%;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
 
   &:hover {
     transform: scale(1.05);
     box-shadow: 1px 8px 20px rgba(69, 65, 221, 0.75);
     transition: all 0.1s ease-in-out;
-    /* color: whitesmoke; */
     backdrop-filter: blur(50px);
-    /* background-color: rgba(0, 0, 0, 0.5); */
   }
 
   &::before {
@@ -83,6 +84,7 @@ export const JobCard = styled.div`
 
     background: linear-gradient(#00e5ff, #b400fb);
     animation: animate 10s linear infinite;
+    overflow: hidden;
 
     @keyframes animate {
       0% {
@@ -100,6 +102,8 @@ export const JobCard = styled.div`
     inset: 5px;
     background: #29303f;
     border-radius: 10%;
+    overflow: hidden;
+    /* background: inherit; */
   }
 `;
 
@@ -186,15 +190,6 @@ export const Muted = styled.span`
 `;
 
 export const ApplyButton = styled.button`
-  /* border: 1px solid white;
-  border-radius: 0.4rem;
-  outline: none;
-  color: rgb(69, 65, 221);
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 0.2rem 0.5rem;
-  transition: all 0.3s ease-in-out; */
-
-  /* width: 80%; */
   padding: 0.2rem 0.7rem;
   margin: auto;
   background-color: #3a3636;
