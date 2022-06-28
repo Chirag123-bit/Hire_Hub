@@ -50,7 +50,8 @@ export const NavLogo = styled(LinkR)`
   margin-left: 24px;
   font-weight: bold;
   text-decoration: none;
-  color: ${({ scrollNav }) => (scrollNav ? "white" : "orange")};
+  color: white;
+  /* color: ${({ scrollNav }) => (scrollNav ? "white" : "orange")}; */
 `;
 
 export const MobileIcon = styled.div`
@@ -90,8 +91,8 @@ export const NavLinks = styled(LinkR)`
   font-weight: 600;
   height: 100%;
   cursor: pointer;
-  /* color: white; */
-  color: ${({ scrollNav }) => (scrollNav ? "white" : "black")};
+  color: white;
+  /* color: ${({ scrollNav }) => (scrollNav ? "white" : "black")}; */
 
   &:hover {
     color: #045de9;
@@ -132,14 +133,20 @@ export const NavBtnLink = styled(LinkR)`
 `;
 
 export const Notification = styled(BiNotification)`
-  color: ${({ scrollNav }) =>
-    scrollNav ? "white !important" : "black !important"};
+  color: white;
+
+  /* color: ${({ scrollNav }) =>
+    scrollNav ? "white !important" : "black !important"}; */
 `;
 export const Message = styled(BiMessageRounded)`
-  color: ${({ scrollNav }) =>
-    scrollNav ? "white !important" : "black !important"};
+  color: white;
+
+  /* color: ${({ scrollNav }) =>
+    scrollNav ? "white !important" : "black !important"}; */
 `;
 export const Down = styled(BiDownArrowAlt)`
-  color: ${({ scrollNav }) =>
-    scrollNav ? "white !important" : "black !important"};
+  color: white;
+
+  /* color: ${({ scrollNav }) =>
+    scrollNav ? "white !important" : "black !important"}; */
 `;
