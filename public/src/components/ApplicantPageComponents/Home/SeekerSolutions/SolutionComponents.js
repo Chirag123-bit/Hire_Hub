@@ -7,7 +7,7 @@ export const SolutionsContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 5rem 0;
+  padding-top: 5rem;
   /* backdrop-filter: blur(100px); */
 
   @media screen and (max-width: 768px) {

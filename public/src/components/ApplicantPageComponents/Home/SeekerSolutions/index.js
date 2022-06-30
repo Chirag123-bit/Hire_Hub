@@ -33,7 +33,7 @@ function SeekerSolutions() {
       setCategories(result.data.data);
       setIsReady(true);
     });
-  });
+  }, []);
   return (
     <SolutionsContainer>
       <TextContent>
@@ -43,7 +43,13 @@ function SeekerSolutions() {
       </TextContent>
       <CardsContainer>
         {!ready ? (
-          <div className="loading" />
+          <div style={{ margin: "auto" }}>
+            <div className="loading-wrapper">
+              <div className="loader">
+                <div className="loading-circle">s</div>
+              </div>
+            </div>
+          </div>
         ) : (
           categories.slice(0, 6).map(
             (category) => (
