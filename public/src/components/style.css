@@ -88,13 +88,15 @@
   background: #000;
   z-index: 1;
 }
-/* .loading-circle {
-  width: 90%;
-  height: 90%;
-  border-radius: 100%;
-  position: absolute;
-  left: 5%;
-  top: 5%;
-  background: transparent;
-  z-index: 1;
-} */
+#profileDropdown a {
+  color: #fff;
+  text-transform: capitalize;
+  border: "none";
+  box-shadow: "none";
+}
+
+#profileDropdown a:hover {
+  color: #fff;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.2);
+}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import AppliedJobs from "../components/ApplicantPageComponents/AppliedJobs";
 import SeekerNav from "../components/ApplicantPageComponents/Common/SeekerNav";
 import Careers from "../components/ApplicantPageComponents/Company/CompanyView";
 import SeekerJobs from "../components/ApplicantPageComponents/Jobs/SeekerJobComponent/SeekerJobs";
@@ -28,6 +29,7 @@ export default function Seeker() {
           <Route path="/company/:id" element={<Careers />} />
           <Route path="/jobs" element={<SeekerJobs />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/appliedJobs" element={<AppliedJobs />} />
           <Route path="/job/:id" element={<JobDescription />} />
         </Routes>
       </div>

@@ -4,6 +4,7 @@ const Job = require("../model/JobModel");
 const Company = require("../model/CompanyModel");
 const userModel = require("../model/userModel");
 const util = require("util");
+const asyncHandler = require("express-async-handler");
 
 module.exports.addJob = async (req, res, next) => {
   try {
@@ -347,3 +348,27 @@ module.exports.updateJobStatus = async (req, res, next) => {
     });
   }
 };
+
+module.exports.getAppliedJobs = asyncHandler(async (req, res, next) => {
+  const usr = await req.user._id;
+  var jobs = await userModel
+    .findById(usr)
+    .select("appliedJobs")
+    .populate({
+      path: "appliedJobs.job",
+      populate: {
+        path: "company",
+      },
+    });
+  // .populate("appliedJobs.job")
+  // .populate("appliedJobs.job.company")
+  // .populate("appliedJobs.job.sector");
+
+  console.log(jobs.appliedJobs[0]);
+
+  if (!jobs) {
+    res.status(400).send("Applied Jobs not found");
+  } else {
+    res.status(200).send(jobs);
+  }
+});
