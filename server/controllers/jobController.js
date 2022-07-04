@@ -4,6 +4,7 @@ const Job = require("../model/JobModel");
 const Company = require("../model/CompanyModel");
 const userModel = require("../model/userModel");
 const util = require("util");
+const asyncHandler = require("express-async-handler");
 
 module.exports.addJob = async (req, res, next) => {
   try {
@@ -39,7 +40,6 @@ module.exports.addJob = async (req, res, next) => {
           .then((result) => {
             result.jobs.push(job);
             result.save();
-            console.log("Done");
             return res.json({
               success: true,
               data: result,
@@ -105,6 +105,7 @@ module.exports.getAllJobs = async (req, res, next) => {
   try {
     Job.find()
       .populate("company")
+      .populate("sector")
       .then((result) => {
         return res.json({
           success: true,
@@ -112,12 +113,15 @@ module.exports.getAllJobs = async (req, res, next) => {
         });
       })
       .catch((err) => {
+        console.log(err);
+
         return res.json({
           success: false,
           msg: err,
         });
       });
   } catch (error) {
+    console.log(error);
     return res.json({
       success: false,
       error: error,
@@ -129,7 +133,6 @@ module.exports.getAllJobs = async (req, res, next) => {
 module.exports.getJobsForSpecificSector = async (req, res, next) => {
   try {
     const jobs = await Job.find({ sector: req.query.sector });
-    console.log(jobs);
     return res.json({
       success: true,
       data: jobs,
@@ -165,7 +168,7 @@ module.exports.applyForJob = async (req, res, next) => {
     const appliedJob = await Job.findById(job);
     const appliedUser = await userModel.findById(user);
     //find if the user has already applied for this job
-    // console.log(appliedUser, job);
+
     if (appliedJob.applicants) {
       appliedJob.applicants.forEach((applicant) => {
         if (applicant.applicant == user) {
@@ -236,7 +239,7 @@ const getReusableJobDetail = async (job_id) => {
   //     model: "Users",
   //   },
   // });
-  // console.log(Jobs);
+
   await Job.aggregate([
     { $match: { _id: job_id } },
     {
@@ -345,3 +348,27 @@ module.exports.updateJobStatus = async (req, res, next) => {
     });
   }
 };
+
+module.exports.getAppliedJobs = asyncHandler(async (req, res, next) => {
+  const usr = await req.user._id;
+  var jobs = await userModel
+    .findById(usr)
+    .select("appliedJobs")
+    .populate({
+      path: "appliedJobs.job",
+      populate: {
+        path: "company",
+      },
+    });
+  // .populate("appliedJobs.job")
+  // .populate("appliedJobs.job.company")
+  // .populate("appliedJobs.job.sector");
+
+  console.log(jobs.appliedJobs[0]);
+
+  if (!jobs) {
+    res.status(400).send("Applied Jobs not found");
+  } else {
+    res.status(200).send(jobs);
+  }
+});

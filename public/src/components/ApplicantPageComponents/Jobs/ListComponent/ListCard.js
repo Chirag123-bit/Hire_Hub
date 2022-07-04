@@ -1,9 +1,8 @@
-import React from "react";
 import { FcBrokenLink } from "react-icons/fc";
 import {
-  JobCard,
   ApplyButton,
   CompanyInfoHoler,
+  JobCard,
   JobDescription,
   JobDescriptionBox,
   JobFooter,
@@ -28,31 +27,33 @@ function Job({
 }) {
   return (
     <JobCard id={id}>
-      <CompanyInfoHoler>
-        <div className="box1">
-          <FcBrokenLink style={{ fontSize: "1.5rem" }} />
-        </div>
-        <div className="box2">
-          <h6>{company_name}</h6>
-          <p>
-            {company_region}, {company_country}
-          </p>
-        </div>
-      </CompanyInfoHoler>
-      <JobTitleHolder>
-        <JobTitle>{title}</JobTitle>
-        <JobType>{type}</JobType>
-      </JobTitleHolder>
-      <JobDescriptionBox>
-        <JobDescription>{description}</JobDescription>
-      </JobDescriptionBox>
-      <JobFooter>
-        <Sallary>
-          Rs.{sallary}
-          <Muted>/month</Muted>
-        </Sallary>
-        <ApplyButton>Apply Now</ApplyButton>
-      </JobFooter>
+      <div style={{ zIndex: 1 }}>
+        <CompanyInfoHoler>
+          <div className="box1">
+            <FcBrokenLink style={{ fontSize: "1.5rem" }} />
+          </div>
+          <div className="box2">
+            <h6>{company_name}</h6>
+            <p>
+              {company_region}, {company_country}
+            </p>
+          </div>
+        </CompanyInfoHoler>
+        <JobTitleHolder>
+          <JobTitle>{title}</JobTitle>
+          <JobType>{type}</JobType>
+        </JobTitleHolder>
+        <JobDescriptionBox>
+          <JobDescription>{description}</JobDescription>
+        </JobDescriptionBox>
+        <JobFooter>
+          <Sallary>
+            Rs.{sallary}
+            <Muted>/month</Muted>
+          </Sallary>
+          <ApplyButton>Apply Now</ApplyButton>
+        </JobFooter>
+      </div>
     </JobCard>
   );
 }

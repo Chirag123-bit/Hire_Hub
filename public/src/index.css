@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@400;700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital@1&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@400;700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital@1&family=Titillium+Web:ital,wght@0,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital@1&family=Titillium+Web:ital,wght@0,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alef&family=Encode+Sans+Expanded:wght@400;700&family=Open+Sans&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,600;1,700;1,900&family=Titillium+Web:ital,wght@0,400;1,700&display=swap");
 
 ::-webkit-scrollbar {
   background-color: #080420;
@@ -13,4 +14,41 @@
 ::-webkit-scrollbar-thumb {
   /* background: rgb(197, 14, 14); */
   background: #045de9;
+}
+
+.seeker-gradient {
+  background-image: url("images/background.png");
+
+  background-attachment: fixed;
+}
+
+.seeker-gradient-two {
+  /* background-image: url("images/background.png"); */
+  /* background-image: linear-gradient(
+    83.2deg,
+    rgba(150, 93, 233, 1) 10.8%,
+    rgba(99, 88, 238, 1) 94.3%
+  );
+
+  background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-position: center;
+  backdrop-filter: blur(50px);
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: url("images/back1.jpg");
+}
+
+.makeStyles-root-1 {
+  margin-left: 0;
+}
+
+.MuiCheckbox-root {
+  color: white !important;
+}
+
+.sc-eTgnfb .jGQbXH option {
+  /* backdrop-filter: blur(20px); */
+  /* background: transparent !important; */
+  background-color: red !important;
 }

@@ -24,6 +24,7 @@ export const HomePanalWrap = styled.div`
   flex-basis: 20%;
   overflow-y: auto;
   padding: 1rem;
+  padding-left: 0;
   padding-bottom: 0;
   &::-webkit-scrollbar {
     display: none;

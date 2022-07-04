@@ -2,12 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import backend from "../../../../images/backend.png";
 import { getSectorJob } from "../../../../utils/APIRoutes";
-import { ColoredSlogan } from "../SeekerHero/seekerHeroElements";
 import {
   CategoryCard,
   CategoryContainer,
   CategoryTitle,
   CatImage,
+  ColoredSlogan,
   ContentHolder,
   HContainer,
   ImageSection,

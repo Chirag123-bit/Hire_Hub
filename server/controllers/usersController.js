@@ -9,6 +9,9 @@ require("dotenv").config();
 const path = require("path");
 const { register_schema } = require("../validators/register_validator");
 const jwt = require("jsonwebtoken");
+const generateToken = require("../config/generateToken");
+const Event = require("../model/EventModel");
+const Todo = require("../model/TodoModels");
 
 // Node Mail Service Transporter
 let transporter = nodemailer.createTransport({
@@ -33,7 +36,6 @@ module.exports.resendVerification = async (req, res) => {
   const email = req.body["email"];
   User.findOne({ _id })
     .then((user) => {
-      console.log(user);
       if (!user.isVerified) {
         const code = Math.floor(Math.random() * (999999 - 100000 + 1) + 100000);
 
@@ -172,8 +174,6 @@ module.exports.verify = (req, res) => {
   userVerification
     .find({ userId })
     .then((result) => {
-      console.log(userId);
-      console.log(result.length);
       if (result.length > 0) {
         const { expiresAt } = result[0];
         const hashedUniqueString = result[0].uniqueString;
@@ -304,14 +304,21 @@ module.exports.register = async (req, res, next) => {
       cabout,
       cdesc,
     } = req.body;
+    console.log(req.body);
     const usernameCheck = await User.findOne({ username });
 
     //Username and Email Validation
     if (usernameCheck)
-      return res.json({ msg: "Username already used", status: false });
+      return res.status(500).json({
+        msg: "Username already used",
+        status: false,
+      });
     const emailCheck = await User.findOne({ email });
     if (emailCheck)
-      return res.json({ msg: "Email already used", status: false });
+      return res.status(500).json({
+        msg: "Email already used",
+        status: false,
+      });
 
     const companyNameCheck = await Company.findOne({ name: c_name });
 
@@ -363,7 +370,7 @@ module.exports.register = async (req, res, next) => {
         if (result.type === "Company") {
           if (companyNameCheck) {
             result.deleteOne();
-            return res.json({
+            return res.status(500).json({
               msg: "Company Name already exists",
               status: false,
             });
@@ -383,17 +390,18 @@ module.exports.register = async (req, res, next) => {
               result
                 .updateOne({ company: company._id })
                 .then(() => {
-                  return res.json({
+                  return res.status(200).json({
                     status: true,
                     user: result,
                     company: company,
+                    token: generateToken(result._id),
                     msg: "Successfully created account",
                   });
                 })
                 .catch((e) => {
                   result.deleteOne();
                   company.deleteOne();
-                  return res.json({
+                  return res.status(500).json({
                     status: false,
                     msg: "Failed to bind user info with company",
                   });
@@ -403,22 +411,23 @@ module.exports.register = async (req, res, next) => {
               console.log(e);
               result.deleteOne();
               company.deleteOne();
-              return res.json({
+              return res.status(500).json({
                 status: false,
                 msg: "Failed to create account",
               });
             });
         } else {
-          return res.json({
+          return res.status(200).json({
             status: true,
             user: result,
+            token: generateToken(result._id),
             msg: "Successfully created account",
           });
         }
       })
       .catch((error) => {
         console.log(error);
-        res.json({
+        res.status(500).json({
           status: false,
           message: "An Error Occured",
         });
@@ -434,36 +443,33 @@ module.exports.login = async (req, res, next) => {
     var { username, password } = req.body;
     const user = await User.findOne({ username });
     if (!user) {
-      return res.json({ msg: "Incorrect Username or Password", status: false });
+      return res
+        .status(500)
+        .json({ msg: "Incorrect Username or Password", status: false });
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       console.log("Invalid");
-      return res.json({ msg: "Incorrect Username or Password", status: false });
+      return res
+        .status(500)
+        .json({ msg: "Incorrect Username or Password", status: false });
     }
 
     delete user.password;
-    const token = jwt.sign(
-      {
-        userId: user._id,
-      },
-      "RANDOM-TOKEN",
-      { expiresIn: "24h" }
-    );
     if (user.type === "Company") {
       const company = await Company.findOne({ _id: user.company });
 
-      return res.json({
+      return res.status(200).json({
         status: true,
         user,
         company,
-        token,
+        token: generateToken(user._id),
       });
     }
-    return res.json({
+    return res.status(200).json({
       status: true,
       user,
-      token,
+      token: generateToken(user._id),
     });
   } catch (ex) {
     next(ex);
@@ -522,4 +528,149 @@ module.exports.applyJob = async (req, res, next) => {
   } catch (e) {
     // next(e);
   }
+};
+
+module.exports.allUsers = async (req, res, next) => {
+  const keyword = req.query.search
+    ? {
+        $or: [
+          { firstName: { $regex: req.query.search, $options: "i" } },
+          { lastName: { $regex: req.query.search, $options: "i" } },
+          { username: { $regex: req.query.search, $options: "i" } },
+          { email: { $regex: req.query.search, $options: "i" } },
+        ],
+      }
+    : {};
+
+  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  res.send(users);
+};
+
+module.exports.addEvent = async (req, res, next) => {
+  try {
+    const { title, note, color, date, startTime, endTime, remind, repeat } =
+      req.body;
+    const user = req.user;
+    const event = new Event({
+      title,
+      note,
+      color,
+      date,
+      startTime,
+      endTime,
+      remind,
+      repeat,
+    });
+    await event.save();
+    user.events.push(event);
+    await user.save();
+    return res.json({
+      status: true,
+      msg: "Event added successfully",
+      event,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+module.exports.addTodos = async (req, res, next) => {
+  try {
+    const { title, note, color, isCompleted } = req.body;
+
+    const user = req.user;
+    const todo = new Todo({
+      title,
+      note,
+      color,
+      isCompleted,
+    });
+    await todo.save();
+    user.todos.push(todo);
+    await user.save();
+    return res.json({
+      status: true,
+      msg: "Todo added successfully",
+      todo,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+//mark event completed
+module.exports.markEventCompleted = async (req, res, next) => {
+  try {
+    const { eventId } = req.body;
+    console.log(eventId);
+    const user = req.user;
+    const event = await Event.findById(eventId);
+    event.isCompleted = true;
+    await event.save();
+    return res.json({
+      status: true,
+      msg: "Event marked completed successfully",
+      event,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+//mark todo completed
+module.exports.markTodoCompleted = async (req, res, next) => {
+  try {
+    const { todoId } = req.body;
+    const user = req.user;
+    const todo = await Todo.findById(todoId);
+    todo.isCompleted = true;
+    await todo.save();
+    return res.json({
+      status: true,
+      msg: "Todo marked completed successfully",
+      todo,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+//update certain fields of the user
+module.exports.updateUser = async (req, res, next) => {
+  const userId = req.user._id;
+  var user;
+  try {
+    if (req.body.title) {
+      user = await User.findByIdAndUpdate(userId, {
+        $set: {
+          "professional.title": req.body.title,
+          "professional.sector": req.body.sector,
+          "professional.skills": req.body.skills,
+        },
+      });
+    } else if (req.body.education) {
+      user = await User.findByIdAndUpdate(userId, {
+        $set: {
+          "additional.0.education": req.body.education,
+        },
+      });
+    } else if (req.body.works) {
+      user = await User.findByIdAndUpdate(userId, {
+        $set: {
+          "additional.0.experience": req.body.works,
+        },
+      });
+    } else {
+      user = await User.findOneAndUpdate({ _id: userId }, { $set: req.body });
+    }
+    console.log(user);
+    return res.status(200).json({
+      status: true,
+      user,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+  return res.status(500).json({
+    status: false,
+  });
 };

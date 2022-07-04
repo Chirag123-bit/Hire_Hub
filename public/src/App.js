@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthProvider } from "./auth/auth";
 import EmailVerified from "./components/Common/Email/EmailVerified";
 import VideoCall from "./components/Meeting/VideoCall";
+import ChatProvider from "./context/ChatProvider";
 import Auth from "./pages/Auth";
-import { Chat } from "./pages/Chat";
+import ChatPage from "./pages/ChatPage";
 import Code_sent from "./pages/code_sent";
 import Employer from "./pages/Employer";
 import Home from "./pages/index";
@@ -18,16 +18,17 @@ import SetAvatar from "./pages/SetAvatar";
 function App() {
   const [inCall, setInCall] = useState(false);
   return (
-    <AuthProvider>
+    <>
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/auth/*" element={<Auth />} />
         <Route path="/verified" element={<EmailVerified />} />
         <Route path="/setAvatar" element={<SetAvatar />} />
-        <Route
+        {/* <Route
           path="/chat"
           element={<Chat inCall={inCall} setInCall={setInCall} />}
-        />
+        /> */}
+
         {/* <Route path="/videoCall/" element={<VideoApp />} /> */}
         <Route
           path="/videoCall"
@@ -40,8 +41,13 @@ function App() {
         <Route exact path="/codesent/:id" element={<Code_sent />} />
       </Routes>
 
+      <ChatProvider>
+        <Routes>
+          <Route path="/chats" element={<ChatPage />} />
+        </Routes>
+      </ChatProvider>
       <ToastContainer autoClose={500} />
-    </AuthProvider>
+    </>
   );
 }
 

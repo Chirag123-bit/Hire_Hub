@@ -1,0 +1,102 @@
+.cardTest {
+  width: 350px;
+  height: 75vh;
+  padding: 20px;
+  backdrop-filter: blur(20px);
+  border: 2px solid #fff;
+  border-radius: 20px;
+  display: grid;
+  align-content: center;
+}
+.proImg {
+  width: 200px;
+  margin: auto;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  margin: 30px auto 40px auto;
+}
+.name {
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+}
+.cardTest p {
+  color: #fff;
+  text-align: center;
+  margin: 20px 0;
+}
+.cardTest button {
+  width: 80%;
+  padding: 8px 0;
+  margin: auto;
+  background-color: #3a3636;
+  color: #fff;
+  border-radius: 7px;
+  border: 2px solid #fff;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  transition: 0.3s;
+}
+.cardTest button:hover {
+  background: #000;
+}
+
+.loading-wrapper {
+  /* min-width: 200px;
+  min-height: 200px; */
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.loader {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: animationLoading 2s infinite;
+  backdrop-filter: blur(50px);
+}
+
+@keyframes animationLoading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader::after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: -50%;
+  border-radius: 0 20px 0 0;
+  background: linear-gradient(to top, transparent, #00fff9);
+}
+
+.loading-circle {
+  width: 90%;
+  height: 90%;
+  border-radius: 100%;
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  background: #000;
+  z-index: 1;
+}
+#profileDropdown a {
+  color: #fff;
+  text-transform: capitalize;
+  border: "none";
+  box-shadow: "none";
+}
+
+#profileDropdown a:hover {
+  color: #fff;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.2);
+}

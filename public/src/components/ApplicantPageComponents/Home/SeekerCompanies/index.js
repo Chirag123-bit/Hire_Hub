@@ -1,5 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useSpring } from "react-spring";
+import { v4 as uuid } from "uuid";
 import { getAllCompanies } from "../../../../utils/APIRoutes";
 import {
   ColoredSlogan,
@@ -25,6 +27,11 @@ function Companies() {
     });
   }, []);
 
+  const [props, set] = useSpring(() => ({
+    xys: [0, 0, 1],
+    config: { mass: 10, tension: 200, friction: 50 },
+  }));
+
   return (
     <SolutionsContainer>
       <TextContent>
@@ -36,15 +43,11 @@ function Companies() {
       <CardsContainer>
         {ready ? (
           companies.map((company) => (
-            <CategoryCard
-              onClick={(event) =>
-                (window.location.href = `/applicant/company/${company._id}`)
-              }
-            >
-              <div className="box1">
+            <CategoryCard id={uuid()}>
+              <div className="box1" id={uuid()}>
                 <FcAdvertisment />
               </div>
-              <div className="box2">
+              <div className="box2" id={uuid()}>
                 <h6>{company.name}</h6>
                 <p>
                   {company.region}, {company.country}

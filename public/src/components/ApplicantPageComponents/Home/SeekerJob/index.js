@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FcBrokenLink } from "react-icons/fc";
 import { getAllJobs } from "../../../../utils/APIRoutes";
 import { ColoredSlogan, Slogan } from "../SeekerHero/seekerHeroElements";
@@ -20,7 +20,6 @@ import {
   Sallary,
   TitleHolder,
 } from "./JobElements";
-import ParticleBackground from "./ParticleBackground";
 import "./style.css";
 
 function SeekerJob() {
@@ -35,7 +34,7 @@ function SeekerJob() {
   }, []);
   return (
     <JobsContainer>
-      <ParticleBackground />
+      {/* <ParticleBackground /> */}
       <ContentHolder>
         <TitleHolder>
           <Slogan>
@@ -50,31 +49,33 @@ function SeekerJob() {
                   (window.location.href = `/applicant/job/${job._id}`)
                 }
               >
-                <CompanyInfoHoler>
-                  <div className="box1">
-                    <FcBrokenLink style={{ fontSize: "1.5rem" }} />
-                  </div>
-                  <div className="box2">
-                    <h6>{job.company.name}</h6>
-                    <p>
-                      {job.company.region}, {job.company.country}
-                    </p>
-                  </div>
-                </CompanyInfoHoler>
-                <JobTitleHolder>
-                  <JobTitle>{job.title}</JobTitle>
-                  <JobType>Full Time</JobType>
-                </JobTitleHolder>
-                <JobDescriptionBox>
-                  <JobDescription>{job.description}</JobDescription>
-                </JobDescriptionBox>
-                <JobFooter>
-                  <Sallary>
-                    ${job.sallary}
-                    <Muted>/month</Muted>
-                  </Sallary>
-                  <ApplyButton>Apply Now</ApplyButton>
-                </JobFooter>
+                <div style={{ zIndex: 1 }}>
+                  <CompanyInfoHoler>
+                    <div className="box1">
+                      <FcBrokenLink style={{ fontSize: "1.5rem" }} />
+                    </div>
+                    <div className="box2">
+                      <h6>{job.company.name}</h6>
+                      <p>
+                        {job.company.region}, {job.company.country}
+                      </p>
+                    </div>
+                  </CompanyInfoHoler>
+                  <JobTitleHolder>
+                    <JobTitle>{job.title}</JobTitle>
+                    <JobType>Full Time</JobType>
+                  </JobTitleHolder>
+                  <JobDescriptionBox>
+                    <JobDescription>{job.description}</JobDescription>
+                  </JobDescriptionBox>
+                  <JobFooter>
+                    <Sallary>
+                      ${job.sallary}
+                      <Muted>/month</Muted>
+                    </Sallary>
+                    <ApplyButton>Apply Now</ApplyButton>
+                  </JobFooter>
+                </div>
               </JobCard>
             ))
           ) : (

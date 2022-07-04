@@ -1,8 +1,8 @@
-import styled from "styled-components";
 import SearchIcon from "@material-ui/icons/Search";
+import styled from "styled-components";
 
 export const SearchbarWrap = styled.div`
-  border-bottom: 1px solid rgba(0, 0, 0, 0.26);
+  /* border-bottom: 1px solid white; */
   padding: 1.5rem 1rem;
 `;
 export const ContentWrap = styled.div`
@@ -11,11 +11,12 @@ export const ContentWrap = styled.div`
   width: 40%;
   margin: auto;
   border-radius: 2rem;
-  border: 1px solid #045de9;
+  border: 1px solid white;
+  backdrop-filter: blur(20px);
 `;
 
 export const Searchicon = styled(SearchIcon)`
-  color: rgba(0, 0, 0, 0.26);
+  color: white;
   margin-right: 2rem;
   margin-left: 1rem;
 `;
@@ -27,8 +28,12 @@ export const SearchInput = styled.input`
   width: 100%;
   border-radius: 2rem;
   font-family: "Raleway", sans-serif;
-  color: #045de9;
+  backdrop-filter: blur(20px);
+  background: transparent;
+  caret-color: white;
+  color: white;
+  padding-left: 0.2rem;
   &::placeholder {
-    color: rgba(0, 0, 0, 0.26);
+    color: white;
   }
 `;

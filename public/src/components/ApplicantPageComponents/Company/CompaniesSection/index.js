@@ -1,18 +1,18 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { v4 as uuid } from "uuid";
 import { getSectorCompany } from "../../../../utils/APIRoutes";
 import {
-  CategoryCard,
   CategoryContainer,
-  CategoryTitle,
-  CatImage,
   ContentHolder,
   HContainer,
-  ImageSection,
   Title,
   TitleContainer,
-  TitleSection,
 } from "../../Home/CategorySection/CategoryElements";
+import {
+  CategoryCard,
+  FcAdvertisment,
+} from "../../Home/SeekerCompanies/ComapnyElements";
 import { ColoredSlogan } from "../../Home/SeekerHero/seekerHeroElements";
 
 function Categories({ white }) {
@@ -78,28 +78,32 @@ function Categories({ white }) {
   return (
     <CategoryContainer white={white}>
       <ContentHolder>
-        <TitleContainer>
+        <TitleContainer style={{ color: "white" }}>
           <Title>
-            Companies Focused in <ColoredSlogan>Technology</ColoredSlogan>
+            Companies Focused in{" "}
+            <ColoredSlogan style={{ color: "whitesmoke" }}>
+              Technology
+            </ColoredSlogan>
           </Title>
         </TitleContainer>
         <HContainer>
           {isTechReady ? (
             tech.map((company) => (
               <CategoryCard
-                white={white}
+                id={uuid()}
                 onClick={(event) =>
                   (window.location.href = `/applicant/company/${company._id}`)
                 }
               >
-                <ImageSection>
-                  <CatImage src={company.avatarImage} alt="Backend" />
-                </ImageSection>
-                <TitleSection>
-                  <CategoryTitle style={{ "font-size": "20px" }}>
-                    {company.name}
-                  </CategoryTitle>
-                </TitleSection>
+                <div className="box1" id={uuid()}>
+                  <FcAdvertisment />
+                </div>
+                <div className="box2" id={uuid()}>
+                  <h6>{company.name}</h6>
+                  <p>
+                    {company.region}, {company.country}
+                  </p>
+                </div>
               </CategoryCard>
             ))
           ) : (
@@ -109,27 +113,31 @@ function Categories({ white }) {
       </ContentHolder>
       <ContentHolder>
         <TitleContainer>
-          <Title>
-            Companies Focused in <ColoredSlogan>Health Care</ColoredSlogan>
+          <Title style={{ color: "white" }}>
+            Companies Focused in{" "}
+            <ColoredSlogan style={{ color: "whitesmoke" }}>
+              Health Care
+            </ColoredSlogan>
           </Title>
         </TitleContainer>
         <HContainer>
           {isHealthReady ? (
             health.map((company) => (
               <CategoryCard
-                white={white}
+                id={uuid()}
                 onClick={(event) =>
                   (window.location.href = `/applicant/company/${company._id}`)
                 }
               >
-                <ImageSection>
-                  <CatImage src={company.avatarImage} alt="Backend" />
-                </ImageSection>
-                <TitleSection>
-                  <CategoryTitle style={{ "font-size": "20px" }}>
-                    {company.name}
-                  </CategoryTitle>
-                </TitleSection>
+                <div className="box1" id={uuid()}>
+                  <FcAdvertisment />
+                </div>
+                <div className="box2" id={uuid()}>
+                  <h6>{company.name}</h6>
+                  <p>
+                    {company.region}, {company.country}
+                  </p>
+                </div>
               </CategoryCard>
             ))
           ) : (
@@ -139,28 +147,31 @@ function Categories({ white }) {
       </ContentHolder>
       <ContentHolder>
         <TitleContainer>
-          <Title>
+          <Title style={{ color: "white" }}>
             Companies Focused in{" "}
-            <ColoredSlogan>Entertainment Industry</ColoredSlogan>
+            <ColoredSlogan style={{ color: "whitesmoke" }}>
+              Entertainment Industry
+            </ColoredSlogan>
           </Title>
         </TitleContainer>
         <HContainer>
           {isEntReady ? (
             ent.map((company) => (
               <CategoryCard
-                white={white}
+                id={uuid()}
                 onClick={(event) =>
                   (window.location.href = `/applicant/company/${company._id}`)
                 }
               >
-                <ImageSection>
-                  <CatImage src={company.avatarImage} alt="Backend" />
-                </ImageSection>
-                <TitleSection>
-                  <CategoryTitle style={{ "font-size": "20px" }}>
-                    {company.name}
-                  </CategoryTitle>
-                </TitleSection>
+                <div className="box1" id={uuid()}>
+                  <FcAdvertisment />
+                </div>
+                <div className="box2" id={uuid()}>
+                  <h6>{company.name}</h6>
+                  <p>
+                    {company.region}, {company.country}
+                  </p>
+                </div>
               </CategoryCard>
             ))
           ) : (
@@ -170,27 +181,31 @@ function Categories({ white }) {
       </ContentHolder>
       <ContentHolder>
         <TitleContainer>
-          <Title>
-            Companies Focused in <ColoredSlogan>Real Estates</ColoredSlogan>
+          <Title style={{ color: "white" }} s>
+            Companies Focused in{" "}
+            <ColoredSlogan style={{ color: "whitesmoke" }}>
+              Real Estates
+            </ColoredSlogan>
           </Title>
         </TitleContainer>
         <HContainer style={{ marginBottom: "2rem" }}>
           {isRealReady ? (
             real.map((company) => (
               <CategoryCard
-                white={white}
+                id={uuid()}
                 onClick={(event) =>
                   (window.location.href = `/applicant/company/${company._id}`)
                 }
               >
-                <ImageSection>
-                  <CatImage src={company.avatarImage} alt="Backend" />
-                </ImageSection>
-                <TitleSection>
-                  <CategoryTitle style={{ "font-size": "20px" }}>
-                    {company.name}
-                  </CategoryTitle>
-                </TitleSection>
+                <div className="box1" id={uuid()}>
+                  <FcAdvertisment />
+                </div>
+                <div className="box2" id={uuid()}>
+                  <h6>{company.name}</h6>
+                  <p>
+                    {company.region}, {company.country}
+                  </p>
+                </div>
               </CategoryCard>
             ))
           ) : (

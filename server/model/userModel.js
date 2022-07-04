@@ -133,6 +133,57 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
+
+  savedJobs: [
+    {
+      job: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Job",
+      },
+      savedDate: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+
+  favouriteJobs: [
+    {
+      job: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Job",
+      },
+      savedDate: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+
+  events: [
+    {
+      event: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Event",
+      },
+      savedDate: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+  todos: [
+    {
+      event: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Todo",
+      },
+      savedDate: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model("Users", userSchema);

@@ -20,8 +20,19 @@ export const getSectorJob = `${host}/api/job/getSectorJob`;
 export const getJob = `${host}/api/job/getJob`;
 export const applyForJob = `${host}/api/job/applyForJob`;
 export const updateJobStatus = `${host}/api/job/updateJobStatus`;
+export const getAppliedJobs = `${host}/api/job/appliedJobs`;
 
 export const getCompanyData = `${host}/api/company/getCompanyData`;
 export const getAllCompanies = `${host}/api/company/getCompanies`;
 export const getSectorCompany = `${host}/api/company/getSectorCompany`;
 export const getCompanyDetails = `${host}/api/company/getCompanyDetails`;
+
+export const chatUserSearch = `${host}/api/auth/getAllUsers?`;
+export const accessUserChat = `${host}/api/chat`;
+export const group = `${host}/api/chat/groups`;
+export const groupRename = `${host}/api/chat/rename`;
+export const groupAdd = `${host}/api/chat/groupadd`;
+export const groupRemove = `${host}/api/chat/groupremove`;
+export const message = `${host}/api/message`;
+
+export const getCategories = `${host}/api/category/getCategory`;

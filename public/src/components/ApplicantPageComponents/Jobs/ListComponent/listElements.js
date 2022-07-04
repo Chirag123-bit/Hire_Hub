@@ -18,9 +18,44 @@ export const JobCard = styled.div`
   justify-content: space-between;
   transition: box-shadow 0.3s ease-in;
   margin: 1rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10%;
+
   &:hover {
     box-shadow: 1px 8px 20px rgba(69, 65, 221, 0.75);
     transition: box-shadow 0.3s ease-in;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    height: 150%;
+    width: 40%;
+    top: -15%;
+    right: 0;
+    left: 0;
+    margin: auto;
+
+    background: linear-gradient(#00e5ff, #b400fb);
+    animation: animate 10s linear infinite;
+
+    @keyframes animate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    background: #29303f;
+    border-radius: 10%;
   }
 `;
 
@@ -29,9 +64,10 @@ export const CompanyInfoHoler = styled.div`
   grid-template-columns: [image-row] 1fr [content-row] 6fr;
   width: 100%;
   justify-content: space-between;
-  background-color: white;
+  /* background-color: white; */
   padding: 1rem 2rem;
   text-align: center;
+  color: white;
 
   padding-left: 0;
   transition: all 0.2s ease-in-out;
@@ -48,6 +84,7 @@ export const CompanyInfoHoler = styled.div`
     h6 {
       margin: 0;
       text-align: left;
+      color: white;
     }
 
     p {
@@ -55,17 +92,20 @@ export const CompanyInfoHoler = styled.div`
       text-align: left;
       font-size: 14px;
       margin: 0;
+      color: white;
     }
   }
 `;
 
 export const JobTitleHolder = styled.div`
   margin: 0.5rem 0;
+  color: white;
 `;
 
 export const JobTitle = styled.h4`
   margin-bottom: 0;
   font-family: "Encode Sans Expanded", sans-serif;
+  color: white;
 `;
 
 export const JobType = styled.p`
@@ -87,6 +127,7 @@ export const JobDescription = styled.p`
   -webkit-box-orient: vertical;
   color: rgb(112, 137, 157);
   font-family: "Source Sans Pro", sans-serif;
+  color: white;
 `;
 
 export const JobFooter = styled.div`
@@ -97,6 +138,7 @@ export const JobFooter = styled.div`
 
 export const Sallary = styled.h5`
   font-weight: bold;
+  color: white;
 `;
 export const Muted = styled.span`
   font-size: 12px;
@@ -107,7 +149,9 @@ export const ApplyButton = styled.button`
   border: none;
   outline: none;
   color: rgb(69, 65, 221);
-  background-color: #f8f6fe;
+  background-color: #3a3636;
+  border-radius: 7px;
+  border: 2px solid #fff;
   padding: 0.2rem 0.5rem;
   transition: all 0.3s ease-in-out;
 

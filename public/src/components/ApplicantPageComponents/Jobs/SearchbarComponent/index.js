@@ -1,9 +1,8 @@
-import React from "react";
 import {
+  ContentWrap,
   SearchbarWrap,
   Searchicon,
   SearchInput,
-  ContentWrap,
 } from "./Components";
 
 function SearchBar({ value, changeInput }) {

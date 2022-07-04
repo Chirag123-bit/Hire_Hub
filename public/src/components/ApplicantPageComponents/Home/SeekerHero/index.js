@@ -1,26 +1,25 @@
 import React from "react";
-import "./style.css";
-import ParticleBackground from "./ParticleBackground";
-
+import ParticleBackground from "../SeekerJob/ParticleBackground";
 import {
-  HeroContainer,
-  ContentHolder,
   ColoredSlogan,
-  Slogan,
-  SloganSubtext,
-  TextContent,
+  ContentHolder,
+  FormContainer,
+  HeroContainer,
   JobSearch,
   LocationFilter,
   SearchBtn,
   SearchContainer,
-  FormContainer,
+  Slogan,
+  SloganSubtext,
+  TextContent,
 } from "./seekerHeroElements";
+import "./style.css";
 
 function SeekerHero() {
   return (
     <HeroContainer>
       <ParticleBackground />
-      <ContentHolder>
+      <ContentHolder style={{ backdropFilter: "blur(15px)" }}>
         <TextContent>
           <Slogan>
             Get The <ColoredSlogan>Right Job</ColoredSlogan> {"\n"} You Deserve

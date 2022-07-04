@@ -4,6 +4,9 @@ const messageRoute = require("./routes/messagesRoute");
 const videoRoute = require("./routes/videoRoute");
 const companyRoute = require("./routes/companyRoute");
 const jobRoute = require("./routes/jobRoute");
+const chatRoute = require("./routes/chatRoute");
+const messagesRoute = require("./routes/messageRoute");
+const categoryRoute = require("./routes/categoryRoute");
 
 //Socket Connection
 const socket = require("socket.io");
@@ -25,10 +28,14 @@ app.use(express.json());
 
 //Routes Setup
 app.use("/api/auth", userRoutes);
-app.use("/api/messages", messageRoute);
+// app.use("/api/messages", messageRoute);
 app.use("/api/video", videoRoute);
 app.use("/api/company", companyRoute);
 app.use("/api/job", jobRoute);
+app.use("/api/chat", chatRoute);
+app.use("/api/message", messagesRoute);
+app.use("/api/category", categoryRoute);
+app.use("/uploads", express.static("uploads"));
 
 // Server Initialization
 const server = app.listen(process.env.PORT, () =>
@@ -37,32 +44,45 @@ const server = app.listen(process.env.PORT, () =>
 
 // Socket Connection
 const io = socket(server, {
+  pingTimeout: 60000, //Close connection after 60s of inactivity
   cors: {
     origin: "http://localhost:3000",
     credentials: true,
   },
 });
 
-global.onlineUsers = new Map();
-
 io.on("connection", (socket) => {
-  global.chatSocket = socket;
-  socket.on("add-user", (userId) => {
-    onlineUsers.set(userId, socket.id);
+  console.log("Connected to socket.io");
+
+  socket.on("setup", (userData) => {
+    socket.join(userData._id);
+    socket.emit("connected");
   });
 
-  socket.on("send-msg", (data) => {
-    const sendUserSocket = onlineUsers.get(data.to);
-    if (sendUserSocket) {
-      socket.to(sendUserSocket).emit("msg-recive", data.message);
-    }
+  socket.on("join chat", (room) => {
+    socket.join(room);
+    console.log("User Joined Room: " + room);
   });
 
-  socket.on("join-room", ({ roomId, userId }) => {
-    const clientsInRoom = io.in(roomId).allSockets();
-    if (!userId in clientsInRoom) {
-      socket.join(roomId);
-    }
-    socket.broadcast.to(roomId).emit("user-connected", userId);
+  socket.on("typing", (room) => {
+    socket.in(room).emit("typing");
+  });
+  socket.on("stop typing", (room) => {
+    socket.in(room).emit("stop typing");
+  });
+
+  socket.on("new message", (newMessageRecieved) => {
+    var chat = newMessageRecieved.chat;
+    if (!chat.users) return console.log("Users not defined");
+
+    chat.users.forEach((user) => {
+      if (user._id === newMessageRecieved.sender._id) return;
+      socket.in(user._id).emit("message recieved", newMessageRecieved);
+    });
+  });
+
+  socket.off("setup", () => {
+    console.log("User Disconnected");
+    socket.leave(userData._id);
   });
 });
