@@ -14,6 +14,7 @@ const {
   markEventCompleted,
   markTodoCompleted,
   addTodos,
+  updateUser,
 } = require("../controllers/usersController");
 const { protect } = require("../middleware/authMiddleware");
 
@@ -35,6 +36,7 @@ router.route("/addEvent").post(protect, addEvent);
 router.route("/addTodo").post(protect, addTodos);
 router.route("/completeEvent").put(protect, markEventCompleted);
 router.route("/completeTodo").put(protect, markTodoCompleted);
+router.route("/updateUser").put(protect, updateUser);
 // router.get("/getAllUsers", (protect, allUsers));
 
 module.exports = router;

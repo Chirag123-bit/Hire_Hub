@@ -634,3 +634,43 @@ module.exports.markTodoCompleted = async (req, res, next) => {
     next(e);
   }
 };
+//update certain fields of the user
+module.exports.updateUser = async (req, res, next) => {
+  const userId = req.user._id;
+  var user;
+  try {
+    if (req.body.title) {
+      user = await User.findByIdAndUpdate(userId, {
+        $set: {
+          "professional.title": req.body.title,
+          "professional.sector": req.body.sector,
+          "professional.skills": req.body.skills,
+        },
+      });
+    } else if (req.body.education) {
+      user = await User.findByIdAndUpdate(userId, {
+        $set: {
+          "additional.0.education": req.body.education,
+        },
+      });
+    } else if (req.body.works) {
+      user = await User.findByIdAndUpdate(userId, {
+        $set: {
+          "additional.0.experience": req.body.works,
+        },
+      });
+    } else {
+      user = await User.findOneAndUpdate({ _id: userId }, { $set: req.body });
+    }
+    console.log(user);
+    return res.status(200).json({
+      status: true,
+      user,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+  return res.status(500).json({
+    status: false,
+  });
+};
