@@ -164,43 +164,89 @@ module.exports.getJob = async (req, res, next) => {
 
 module.exports.applyForJob = async (req, res, next) => {
   try {
-    const { user, job } = req.body.params;
-    const appliedJob = await Job.findById(job);
+    var appliedJobId;
+    try {
+      const { job } = req.body.params;
+      appliedJobId = job;
+    } catch (error) {}
+
+    try {
+      const { job } = req.body;
+      appliedJobId = job;
+    } catch (error) {}
+
+    const user = req.user._id;
+    const appliedJob = await Job.findById(appliedJobId);
+
     const appliedUser = await userModel.findById(user);
-    //find if the user has already applied for this job
 
     if (appliedJob.applicants) {
-      appliedJob.applicants.forEach((applicant) => {
-        if (applicant.applicant == user) {
-          return res.json({
-            success: false,
-            msg: "You have already applied for this job",
-          });
-        }
-      });
+      const isApplyable = verifyNewApplicant(appliedJob, user);
+      console.log("Status: ");
+      console.log(isApplyable);
+      if (!isApplyable) {
+        console.log("Already Applied");
+
+        return res.status(500).json({
+          success: false,
+          msg: "You have already applied for this job",
+        });
+      } else {
+        console.log("Not Applied Yet");
+        appliedJob.applicants.push({
+          applicant: user,
+          status: "New",
+          appliedDate: new Date(),
+        });
+        appliedUser.appliedJobs.push({
+          job: appliedJob,
+          status: "New",
+          appliedDate: new Date(),
+        });
+        appliedJob.save();
+        appliedUser.save();
+        console.log("Successfully Applied");
+        return res.status(200).json({
+          success: true,
+          msg: "You have applied for this job",
+        });
+      }
     }
-    appliedJob.applicants.push({
-      applicant: user,
-      status: "New",
-      appliedDate: new Date(),
-    });
-    appliedUser.appliedJobs.push({
-      job: job,
-      status: "New",
-      appliedDate: new Date(),
-    });
-    appliedJob.save();
-    appliedUser.save();
-    return res.json({
-      success: true,
-      msg: "You have applied for this job",
-    });
   } catch (error) {
     console.log(error);
-    return res.json({
+    return res.status(500).json({
       success: false,
       msg: error,
     });
+  }
+};
+
+const verifyNewApplicant = (appliedJob, user) => {
+  var isFine = false;
+  try {
+    appliedJob.applicants.every((applicant) => {
+      const status = conditionChecker(applicant.applicant, user);
+      if (!status) {
+        console.log("False Flund");
+        isFine = false;
+        throw "Break";
+      } else {
+        isFine = true;
+      }
+    });
+  } catch (error) {
+    if (error !== "Break") console.log(error);
+  }
+  return isFine;
+};
+
+const conditionChecker = (appliedJob, user) => {
+  console.log(appliedJob);
+  console.log(user);
+  if (appliedJob.equals(user)) {
+    return false;
+  } else {
+    return true;
   }
 };
 
@@ -232,13 +278,6 @@ module.exports.applyForJob = async (req, res, next) => {
 
 const getReusableJobDetail = async (job_id) => {
   var res;
-  // const Jobs = await Job.findById(job_id).populate({
-  //   path: "applicants",
-  //   populate: {
-  //     path: "applicant",
-  //     model: "Users",
-  //   },
-  // });
 
   await Job.aggregate([
     { $match: { _id: job_id } },
@@ -269,14 +308,6 @@ const getReusableJobDetail = async (job_id) => {
 };
 
 const getReusableJobDetail1 = async (job_id) => {
-  // const Jobs = await Job.findById(job_id).populate({
-  //   path: "applicants",
-  //   populate: {
-  //     path: "applicant",
-  //     model: "Users",
-  //   },
-  // });
-  // console.log(Jobs);
   const Jobs = await Job.findById(job_id).populate({
     path: "applicants",
     populate: {

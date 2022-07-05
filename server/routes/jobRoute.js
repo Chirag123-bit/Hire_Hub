@@ -19,9 +19,9 @@ router.get("/getCompanyJobDetail", getCompanyJobDetail);
 router.get("/getAllJobs", getAllJobs);
 router.get("/getSectorJob", getJobsForSpecificSector);
 router.get("/getJob", getJob);
-router.post("/applyForJob", applyForJob);
 router.post("/updateJobStatus", updateJobStatus);
 
 router.route("/appliedJobs").get(protect, getAppliedJobs);
+router.route("/applyForJob").post(protect, applyForJob);
 
 module.exports = router;
