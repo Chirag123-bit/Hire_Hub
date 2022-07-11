@@ -9,7 +9,6 @@
 // import women from "../../../../images/woman.jpg";
 // import "../../../style.css";
 
-import { v4 as uuid } from "uuid";
 import {
   ColoredSlogan,
   Slogan,
@@ -22,12 +21,13 @@ import { useEffect, useState } from "react";
 import { getCategories, host } from "../../../../utils/APIRoutes";
 import "../../../style.css";
 
+import Tilt from "react-tilt";
+import { v4 as uuid } from "uuid";
+
 function SeekerSolutions() {
   const [categories, setCategories] = useState([]);
   const [ready, setIsReady] = useState(false);
-  // useEffect(() => {
-  //   import("./glass");
-  // });
+
   useEffect(() => {
     axios.get(getCategories).then((result) => {
       setCategories(result.data.data);
@@ -53,13 +53,20 @@ function SeekerSolutions() {
         ) : (
           categories.slice(0, 6).map(
             (category) => (
-              <div
-                data-tilt
-                data-tilt-glare
-                data-tilt-max-glare="0.3"
+              <Tilt
                 className="cardTest"
                 id={uuid()}
                 style={{ marginBottom: "1rem" }}
+                options={{
+                  scale: 1,
+                  speed: 500,
+                  reverse: true,
+                  max: 30,
+                  glare: true,
+                  maxGlare: 1,
+                  easing: "cubic-bezier(.03,.98,.52,.99)",
+                  prespective: 500,
+                }}
               >
                 <img
                   src={host + "/" + category.category.image}
@@ -70,7 +77,7 @@ function SeekerSolutions() {
                 <h2 class="name">{category.category.title}</h2>
                 <p>{category.jobs} Jobs Available</p>
                 <button>Explore Now</button>
-              </div>
+              </Tilt>
             ),
             import("./glass")
           )
@@ -81,3 +88,18 @@ function SeekerSolutions() {
 }
 
 export default SeekerSolutions;
+
+// <div
+//   data-tilt
+//   data-tilt-glare
+//   data-tilt-max-glare="0.3"
+//   className="cardTest"
+//   id={uuid()}
+//   style={{ marginBottom: "1rem" }}
+// >
+//   <img src={host + "/" + category.category.image} class="proImg" alt="srh" />
+
+//   <h2 class="name">{category.category.title}</h2>
+//   <p>{category.jobs} Jobs Available</p>
+//   <button>Explore Now</button>
+// </div>;

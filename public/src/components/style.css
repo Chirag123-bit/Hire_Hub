@@ -8,6 +8,16 @@
   display: grid;
   align-content: center;
 }
+.cardEmpty {
+  width: 100%;
+  height: 40vh;
+  padding: 20px;
+  backdrop-filter: blur(20px);
+  border: 2px solid #fff;
+  border-radius: 20px;
+  display: grid;
+  align-content: center;
+}
 .proImg {
   width: 200px;
   margin: auto;

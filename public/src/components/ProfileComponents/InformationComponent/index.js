@@ -33,7 +33,7 @@ function CandidateDescription({ user }) {
           </Summary>
         </SummaryContainer>
 
-        <SummaryContainer>
+        <SummaryContainer style={{ marginBottom: 0 }}>
           <DescriptionTitle>Work Experience</DescriptionTitle>
           {user.additional[0].experience.map((experience, index) => (
             <Listing key={index}>
@@ -42,7 +42,7 @@ function CandidateDescription({ user }) {
                 <Location>
                   <Company>
                     <FaBus /> {experience.company}
-                  </Company>
+                  </Company>{" "}
                   <Address>
                     <IoLocationSharp /> {experience.company_location}
                   </Address>
@@ -62,7 +62,7 @@ function CandidateDescription({ user }) {
           ))}
         </SummaryContainer>
 
-        <SummaryContainer>
+        <SummaryContainer style={{ marginTop: 0 }}>
           <DescriptionTitle>Education</DescriptionTitle>
           {user.additional[0].education.map((education, index) => (
             <Listing>

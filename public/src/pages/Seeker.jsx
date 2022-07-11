@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import AppliedJobs from "../components/ApplicantPageComponents/AppliedJobs";
 import SeekerNav from "../components/ApplicantPageComponents/Common/SeekerNav";
 import Careers from "../components/ApplicantPageComponents/Company/CompanyView";
+import AppliedJobs from "../components/ApplicantPageComponents/Jobs/AppliedJobs";
+import SavedJobs from "../components/ApplicantPageComponents/Jobs/SavedJobs";
 import SeekerJobs from "../components/ApplicantPageComponents/Jobs/SeekerJobComponent/SeekerJobs";
 import Footer from "../components/Common/Footer";
 import JobDescription from "../components/JobDescriptionComponent";
@@ -30,6 +31,7 @@ export default function Seeker() {
           <Route path="/jobs" element={<SeekerJobs />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/appliedJobs" element={<AppliedJobs />} />
+          <Route path="/savedJobs" element={<SavedJobs />} />
           <Route path="/job/:id" element={<JobDescription />} />
         </Routes>
       </div>

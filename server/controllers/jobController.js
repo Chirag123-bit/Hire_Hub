@@ -222,12 +222,11 @@ module.exports.applyForJob = async (req, res, next) => {
 };
 
 const verifyNewApplicant = (appliedJob, user) => {
-  var isFine = false;
+  var isFine = true;
   try {
     appliedJob.applicants.every((applicant) => {
       const status = conditionChecker(applicant.applicant, user);
       if (!status) {
-        console.log("False Flund");
         isFine = false;
         throw "Break";
       } else {
@@ -275,37 +274,6 @@ const conditionChecker = (appliedJob, user) => {
 //     });
 //   }
 // };
-
-const getReusableJobDetail = async (job_id) => {
-  var res;
-
-  await Job.aggregate([
-    { $match: { _id: job_id } },
-    {
-      $lookup: {
-        from: "users",
-        localField: "applicants.applicant",
-        foreignField: "_id",
-        as: "user_detail",
-      },
-    },
-
-    { $unwind: "$applicants" },
-    {
-      $group: {
-        _id: {
-          status: "$applicants.status",
-        },
-
-        data: { $push: "$user_detail" },
-      },
-    },
-  ]).then((result) => {
-    res = result;
-    return result;
-  });
-  return res;
-};
 
 const getReusableJobDetail1 = async (job_id) => {
   const Jobs = await Job.findById(job_id).populate({
@@ -391,15 +359,51 @@ module.exports.getAppliedJobs = asyncHandler(async (req, res, next) => {
         path: "company",
       },
     });
-  // .populate("appliedJobs.job")
-  // .populate("appliedJobs.job.company")
-  // .populate("appliedJobs.job.sector");
-
   console.log(jobs.appliedJobs[0]);
 
   if (!jobs) {
     res.status(400).send("Applied Jobs not found");
   } else {
     res.status(200).send(jobs);
+  }
+});
+module.exports.getSavedJobs = asyncHandler(async (req, res, next) => {
+  const usr = await req.user._id;
+  var jobs = await userModel
+    .findById(usr)
+    .select("savedJobs")
+    .populate({
+      path: "savedJobs.job",
+      populate: {
+        path: "company",
+      },
+    });
+  console.log(jobs.savedJobs[0]);
+
+  if (!jobs) {
+    res.status(400).send("Saved Jobs not found");
+  } else {
+    res.status(200).send(jobs);
+  }
+});
+
+module.exports.getAppliedJobsApp = asyncHandler(async (req, res, next) => {
+  const usr = await req.user._id;
+  var jobs = await userModel
+    .findById(usr)
+    .select("appliedJobs")
+    .populate({
+      path: "appliedJobs.job",
+      populate: {
+        path: "company",
+      },
+    });
+
+  console.log(jobs.appliedJobs[0]);
+
+  if (!jobs) {
+    return res.status(400).json({ success: false });
+  } else {
+    return res.status(200).json({ data: jobs, success: true });
   }
 });

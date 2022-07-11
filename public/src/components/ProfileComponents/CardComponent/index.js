@@ -1,8 +1,7 @@
 import React from "react";
-import { GrLocation } from "react-icons/gr";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import { IoSchoolOutline } from "react-icons/io5";
-import { MdOutlineEmail } from "react-icons/md";
+import { MdOutlineEmail, MdOutlineLocationCity } from "react-icons/md";
 import ReactRoundedImage from "react-rounded-image";
 import {
   Card,
@@ -61,25 +60,25 @@ function ProfileCard({ user }) {
           <Info>
             <IconHolder>
               <MdOutlineEmail />
-            </IconHolder>
+            </IconHolder>{" "}
             {user.email}
           </Info>
           <Info>
             <IconHolder>
-              <GrLocation />
-            </IconHolder>
+              <MdOutlineLocationCity />
+            </IconHolder>{" "}
             Kathmandu, Nepal
           </Info>
           <Info>
             <IconHolder>
               <HiOutlineOfficeBuilding />
-            </IconHolder>
+            </IconHolder>{" "}
             Full Time
           </Info>
           <Info>
             <IconHolder>
               <IoSchoolOutline />
-            </IconHolder>
+            </IconHolder>{" "}
             {user.professional.sector}
           </Info>
         </InfoHolder>

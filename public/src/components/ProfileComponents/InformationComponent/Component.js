@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const ContentHolder = styled.div`
   width: 60%;
-  /* height: 100vh; */
   background: transparent;
+  backdrop-filter: blur(10px);
 `;
 
 export const Content = styled.div`
@@ -25,28 +25,30 @@ export const DescriptionTitle = styled.h3`
   margin-bottom: 1.5rem;
   text-align: left;
   color: rgb(51, 71, 129);
+  color: white;
 `;
 
 export const Summary = styled.p`
-  max-width: 80%;
   text-align: justify;
+  color: white;
 `;
 
 export const Listing = styled.div`
   margin-bottom: 2rem;
-  max-width: 80%;
+
   padding-bottom: 2rem;
-  border-bottom: 1px solid #50cdfe;
+  border-bottom: 1px solid white;
   display: flex;
   justify-content: space-between;
 `;
 
 export const TitleListing = styled.div`
-  max-width: 70%;
+  width: 27%;
+  color: white;
 `;
 
 export const JobTitle = styled.h4`
-  color: black;
+  color: wheat;
   /* margin-bottom: 1rem;
   margin-top: 0; */
   margin-bottom: 0;
@@ -64,7 +66,7 @@ export const Company = styled.p`
 `;
 
 export const Address = styled.p`
-  color: #50cdfe;
+  color: white;
   font-size: 14px;
 `;
 
@@ -81,6 +83,6 @@ export const JobType = styled.div`
 `;
 
 export const Date = styled.p`
-  color: black;
+  color: white;
   font-size: 14px;
 `;

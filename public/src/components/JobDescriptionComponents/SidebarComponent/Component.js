@@ -3,11 +3,6 @@ import styled from "styled-components";
 export const SectionWrapper = styled.div`
   width: 20%;
   background: transparent;
-  overflow-y: auto;
-  height: 100vh;
-  &::-webkit-scrollbar {
-    display: none;
-  }
 `;
 
 export const ApplyButton = styled.button`
@@ -33,7 +28,7 @@ export const DisabledApplyButton = styled.button`
   outline: white;
   border: 1px solid #3dbeee;
   border-radius: 5px;
-  color: black;
+  color: white;
   width: 100%;
   margin: auto;
   cursor: pointer;
@@ -56,6 +51,9 @@ export const ChatContainer = styled.div`
 export const ChatInput = styled.textarea`
   text-align: left;
   margin-bottom: 0;
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  color: white;
 `;
 
 export const MessageButton = styled.button`
@@ -82,7 +80,9 @@ export const SaveButton = styled.button`
 
   &:hover {
     background-color: transparent;
+    backdrop-filter: blur(10px);
     color: #423edd;
     border: 1px solid orange;
+    color: white;
   }
 `;

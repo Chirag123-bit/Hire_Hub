@@ -147,19 +147,6 @@ const userSchema = new mongoose.Schema({
     },
   ],
 
-  favouriteJobs: [
-    {
-      job: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Job",
-      },
-      savedDate: {
-        type: Date,
-        default: Date.now,
-      },
-    },
-  ],
-
   events: [
     {
       event: {

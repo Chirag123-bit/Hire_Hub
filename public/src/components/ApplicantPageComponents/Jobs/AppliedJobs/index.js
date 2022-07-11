@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FcBrokenLink } from "react-icons/fc";
-import { getAppliedJobs } from "../../../utils/APIRoutes";
-import { ColoredSlogan, Slogan } from "../Home/SeekerHero/seekerHeroElements";
+import { getAppliedJobs } from "../../../../utils/APIRoutes";
+import {
+  ColoredSlogan,
+  Slogan,
+} from "../../Home/SeekerHero/seekerHeroElements";
 import {
   ApplyButton,
   CompanyInfoHoler,
@@ -21,27 +24,21 @@ import {
 } from "./JobElements";
 
 function AppliedJobs() {
-  var [appliedJobs, setAppliedJobs] = useState([]);
-  const [isReady, setIsReady] = useState(false);
-  useEffect(async () => {
-    const token = await JSON.parse(localStorage.getItem("token"));
+  const [appliedJobs, setAppliedJobs] = useState([]);
+  const [ready, setIsReady] = useState(false);
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
     const config = {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     };
-
-    axios
-      .get(getAppliedJobs, config)
-      .then((result) => {
-        setAppliedJobs(result.data.appliedJobs);
-        appliedJobs = result.data.appliedJobs;
-        setIsReady(true);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios.get(getAppliedJobs, config).then((result) => {
+      setAppliedJobs(result.data.appliedJobs);
+      setIsReady(true);
+    });
   }, []);
 
   return (
@@ -54,7 +51,7 @@ function AppliedJobs() {
         </TitleHolder>
 
         <JobCardsHoler>
-          {isReady ? (
+          {ready ? (
             appliedJobs.map((job) => (
               <JobCard
                 onClick={(event) =>
@@ -91,7 +88,13 @@ function AppliedJobs() {
               </JobCard>
             ))
           ) : (
-            <div></div>
+            <div style={{ margin: "auto" }}>
+              <div className="loading-wrapper">
+                <div className="loader">
+                  <div className="loading-circle">s</div>
+                </div>
+              </div>
+            </div>
           )}
         </JobCardsHoler>
       </ContentHolder>

@@ -4,6 +4,7 @@ export const Card = styled.div`
   width: 25%;
   height: 100vh;
   background: transparent;
+  backdrop-filter: blur(10px);
 `;
 
 export const ProfileContainer = styled.div`
@@ -23,6 +24,7 @@ export const IntroContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  backdrop-filter: blur(10px);
 `;
 
 export const ImageContainer = styled.div`
@@ -39,17 +41,19 @@ export const IntroTextHolder = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  backdrop-filter: blur(10px);
+  color: white;
 `;
 
 export const Name = styled.p`
-  color: #045de9;
+  color: white;
   font-size: 2rem;
   margin-bottom: 0;
 `;
 
 export const Title = styled.p`
   font-size: 1.2rem;
-  color: #98a0be;
+  color: white;
   margin-top: 0;
 `;
 
@@ -63,8 +67,7 @@ export const SkillHolder = styled.ul`
 `;
 
 export const Skill = styled.li`
-  /* background-color: #045de9; */
-  color: black;
+  color: white;
   padding: 0 0.2rem;
   margin: 0 0.4rem;
   border-radius: 0.7rem;
@@ -79,7 +82,7 @@ export const InfoHolder = styled.div`
 `;
 
 export const Info = styled.h5`
-  color: rgb(104, 118, 162);
+  color: white;
   border-bottom: 1px dotted gray;
   padding: 1rem 0;
   display: flex;
