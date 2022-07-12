@@ -147,7 +147,7 @@ const SeekerNav = ({ toggle }) => {
                   <Link class="dropdown-item" to="appliedJobs">
                     Applied Jobs
                   </Link>
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item" href="events">
                     My Events
                   </a>
                   <a class="dropdown-item" href="#">

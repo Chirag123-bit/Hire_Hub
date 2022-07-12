@@ -60,6 +60,7 @@
     "react-spring": "^9.4.5",
     "react-tabs": "^5.1.0",
     "react-tilt": "^0.1.4",
+    "react-time-picker": "^4.5.0",
     "react-toastify": "^8.2.0",
     "react-tsparticles": "^2.0.6",
     "react-vanilla-tilt": "^1.0.0",
