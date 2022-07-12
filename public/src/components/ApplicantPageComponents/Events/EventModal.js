@@ -11,10 +11,10 @@ export const EventsModal = ({
   setShowModal,
   event,
   handleEventInput,
-  handleSubmit,
   handleDateInput,
   handleStartInput,
   handleEndInput,
+  handleSubmit,
 }) => {
   return (
     <>
@@ -65,7 +65,7 @@ export const EventsModal = ({
                   required
                   id="outlined-multiline-flexible1"
                   label="Note"
-                  name="about"
+                  name="note"
                   multiline
                   minRows={6}
                   style={{ width: "100%" }}
@@ -124,7 +124,7 @@ export const EventsModal = ({
                       onChange={handleEndInput}
                       value={event.endTime}
                       name="endTime"
-                      style={{ width: "100%" }}
+                      style={{ width: "100%", color: "white" }}
                       minDate={new Date()}
                     />
                   </div>

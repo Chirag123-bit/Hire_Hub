@@ -37,3 +37,8 @@ export const groupRemove = `${host}/api/chat/groupremove`;
 export const message = `${host}/api/message`;
 
 export const getCategories = `${host}/api/category/getCategory`;
+
+export const addEvent = `${host}/api/event/addEvent`;
+export const getEvent = `${host}/api/event/getEvents`;
+export const updateEvent = `${host}/api/event/updateEvent`;
+export const deleteEvent = `${host}/api/event/deleteEvent`;

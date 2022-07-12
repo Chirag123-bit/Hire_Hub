@@ -7,6 +7,7 @@
   width: 65%;
   margin: auto;
   padding: 0 1rem;
+  backdrop-filter: blur(5px);
 }
 .event-card .event .event-details {
   flex-grow: 0;
@@ -54,6 +55,7 @@
   background-color: rgba(0, 0, 0, 0.3);
   border: none !important;
   backdrop-filter: blur(10px) !important;
+  font-size: 1.2rem;
 }
 
 .event-card .event .calendar .calendar-body .day,
@@ -82,6 +84,10 @@
   margin-bottom: 1rem;
 }
 
+#btnHolder button {
+  backdrop-filter: blur(5px);
+}
+
 #addBtnHolder {
   width: 52%;
   display: flex;
@@ -101,4 +107,15 @@
 
 #eventForm div .ModalHead {
   width: 100%;
+}
+
+.react-time-picker__inputGroup input,
+.react-time-picker__inputGroup select,
+.react-time-picker__inputGroup button {
+  color: white !important;
+}
+
+.react-time-picker__clear-button svg,
+.react-time-picker__clock-button svg {
+  stroke: white !important;
 }
