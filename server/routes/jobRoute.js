@@ -8,6 +8,8 @@ const {
   getCompanyJobDetail,
   updateJobStatus,
   getAppliedJobs,
+  getAppliedJobsApp,
+  getSavedJobs,
 } = require("../controllers/jobController");
 const { protect } = require("../middleware/authMiddleware");
 
@@ -19,9 +21,11 @@ router.get("/getCompanyJobDetail", getCompanyJobDetail);
 router.get("/getAllJobs", getAllJobs);
 router.get("/getSectorJob", getJobsForSpecificSector);
 router.get("/getJob", getJob);
-router.post("/applyForJob", applyForJob);
 router.post("/updateJobStatus", updateJobStatus);
 
+router.route("/savedJobs").get(protect, getSavedJobs);
 router.route("/appliedJobs").get(protect, getAppliedJobs);
+router.route("/appliedJobsApp").get(protect, getAppliedJobsApp);
+router.route("/applyForJob").post(protect, applyForJob);
 
 module.exports = router;

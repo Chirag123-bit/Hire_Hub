@@ -93,7 +93,7 @@ function Sidebar({ job, isLoading }) {
               <AiOutlineCheckCircle /> Apply For This Job
             </ApplyButton>
           ) : (
-            <div>
+            <div style={{ color: "white" }}>
               <DisabledApplyButton
                 primary="true"
                 dark="true"
@@ -125,7 +125,12 @@ function Sidebar({ job, isLoading }) {
       </ButtonContainer>
 
       <ChatContainer>
-        <ChatInput name="message" rows="6" cols="38"></ChatInput>
+        <ChatInput
+          name="message"
+          rows="6"
+          cols="38"
+          placeholder="Enter your message"
+        ></ChatInput>
         <MessageButton to="/applicant/home" primary="true" dark="true">
           <MdOutlineMessage /> Send Message
         </MessageButton>

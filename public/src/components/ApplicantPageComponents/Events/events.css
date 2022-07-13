@@ -1,0 +1,121 @@
+.event-card .event {
+  background-color: transparent !important;
+  border: 1px solid white !important;
+  border-radius: 2rem !important;
+  display: flex;
+  justify-content: space-around !important;
+  width: 65%;
+  margin: auto;
+  padding: 0 1rem;
+  backdrop-filter: blur(5px);
+}
+.event-card .event .event-details {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 50%;
+  width: min-content;
+  margin: auto;
+  flex: 4;
+}
+.event-card .event .event-details .event-name,
+.event-card .event .event-details .event-time,
+.event-card .event .event-details .event-participant {
+  color: white !important;
+  width: max-content;
+  margin: auto;
+}
+
+.event-card .event .event-details .event-name {
+  font-size: 1.2rem;
+}
+
+.event-card .event .event-details .event-time,
+.event-card .event .event-details .event-participant {
+  font-size: 0.8rem;
+}
+
+.event-card .event .event-description p {
+  color: white;
+  margin-bottom: 0;
+}
+.event-card .event .event-description {
+  margin: auto;
+}
+.event-card .event .calendar,
+.event-card .event .event-description {
+  flex: 5;
+}
+
+.event-card .event .calendar .calendar-body {
+  background-color: transparent !important;
+  border: none !important;
+  backdrop-filter: blur(10px) !important;
+}
+.event-card .event .calendar .calendar-body .month {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: none !important;
+  backdrop-filter: blur(10px) !important;
+  font-size: 1.2rem;
+}
+
+.event-card .event .calendar .calendar-body .day,
+.event-card .event .calendar .calendar-body .date {
+  color: white !important;
+}
+
+.event-card .event .event-dropdown {
+  flex: 1;
+  margin: auto;
+}
+
+.event-card .event .event-dropdown button::after {
+  content: none;
+}
+
+.event-card .event .event-dropdown .dropdown div a:hover {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  /* color: red !important; */
+}
+
+#btnHolder {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+#btnHolder button {
+  backdrop-filter: blur(5px);
+}
+
+#addBtnHolder {
+  width: 52%;
+  display: flex;
+  justify-content: end;
+}
+
+#eventModal .modal-content {
+  background-color: transparent !important;
+  border: none !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+#eventForm {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+#eventForm div .ModalHead {
+  width: 100%;
+}
+
+.react-time-picker__inputGroup input,
+.react-time-picker__inputGroup select,
+.react-time-picker__inputGroup button {
+  color: white !important;
+}
+
+.react-time-picker__clear-button svg,
+.react-time-picker__clock-button svg {
+  stroke: white !important;
+}

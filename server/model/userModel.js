@@ -70,7 +70,7 @@ const userSchema = new mongoose.Schema({
         type: String,
       },
     ],
-    description: {
+    summary: {
       type: String,
     },
   },
@@ -135,19 +135,6 @@ const userSchema = new mongoose.Schema({
   ],
 
   savedJobs: [
-    {
-      job: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Job",
-      },
-      savedDate: {
-        type: Date,
-        default: Date.now,
-      },
-    },
-  ],
-
-  favouriteJobs: [
     {
       job: {
         type: mongoose.Schema.Types.ObjectId,

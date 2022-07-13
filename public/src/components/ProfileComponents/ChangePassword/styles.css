@@ -1,0 +1,24 @@
+.PassowrdFormContainer {
+  min-height: 95vh;
+}
+
+.parentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.formContainerP {
+  width: 40%;
+  margin: auto;
+  padding: 12rem 0;
+  text-align: center;
+}
+
+.innerForm {
+  padding: 2rem;
+
+  background-color: rgba(0, 0, 0, 0.33) !important;
+  border-radius: 10px;
+}

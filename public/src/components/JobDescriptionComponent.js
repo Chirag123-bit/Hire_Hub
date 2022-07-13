@@ -20,13 +20,13 @@ function JobDescription() {
     });
   }, []);
   return (
-    <div id="job-description">
+    <>
       <JobInfoSection job={job} isLoading={isLoading} />
       <SideWrapper>
         <JobDescriptionSection job={job} isLoading={isLoading} />
         <Sidebar job={job} isLoading={isLoading} />
       </SideWrapper>
-    </div>
+    </>
   );
 }
 

@@ -57,36 +57,43 @@ export const Login = () => {
     event.preventDefault();
     if (handleValidation()) {
       const { password, username } = values;
-      const { data } = await axios.post(loginRoute, {
-        username,
-        password,
-      });
-      if (data.status === false) {
-        toast.error(data.msg, toastOptions);
-      } else {
-        if (data.user.type === "Company") {
-          localStorage.setItem("user", JSON.stringify(data.user));
-          setUser(data.user);
-          localStorage.setItem("company", JSON.stringify(data.company));
-          toast.success(
-            "Welcome to HireHub, " + data.user.firstName,
-            toastOptions
-          );
-          localStorage.setItem("token", JSON.stringify(data.token));
+      axios
+        .post(loginRoute, {
+          username,
+          password,
+        })
+        .then((res) => {
+          if (res.data.status === 500) {
+            toast.error(res.data.msg, toastOptions);
+          } else {
+            if (res.data.user.type === "Company") {
+              localStorage.setItem("user", JSON.stringify(res.data.user));
+              setUser(res.data.user);
+              localStorage.setItem("company", JSON.stringify(res.data.company));
+              toast.success(
+                "Welcome to HireHub, " + res.data.user.firstName,
+                toastOptions
+              );
+              localStorage.setItem("token", JSON.stringify(res.data.token));
 
-          navigate("/employer/dashboard", { replace: true });
-        }
-        if (data.user.type === "Applicant") {
-          localStorage.setItem("user", JSON.stringify(data.user));
-          toast.success(
-            "Welcome to HireHub, " + data.user.firstName,
-            toastOptions
-          );
-          localStorage.setItem("token", JSON.stringify(data.token));
+              navigate("/employer/dashboard", { replace: true });
+            }
+            if (res.data.user.type === "Applicant") {
+              localStorage.setItem("user", JSON.stringify(res.data.user));
+              toast.success(
+                "Welcome to HireHub, " + res.data.user.firstName,
+                toastOptions
+              );
+              localStorage.setItem("token", JSON.stringify(res.data.token));
 
-          navigate("/applicant/home", { replace: true });
-        }
-      }
+              navigate("/applicant/home", { replace: true });
+            }
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("Invalid Username or password", toastOptions);
+        });
     }
   };
 

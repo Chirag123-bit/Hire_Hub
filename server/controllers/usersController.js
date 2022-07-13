@@ -3,6 +3,7 @@ const Company = require("../model/CompanyModel");
 const bcrypt = require("bcrypt");
 const UserVerification = require("../model/UserVerification");
 const nodemailer = require("nodemailer");
+const multer = require("multer");
 
 const userVerification = require("../model/UserVerification");
 require("dotenv").config();
@@ -21,6 +22,83 @@ let transporter = nodemailer.createTransport({
     pass: process.env.AUTH_PASSWORD,
   },
 });
+
+const storage = multer.diskStorage({
+  destination: "./uploads/images/profile",
+  filename: (req, file, cb) => {
+    cb(null, `${file.fieldname}-${Date.now()}${file.originalname}`);
+  },
+});
+
+const uploadProfileImage = multer({
+  storage: storage,
+  fileFilter: (req, file, cb) => {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/i)) {
+      return cb(new Error("Please upload an image file"));
+    }
+    cb(null, true);
+  },
+  limits: {
+    fileSize: 1024 * 1024 * 5,
+  },
+});
+
+//upload profile image
+module.exports.changeProfileImage = async (req, res, next) => {
+  uploadProfileImage.single("image")(req, res, async (err) => {
+    if (err) {
+      return res.status(400).json({
+        error: err.message,
+      });
+    } else {
+      console.log("Uploaded");
+    }
+    try {
+      const userId = req.user._id;
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({
+          message: "User not found",
+        });
+      }
+      console.log(req.file);
+      user.avatarImage = req.file.path;
+      await user.save();
+      const updatedUser = await User.findById(userId);
+      res.status(200).json({
+        message: "Profile image uploaded successfully",
+        user: updatedUser,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  });
+};
+
+//update password
+module.exports.updatePassword = async (req, res, next) => {
+  const userId = req.user._id;
+  const user = await User.findById(userId);
+  if (!user) {
+    return res.status(404).json({
+      message: "User not found",
+    });
+  }
+  const oldPassword = req.body.oldPassword;
+  const newPassword = req.body.password;
+  const isMatch = await bcrypt.compare(oldPassword, user.password);
+  if (!isMatch) {
+    return res.status(500).json({
+      message: "Old password is incorrect",
+    });
+  }
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+  user.password = hashedPassword;
+  await user.save();
+  res.status(200).json({
+    message: "Password updated successfully",
+  });
+};
 
 // Verifying Connection
 transporter.verify((error, success) => {
@@ -666,6 +744,53 @@ module.exports.updateUser = async (req, res, next) => {
     return res.status(200).json({
       status: true,
       user,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+  return res.status(500).json({
+    status: false,
+  });
+};
+
+//updating user details
+module.exports.updateUserDetails = async (req, res, next) => {
+  const userId = req.user._id;
+  console.log(req.body);
+  var user;
+  try {
+    user = await User.findOneAndUpdate(
+      { _id: userId },
+      {
+        $set: {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          gender: req.body.gender,
+          "professional.title": req.body.title,
+          "professional.sector": req.body.sector,
+          "professional.skills": req.body.skills,
+          "professional.summary": req.body.summary,
+          "additional.0.education": req.body.educationSet.map((edu) => ({
+            degree: edu.etitle,
+            college: edu.ecollege,
+            startDate: edu.estart,
+            endDate: edu.eend,
+          })),
+          "additional.0.experience": req.body.workSet.map((work) => ({
+            job_title: work.wtitle,
+            company: work.wcompany,
+            company_location: work.wlocation,
+            work_type: work.wtype,
+            startDate: work.wstart,
+            endDate: work.wend,
+          })),
+        },
+      }
+    );
+    const updatedDetails = await User.findById(userId);
+    return res.status(200).json({
+      status: true,
+      user: updatedDetails,
     });
   } catch (e) {
     console.log(e);

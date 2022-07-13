@@ -3,11 +3,6 @@ import styled from "styled-components";
 export const SectionWrapper = styled.div`
   width: 70%;
   background: transparent;
-  overflow-y: auto;
-  height: 100vh;
-  &::-webkit-scrollbar {
-    display: none;
-  }
 `;
 
 export const ContentWrapper = styled.div`
@@ -30,6 +25,7 @@ export const CompanyInfo = styled.div`
   justify-content: space-around;
   width: 70%;
   margin: 1rem 0;
+  color: white;
 `;
 
 export const LogoContainer = styled.div`
@@ -69,22 +65,25 @@ export const Sallary = styled.p`
 export const SectionTitle = styled.p`
   font-weight: 500;
   font-size: 1.5rem;
-  color: gray;
+  color: white;
 `;
 
 export const AboutContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  color: white;
 `;
 
 export const CompanyDescription = styled.div`
   margin: 0.5rem 0;
+  color: white;
 `;
 
 export const Description = styled.p`
   text-align: justify;
   line-height: 1.5rem;
+  color: white;
 `;
 export const SkillSection = styled.div`
   width: 70%;
@@ -105,6 +104,7 @@ export const Skill = styled.p`
   border: 1px solid #045de9;
   display: flex;
   border-radius: 50px;
+  color: white;
 `;
 
 export const DescSection = styled.div`
@@ -115,6 +115,7 @@ export const DescSection = styled.div`
 
 export const Desc = styled.p`
   margin: 1rem 0;
+  color: white;
 `;
 
 export const Section = styled.p`
@@ -130,6 +131,7 @@ export const ResponsibilitySection = styled.div`
 
 export const Responsibilities = styled.ul`
   text-align: left;
+  color: white;
 `;
 
 export const Responsibility = styled.li`

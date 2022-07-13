@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const SectionContainer = styled.div`
   width: 100%;
   min-height: 450px;
-  background-color: #3dbeee;
+
   padding-top: 6rem;
 `;
 

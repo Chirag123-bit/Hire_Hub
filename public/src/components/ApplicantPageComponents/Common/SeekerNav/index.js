@@ -16,6 +16,8 @@ import {
   Notification,
 } from "./NavbarElements";
 
+import { Link } from "react-router-dom";
+
 const SeekerNav = ({ toggle }) => {
   const [scrollNav, setScrollNav] = useState(false);
 
@@ -25,6 +27,13 @@ const SeekerNav = ({ toggle }) => {
     } else {
       setScrollNav(false);
     }
+  };
+
+  //logout
+  const logout = () => {
+    localStorage.clear();
+    //redirect to login page
+    window.location.href = "/auth/login";
   };
 
   useEffect(() => {
@@ -136,22 +145,22 @@ const SeekerNav = ({ toggle }) => {
                     color: "white",
                   }}
                 >
-                  <a class="dropdown-item" href="/applicant/profile">
+                  <Link className="dropdown-item" to="profile">
                     My Profile
-                  </a>
-                  <a class="dropdown-item" href="#">
+                  </Link>
+                  <Link class="dropdown-item" to="savedJobs">
                     Saved Jobs
-                  </a>
-                  <a class="dropdown-item" href="/applicant/appliedJobs">
+                  </Link>
+                  <Link class="dropdown-item" to="appliedJobs">
                     Applied Jobs
-                  </a>
-                  <a class="dropdown-item" href="#">
+                  </Link>
+                  <Link class="dropdown-item" to="events">
                     My Events
-                  </a>
-                  <a class="dropdown-item" href="#">
+                  </Link>
+                  <Link class="dropdown-item" to="todos">
                     My Todos
-                  </a>
-                  <a class="dropdown-item" href="#">
+                  </Link>
+                  <a class="dropdown-item" href="#" onClick={logout}>
                     Logout
                   </a>
                 </div>
