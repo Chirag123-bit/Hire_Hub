@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 import background from "../../../images/background.png";
-import { registerRoute } from "../../../utils/APIRoutes";
+import { registerRoute, userUpdateRoute } from "../../../utils/APIRoutes";
 import { renderText } from "../../Common/Auth/DisplayComponent";
 import AdditionlInfo from "./FormSteps/AdditionalInformation";
 import PersonalBio from "./FormSteps/PersonalBio";
@@ -97,6 +97,13 @@ class ProfileUpdateForm extends Component {
   };
   handleSubmit = async (event) => {
     event.preventDefault();
+    const token = JSON.parse(localStorage.getItem("token"));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
     const stateData = this.state.data;
     let firstName = stateData.firstName;
     let lastName = stateData.lastName;
@@ -121,47 +128,31 @@ class ProfileUpdateForm extends Component {
         let workSet = stateData.workSet;
         let educationSet = stateData.educationSet;
 
-        console.log(
-          firstName,
-          lastName,
-          gender,
-          phone,
-          email,
-          type,
-          username,
-          password,
-          title,
-          skills,
-          sector,
-          summary,
-          workSet,
-          educationSet
+        const { data } = await axios.post(
+          userUpdateRoute,
+          {
+            firstName,
+            lastName,
+            gender,
+            phone,
+            email,
+            type,
+            username,
+            password,
+            title,
+            skills,
+            sector,
+            summary,
+            workSet,
+            educationSet,
+          },
+          config
         );
-
-        const { data } = await axios.post(registerRoute, {
-          firstName,
-          lastName,
-          gender,
-          phone,
-          email,
-          type,
-          username,
-          password,
-
-          title,
-          skills,
-          sector,
-          summary,
-          workSet,
-          educationSet,
-        });
         if (data.status === false) {
           toast.error(data.msg, this.toastOptions);
         } else {
-          toast.success(data.msg, this.toastOptions);
+          toast.success("Details Updated Successfully", this.toastOptions);
           localStorage.setItem("user", JSON.stringify(data.user));
-          window.location.replace("localhost:3000/auth/login");
-          window.location.href = "localhost:3000/auth/login";
         }
       }
     } else if (type === "Company") {
@@ -200,22 +191,20 @@ class ProfileUpdateForm extends Component {
           toast.success(data.msg, this.toastOptions);
           localStorage.setItem("user", JSON.stringify(data.user));
           localStorage.setItem("company", JSON.stringify(data.company));
-          window.location.replace("localhost:3000/auth/login");
-          window.location.href = "localhost:3000/auth/login";
         }
       }
     }
   };
+  user = JSON.parse(localStorage.getItem("user"));
   state = {
     data: {
-      firstName: "",
-      lastName: "",
-      gender: "",
-      phone: "",
-      email: "",
-      type: "",
-      username: "",
-      password: "",
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      gender: this.user.gender,
+      phone: this.user.phone,
+      email: this.user.email,
+      type: this.user.type,
+      username: this.user.username,
 
       cname: "",
       country: "",
@@ -225,32 +214,63 @@ class ProfileUpdateForm extends Component {
 
       csector: "",
 
-      title: "",
+      title: this.user.professional.title,
+      summary: this.user.professional.summary,
       skills: [],
-      skillSet: [{ skill: "" }],
-      sector: "",
-      summary: "",
+      skillSet:
+        this.user.professional.skills.length > 0
+          ? this.user.professional.skills.map((skill) => {
+              return { skill: skill };
+            })
+          : [{ skill: "" }],
+
+      sector: this.user.professional.sector,
 
       work: [],
-      workSet: [
-        {
-          wtitle: "",
-          wcompany: "",
-          wlocation: "",
-          wtype: "",
-          wstart: "",
-          wend: "",
-        },
-      ],
+      workSet:
+        this.user.additional[0].experience.length > 0
+          ? this.user.additional[0].experience.map((work) => {
+              console.log(work);
+              return {
+                wtitle: work.job_title,
+                wcompany: work.company,
+                wlocation: work.company_location,
+                wtype: work.work_type,
+                wstart: new Date(work.startDate),
+                wend: new Date(work.endDate),
+              };
+            })
+          : [
+              {
+                wtitle: "",
+                wcompany: "",
+                wlocation: "",
+                wtype: "",
+                wstart: "",
+                wend: "",
+              },
+            ],
 
       education: [],
-      educationSet: [{ etitle: "", ecollege: "", estart: "", eend: "" }],
+      educationSet:
+        this.user.additional[0].education.length > 0
+          ? this.user.additional[0].education.map((edu) => {
+              return {
+                etitle: edu.degree,
+                ecollege: edu.college,
+                estart: new Date(edu.startDate),
+                eend: new Date(edu.endDate),
+              };
+            })
+          : [{ etitle: "", ecollege: "", estart: "", eend: "" }],
+      // educationSet: [{ etitle: "", ecollege: "", estart: "", eend: "" }],
     },
     errors: {},
     currentStep: 0,
     redirect: null,
   };
   render() {
+    console.log(this.state.data.skillSet);
     const { classes } = this.props;
 
     const handleOnChange = ({ target }) => {

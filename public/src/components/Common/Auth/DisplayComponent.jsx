@@ -69,6 +69,7 @@ export const renderInputText = ({
   state,
   handleOnChange,
   type,
+  readOnly = false,
 }) => {
   const { data, errors } = state;
   return (
@@ -87,6 +88,7 @@ export const renderInputText = ({
         type={type ? type : ""}
         required
         style={{ color: "white" }}
+        disabled={readOnly}
         InputLabelProps={{
           style: { color: "#fff" },
         }}
@@ -130,6 +132,7 @@ export const renderSelectType = ({
   color,
   state,
   handleOnChange,
+  readOnly = false,
 }) => {
   const { data, errors } = state;
   return (
@@ -149,6 +152,7 @@ export const renderSelectType = ({
       InputLabelProps={{
         style: { color: "#fff" },
       }}
+      disabled={readOnly}
     >
       {types.map((option) => (
         <MenuItem key={option.value} value={option.value}>

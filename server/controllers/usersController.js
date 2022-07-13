@@ -674,3 +674,50 @@ module.exports.updateUser = async (req, res, next) => {
     status: false,
   });
 };
+
+//updating user details
+module.exports.updateUserDetails = async (req, res, next) => {
+  const userId = req.user._id;
+  console.log(req.body);
+  var user;
+  try {
+    user = await User.findOneAndUpdate(
+      { _id: userId },
+      {
+        $set: {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          gender: req.body.gender,
+          "professional.title": req.body.title,
+          "professional.sector": req.body.sector,
+          "professional.skills": req.body.skills,
+          "professional.summary": req.body.summary,
+          "additional.0.education": req.body.educationSet.map((edu) => ({
+            degree: edu.etitle,
+            college: edu.ecollege,
+            startDate: edu.estart,
+            endDate: edu.eend,
+          })),
+          "additional.0.experience": req.body.workSet.map((work) => ({
+            job_title: work.wtitle,
+            company: work.wcompany,
+            company_location: work.wlocation,
+            work_type: work.wtype,
+            startDate: work.wstart,
+            endDate: work.wend,
+          })),
+        },
+      }
+    );
+    const updatedDetails = await User.findById(userId);
+    return res.status(200).json({
+      status: true,
+      user: updatedDetails,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+  return res.status(500).json({
+    status: false,
+  });
+};

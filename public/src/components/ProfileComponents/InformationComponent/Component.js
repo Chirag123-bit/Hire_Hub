@@ -43,7 +43,7 @@ export const Listing = styled.div`
 `;
 
 export const TitleListing = styled.div`
-  width: 27%;
+  width: 40%;
   color: white;
 `;
 

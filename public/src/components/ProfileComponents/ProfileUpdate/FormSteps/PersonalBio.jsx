@@ -48,25 +48,18 @@ export default function PersonalBio({ state, handleOnChange, handleNext }) {
             name: "type",
             state,
             handleOnChange,
+            readOnly: true,
           })}
         </Grid>
       </Grid>
       <Grid container spacing={2} style={{ marginTop: "1rem" }}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12}>
           {renderInputText({
             label: "Username",
             name: "username",
             state,
             handleOnChange,
-          })}
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          {renderInputText({
-            label: "Password",
-            name: "password",
-            state,
-            handleOnChange,
-            type: "password",
+            readOnly: true,
           })}
         </Grid>
       </Grid>
@@ -77,6 +70,7 @@ export default function PersonalBio({ state, handleOnChange, handleNext }) {
             name: "phone",
             state,
             handleOnChange,
+            readOnly: true,
           })}
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -85,6 +79,7 @@ export default function PersonalBio({ state, handleOnChange, handleNext }) {
             name: "email",
             state,
             handleOnChange,
+            readOnly: true,
           })}
         </Grid>
       </Grid>

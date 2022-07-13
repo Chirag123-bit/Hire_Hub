@@ -70,7 +70,7 @@ const userSchema = new mongoose.Schema({
         type: String,
       },
     ],
-    description: {
+    summary: {
       type: String,
     },
   },
