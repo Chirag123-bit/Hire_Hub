@@ -11,6 +11,7 @@ import Footer from "../components/Common/Footer";
 import JobDescription from "../components/JobDescriptionComponent";
 import Sidebar from "../components/OnboardingPageComponents/Sidebar";
 import Profile from "../components/ProfileComponent";
+import ChangePassword from "../components/ProfileComponents/ChangePassword";
 import ProfileUpdateForm from "../components/ProfileComponents/ProfileUpdate/UpdateForm";
 import SeekerCategory from "../components/SeekerCategory";
 import SeekerCompany from "../components/SeekerCompany";
@@ -32,10 +33,12 @@ export default function Seeker() {
           <Route path="/company/:id" element={<Careers />} />
           <Route path="/jobs" element={<SeekerJobs />} />
           <Route path="/profile" element={<Profile />} />
+
           <Route
             path="/profile/profileUpdate"
             element={<ProfileUpdateForm />}
           />
+          <Route path="/profile/changePassword" element={<ChangePassword />} />
           <Route path="/appliedJobs" element={<AppliedJobs />} />
           <Route path="/savedJobs" element={<SavedJobs />} />
           <Route path="/job/:id" element={<JobDescription />} />

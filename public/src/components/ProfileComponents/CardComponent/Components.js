@@ -30,6 +30,7 @@ export const IntroContainer = styled.div`
 export const ImageContainer = styled.div`
   text-align: center;
   margin: auto;
+  cursor: pointer;
 `;
 
 export const CandidateImage = styled.img`

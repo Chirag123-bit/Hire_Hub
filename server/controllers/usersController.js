@@ -3,6 +3,7 @@ const Company = require("../model/CompanyModel");
 const bcrypt = require("bcrypt");
 const UserVerification = require("../model/UserVerification");
 const nodemailer = require("nodemailer");
+const multer = require("multer");
 
 const userVerification = require("../model/UserVerification");
 require("dotenv").config();
@@ -21,6 +22,58 @@ let transporter = nodemailer.createTransport({
     pass: process.env.AUTH_PASSWORD,
   },
 });
+
+const storage = multer.diskStorage({
+  destination: "./uploads/images/profile",
+  filename: (req, file, cb) => {
+    cb(null, `${file.fieldname}-${Date.now()}${file.originalname}`);
+  },
+});
+
+const uploadProfileImage = multer({
+  storage: storage,
+  fileFilter: (req, file, cb) => {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/i)) {
+      return cb(new Error("Please upload an image file"));
+    }
+    cb(null, true);
+  },
+  limits: {
+    fileSize: 1024 * 1024 * 5,
+  },
+});
+
+//upload profile image
+module.exports.changeProfileImage = async (req, res, next) => {
+  uploadProfileImage.single("image")(req, res, async (err) => {
+    if (err) {
+      return res.status(400).json({
+        error: err.message,
+      });
+    } else {
+      console.log("Uploaded");
+    }
+    try {
+      const userId = req.user._id;
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({
+          message: "User not found",
+        });
+      }
+      console.log(req.file);
+      user.avatarImage = req.file.path;
+      await user.save();
+      const updatedUser = await User.findById(userId);
+      res.status(200).json({
+        message: "Profile image uploaded successfully",
+        user: updatedUser,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  });
+};
 
 // Verifying Connection
 transporter.verify((error, success) => {
