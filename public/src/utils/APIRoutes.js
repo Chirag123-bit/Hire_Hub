@@ -4,6 +4,7 @@ export const loginRoute = `${host}/api/auth/login`;
 export const userUpdateRoute = `${host}/api/auth/updateUserDetails`;
 export const setAvatarRoute = `${host}/api/auth/setAvatar`;
 export const updateProfilePic = `${host}/api/auth/changeProfilePic`;
+export const updatePasswordRoute = `${host}/api/auth/updatePassword`;
 
 export const allUsersRoute = `${host}/api/auth/allusers`;
 export const sendMessageRoute = `${host}/api/messages/addmsg`;

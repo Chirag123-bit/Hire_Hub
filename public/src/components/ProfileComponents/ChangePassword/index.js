@@ -1,8 +1,10 @@
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import background from "../../../images/background.png";
+import { updatePasswordRoute } from "../../../utils/APIRoutes";
 import "./styles.css";
 function ChangePassword() {
   //handle onsubmit
@@ -16,11 +18,39 @@ function ChangePassword() {
     draggable: true,
     theme: "dark",
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error("Passwords do not match", toastOptions);
     } else {
+      const token = JSON.parse(localStorage.getItem("token"));
+
+      axios({
+        method: "put",
+        url: updatePasswordRoute,
+        data: {
+          oldPassword: oldPassword,
+          password,
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            toast.success(res.data.message, toastOptions);
+            setPassword("");
+            setConfirmPassword("");
+            setOldPassword("");
+          } else {
+            toast.error(res.data.message, toastOptions);
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message, toastOptions);
+        });
+
       //send request to server
       //if success, toast success message
       //if fail, toast error message
