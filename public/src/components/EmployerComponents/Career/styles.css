@@ -16,6 +16,7 @@
 
 .CareerHead {
   text-align: center;
+  display: flex;
 }
 .CareerAbout {
   margin-top: 1rem;
@@ -47,4 +48,12 @@
 
 .career-card {
   max-width: 28% !important;
+}
+
+.CareerHead div svg path {
+  stroke: white;
+}
+
+.career-dropdown .show .show a:hover {
+  background-color: black;
 }

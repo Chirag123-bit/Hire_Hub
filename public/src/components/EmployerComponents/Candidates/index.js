@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Badge from "react-bootstrap/Badge";
 import Table from "react-bootstrap/Table";
 import ReactRoundedImage from "react-rounded-image";
+import { host } from "../../../utils/APIRoutes";
 import {
   ActionsDropDown,
   DropBtn,
@@ -94,7 +95,7 @@ function Candidates({ Applicants, isOpen, jobInfo }) {
                           >
                             <div className="avatars-w-50">
                               <ReactRoundedImage
-                                image={jb.applicant.avatarImage}
+                                image={host + "/" + jb.applicant.avatarImage}
                                 roundedColor="rgb(4,93,233)"
                                 imageWidth="40"
                                 imageHeight="40"
