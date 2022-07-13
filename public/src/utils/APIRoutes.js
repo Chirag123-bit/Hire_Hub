@@ -42,3 +42,8 @@ export const addEvent = `${host}/api/event/addEvent`;
 export const getEvent = `${host}/api/event/getEvents`;
 export const updateEvent = `${host}/api/event/updateEvent`;
 export const deleteEvent = `${host}/api/event/deleteEvent`;
+
+export const addTodo = `${host}/api/todo/addTodo`;
+export const getTodo = `${host}/api/todo/getTodos`;
+export const updateTodo = `${host}/api/todo/updateTodo`;
+export const deleteTodo = `${host}/api/todo/deleteTodo`;

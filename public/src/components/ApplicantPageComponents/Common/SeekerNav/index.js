@@ -29,6 +29,13 @@ const SeekerNav = ({ toggle }) => {
     }
   };
 
+  //logout
+  const logout = () => {
+    localStorage.clear();
+    //redirect to login page
+    window.location.href = "/auth/login";
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", changeNav);
   });
@@ -147,13 +154,13 @@ const SeekerNav = ({ toggle }) => {
                   <Link class="dropdown-item" to="appliedJobs">
                     Applied Jobs
                   </Link>
-                  <a class="dropdown-item" href="events">
+                  <Link class="dropdown-item" to="events">
                     My Events
-                  </a>
-                  <a class="dropdown-item" href="#">
+                  </Link>
+                  <Link class="dropdown-item" to="todos">
                     My Todos
-                  </a>
-                  <a class="dropdown-item" href="#">
+                  </Link>
+                  <a class="dropdown-item" href="#" onClick={logout}>
                     Logout
                   </a>
                 </div>

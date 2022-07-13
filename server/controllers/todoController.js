@@ -40,6 +40,7 @@ module.exports.getTodos = asyncHandler(async (req, res, next) => {
     todos: 1,
     _id: 0,
   });
+  console.log(events);
 
   if (!events) {
     res.status(400).send("Applied Jobs not found");
@@ -56,7 +57,8 @@ module.exports.updateTodo = asyncHandler(async (req, res, next) => {
   if (!event) {
     res.status(400).send("Event not found");
   } else {
-    event.isCompleted = !event.isComplete;
+    const new_val = !event.isCompleted;
+    event.isCompleted = new_val;
     event
       .save()
       .then((ev) => {

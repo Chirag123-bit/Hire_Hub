@@ -6,14 +6,15 @@ import ApplicantEvents from "../components/ApplicantPageComponents/Events";
 import AppliedJobs from "../components/ApplicantPageComponents/Jobs/AppliedJobs";
 import SavedJobs from "../components/ApplicantPageComponents/Jobs/SavedJobs";
 import SeekerJobs from "../components/ApplicantPageComponents/Jobs/SeekerJobComponent/SeekerJobs";
+import ApplicantTodos from "../components/ApplicantPageComponents/Todo";
 import Footer from "../components/Common/Footer";
 import JobDescription from "../components/JobDescriptionComponent";
 import Sidebar from "../components/OnboardingPageComponents/Sidebar";
 import Profile from "../components/ProfileComponent";
+import ProfileUpdateForm from "../components/ProfileComponents/ProfileUpdate/UpdateForm";
 import SeekerCategory from "../components/SeekerCategory";
 import SeekerCompany from "../components/SeekerCompany";
 import ApplicantHome from "../components/SeekerHome";
-// import SeekerJobs from "../components/SeekerJobComponent/SeekerJobs";
 
 export default function Seeker() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,10 +32,15 @@ export default function Seeker() {
           <Route path="/company/:id" element={<Careers />} />
           <Route path="/jobs" element={<SeekerJobs />} />
           <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile/profileUpdate"
+            element={<ProfileUpdateForm />}
+          />
           <Route path="/appliedJobs" element={<AppliedJobs />} />
           <Route path="/savedJobs" element={<SavedJobs />} />
           <Route path="/job/:id" element={<JobDescription />} />
           <Route path="/events" element={<ApplicantEvents />} />
+          <Route path="/todos" element={<ApplicantTodos />} />
         </Routes>
       </div>
 
