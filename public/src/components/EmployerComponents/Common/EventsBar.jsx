@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { AiOutlineUser, AiOutlinePlus, AiTwotoneDelete } from "react-icons/ai";
+import React, { useState } from "react";
+import { AiOutlinePlus, AiOutlineUser, AiTwotoneDelete } from "react-icons/ai";
 import { FiClock } from "react-icons/fi";
 import { MdOutlineClear } from "react-icons/md";
-import { todos } from "./Constants";
 import { v4 as uuid } from "uuid";
+import { todos } from "./Constants";
 
-function EventsBar({ isOpen }) {
+function EventsBar({ isOpen, openModal, closeModel, loading, events }) {
   const [todoList, setTodos] = useState(todos);
   const [hideCompleted, setHideCompleted] = useState(true);
   const clearTodos = () => {
@@ -41,75 +40,39 @@ function EventsBar({ isOpen }) {
       <div className="EventsContainer">
         <div className="headTitleSection">
           <h5 className="titleStyle">Your events</h5>
-          <button className="viewAll">View All</button>
+          <button className="viewAll" onClick={() => openModal()}>
+            Add Event
+          </button>
         </div>
         <div className="events">
-          <div className="event">
-            <div className="calendar">
-              <div className="calendar-body">
-                <span className="month" style={{ width: "100%" }}>
-                  Janurary
-                </span>
-                <span className="date">15</span>
-                <span className="day">Sunday</span>
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            events.map((event) => (
+              <div className="event">
+                <div className="calendar">
+                  <div className="calendar-body">
+                    <span className="month" style={{ width: "100%" }}>
+                      Janurary
+                    </span>
+                    <span className="date">15</span>
+                    <span className="day">Sunday</span>
+                  </div>
+                </div>
+                <div className="event-details">
+                  <p className="event-name">Call</p>
+                  <div className="event-participant">
+                    {" "}
+                    <AiOutlineUser /> Some User
+                  </div>
+                  <div className="event-time">
+                    {" "}
+                    <FiClock /> 8:00-10:30
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="event-details">
-              <p className="event-name">Call</p>
-              <div className="event-participant">
-                {" "}
-                <AiOutlineUser /> Some User
-              </div>
-              <div className="event-time">
-                {" "}
-                <FiClock /> 8:00-10:30
-              </div>
-            </div>
-          </div>
-          <div className="event">
-            <div className="calendar">
-              <div className="calendar-body">
-                <span className="month" style={{ width: "100%" }}>
-                  Janurary
-                </span>
-                <span className="date">15</span>
-                <span className="day">Sunday</span>
-              </div>
-            </div>
-            <div className="event-details">
-              <p className="event-name">Call</p>
-              <div className="event-participant">
-                {" "}
-                <AiOutlineUser /> Some User
-              </div>
-              <div className="event-time">
-                {" "}
-                <FiClock /> 8:00-10:30
-              </div>
-            </div>
-          </div>
-          <div className="event">
-            <div className="calendar">
-              <div className="calendar-body">
-                <span className="month" style={{ width: "100%" }}>
-                  Janurary
-                </span>
-                <span className="date">15</span>
-                <span className="day">Sunday</span>
-              </div>
-            </div>
-            <div className="event-details">
-              <p className="event-name">Call</p>
-              <div className="event-participant">
-                {" "}
-                <AiOutlineUser /> Some User
-              </div>
-              <div className="event-time">
-                {" "}
-                <FiClock /> 8:00-10:30
-              </div>
-            </div>
-          </div>
+            ))
+          )}
         </div>
       </div>
 

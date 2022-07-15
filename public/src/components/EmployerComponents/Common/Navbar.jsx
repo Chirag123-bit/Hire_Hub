@@ -3,6 +3,7 @@ import { BiMessageSquareDetail } from "react-icons/bi";
 import { IoNotifications } from "react-icons/io5";
 import { MdOutlineLightMode } from "react-icons/md";
 import ReactRoundedImage from "react-rounded-image";
+import { host } from "../../../utils/APIRoutes";
 
 function Navbar({ user, company, loading, jobInfo }) {
   if (!loading) {
@@ -25,7 +26,7 @@ function Navbar({ user, company, loading, jobInfo }) {
           </div>
           <div className="profilePic">
             <ReactRoundedImage
-              image={user.avatarImage}
+              image={host + "/" + company.avatarImage}
               roundedColor="rgb(4,93,233)"
               imageWidth="40"
               imageHeight="40"

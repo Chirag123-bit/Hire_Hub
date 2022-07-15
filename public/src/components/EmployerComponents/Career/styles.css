@@ -17,6 +17,7 @@
 .CareerHead {
   text-align: center;
   display: flex;
+  justify-content: center;
 }
 .CareerAbout {
   margin-top: 1rem;

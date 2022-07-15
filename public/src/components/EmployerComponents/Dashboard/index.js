@@ -1,13 +1,13 @@
 import axios from "axios";
 import { motion } from "framer-motion";
 import Moment from "moment";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiDollar, BiHome, BiMap, BiTimeFive, BiUser } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { addNewJob } from "../../../utils/APIRoutes";
+import { addEvent, addNewJob, getEvent } from "../../../utils/APIRoutes";
 import EventsBar from "../Common/EventsBar";
 import {
   ActionsDropDown,
@@ -41,6 +41,7 @@ import {
   Title,
   UpperHead,
 } from "./Components";
+import { EventsModal } from "./Events/EventModal";
 import { JobModal } from "./JobModal/modal";
 
 function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
@@ -53,6 +54,33 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
     theme: "dark",
   };
 
+  const [event, setEvent] = useState({
+    title: "",
+    note: "Lorem Epsum",
+    date: new Date(),
+    startTime: "9:00",
+    endTime: "10:00",
+  });
+
+  const handleEventDateInput = (e) => {
+    console.log(e);
+    setEvent({ ...event, date: e });
+  };
+  const handleStartInput = (e) => {
+    console.log(e);
+    setEvent({ ...event, startTime: e });
+  };
+  const handleEndInput = (e) => {
+    console.log(e);
+    setEvent({ ...event, endTime: e });
+  };
+  const handleEventInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setEvent({ ...event, [name]: value });
+  };
+
   const handleOverview = (data) => {
     setSelectedJob(data);
     navigate("/employer/dashboard/job-post", {
@@ -62,9 +90,6 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
     });
   };
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [jobs, setJobs] = useState([]);
-
   // const [skills, requirements, responsibilities] = [];
   var skills = [];
   var requirements = [];
@@ -73,6 +98,10 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
   const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setShowModal((prev) => !prev);
+  };
+  const [showEventModal, setShowEventModal] = useState(false);
+  const openEventModal = () => {
+    setShowEventModal((prev) => !prev);
   };
 
   const closeModel = () => {
@@ -104,6 +133,79 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
 
   const handleDateInput = (e) => {
     setAddJob({ ...addJob, closeTime: e });
+  };
+
+  const handleEventSubmit = async (e) => {
+    e.preventDefault();
+    const token = await JSON.parse(localStorage.getItem("token"));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .post(
+        addEvent,
+        {
+          title: event.title,
+          note: event.note,
+          date: event.date,
+          startTime: event.startTime,
+          endTime: event.endTime,
+        },
+        config
+      )
+      .then((result) => {
+        console.log(result);
+        if (result.status === 200) {
+          closeModel();
+          setEvent({
+            title: "",
+            note: "Lorem Epsum",
+            date: new Date(),
+            startTime: "9:00",
+            endTime: "10:00",
+          });
+          toast.success("Event was added successfully", toastOptions);
+          getEvents();
+        } else {
+          toast.error(result.data.msg, toastOptions);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.response.data.msg, toastOptions);
+      });
+  };
+
+  const [events, setEvents] = useState([]);
+  const [loadingEvents, setLoadingEvents] = useState(false);
+
+  const getEvents = async () => {
+    setLoadingEvents(true);
+    const token = await JSON.parse(localStorage.getItem("token"));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .get(getEvent, config)
+      .then((result) => {
+        console.log(result);
+        if (result.status === 200) {
+          setEvents(result.data.events);
+        } else {
+          toast.error("Error Fetching events", toastOptions);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Some Unknown error occured", toastOptions);
+      });
+    setLoadingEvents(false);
   };
 
   const handleAddSkill = () => {
@@ -178,6 +280,21 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
     });
   };
 
+  var monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
   const validateInputedData = () => {
     if (
       addJob.title === "" ||
@@ -247,6 +364,10 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
       }
     }
   };
+
+  useEffect(() => {
+    getEvents();
+  }, []);
 
   return (
     <motion.div
@@ -515,7 +636,12 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
           }
         </JobsContainerRow>
       </DashboardContainer>
-      <EventsBar isOpen={isOpen} />
+      <EventsBar
+        isOpen={isOpen}
+        openModal={openEventModal}
+        events={events}
+        loading={loadingEvents}
+      />
       {showModal && (
         <JobModal
           showModal={showModal}
@@ -533,6 +659,18 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
           handleRemoveResponsibility={handleRemoveResponsibility}
           handleDateInput={handleDateInput}
           handleSubmit={handleSubmit}
+        />
+      )}
+      {showEventModal && (
+        <EventsModal
+          showModal={showEventModal}
+          setShowModal={closeModel}
+          event={event}
+          handleEventInput={handleEventInput}
+          handleDateInput={handleEventDateInput}
+          handleStartInput={handleStartInput}
+          handleEndInput={handleEndInput}
+          handleSubmit={handleEventSubmit}
         />
       )}
     </motion.div>

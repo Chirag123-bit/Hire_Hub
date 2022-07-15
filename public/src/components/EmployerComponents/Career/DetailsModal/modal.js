@@ -195,7 +195,7 @@ export const DetailsModal = ({
                 size="md"
                 type="submit"
               >
-                Create
+                Update
               </Button>
             </Modal.Footer>
           </form>

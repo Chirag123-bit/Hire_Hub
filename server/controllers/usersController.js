@@ -756,7 +756,7 @@ module.exports.updateUser = async (req, res, next) => {
 //updating user details
 module.exports.updateUserDetails = async (req, res, next) => {
   const userId = req.user._id;
-  console.log(req.body);
+
   var user;
   try {
     user = await User.findOneAndUpdate(

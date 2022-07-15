@@ -4,7 +4,12 @@ import React, { useEffect, useRef, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import { toast } from "react-toastify";
 import LoadingImage from "../../../images/loading.gif";
-import { getCompanyJobs, updateProfilePic } from "../../../utils/APIRoutes";
+import {
+  changeLogo,
+  editCompanyDetails,
+  getCompanyJobs,
+  host,
+} from "../../../utils/APIRoutes";
 import {
   ApplyButton,
   CompanyInfoHoler,
@@ -22,10 +27,11 @@ import { JobTitle } from "../Dashboard/Components";
 import { DetailsModal } from "./DetailsModal/modal";
 import "./styles.css";
 
-function Careers({ isOpen, user, company }) {
+function Careers({ isOpen, user, com }) {
   const [isLoading, setIsLoading] = useState(true);
   const [jobs, setJobs] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [company, setCompany] = useState(com);
   const openModal = () => {
     console.log("open modal");
     setShowModal(true);
@@ -61,11 +67,19 @@ function Careers({ isOpen, user, company }) {
     theme: "dark",
   };
 
-  const [profileUrl, setProfileUrl] = useState(user.avatarImage);
+  const [profileUrl, setProfileUrl] = useState(company.avatarImage);
+
+  const selectCountry = (e) => {
+    setCompany({ ...company, country: e });
+  };
+  const selectRegion = (e) => {
+    setCompany({ ...company, region: e });
+  };
 
   const getNewImage = async () => {
     setIsUpdating(true);
-    const currentUser = await JSON.parse(localStorage.getItem("user"));
+    const currentUser = await JSON.parse(localStorage.getItem("company"));
+    setCompany(currentUser);
     setProfileUrl(currentUser.avatarImage);
     setIsUpdating(false);
   };
@@ -84,11 +98,12 @@ function Careers({ isOpen, user, company }) {
     };
 
     try {
-      const res = await axios.post(updateProfilePic, formData, config);
+      const res = await axios.post(changeLogo, formData, config);
       if (res.status === 200) {
-        localStorage.removeItem("user");
-        localStorage.setItem("user", JSON.stringify(res.data.user));
-        toast.success("Profile picture updated successfully", toastOptions);
+        console.log(res);
+        localStorage.removeItem("company");
+        localStorage.setItem("company", JSON.stringify(res.data.company));
+        toast.success("Logo updated successfully", toastOptions);
         getNewImage();
       } else {
         toast.error(
@@ -97,8 +112,48 @@ function Careers({ isOpen, user, company }) {
         );
       }
     } catch (err) {
+      toast.error(
+        "Failed to update logo. Please select a valid image",
+        toastOptions
+      );
       console.log(err);
     }
+  };
+
+  //handle company details update
+  const handleCompanyDetailsUpdate = async (e) => {
+    e.preventDefault();
+    const token = JSON.parse(localStorage.getItem("token"));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    // setIsUpdating(true);
+    const data = {
+      name: company.name,
+      phone: company.phone,
+      sector: company.sector,
+      country: company.country,
+      region: company.region,
+      about: company.about,
+      desc: company.desc,
+    };
+    axios.put(editCompanyDetails, data, config).then((res) => {
+      if (res.status === 200) {
+        localStorage.removeItem("company");
+        localStorage.setItem("company", JSON.stringify(res.data.data));
+        toast.success("Company details updated successfully", toastOptions);
+        closeModel();
+      } else {
+        toast.error("Failed to update company details", toastOptions);
+      }
+    });
+  };
+
+  const handleCompanyChange = (e) => {
+    setCompany({ ...company, [e.target.name]: e.target.value });
   };
 
   return (
@@ -128,8 +183,8 @@ function Careers({ isOpen, user, company }) {
             <>
               <div className="CareerHead">
                 <div>
-                  <div className="logo-container mb-2">
-                    <img src={company.avatarImage} alt="ss" />
+                  <div className="logo-container mb-2" onClick={handleBtnClick}>
+                    <img src={host + "/" + company.avatarImage} alt="ss" />
                   </div>
                   <h3 style={{ color: "white" }}>{company.name}</h3>
                   <h5 style={{ color: "white" }}>{company.location}</h5>
@@ -196,7 +251,10 @@ function Careers({ isOpen, user, company }) {
                           }}
                         >
                           <div className="box1 ">
-                            <img src={company.avatarImage} alt="ss" />
+                            <img
+                              src={host + "/" + company.avatarImage}
+                              alt="ss"
+                            />
 
                             {/* <FcBrokenLink style={{ fontSize: "1.5rem" }} /> */}
                           </div>
@@ -232,7 +290,11 @@ function Careers({ isOpen, user, company }) {
               </div>
               <div className="career-footer">
                 <div className="logo-container mb-2">
-                  <img src={company.avatarImage} alt="ss" />
+                  <img
+                    src={host + "/" + company.avatarImage}
+                    alt="ss"
+                    style={{ width: "55px" }}
+                  />
                 </div>
                 <p style={{ color: "white" }} className="text-capitalize">
                   {company.sector} based company
@@ -248,6 +310,10 @@ function Careers({ isOpen, user, company }) {
           job={company}
           showModal={showModal}
           closeModal={closeModel}
+          handleJobInput={handleCompanyChange}
+          handleSubmit={handleCompanyDetailsUpdate}
+          selectCountry={selectCountry}
+          selectRegion={selectRegion}
         />
       )}
     </>

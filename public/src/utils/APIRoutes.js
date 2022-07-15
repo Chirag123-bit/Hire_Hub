@@ -31,6 +31,8 @@ export const getCompanyData = `${host}/api/company/getCompanyData`;
 export const getAllCompanies = `${host}/api/company/getCompanies`;
 export const getSectorCompany = `${host}/api/company/getSectorCompany`;
 export const getCompanyDetails = `${host}/api/company/getCompanyDetails`;
+export const editCompanyDetails = `${host}/api/company/editCompany`;
+export const changeLogo = `${host}/api/company/changeLogo`;
 
 export const chatUserSearch = `${host}/api/auth/getAllUsers?`;
 export const accessUserChat = `${host}/api/chat`;

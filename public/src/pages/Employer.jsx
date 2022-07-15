@@ -28,6 +28,7 @@ export default function Employer() {
   const [loading, setLoading] = useState(true);
   var [jobInfo, setJobInfo] = useState([]);
   const [selectedJob, setSelectedJob] = useState([]);
+  const [company, setCompany] = useState(null);
 
   useEffect(() => {
     if (loading)
@@ -145,7 +146,7 @@ export default function Employer() {
           <Route
             path="/career"
             element={
-              <Careers id="dashboard" isOpen={isOpen} user={cu} company={com} />
+              <Careers id="dashboard" isOpen={isOpen} user={cu} com={com} />
             }
           />
         </Routes>
