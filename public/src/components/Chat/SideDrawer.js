@@ -180,10 +180,14 @@ const SideDrawer = () => {
             <MenuList>
               <MenuItem
                 onClick={() => {
-                  navigate("/applicant/profile");
+                  if (user.type == "Applicant") {
+                    navigate("/applicant/profile");
+                  } else {
+                    navigate("/employer/dashboard");
+                  }
                 }}
               >
-                My Profile
+                My Dashboard
               </MenuItem>
               <MenuDivider />
               <MenuItem onClick={logoutHandler}>Logout</MenuItem>

@@ -8,6 +8,7 @@ import Sidebar from "../components/EmployerComponents/Common/Sidebar";
 import Dashboard from "../components/EmployerComponents/Dashboard";
 import JobApplicants from "../components/EmployerComponents/JobApplicants";
 import { Applicants } from "../components/EmployerComponents/JobApplicants/Overview/Constants";
+import Settings from "../components/EmployerComponents/Setting";
 import { getCompanyJobDetail } from "../utils/APIRoutes";
 import "./Employer.css";
 
@@ -124,32 +125,10 @@ export default function Employer() {
         });
   }, []);
 
-  // useEffect(() => {
-  // if (localStorage.getItem("company") === null) {
-  //   navigate("/auth/login");
-  //   localStorage.clear();
-  // }
-  // const { data } = axios.post(getCompanyData, {
-  //   id: com._id,
-  // });
-  // if (data.status === false) {
-  //   toast.error(data.msg, toastOptions);
-  // } else {
-  // com = data.data;
-  // }
-  // }, []);
-
   if (localStorage.getItem("user")) {
     cu = JSON.parse(localStorage.getItem("user"));
     com = JSON.parse(localStorage.getItem("company"));
-
-    // if (currUser.type === "Applicant") {
-    //   navigate("/applicant/home");
-    // }
   }
-  //  else {
-  //   navigate("/auth/login");
-  // }
 
   return (
     <>
@@ -194,6 +173,12 @@ export default function Employer() {
             path="/career"
             element={
               <Careers id="dashboard" isOpen={isOpen} user={cu} com={com} />
+            }
+          />
+          <Route
+            path="/setting"
+            element={
+              <Settings id="dashboard" isOpen={isOpen} user={cu} com={com} />
             }
           />
         </Routes>

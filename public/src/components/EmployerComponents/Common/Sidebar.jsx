@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaHome, FaBars } from "react-icons/fa";
+import { AnimatePresence, motion } from "framer-motion";
+import React from "react";
+import { AiFillSetting } from "react-icons/ai";
+import { FaBars, FaHome } from "react-icons/fa";
 import { ImUsers } from "react-icons/im";
 import { IoIosPaper } from "react-icons/io";
-import { AiFillSetting } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = ({ isOpen, toggle }) => {

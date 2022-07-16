@@ -19,6 +19,6 @@
 .innerForm {
   padding: 2rem;
 
-  background-color: rgba(0, 0, 0, 0.33) !important;
+  background-color: rgba(0, 0, 0, 0.33);
   border-radius: 10px;
 }

@@ -1,0 +1,60 @@
+.CareerContainer {
+  margin-top: 6rem;
+  margin-left: 6rem;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.logo-container {
+  width: 8%;
+  margin: auto;
+}
+
+.logo-container img {
+  max-width: 100%;
+}
+
+.CareerHead {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.CareerAbout {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}
+
+.CareerBody {
+  width: 70%;
+  margin: auto;
+  text-align: justify;
+  color: white;
+  margin-top: 3.5rem;
+}
+
+.career-footer {
+  text-align: center;
+}
+
+.box1 {
+  /* max-width: 100% !important; */
+  vertical-align: middle;
+}
+
+.box1 img {
+  width: 100%;
+  vertical-align: middle;
+  /* margin-right: 0.5rem; */
+}
+
+.career-card {
+  max-width: 28% !important;
+}
+
+.CareerHead div svg path {
+  stroke: white;
+}
+
+.career-dropdown .show .show a:hover {
+  background-color: black;
+}

@@ -619,7 +619,7 @@ function Dashboard({
     >
       <DashboardContainer
         className="col-lg-7 col-xl-8 mb-4 mb-lg-0"
-        style={{ width: "66%" }}
+        style={{ width: "66%", minHeight: "100vh" }}
       >
         <HeadContainer>
           <UpperHead className="d-flex  justify-content-between">

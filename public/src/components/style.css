@@ -110,3 +110,12 @@
   text-decoration: none;
   background: rgba(0, 0, 0, 0.2);
 }
+
+#dropdownMenuButtonEmployer::after {
+  content: none;
+}
+
+.sideBar .top_section {
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+}
