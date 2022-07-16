@@ -11,6 +11,7 @@ import {
   addEvent,
   addNewJob,
   addTodo,
+  editJob,
   getEvent,
   getTodo,
 } from "../../../utils/APIRoutes";
@@ -51,7 +52,14 @@ import { EventsModal } from "./Events/EventModal";
 import { JobEditModal } from "./JobEditModal/modal";
 import { JobModal } from "./JobModal/modal";
 
-function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
+function Dashboard({
+  isOpen,
+  company,
+  loading,
+  jobInfo,
+  setSelectedJob,
+  getCompanyJob,
+}) {
   const navigate = useNavigate();
   const toastOptions = {
     position: "bottom-right",
@@ -156,6 +164,7 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
 
       requirementsSet: requirementsSet,
     });
+    setSelectedId(job._id);
     setShowEditModal(true);
   };
   const closeEditModal = () => {
@@ -507,6 +516,93 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
       }
     }
   };
+  const [selectedId, setSelectedId] = useState(null);
+  const handleEditSubmit = async (event) => {
+    event.preventDefault();
+    extractSkills();
+    extractRequirements();
+    extractResponsibilities();
+    const token = await JSON.parse(localStorage.getItem("token"));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const title = addJob.title;
+    const about = addJob.about;
+    const sallary = addJob.sallary;
+    const description = addJob.description;
+    const closeTime = addJob.closeTime;
+    const _id = selectedId;
+
+    if (validateInputedData()) {
+      try {
+        const response = await axios.put(
+          editJob,
+          {
+            title,
+            about,
+            sallary,
+            description,
+            skills,
+            requirements,
+            responsibilities,
+            closeTime,
+            _id,
+          },
+          config
+        );
+        console.log(response);
+
+        if (response.data.success) {
+          toast.success(response.data.msg, toastOptions);
+          setAddJob({
+            title: "",
+            about: "",
+            sallary: "",
+            description: "",
+            sector: "",
+
+            skillSet: [{ skill: "" }],
+
+            responsibilitiesSet: [{ responsibility: "" }],
+
+            requirementsSet: [{ requirement: "" }],
+            closeTime: "",
+          });
+          skills = [];
+          responsibilities = [];
+          requirements = [];
+          getCompanyJob();
+          closeEditModal();
+        } else {
+          getCompanyJob();
+
+          toast.error(response.data.msg, toastOptions);
+          closeEditModal();
+        }
+      } catch (err) {
+        setAddJob({
+          title: "",
+          about: "",
+          sallary: "",
+          description: "",
+          sector: "",
+
+          skillSet: [{ skill: "" }],
+
+          responsibilitiesSet: [{ responsibility: "" }],
+
+          requirementsSet: [{ requirement: "" }],
+          closeTime: "",
+        });
+        toast.error("Failed to update job details", toastOptions);
+        closeEditModal();
+      }
+    }
+  };
 
   useEffect(() => {
     getEvents();
@@ -828,7 +924,7 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
           handleAddResponsibility={handleAddResponsibility}
           handleRemoveResponsibility={handleRemoveResponsibility}
           handleDateInput={handleDateInput}
-          handleSubmit={handleSubmit}
+          handleSubmit={handleEditSubmit}
           closeModel={closeEditModal}
         />
       )}

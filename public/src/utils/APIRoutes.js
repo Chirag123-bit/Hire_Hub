@@ -26,6 +26,7 @@ export const applyForJob = `${host}/api/job/applyForJob`;
 export const updateJobStatus = `${host}/api/job/updateJobStatus`;
 export const getAppliedJobs = `${host}/api/job/appliedJobs`;
 export const getSavedJobs = `${host}/api/job/savedJobs`;
+export const editJob = `${host}/api/job/editJob`;
 
 export const getCompanyData = `${host}/api/company/getCompanyData`;
 export const getAllCompanies = `${host}/api/company/getCompanies`;

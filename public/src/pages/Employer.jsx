@@ -30,6 +30,52 @@ export default function Employer() {
   const [selectedJob, setSelectedJob] = useState([]);
   const [company, setCompany] = useState(null);
 
+  const getCompanyJob = async () => {
+    axios
+      .get(getCompanyJobDetail, {
+        params: {
+          user: com._id,
+        },
+      })
+      .then((result) => {
+        setJobInfo([]);
+        // console.log(result.data.data);
+        for (var info in result.data.data) {
+          var comp = result.data.data[info].data;
+          var applicants = {};
+          //filter new applicants
+          applicants.New = comp.applicants.filter(
+            (applicant) => applicant.status === "New"
+          );
+          applicants.Shortlist = comp.applicants.filter(
+            (applicant) => applicant.status === "Shortlist"
+          );
+          applicants.Interview = comp.applicants.filter(
+            (applicant) => applicant.status === "Interview"
+          );
+          applicants.Negotiation = comp.applicants.filter(
+            (applicant) => applicant.status === "Negotiation"
+          );
+          applicants.TaskPhase = comp.applicants.filter(
+            (applicant) => applicant.status === "Task Phase"
+          );
+          applicants.Hired = comp.applicants.filter(
+            (applicant) => applicant.status === "Hired"
+          );
+          applicants.Disqualified = comp.applicants.filter(
+            (applicant) => applicant.status === "Disqualified"
+          );
+          applicants.Rejected = comp.applicants.filter(
+            (applicant) => applicant.status === "Rejected"
+          );
+          setJobInfo((oldArray) => [
+            ...oldArray,
+            { job: comp, applicants: applicants },
+          ]);
+        }
+      });
+  };
+
   useEffect(() => {
     if (loading)
       axios
@@ -123,6 +169,7 @@ export default function Employer() {
                 jobInfo={jobInfo}
                 company={com}
                 setSelectedJob={setSelectedJob}
+                getCompanyJob={getCompanyJob}
               />
             }
           />
