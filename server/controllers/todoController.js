@@ -115,3 +115,34 @@ module.exports.deleteEvent = asyncHandler(async (req, res, next) => {
       });
   }
 });
+
+module.exports.deleteTodo = asyncHandler(async (req, res, next) => {
+  console.log(req.params.id);
+  const usr = await req.user._id;
+  const user = await userModel.findById(usr);
+  const event = await todoModel.findById(req.body.id);
+  console.log(event);
+
+  if (!event) {
+    res.status(400).send("Todo not found");
+  } else {
+    // user.todos.pull({ event: event });
+    await user.update({ $pull: { todos: { event: event._id } } });
+    user
+      .save()
+      .then((usr) => {
+        return res.status(200).json({
+          success: true,
+          data: event,
+          msg: "The Todo was deleted successfully",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(400).json({
+          success: false,
+          msg: "Error Deleting Todo",
+        });
+      });
+  }
+});

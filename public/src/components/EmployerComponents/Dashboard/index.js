@@ -7,7 +7,13 @@ import { BiDollar, BiHome, BiMap, BiTimeFive, BiUser } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { addEvent, addNewJob, getEvent } from "../../../utils/APIRoutes";
+import {
+  addEvent,
+  addNewJob,
+  addTodo,
+  getEvent,
+  getTodo,
+} from "../../../utils/APIRoutes";
 import EventsBar from "../Common/EventsBar";
 import {
   ActionsDropDown,
@@ -42,6 +48,7 @@ import {
   UpperHead,
 } from "./Components";
 import { EventsModal } from "./Events/EventModal";
+import { JobEditModal } from "./JobEditModal/modal";
 import { JobModal } from "./JobModal/modal";
 
 function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
@@ -63,15 +70,12 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
   });
 
   const handleEventDateInput = (e) => {
-    console.log(e);
     setEvent({ ...event, date: e });
   };
   const handleStartInput = (e) => {
-    console.log(e);
     setEvent({ ...event, startTime: e });
   };
   const handleEndInput = (e) => {
-    console.log(e);
     setEvent({ ...event, endTime: e });
   };
   const handleEventInput = (e) => {
@@ -79,6 +83,12 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
     const value = e.target.value;
 
     setEvent({ ...event, [name]: value });
+  };
+  const handleTodoInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setTodo({ ...todo, [name]: value });
   };
 
   const handleOverview = (data) => {
@@ -96,8 +106,60 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
   var responsibilities = [];
 
   const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const openModal = () => {
+    setAddJob({
+      title: "",
+      about: "",
+      sallary: "",
+      description: "",
+      sector: "",
+
+      skillSet: [{ skill: "" }],
+
+      responsibilitiesSet: [{ responsibility: "" }],
+
+      requirementsSet: [{ requirement: "" }],
+      closeTime: "",
+    });
     setShowModal((prev) => !prev);
+  };
+
+  const openEditModal = (job) => {
+    console.log(job);
+    var skillSets = job.skills.map((skill) => {
+      return {
+        skill: skill,
+      };
+    });
+    var responsibilitySet = job.responsibilities.map((responsibility) => {
+      return {
+        responsibility: responsibility,
+      };
+    });
+    var requirementsSet = job.requirements.map((requirement) => {
+      return {
+        requirement: requirement,
+      };
+    });
+    const dt = new Date(job.closeDate);
+    setAddJob({
+      title: job.title,
+      about: job.about,
+      sallary: job.sallary,
+      description: job.description,
+      sector: job.sector,
+      closeTime: dt,
+
+      skillSet: skillSets,
+      responsibilitiesSet: responsibilitySet,
+
+      requirementsSet: requirementsSet,
+    });
+    setShowEditModal(true);
+  };
+  const closeEditModal = () => {
+    setShowEditModal(false);
   };
   const [showEventModal, setShowEventModal] = useState(false);
   const openEventModal = () => {
@@ -106,6 +168,17 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
 
   const closeModel = () => {
     setShowModal(false);
+  };
+  const closeEventModel = () => {
+    setShowEventModal(false);
+  };
+  const [showTodoModal, setShowTodoModal] = useState(false);
+  const openTodoModal = () => {
+    setShowTodoModal((prev) => !prev);
+  };
+
+  const closeTodoModel = () => {
+    setShowTodoModal(false);
   };
 
   //Fields required for adding Job
@@ -159,7 +232,8 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
       .then((result) => {
         console.log(result);
         if (result.status === 200) {
-          closeModel();
+          getEvents();
+          closeEventModel();
           setEvent({
             title: "",
             note: "Lorem Epsum",
@@ -168,7 +242,6 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
             endTime: "10:00",
           });
           toast.success("Event was added successfully", toastOptions);
-          getEvents();
         } else {
           toast.error(result.data.msg, toastOptions);
         }
@@ -180,7 +253,9 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
   };
 
   const [events, setEvents] = useState([]);
+  const [todos, setTodos] = useState([]);
   const [loadingEvents, setLoadingEvents] = useState(false);
+  const [loadingTodos, setLoadingTodos] = useState(false);
 
   const getEvents = async () => {
     setLoadingEvents(true);
@@ -206,6 +281,74 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
         toast.error("Some Unknown error occured", toastOptions);
       });
     setLoadingEvents(false);
+  };
+
+  const getTodos = async () => {
+    setLoadingTodos(true);
+    const token = await JSON.parse(localStorage.getItem("token"));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .get(getTodo, config)
+      .then((result) => {
+        console.log(result);
+        if (result.status === 200) {
+          setTodos(result.data.todos);
+        } else {
+          toast.error("Error Fetching todos", toastOptions);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Some Unknown error occured", toastOptions);
+      });
+    setLoadingTodos(false);
+  };
+
+  const [todo, setTodo] = useState({
+    title: "",
+    note: "Lorem Epsum",
+  });
+
+  const handleTodoSubmit = async (e) => {
+    e.preventDefault();
+    const token = await JSON.parse(localStorage.getItem("token"));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .post(
+        addTodo,
+        {
+          title: todo.title,
+          note: todo.note,
+        },
+        config
+      )
+      .then((result) => {
+        console.log(result);
+        if (result.status === 200) {
+          getTodos();
+          setTodo({
+            title: "",
+            note: "Lorem Epsum",
+          });
+          toast.success("Todo was added successfully", toastOptions);
+        } else {
+          toast.error(result.data.msg, toastOptions);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.response.data.msg, toastOptions);
+      });
   };
 
   const handleAddSkill = () => {
@@ -367,6 +510,7 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
 
   useEffect(() => {
     getEvents();
+    getTodos();
   }, []);
 
   return (
@@ -480,6 +624,7 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
                           <DropLink
                             href="#"
                             className="dropdown-item px-4 py-2"
+                            onClick={() => openEditModal(jobDetail.job)}
                           >
                             Edit
                           </DropLink>
@@ -641,6 +786,12 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
         openModal={openEventModal}
         events={events}
         loading={loadingEvents}
+        todos={todos}
+        loadingTodos={loadingTodos}
+        handleTodoInput={handleTodoInput}
+        todo={todo}
+        handleTodoSubmit={handleTodoSubmit}
+        getTodos={getTodos}
       />
       {showModal && (
         <JobModal
@@ -661,6 +812,27 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
           handleSubmit={handleSubmit}
         />
       )}
+      {showEditModal && (
+        <JobEditModal
+          showModal={showEditModal}
+          setShowModal={closeModel}
+          job={addJob}
+          handleJobInput={handleJobInput}
+          handleAddSkill={handleAddSkill}
+          handleRemoveSkill={handleRemoveSkill}
+          handleAddRequirement={handleAddRequirement}
+          handleRemoveRequirement={handleRemoveRequirement}
+          handleOnSkillChange={handleOnSkillChange}
+          handleOnRequirementChange={handleOnRequirementChange}
+          handleOnResponsibilityChange={handleOnResponsibilityChange}
+          handleAddResponsibility={handleAddResponsibility}
+          handleRemoveResponsibility={handleRemoveResponsibility}
+          handleDateInput={handleDateInput}
+          handleSubmit={handleSubmit}
+          closeModel={closeEditModal}
+        />
+      )}
+
       {showEventModal && (
         <EventsModal
           showModal={showEventModal}
@@ -670,6 +842,7 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
           handleDateInput={handleEventDateInput}
           handleStartInput={handleStartInput}
           handleEndInput={handleEndInput}
+          closeModel={closeEventModel}
           handleSubmit={handleEventSubmit}
         />
       )}

@@ -14,6 +14,7 @@ export const EventsModal = ({
   handleDateInput,
   handleStartInput,
   handleEndInput,
+  closeModel,
   handleSubmit,
 }) => {
   return (
@@ -118,7 +119,7 @@ export const EventsModal = ({
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="danger" onClick={setShowModal} size="md">
+              <Button variant="danger" onClick={closeModel} size="md">
                 Cancle
               </Button>
               <Button

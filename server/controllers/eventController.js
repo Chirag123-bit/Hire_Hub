@@ -94,17 +94,10 @@ module.exports.deleteEvent = asyncHandler(async (req, res, next) => {
   if (!event) {
     res.status(400).send("Event not found");
   } else {
-    user.events.pull({ event: event });
+    await user.update({ $pull: { events: { event: event._id } } });
     user
       .save()
       .then((usr) => {
-        // event.remove().then((ev) => {
-        //   return res.status(200).json({
-        //     success: true,
-        //     data: event,
-        //     msg: "The Event was deleted successfully",
-        //   });
-        // });
         return res.status(200).json({
           success: true,
           data: event,

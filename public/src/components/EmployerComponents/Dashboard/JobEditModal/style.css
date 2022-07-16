@@ -1,0 +1,57 @@
+.modal-backdrop.show {
+  opacity: 0.4 !important;
+}
+
+.ModalHead {
+  width: 28%;
+}
+
+.modal-content {
+  background-color: #272b35 !important;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 80% !important;
+  }
+}
+
+.ModalHead .btn-close {
+  outline: none;
+}
+
+.modal-body > div {
+  width: 95%;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+.modal-body > div > p,
+.sc-hFrEEg,
+.modal-body ul {
+  max-width: 80% !important;
+  margin-left: 8rem;
+}
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+  border-color: rgb(204, 204, 204) !important;
+}
+
+.react-datetime-picker {
+  width: 100%;
+  color: white;
+}
+
+.react-datetime-picker,
+.react-datetime-picker input,
+.react-datetime-picker select,
+.react-datetime-picker button svg {
+  color: orange;
+}
+
+.react-datetime-picker__inputGroup {
+  padding: 10px;
+}
+
+.react-datetime-picker button svg path {
+  fill: orange;
+}
