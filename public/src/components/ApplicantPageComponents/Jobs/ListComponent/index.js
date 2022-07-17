@@ -1,13 +1,15 @@
 import Job from "./ListCard";
 import { JobCardsHoler } from "./listElements";
 
-function ListComponent({ list }) {
+function ListComponent({ list, isLoading }) {
   return (
-    <JobCardsHoler>
-      {list.map((item) => {
-        return <Job item={item} />;
-      })}
-    </JobCardsHoler>
+    { isLoading } && (
+      <JobCardsHoler>
+        {list.map((item) => {
+          return <Job item={item} />;
+        })}
+      </JobCardsHoler>
+    )
   );
 }
 

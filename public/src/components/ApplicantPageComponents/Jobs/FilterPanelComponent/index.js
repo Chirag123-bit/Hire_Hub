@@ -22,9 +22,10 @@ function FilterPanel({
   country,
   region,
   setRegion,
+  reset,
 }) {
   return (
-    <FilterContainer>
+    <FilterContainer onDoubleClick={reset}>
       <InputGroup>
         <Label>Job Type</Label>
         <div style={{ width: "100%" }}>

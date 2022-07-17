@@ -1,4 +1,8 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { getAllJobs } from "../../../../utils/APIRoutes";
+import EmptyView from "../EmptyView/index";
+import FilterPanel from "../FilterPanelComponent";
 import ListComponent from "../ListComponent/index";
 import SearchBar from "../SearchbarComponent";
 import {
@@ -7,9 +11,6 @@ import {
   HomePanalWrap,
   ListWrap,
 } from "./JobComponents";
-import { dataList } from "../SearchbarComponent/Constants";
-import EmptyView from "../EmptyView/index";
-import FilterPanel from "../FilterPanelComponent";
 
 function SeekerJobs() {
   const [selectedType, setSelectedType] = useState(null);
@@ -18,17 +19,18 @@ function SeekerJobs() {
   };
 
   const [inputSearch, setInputSearch] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [selectedCategory, setSelectedCategory] = useState([
     {
       id: 1,
       checked: false,
-      label: "Technology",
+      label: "Information Technology",
     },
     {
       id: 2,
       checked: false,
-      label: "Health",
+      label: "Medical Sector",
     },
     {
       id: 3,
@@ -38,17 +40,22 @@ function SeekerJobs() {
     {
       id: 4,
       checked: false,
-      label: "Service",
+      label: "Skilled Worker",
     },
     {
       id: 5,
       checked: false,
-      label: "Finance",
+      label: "Financial Sector",
     },
     {
       id: 6,
       checked: false,
-      label: "Entertainment",
+      label: "Entertainment Sector",
+    },
+    {
+      id: 7,
+      checked: false,
+      label: "Marketing Sector",
     },
   ]);
 
@@ -69,14 +76,61 @@ function SeekerJobs() {
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
 
-  const [list, setList] = useState(dataList);
+  const [allJobs, setAllJobs] = useState([]);
+  const [list, setList] = useState([]);
   const [resultFound, setResultFound] = useState(false);
+  const reset = () => {
+    console.log("reset");
+    setCountry("");
+    setRegion("");
+    setSelectedType(null);
+    setInputSearch("");
+    setSelectedCategory([
+      {
+        id: 1,
+        checked: false,
+        label: "Information Technology",
+      },
+      {
+        id: 2,
+        checked: false,
+        label: "Medical Sector",
+      },
+      {
+        id: 3,
+        checked: false,
+        label: "Education",
+      },
+      {
+        id: 4,
+        checked: false,
+        label: "Skilled Worker",
+      },
+      {
+        id: 5,
+        checked: false,
+        label: "Financial Sector",
+      },
+      {
+        id: 6,
+        checked: false,
+        label: "Entertainment Sector",
+      },
+      {
+        id: 7,
+        checked: false,
+        label: "Marketing Sector",
+      },
+    ]);
+  };
 
   const applyFilter = () => {
-    let updatedList = dataList;
+    let updatedList = allJobs;
 
     if (selectedType) {
-      updatedList = updatedList.filter((item) => item.type === selectedType);
+      updatedList = updatedList.filter(
+        (item) => item.type !== "Remote Delivery"
+      );
     }
 
     const categoryChecked = selectedCategory
@@ -84,9 +138,9 @@ function SeekerJobs() {
       .map((item) => item.label);
 
     if (categoryChecked.length > 0) {
-      updatedList = updatedList.filter((item) =>
-        categoryChecked.includes(item.category)
-      );
+      updatedList = updatedList.filter((item) => {
+        return categoryChecked.includes(item.sector.title);
+      });
     }
 
     const minPrice = selectedPrice[0] * 1000;
@@ -98,13 +152,13 @@ function SeekerJobs() {
 
     if (country !== "") {
       updatedList = updatedList.filter(
-        (item) => item.company_country === country
+        (item) => item.company.country === country
       );
     }
 
     if (region !== "") {
       updatedList = updatedList.filter(
-        (item) => item.company_region === region
+        (item) => item.company.region === region
       );
     }
 
@@ -131,6 +185,24 @@ function SeekerJobs() {
     region,
     inputSearch,
   ]);
+
+  useEffect(() => {
+    //get all jobs from database
+    setLoading(true);
+    try {
+      axios.get(getAllJobs).then((res) => {
+        setAllJobs(res.data.data);
+        setList(res.data.data);
+        setLoading(false);
+        reset();
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   return (
     <div id="jobs">
       <ContentHolder>
@@ -151,10 +223,15 @@ function SeekerJobs() {
               country={country}
               region={region}
               setRegion={setRegion}
+              reset={reset}
             />
           </HomePanalWrap>
           <ListWrap>
-            {resultFound ? <ListComponent list={list} /> : <EmptyView />}
+            {resultFound ? (
+              <ListComponent list={list} isLoading={!loading} />
+            ) : (
+              <EmptyView />
+            )}
           </ListWrap>
         </HomePanalListWrap>
       </ContentHolder>
