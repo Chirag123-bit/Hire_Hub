@@ -24,9 +24,10 @@ export const CardsContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  width: 75%;
-  margin: 1rem 0;
+  width: 85%;
+  margin: auto;
   padding: 1rem 0;
+  padding-bottom: 0;
   border-radius: 1.2rem;
   font-family: "Source Sans Pro", sans-serif;
 `;

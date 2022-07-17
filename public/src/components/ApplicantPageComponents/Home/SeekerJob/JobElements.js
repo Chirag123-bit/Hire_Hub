@@ -22,6 +22,7 @@ export const JobsContainer = styled.div`
 
 export const ContentHolder = styled.div`
   padding: 5rem 0;
+  padding-bottom: 0;
   width: 90%;
   margin: auto;
   display: flex;

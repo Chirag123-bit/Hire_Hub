@@ -1,169 +1,61 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import backend from "../../../../images/backend.png";
-import { getSectorJob } from "../../../../utils/APIRoutes";
-import {
-  CategoryCard,
-  CategoryContainer,
-  CategoryTitle,
-  CatImage,
-  ColoredSlogan,
-  ContentHolder,
-  HContainer,
-  ImageSection,
-  Title,
-  TitleContainer,
-  TitleSection,
-} from "./CategoryElements";
+import Tilt from "react-tilt";
+import { v4 as uuid } from "uuid";
+import { getCategories, host } from "../../../../utils/APIRoutes";
+import { CardsContainer } from "../SeekerSolutions/SolutionComponents";
 
 function Categories() {
-  var [isTechReady, setIsTechReady] = useState(false);
-  var [tech, setTech] = useState([]);
-  var [isHealthReady, setIsHealthReady] = useState(false);
-  var [health, setHealth] = useState([]);
-  var [isEntReady, setIsEntReady] = useState(false);
-  var [ent, setEnt] = useState([]);
-  var [isFinanceReady, setIsFinanceReady] = useState(false);
-  var [finance, setFinance] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [ready, setIsReady] = useState(false);
+
   useEffect(() => {
-    axios
-      .get(getSectorJob, {
-        params: {
-          sector: "Information Technology",
-        },
-      })
-      .then((result) => {
-        tech = result.data.data.slice(0, 3);
-        setTech(tech);
-        setIsTechReady(true);
-        // console.log(tech);
-      });
-
-    axios
-      .get(getSectorJob, {
-        params: {
-          sector: "Finance",
-        },
-      })
-      .then((result) => {
-        finance = result.data.data.slice(0, 3);
-        setFinance(finance);
-        setIsFinanceReady(true);
-        // console.log(result.data.data);
-      });
-
-    axios
-      .get(getSectorJob, {
-        params: {
-          sector: "Entertainment",
-        },
-      })
-      .then((result) => {
-        ent = result.data.data.slice(0, 3);
-        setEnt(ent);
-        setIsEntReady(true);
-        // console.log(ent);
-      });
+    axios.get(getCategories).then((result) => {
+      setCategories(result.data.data);
+      setIsReady(true);
+    });
   }, []);
+
   return (
-    <CategoryContainer>
-      <ContentHolder>
-        <TitleContainer>
-          <Title>
-            Jobs in <ColoredSlogan>Information Technology</ColoredSlogan>
-          </Title>
-        </TitleContainer>
+    <CardsContainer>
+      {!ready ? (
+        <div style={{ margin: "auto" }}>
+          <div className="loading-wrapper">
+            <div className="loader">
+              <div className="loading-circle">s</div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        categories.map((category) => (
+          <Tilt
+            className="cardTest"
+            id={uuid()}
+            style={{ marginBottom: "1rem" }}
+            options={{
+              scale: 1,
+              speed: 500,
+              reverse: true,
+              max: 30,
+              glare: true,
+              maxGlare: 1,
+              easing: "cubic-bezier(.03,.98,.52,.99)",
+              prespective: 500,
+            }}
+          >
+            <img
+              src={host + "/" + category.category.image}
+              class="proImg"
+              alt="srh"
+            />
 
-        <HContainer>
-          {isTechReady ? (
-            tech.map((job) => (
-              <CategoryCard>
-                <ImageSection>
-                  <CatImage src={backend} alt="Backend" />
-                </ImageSection>
-                <TitleSection>
-                  <CategoryTitle>{job.title}</CategoryTitle>
-                </TitleSection>
-              </CategoryCard>
-            ))
-          ) : (
-            <div></div>
-          )}
-        </HContainer>
-      </ContentHolder>
-      <ContentHolder>
-        <TitleContainer>
-          <Title>
-            Jobs in <ColoredSlogan>Financial Services</ColoredSlogan>
-          </Title>
-        </TitleContainer>
-
-        <HContainer>
-          {isFinanceReady ? (
-            finance.map((job) => (
-              <CategoryCard>
-                <ImageSection>
-                  <CatImage src={backend} alt="Backend" />
-                </ImageSection>
-                <TitleSection>
-                  <CategoryTitle>{job.title}</CategoryTitle>
-                </TitleSection>
-              </CategoryCard>
-            ))
-          ) : (
-            <div></div>
-          )}
-        </HContainer>
-      </ContentHolder>
-      <ContentHolder>
-        <TitleContainer>
-          <Title>
-            Jobs in <ColoredSlogan>Entertainment</ColoredSlogan>
-          </Title>
-        </TitleContainer>
-
-        <HContainer>
-          {isEntReady ? (
-            ent.map((job) => (
-              <CategoryCard>
-                <ImageSection>
-                  <CatImage src={backend} alt="Backend" />
-                </ImageSection>
-                <TitleSection>
-                  <CategoryTitle>{job.title}</CategoryTitle>
-                </TitleSection>
-              </CategoryCard>
-            ))
-          ) : (
-            <div></div>
-          )}
-        </HContainer>
-      </ContentHolder>
-      <ContentHolder>
-        <TitleContainer>
-          <Title>
-            Jobs in <ColoredSlogan>Health Sector</ColoredSlogan>
-          </Title>
-        </TitleContainer>
-
-        <HContainer>
-          {isHealthReady ? (
-            health.map((job) => (
-              <CategoryCard>
-                <ImageSection>
-                  <CatImage src={backend} alt="Backend" />
-                </ImageSection>
-                <TitleSection>
-                  <CategoryTitle>{job.title}</CategoryTitle>
-                </TitleSection>
-              </CategoryCard>
-            ))
-          ) : (
-            <div></div>
-          )}
-        </HContainer>
-      </ContentHolder>
-    </CategoryContainer>
+            <h2 class="name">{category.category.title}</h2>
+            <p>{category.jobs} Jobs Available</p>
+            <button>Explore Now</button>
+          </Tilt>
+        ))
+      )}
+    </CardsContainer>
   );
 }
 

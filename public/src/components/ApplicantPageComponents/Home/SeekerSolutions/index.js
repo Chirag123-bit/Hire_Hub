@@ -1,14 +1,3 @@
-// import {
-//   ColoredSlogan,
-//   Slogan,
-//   TextContent,
-// } from "../SeekerHero/seekerHeroElements";
-// import { CardsContainer, SolutionsContainer } from "./SolutionComponents";
-
-// import { useEffect } from "react";
-// import women from "../../../../images/woman.jpg";
-// import "../../../style.css";
-
 import {
   ColoredSlogan,
   Slogan,
