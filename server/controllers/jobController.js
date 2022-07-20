@@ -255,6 +255,7 @@ const getReusableJobDetail1 = async (job_id) => {
     populate: {
       path: "applicant",
       model: "Users",
+      select: "-appliedJobs -events -todos -favouriteJobs -savedJobs",
     },
   });
   console.log(Jobs);
@@ -282,6 +283,33 @@ module.exports.getCompanyJobDetail = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     return res.json({
+      success: false,
+      error: error,
+      msg: error,
+    });
+  }
+};
+
+module.exports.getCompanyJobDetailApp = async (req, res, next) => {
+  var op = [];
+
+  try {
+    const result = await Company.findById(req.user.company).select("jobs");
+
+    //get details of all the jobs
+    const jobArray = result["jobs"];
+    for (job_id in jobArray) {
+      const objId = jobArray[job_id];
+      var dat = await getReusableJobDetail1(objId);
+      op.push({ data: dat });
+    }
+    return res.status(200).json({
+      success: true,
+      data: op,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
       success: false,
       error: error,
       msg: error,

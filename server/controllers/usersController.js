@@ -375,7 +375,7 @@ module.exports.register = async (req, res, next) => {
       summary,
       workSet,
       educationSet,
-      c_name,
+      cname,
       csector,
       country,
       region,
@@ -398,7 +398,7 @@ module.exports.register = async (req, res, next) => {
         status: false,
       });
 
-    const companyNameCheck = await Company.findOne({ name: c_name });
+    const companyNameCheck = await Company.findOne({ name: cname });
 
     // Hashing the user's password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -454,7 +454,7 @@ module.exports.register = async (req, res, next) => {
             });
           }
           const company = new Company({
-            name: c_name,
+            name: cname,
             sector: csector,
             country: country,
             region: region,
@@ -519,7 +519,7 @@ module.exports.register = async (req, res, next) => {
 module.exports.login = async (req, res, next) => {
   try {
     var { username, password } = req.body;
-    const user = await User.findOne({ username });
+    var user = await User.findOne({ username });
     if (!user) {
       return res
         .status(500)
@@ -620,8 +620,31 @@ module.exports.allUsers = async (req, res, next) => {
       }
     : {};
 
-  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  const users = await User.find(keyword)
+    .find({ _id: { $ne: req.user._id } })
+    .select(
+      "-password -__v -isVerified -isAvatarImageSet -additional -appliedJobs -todos -professional -events -savedJobs -favouriteJobs"
+    );
   res.send(users);
+};
+module.exports.allUsersApp = async (req, res, next) => {
+  const keyword = req.query.search
+    ? {
+        $or: [
+          { firstName: { $regex: req.query.search, $options: "i" } },
+          { lastName: { $regex: req.query.search, $options: "i" } },
+          { username: { $regex: req.query.search, $options: "i" } },
+          { email: { $regex: req.query.search, $options: "i" } },
+        ],
+      }
+    : {};
+
+  const users = await User.find(keyword)
+    .find({ _id: { $ne: req.user._id } })
+    .select(
+      "-password -__v -isVerified -isAvatarImageSet  -appliedJobs -todos  -events -savedJobs -favouriteJobs"
+    );
+  return res.json({ data: users });
 };
 
 module.exports.addEvent = async (req, res, next) => {
@@ -790,6 +813,37 @@ module.exports.updateUserDetails = async (req, res, next) => {
     const updatedDetails = await User.findById(userId);
     return res.status(200).json({
       status: true,
+      user: updatedDetails,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+  return res.status(500).json({
+    status: false,
+  });
+};
+module.exports.updateCompanyDetails = async (req, res, next) => {
+  const companyId = req.user.company;
+  console.log(companyId);
+  try {
+    user = await Company.findOneAndUpdate(
+      { _id: companyId },
+      {
+        $set: {
+          name: req.body.cname,
+          sector: req.body.csector,
+          country: req.body.country,
+          region: req.body.region,
+          phone: req.body.phone,
+          about: req.body.cabout,
+          desc: req.body.cdesc,
+        },
+      }
+    );
+    const updatedDetails = await Company.find({ _id: companyId });
+    console.log(updatedDetails);
+    return res.status(200).json({
+      company: true,
       user: updatedDetails,
     });
   } catch (e) {
