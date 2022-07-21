@@ -332,6 +332,10 @@ function Dashboard({
         Authorization: `Bearer ${token}`,
       },
     };
+    if (todo.title === "") {
+      toast.error("Please enter a title", toastOptions);
+      return;
+    }
     axios
       .post(
         addTodo,

@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export const Button = styled(Link)`
   border-radius: 50px;
@@ -16,7 +16,7 @@ export const Button = styled(Link)`
   align-items: center;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  border: 2px solid #423edd;
+  border: 2px solid #045de9;
 
   &:hover {
     background: white;

@@ -124,7 +124,14 @@ function EventsBar({
             <div>Loading...</div>
           ) : (
             events.map((event) => {
-              const date = new Date(event.event.date);
+              console.log(event);
+              var date;
+              try {
+                date = new Date(event.event.date) ?? new Date();
+              } catch (err) {
+                date = new Date();
+              }
+              // const date = new Date(event.event.date) ?? new Date();
               let dt = date.getDate();
               let day = date.toLocaleString("en-us", { weekday: "long" });
               let month = monthNames[date.getMonth()];

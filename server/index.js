@@ -71,6 +71,8 @@ io.on("connection", (socket) => {
     socket.join(id);
     socket.emit("connected");
     clients[id] = socket;
+    //print length of clients
+    console.log(Object.keys(clients).length);
   });
 
   socket.on("join chat", (room) => {
@@ -81,10 +83,10 @@ io.on("connection", (socket) => {
   socket.on("message", (data) => {
     let reciverId = data.reciverId;
     if (clients[reciverId]) {
-      clients[reciverId].emit("message", data.message);
-    } else {
-      clients[data.senderId].emit("message", data.message);
+      console.log("Sending Message to: " + reciverId);
+      clients[reciverId].emit("message", data);
     }
+
     console.log(data);
   });
 

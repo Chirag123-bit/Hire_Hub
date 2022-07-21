@@ -20,10 +20,12 @@ import ApplicantHome from "../components/SeekerHome";
 export default function Seeker() {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+
   return (
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <SeekerNav toggle={toggle} />
+
       <div className="seeker-gradient-two">
         <Routes>
           <Route path="/home" element={<ApplicantHome id="home" />} />

@@ -16,10 +16,12 @@ import {
 } from "./NavbarElements";
 
 import { Link, useNavigate } from "react-router-dom";
+import { ChatState } from "../../../../context/ChatProvider";
 
 const SeekerNav = ({ toggle }) => {
   const navigate = useNavigate();
   const [scrollNav, setScrollNav] = useState(false);
+  const { user } = ChatState();
 
   const changeNav = () => {
     if (window.scrollY >= 80) {
@@ -138,7 +140,7 @@ const SeekerNav = ({ toggle }) => {
                     color: "white",
                   }}
                 >
-                  Chirag Simkhada
+                  {user.firstName + " " + user.lastName}
                 </button>
                 <div
                   class="dropdown-menu"

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { IoNotifications } from "react-icons/io5";
 import { MdOutlineLightMode } from "react-icons/md";
 import ReactRoundedImage from "react-rounded-image";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { host } from "../../../utils/APIRoutes";
 
 function Navbar({ user, company, loading, jobInfo }) {
@@ -12,6 +12,11 @@ function Navbar({ user, company, loading, jobInfo }) {
     localStorage.clear();
     window.location.href = "/auth/login";
   };
+  useEffect(() => {
+    if (!company) {
+      Navigate("/auth/login");
+    }
+  }, []);
   return (
     <div className="navBar" style={{ paddingBottom: "0.8rem" }}>
       <div className="navBarContainer">
@@ -42,6 +47,7 @@ function Navbar({ user, company, loading, jobInfo }) {
                 <h6 style={{ marginBottom: "0" }}>
                   {user.firstName} {user.lastName}
                 </h6>
+
                 <p className="mb-1">{company.name}</p>
               </div>
             </button>

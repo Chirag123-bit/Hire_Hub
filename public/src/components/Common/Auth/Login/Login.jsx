@@ -75,6 +75,7 @@ export const Login = () => {
                 toastOptions
               );
               localStorage.setItem("token", JSON.stringify(res.data.token));
+              localStorage.setItem("type", "Company");
 
               navigate("/employer/dashboard", { replace: true });
             }
@@ -85,6 +86,7 @@ export const Login = () => {
                 toastOptions
               );
               localStorage.setItem("token", JSON.stringify(res.data.token));
+              localStorage.setItem("type", "Applicant");
 
               navigate("/applicant/home", { replace: true });
             }

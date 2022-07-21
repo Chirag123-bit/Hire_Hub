@@ -16,16 +16,18 @@ const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const navigate = useNavigate();
+  const [hide, setHide] = useState(false);
+  const [type, setType] = useState(null);
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("user"));
-    console.log(userInfo);
 
     if (userInfo !== null) {
+      setHide(true);
       if (userInfo.type === "employer") {
-        navigate("/employer/dashboard");
+        setType("Company");
       } else {
-        navigate("/applicant/home");
+        setType("Applicant");
       }
     }
   }, []);
@@ -33,7 +35,7 @@ const Home = () => {
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} />
 
-      <NavBar toggle={toggle} />
+      <NavBar toggle={toggle} hide={hide} type={type} />
       <HeroSection />
       <InfoSection {...homeObjOne} />
       <InfoSection {...homeObjTwo} />

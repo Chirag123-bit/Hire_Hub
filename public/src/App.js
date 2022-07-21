@@ -17,32 +17,30 @@ import SetAvatar from "./pages/SetAvatar";
 
 function App() {
   const [inCall, setInCall] = useState(false);
+
   return (
     <>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/auth/*" element={<Auth />} />
-        <Route path="/verified" element={<EmailVerified />} />
-        <Route path="/setAvatar" element={<SetAvatar />} />
-        {/* <Route
-          path="/chat"
-          element={<Chat inCall={inCall} setInCall={setInCall} />}
-        /> */}
-
-        {/* <Route path="/videoCall/" element={<VideoApp />} /> */}
-        <Route
-          path="/videoCall"
-          element={<VideoCall setInCall={setInCall} />}
-        />
-
-        <Route exact path="/employer/*" element={<Employer />} />
-
-        <Route exact path="/applicant/*" element={<Seeker />} />
-        <Route exact path="/codesent/:id" element={<Code_sent />} />
-      </Routes>
-
       <ChatProvider>
         <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/auth/*" element={<Auth />} />
+          <Route path="/verified" element={<EmailVerified />} />
+          <Route path="/setAvatar" element={<SetAvatar />} />
+          {/* <Route
+          path="/chat"
+          element={<Chat inCall={inCall} setInCall={setInCall} />}
+         /> */}
+
+          {/* <Route path="/videoCall/" element={<VideoApp />} /> */}
+          <Route
+            path="/videoCall"
+            element={<VideoCall setInCall={setInCall} />}
+          />
+
+          <Route exact path="/employer/*" element={<Employer />} />
+
+          <Route exact path="/applicant/*" element={<Seeker />} />
+          <Route exact path="/codesent/:id" element={<Code_sent />} />
           <Route path="/chats" element={<ChatPage />} />
         </Routes>
       </ChatProvider>

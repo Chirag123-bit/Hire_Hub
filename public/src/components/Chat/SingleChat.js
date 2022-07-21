@@ -11,6 +11,7 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Lottie from "react-lottie";
+import { Navigate } from "react-router-dom";
 import io from "socket.io-client";
 import { getSender } from "../../config/ChatLogic";
 import { ChatState } from "../../context/ChatProvider";
@@ -43,12 +44,16 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   };
 
   useEffect(() => {
+    if (!user) {
+      Navigate("/auth/login");
+    }
     socket = io(ENDPOINT);
+
     socket.emit("setup", user);
     socket.on("connected", () => setSocketConnected(true));
-
     socket.on("typing", () => setTyping(true));
     socket.on("stop typing", () => setTyping(false));
+    console.log(socket.connected);
   }, []);
 
   const fetchMessages = async () => {
@@ -90,6 +95,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   console.log(notification, "-------------------------");
 
   useEffect(() => {
+    console.log(socket);
+
     socket.on("message recieved", (newMessageRecieved) => {
       if (
         !selectedChatCompare ||

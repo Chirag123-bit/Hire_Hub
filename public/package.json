@@ -49,6 +49,7 @@
     "react-hook-form": "^7.31.1",
     "react-icons": "^4.3.1",
     "react-image-button": "^1.0.6",
+    "react-loading": "^2.0.3",
     "react-loading-skeleton": "^3.1.0",
     "react-lottie": "^1.2.3",
     "react-notification-badge": "^1.5.1",

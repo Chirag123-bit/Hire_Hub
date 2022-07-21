@@ -3,7 +3,7 @@
   height: 75vh;
   padding: 20px;
   backdrop-filter: blur(20px);
-  border: 2px solid #fff;
+  border: 2px solid #045de9;
   border-radius: 20px;
   display: grid;
   align-content: center;
@@ -13,7 +13,7 @@
   height: 40vh;
   padding: 20px;
   backdrop-filter: blur(20px);
-  border: 2px solid #fff;
+  border: 2px solid #045de9;
   border-radius: 20px;
   display: grid;
   align-content: center;
@@ -21,12 +21,12 @@
 .proImg {
   width: 200px;
   margin: auto;
-  border: 2px solid #fff;
+  border: 2px solid #045de9;
   border-radius: 100%;
   margin: 30px auto 40px auto;
 }
 .name {
-  color: #fff;
+  color: white;
   font-size: 20px;
   text-align: center;
 }
@@ -42,7 +42,7 @@
   background-color: #3a3636;
   color: #fff;
   border-radius: 7px;
-  border: 2px solid #fff;
+  border: 2px solid #045de9;
   cursor: pointer;
   font-size: 14px;
   letter-spacing: 1.5px;
