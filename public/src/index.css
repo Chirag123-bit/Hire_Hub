@@ -32,7 +32,7 @@
 
   background-attachment: fixed; */
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: inherit;
   /* backdrop-filter: blur(50px); */
   background-size: cover;
   background-attachment: fixed;

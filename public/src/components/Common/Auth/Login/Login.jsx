@@ -5,18 +5,20 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 import Cookies from "universal-cookie";
 import { useAuth } from "../../../../auth/auth";
+import { ChatState } from "../../../../context/ChatProvider";
 import background from "../../../../images/background.png";
 import { loginRoute } from "../../../../utils/APIRoutes";
 
 export const Login = () => {
   const navigate = useNavigate();
   const cookies = new Cookies();
+  const { user, setUser } = ChatState();
 
   const [values, setValues] = useState({
     username: "",
     password: "",
   });
-  const [user, setUser] = useState("");
+  const [loggedUser, setLoggedUser] = useState("");
   const auth = useAuth();
 
   const toastOptions = {
@@ -26,20 +28,6 @@ export const Login = () => {
     draggable: true,
     theme: "dark",
   };
-
-  // useEffect(() => {
-  //   if (localStorage.getItem("user")) {
-  //     const currUser = JSON.parse(localStorage.getItem("user"));
-  //     if (currUser.type === "Company") {
-  //       navigate("/employer/dashboard");
-  //       if (!localStorage.getItem("company")) {
-  //         localStorage.clear();
-  //       }
-  //     } else {
-  //       navigate("/applicant/home");
-  //     }
-  //   }
-  // });
 
   const handleValidation = () => {
     const { password, username } = values;
@@ -68,6 +56,7 @@ export const Login = () => {
           } else {
             if (res.data.user.type === "Company") {
               localStorage.setItem("user", JSON.stringify(res.data.user));
+              setLoggedUser(res.data.user);
               setUser(res.data.user);
               localStorage.setItem("company", JSON.stringify(res.data.company));
               toast.success(

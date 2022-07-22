@@ -22,6 +22,7 @@ const SeekerNav = ({ toggle }) => {
   const navigate = useNavigate();
   const [scrollNav, setScrollNav] = useState(false);
   const { user } = ChatState();
+  const [loading, setLoading] = useState(true);
 
   const changeNav = () => {
     if (window.scrollY >= 80) {
@@ -40,6 +41,9 @@ const SeekerNav = ({ toggle }) => {
 
   useEffect(() => {
     window.addEventListener("scroll", changeNav);
+    if (user) {
+      setLoading(false);
+    }
   });
 
   const toggleHome = () => {
@@ -140,7 +144,9 @@ const SeekerNav = ({ toggle }) => {
                     color: "white",
                   }}
                 >
-                  {user.firstName + " " + user.lastName}
+                  {loading
+                    ? "Loading...."
+                    : user.firstName + " " + user.lastName}
                 </button>
                 <div
                   class="dropdown-menu"

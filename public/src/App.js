@@ -40,7 +40,7 @@ function App() {
           <Route exact path="/employer/*" element={<Employer />} />
 
           <Route exact path="/applicant/*" element={<Seeker />} />
-          <Route exact path="/codesent/:id" element={<Code_sent />} />
+          <Route exact path="/codesent" element={<Code_sent />} />
           <Route path="/chats" element={<ChatPage />} />
         </Routes>
       </ChatProvider>

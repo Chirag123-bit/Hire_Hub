@@ -32,28 +32,51 @@ const ChatProvider = ({ children }) => {
     }
 
     if (userInfo) {
-      if (
-        location.pathname == "/auth/login" ||
-        location.pathname == "/auth/register"
-      ) {
-        redirect = true;
-        redirectPath = "/";
-      }
+      if (userInfo.isVerified) {
+        if (location.pathname == "/codesent") {
+          redirect = true;
+          redirectPath = "/";
+        }
+        if (
+          location.pathname == "/auth/login" ||
+          location.pathname == "/auth/register"
+        ) {
+          redirect = true;
+          redirectPath = "/";
+        }
 
-      if (
-        userInfo.type == "Applicant" &&
-        location.pathname.split("/")[1] === "employer"
-      ) {
-        redirect = true;
-        redirectPath = "/applicant/home";
-      }
+        if (
+          userInfo.type == "Applicant" &&
+          location.pathname.split("/")[1] === "employer"
+        ) {
+          redirect = true;
+          redirectPath = "/applicant/home";
+        }
 
-      if (
-        userInfo.type == "Company" &&
-        location.pathname.split("/")[1] === "applicant"
-      ) {
-        redirect = true;
-        redirectPath = "/employer/dashboard";
+        if (
+          userInfo.type == "Company" &&
+          location.pathname.split("/")[1] === "applicant"
+        ) {
+          redirect = true;
+          redirectPath = "/employer/dashboard";
+        }
+      } else {
+        if (
+          location.pathname == "/auth/login" ||
+          location.pathname == "/auth/register" ||
+          location.pathname == "/codesent"
+        ) {
+          redirect = false;
+        } else {
+          redirect = true;
+          redirectPath = "/codesent";
+        }
+        // if (
+        //   location.pathname == "/auth/login" ||
+        //   location.pathname == "/auth/register"
+        // ) {
+        //   redirect = false;
+        // }
       }
     }
 

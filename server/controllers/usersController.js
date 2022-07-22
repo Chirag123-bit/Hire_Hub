@@ -105,7 +105,7 @@ transporter.verify((error, success) => {
   if (error) {
     console.log(error);
   } else {
-    console.log("Verification Service Started");
+    console.log("Verification Service Initialised");
   }
 });
 
