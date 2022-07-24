@@ -1,12 +1,16 @@
 .cardTest {
   width: 350px;
-  height: 75vh;
+  height: 500px;
   padding: 20px;
   backdrop-filter: blur(20px);
   border: 2px solid #045de9;
   border-radius: 20px;
   display: grid;
   align-content: center;
+}
+.crdImg {
+  max-width: 60%;
+  margin: auto;
 }
 .cardEmpty {
   width: 100%;
@@ -19,11 +23,21 @@
   align-content: center;
 }
 .proImg {
-  width: 200px;
+  width: 90%;
   margin: auto;
   border: 2px solid #045de9;
   border-radius: 100%;
   margin: 30px auto 40px auto;
+}
+@media screen and (max-width: 1100px) {
+  .proImg {
+    max-width: 80%;
+  }
+}
+@media screen and (max-width: 900px) {
+  .proImg {
+    max-width: 70%;
+  }
 }
 .name {
   color: white;

@@ -53,6 +53,21 @@ export const CategoryCard = styled(CardsContainer)`
   cursor: pointer;
   backdrop-filter: blur(20px);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  @media screen and (max-width: 900px) {
+    p {
+      font-size: 10px;
+    }
+    flex-direction: column;
+    width: 40%;
+    flex-wrap: wrap;
+  }
+  @media screen and (max-width: 750px) {
+    width: 50%;
+    flex-wrap: wrap;
+  }
+  @media screen and (max-width: 550px) {
+    width: 80%;
+  }
 
   .box1 {
     grid-column-start: image-row;

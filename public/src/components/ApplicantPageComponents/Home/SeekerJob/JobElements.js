@@ -43,6 +43,11 @@ export const JobCardsHoler = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    justify-content: center;
+  }
 `;
 
 export const JobCard = styled.div`
@@ -105,6 +110,10 @@ export const JobCard = styled.div`
     border-radius: 10%;
     overflow: hidden;
     /* background: inherit; */
+  }
+  @media screen and (max-width: 768px) {
+    max-width: 50%;
+    /* justify-content: center; */
   }
 `;
 

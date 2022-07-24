@@ -11,7 +11,8 @@ export const SolutionsContainer = styled.div`
   /* backdrop-filter: blur(100px); */
 
   @media screen and (max-width: 768px) {
-    height: 1100px;
+    /* height: 1100px; */
+    justify-content: center;
   }
 
   @media screen and (max-width: 480px) {
@@ -30,6 +31,10 @@ export const CardsContainer = styled.div`
   padding-bottom: 0;
   border-radius: 1.2rem;
   font-family: "Source Sans Pro", sans-serif;
+  @media screen and (max-width: 768px) {
+    /* height: 1100px; */
+    justify-content: center;
+  }
 `;
 export const FcAdvertisment = styled(FcAdvertising)`
   font-size: 3rem;
