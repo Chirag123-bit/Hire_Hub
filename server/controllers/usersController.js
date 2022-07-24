@@ -332,7 +332,7 @@ module.exports.verify = (req, res) => {
             });
         }
       } else {
-        let message = "Successfully Verified the account";
+        let message = "Account Already Verified";
         return res.json({
           msg: message,
           status: "completed",
@@ -386,17 +386,21 @@ module.exports.register = async (req, res, next) => {
     const usernameCheck = await User.findOne({ username });
 
     //Username and Email Validation
-    if (usernameCheck)
+    if (usernameCheck) {
+      print("Username already exists. Please choose another username");
       return res.status(500).json({
         msg: "Username already used",
         status: false,
       });
+    }
     const emailCheck = await User.findOne({ email });
-    if (emailCheck)
+    if (emailCheck) {
+      console.log("Email already exists. Please choose another email");
       return res.status(500).json({
         msg: "Email already used",
         status: false,
       });
+    }
 
     const companyNameCheck = await Company.findOne({ name: cname });
 
@@ -447,6 +451,9 @@ module.exports.register = async (req, res, next) => {
       .then((result) => {
         if (result.type === "Company") {
           if (companyNameCheck) {
+            console.log(
+              "Company name already exists. Please choose another name Delete"
+            );
             result.deleteOne();
             return res.status(500).json({
               msg: "Company Name already exists",
@@ -477,6 +484,7 @@ module.exports.register = async (req, res, next) => {
                   });
                 })
                 .catch((e) => {
+                  console.log(e);
                   result.deleteOne();
                   company.deleteOne();
                   return res.status(500).json({
