@@ -1,6 +1,5 @@
 // Routes Middleware
 const userRoutes = require("./routes/userRoutes");
-const messageRoute = require("./routes/messagesRoute");
 const videoRoute = require("./routes/videoRoute");
 const companyRoute = require("./routes/companyRoute");
 const jobRoute = require("./routes/jobRoute");
@@ -46,11 +45,13 @@ const server = app.listen(process.env.PORT, () =>
   console.log(`Server started on ${process.env.PORT}`)
 );
 
+var clients = {};
+
 // Socket Connection
 const io = socket(server, {
   pingTimeout: 60000, //Close connection after 60s of inactivity
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
     credentials: true,
   },
 });
@@ -58,14 +59,35 @@ const io = socket(server, {
 io.on("connection", (socket) => {
   console.log("Connected to socket.io");
 
+  socket.on("test", (res) => {
+    console.log(res);
+  });
+
   socket.on("setup", (userData) => {
     socket.join(userData._id);
     socket.emit("connected");
+  });
+  socket.on("setupApp", (id) => {
+    socket.join(id);
+    socket.emit("connected");
+    clients[id] = socket;
+    //print length of clients
+    console.log(Object.keys(clients).length);
   });
 
   socket.on("join chat", (room) => {
     socket.join(room);
     console.log("User Joined Room: " + room);
+  });
+
+  socket.on("message", (data) => {
+    let reciverId = data.reciverId;
+    if (clients[reciverId]) {
+      console.log("Sending Message to: " + reciverId);
+      clients[reciverId].emit("message", data);
+    }
+
+    console.log(data);
   });
 
   socket.on("typing", (room) => {

@@ -10,12 +10,11 @@ import {
   SloganSubtext,
 } from "../../Home/SeekerHero/seekerHeroElements";
 import "../../Home/SeekerHero/style.css";
-import ParticleBackground from "./ParticleBackground";
 
 function CompanyHeadSection() {
   return (
     <HeadSectionContainer>
-      <ParticleBackground />
+      {/* <ParticleBackground /> */}
       <ContentHolder>
         <HeadTitle>
           <Slogan>

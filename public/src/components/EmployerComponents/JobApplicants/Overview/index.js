@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import ReactRoundedImage from "react-rounded-image";
 import { toast } from "react-toastify";
-import { updateJobStatus } from "../../../../utils/APIRoutes";
+import { host, updateJobStatus } from "../../../../utils/APIRoutes";
 import { ApplicantModal } from "../Candidates/Modal/modal";
 import "./style.css";
 
@@ -131,7 +131,9 @@ function Overview({ selectedJob }) {
                                   <div className="d-flex align-items-center justify-content-around">
                                     <div className="mr-2 avatars-w-50">
                                       <ReactRoundedImage
-                                        image={el.applicant.avatarImage}
+                                        image={
+                                          host + "/" + el.applicant.avatarImage
+                                        }
                                         roundedColor="rgb(4,93,233)"
                                         imageWidth="30"
                                         imageHeight="30"

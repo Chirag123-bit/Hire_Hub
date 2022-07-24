@@ -249,38 +249,13 @@ const conditionChecker = (appliedJob, user) => {
   }
 };
 
-// module.exports.getCompanyJobDetail = async (req, res, next) => {
-//   try {
-//     const result = await Company.findById(req.query.user).select("jobs");
-//     // .populate("applicants.$applicant")
-//     const jobArray = result["jobs"];
-//     var op = [];
-//     for (job_id in jobArray) {
-//       const objId = jobArray[job_id];
-//       var dat = await getReusableJobDetail(objId);
-//       var jobData = await Job.findById(objId);
-//       op.push({ data: dat, job: jobData });
-//     }
-//     return res.json({
-//       success: true,
-//       data: op,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     return res.json({
-//       success: false,
-//       error: error,
-//       msg: error,
-//     });
-//   }
-// };
-
 const getReusableJobDetail1 = async (job_id) => {
   const Jobs = await Job.findById(job_id).populate({
     path: "applicants",
     populate: {
       path: "applicant",
       model: "Users",
+      select: "-appliedJobs -events -todos -favouriteJobs -savedJobs",
     },
   });
   console.log(Jobs);
@@ -308,6 +283,33 @@ module.exports.getCompanyJobDetail = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     return res.json({
+      success: false,
+      error: error,
+      msg: error,
+    });
+  }
+};
+
+module.exports.getCompanyJobDetailApp = async (req, res, next) => {
+  var op = [];
+
+  try {
+    const result = await Company.findById(req.user.company).select("jobs");
+
+    //get details of all the jobs
+    const jobArray = result["jobs"];
+    for (job_id in jobArray) {
+      const objId = jobArray[job_id];
+      var dat = await getReusableJobDetail1(objId);
+      op.push({ data: dat });
+    }
+    return res.status(200).json({
+      success: true,
+      data: op,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
       success: false,
       error: error,
       msg: error,
@@ -407,3 +409,49 @@ module.exports.getAppliedJobsApp = asyncHandler(async (req, res, next) => {
     return res.status(200).json({ data: jobs, success: true });
   }
 });
+
+module.exports.editJob = async (req, res, next) => {
+  try {
+    const {
+      title,
+      about,
+      sallary,
+      description,
+      skills,
+      requirements,
+      responsibilities,
+      closeTime,
+      _id,
+    } = req.body;
+
+    const job = await Job.findById(_id);
+
+    await job.updateOne({
+      title: title,
+      about: about,
+      sallary: sallary,
+      description: description,
+      skills: skills,
+      requirements: requirements,
+      responsibilities: responsibilities,
+      closeDate: closeTime,
+    });
+    job.save();
+
+    const updatedJob = await Job.findById(_id);
+    console.log("updatedJob");
+    console.log(updatedJob);
+    return res.status(200).json({
+      success: true,
+      data: updatedJob,
+      msg: "The Job was updated successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      success: false,
+      error: error,
+      msg: "Something went wrong",
+    });
+  }
+};

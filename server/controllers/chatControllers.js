@@ -18,8 +18,6 @@ const accessChat = asyncHandler(async (req, res, next) => {
     .populate("users", "-password")
     .populate("latestMessage");
 
-  console.log(isChat);
-
   isChat = await User.populate(isChat, {
     path: "latestMessage.sender",
     select: "username avatarImage email",
@@ -47,6 +45,45 @@ const accessChat = asyncHandler(async (req, res, next) => {
   }
 });
 
+const accessChatApp = asyncHandler(async (req, res, next) => {
+  const { userId } = req.body;
+  if (!userId) {
+    return res.status(400).send("Please provide userId");
+  }
+
+  var isChat = await Chat.find({
+    isGroupChat: false,
+    users: {
+      $all: [req.user._id.toString(), userId],
+    },
+  })
+    .populate("users", "-password")
+    .populate("latestMessage");
+
+  isChat = await User.populate(isChat, {
+    path: "latestMessage.sender",
+    select: "username avatarImage email",
+  });
+  if (isChat.length > 0) {
+    res.status(200).json({ data: isChat[0]._id });
+  } else {
+    var chatData = {
+      chatName: "sender",
+      isGroupChat: false,
+      users: [req.user._id, userId],
+    };
+
+    try {
+      const createdChat = await Chat.create(chatData);
+
+      res.status(200).json({ data: createdChat._id });
+    } catch (error) {
+      //   res.status(400).send(error);
+      throw new Error(e.message);
+    }
+  }
+});
+
 const fetchChats = asyncHandler(async (req, res, next) => {
   try {
     Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
@@ -60,6 +97,26 @@ const fetchChats = asyncHandler(async (req, res, next) => {
           select: "username avatarImage email",
         });
         res.status(200).send(result);
+      });
+  } catch (e) {
+    res.status(400);
+    throw new Error(e.message);
+  }
+});
+
+const fetchChatsApp = asyncHandler(async (req, res, next) => {
+  try {
+    Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
+      .populate("users", "-password")
+      .populate("groupAdmin", "-password")
+      .populate("latestMessage")
+      .sort({ updatedAt: -1 })
+      .then(async (result) => {
+        result = await User.populate(result, {
+          path: "latestMessage.sender",
+          select: "username avatarImage email additional professional",
+        });
+        res.status(200).json({ data: result });
       });
   } catch (e) {
     res.status(400);
@@ -162,4 +219,6 @@ module.exports = {
   renameGroup,
   addToGroup,
   removeFromGroup,
+  fetchChatsApp,
+  accessChatApp,
 };

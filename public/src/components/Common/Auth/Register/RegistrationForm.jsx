@@ -166,7 +166,7 @@ class RegistrationForm extends Component {
       }
     } else if (type === "Company") {
       if (this.handleCompanyValidation()) {
-        let c_name = stateData.cname;
+        let cname = stateData.cname;
         let csector = stateData.csector;
         let country = stateData.country;
         let region = stateData.region;
@@ -185,7 +185,7 @@ class RegistrationForm extends Component {
           username,
           password,
 
-          c_name,
+          cname,
           csector,
           country,
           region,
@@ -200,8 +200,8 @@ class RegistrationForm extends Component {
           toast.success(data.msg, this.toastOptions);
           localStorage.setItem("user", JSON.stringify(data.user));
           localStorage.setItem("company", JSON.stringify(data.company));
-          window.location.replace("localhost:3000/auth/login");
-          window.location.href = "localhost:3000/auth/login";
+          window.location.replace("localhost:3000/codesent");
+          window.location.href = "localhost:3000/codesent";
         }
       }
     }

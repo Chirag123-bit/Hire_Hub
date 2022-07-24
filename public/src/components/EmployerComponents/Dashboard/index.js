@@ -1,13 +1,20 @@
 import axios from "axios";
 import { motion } from "framer-motion";
 import Moment from "moment";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiDollar, BiHome, BiMap, BiTimeFive, BiUser } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { addNewJob } from "../../../utils/APIRoutes";
+import {
+  addEvent,
+  addNewJob,
+  addTodo,
+  editJob,
+  getEvent,
+  getTodo,
+} from "../../../utils/APIRoutes";
 import EventsBar from "../Common/EventsBar";
 import {
   ActionsDropDown,
@@ -41,9 +48,18 @@ import {
   Title,
   UpperHead,
 } from "./Components";
+import { EventsModal } from "./Events/EventModal";
+import { JobEditModal } from "./JobEditModal/modal";
 import { JobModal } from "./JobModal/modal";
 
-function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
+function Dashboard({
+  isOpen,
+  company,
+  loading,
+  jobInfo,
+  setSelectedJob,
+  getCompanyJob,
+}) {
   const navigate = useNavigate();
   const toastOptions = {
     position: "bottom-right",
@@ -51,6 +67,36 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
     pauseOnHover: true,
     draggable: true,
     theme: "dark",
+  };
+
+  const [event, setEvent] = useState({
+    title: "",
+    note: "Lorem Epsum",
+    date: new Date(),
+    startTime: "9:00",
+    endTime: "10:00",
+  });
+
+  const handleEventDateInput = (e) => {
+    setEvent({ ...event, date: e });
+  };
+  const handleStartInput = (e) => {
+    setEvent({ ...event, startTime: e });
+  };
+  const handleEndInput = (e) => {
+    setEvent({ ...event, endTime: e });
+  };
+  const handleEventInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setEvent({ ...event, [name]: value });
+  };
+  const handleTodoInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setTodo({ ...todo, [name]: value });
   };
 
   const handleOverview = (data) => {
@@ -62,21 +108,86 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
     });
   };
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [jobs, setJobs] = useState([]);
-
   // const [skills, requirements, responsibilities] = [];
   var skills = [];
   var requirements = [];
   var responsibilities = [];
 
   const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const openModal = () => {
+    setAddJob({
+      title: "",
+      about: "",
+      sallary: "",
+      description: "",
+      sector: "",
+
+      skillSet: [{ skill: "" }],
+
+      responsibilitiesSet: [{ responsibility: "" }],
+
+      requirementsSet: [{ requirement: "" }],
+      closeTime: "",
+    });
     setShowModal((prev) => !prev);
+  };
+
+  const openEditModal = (job) => {
+    console.log(job);
+    var skillSets = job.skills.map((skill) => {
+      return {
+        skill: skill,
+      };
+    });
+    var responsibilitySet = job.responsibilities.map((responsibility) => {
+      return {
+        responsibility: responsibility,
+      };
+    });
+    var requirementsSet = job.requirements.map((requirement) => {
+      return {
+        requirement: requirement,
+      };
+    });
+    const dt = new Date(job.closeDate);
+    setAddJob({
+      title: job.title,
+      about: job.about,
+      sallary: job.sallary,
+      description: job.description,
+      sector: job.sector,
+      closeTime: dt,
+
+      skillSet: skillSets,
+      responsibilitiesSet: responsibilitySet,
+
+      requirementsSet: requirementsSet,
+    });
+    setSelectedId(job._id);
+    setShowEditModal(true);
+  };
+  const closeEditModal = () => {
+    setShowEditModal(false);
+  };
+  const [showEventModal, setShowEventModal] = useState(false);
+  const openEventModal = () => {
+    setShowEventModal((prev) => !prev);
   };
 
   const closeModel = () => {
     setShowModal(false);
+  };
+  const closeEventModel = () => {
+    setShowEventModal(false);
+  };
+  const [showTodoModal, setShowTodoModal] = useState(false);
+  const openTodoModal = () => {
+    setShowTodoModal((prev) => !prev);
+  };
+
+  const closeTodoModel = () => {
+    setShowTodoModal(false);
   };
 
   //Fields required for adding Job
@@ -104,6 +215,153 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
 
   const handleDateInput = (e) => {
     setAddJob({ ...addJob, closeTime: e });
+  };
+
+  const handleEventSubmit = async (e) => {
+    e.preventDefault();
+    const token = await JSON.parse(localStorage.getItem("token"));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .post(
+        addEvent,
+        {
+          title: event.title,
+          note: event.note,
+          date: event.date,
+          startTime: event.startTime,
+          endTime: event.endTime,
+        },
+        config
+      )
+      .then((result) => {
+        console.log(result);
+        if (result.status === 200) {
+          getEvents();
+          closeEventModel();
+          setEvent({
+            title: "",
+            note: "Lorem Epsum",
+            date: new Date(),
+            startTime: "9:00",
+            endTime: "10:00",
+          });
+          toast.success("Event was added successfully", toastOptions);
+        } else {
+          toast.error(result.data.msg, toastOptions);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.response.data.msg, toastOptions);
+      });
+  };
+
+  const [events, setEvents] = useState([]);
+  const [todos, setTodos] = useState([]);
+  const [loadingEvents, setLoadingEvents] = useState(false);
+  const [loadingTodos, setLoadingTodos] = useState(false);
+
+  const getEvents = async () => {
+    setLoadingEvents(true);
+    const token = await JSON.parse(localStorage.getItem("token"));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .get(getEvent, config)
+      .then((result) => {
+        console.log(result);
+        if (result.status === 200) {
+          setEvents(result.data.events);
+        } else {
+          toast.error("Error Fetching events", toastOptions);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Some Unknown error occured", toastOptions);
+      });
+    setLoadingEvents(false);
+  };
+
+  const getTodos = async () => {
+    setLoadingTodos(true);
+    const token = await JSON.parse(localStorage.getItem("token"));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .get(getTodo, config)
+      .then((result) => {
+        console.log(result);
+        if (result.status === 200) {
+          setTodos(result.data.todos);
+        } else {
+          toast.error("Error Fetching todos", toastOptions);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Some Unknown error occured", toastOptions);
+      });
+    setLoadingTodos(false);
+  };
+
+  const [todo, setTodo] = useState({
+    title: "",
+    note: "Lorem Epsum",
+  });
+
+  const handleTodoSubmit = async (e) => {
+    e.preventDefault();
+    const token = await JSON.parse(localStorage.getItem("token"));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    if (todo.title === "") {
+      toast.error("Please enter a title", toastOptions);
+      return;
+    }
+    axios
+      .post(
+        addTodo,
+        {
+          title: todo.title,
+          note: todo.note,
+        },
+        config
+      )
+      .then((result) => {
+        console.log(result);
+        if (result.status === 200) {
+          getTodos();
+          setTodo({
+            title: "",
+            note: "Lorem Epsum",
+          });
+          toast.success("Todo was added successfully", toastOptions);
+        } else {
+          toast.error(result.data.msg, toastOptions);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.response.data.msg, toastOptions);
+      });
   };
 
   const handleAddSkill = () => {
@@ -178,6 +436,21 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
     });
   };
 
+  var monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
   const validateInputedData = () => {
     if (
       addJob.title === "" ||
@@ -247,6 +520,98 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
       }
     }
   };
+  const [selectedId, setSelectedId] = useState(null);
+  const handleEditSubmit = async (event) => {
+    event.preventDefault();
+    extractSkills();
+    extractRequirements();
+    extractResponsibilities();
+    const token = await JSON.parse(localStorage.getItem("token"));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const title = addJob.title;
+    const about = addJob.about;
+    const sallary = addJob.sallary;
+    const description = addJob.description;
+    const closeTime = addJob.closeTime;
+    const _id = selectedId;
+
+    if (validateInputedData()) {
+      try {
+        const response = await axios.put(
+          editJob,
+          {
+            title,
+            about,
+            sallary,
+            description,
+            skills,
+            requirements,
+            responsibilities,
+            closeTime,
+            _id,
+          },
+          config
+        );
+        console.log(response);
+
+        if (response.data.success) {
+          toast.success(response.data.msg, toastOptions);
+          setAddJob({
+            title: "",
+            about: "",
+            sallary: "",
+            description: "",
+            sector: "",
+
+            skillSet: [{ skill: "" }],
+
+            responsibilitiesSet: [{ responsibility: "" }],
+
+            requirementsSet: [{ requirement: "" }],
+            closeTime: "",
+          });
+          skills = [];
+          responsibilities = [];
+          requirements = [];
+          getCompanyJob();
+          closeEditModal();
+        } else {
+          getCompanyJob();
+
+          toast.error(response.data.msg, toastOptions);
+          closeEditModal();
+        }
+      } catch (err) {
+        setAddJob({
+          title: "",
+          about: "",
+          sallary: "",
+          description: "",
+          sector: "",
+
+          skillSet: [{ skill: "" }],
+
+          responsibilitiesSet: [{ responsibility: "" }],
+
+          requirementsSet: [{ requirement: "" }],
+          closeTime: "",
+        });
+        toast.error("Failed to update job details", toastOptions);
+        closeEditModal();
+      }
+    }
+  };
+
+  useEffect(() => {
+    getEvents();
+    getTodos();
+  }, []);
 
   return (
     <motion.div
@@ -258,7 +623,7 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
     >
       <DashboardContainer
         className="col-lg-7 col-xl-8 mb-4 mb-lg-0"
-        style={{ width: "66%" }}
+        style={{ width: "66%", minHeight: "100vh" }}
       >
         <HeadContainer>
           <UpperHead className="d-flex  justify-content-between">
@@ -359,6 +724,7 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
                           <DropLink
                             href="#"
                             className="dropdown-item px-4 py-2"
+                            onClick={() => openEditModal(jobDetail.job)}
                           >
                             Edit
                           </DropLink>
@@ -515,7 +881,18 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
           }
         </JobsContainerRow>
       </DashboardContainer>
-      <EventsBar isOpen={isOpen} />
+      <EventsBar
+        isOpen={isOpen}
+        openModal={openEventModal}
+        events={events}
+        loading={loadingEvents}
+        todos={todos}
+        loadingTodos={loadingTodos}
+        handleTodoInput={handleTodoInput}
+        todo={todo}
+        handleTodoSubmit={handleTodoSubmit}
+        getTodos={getTodos}
+      />
       {showModal && (
         <JobModal
           showModal={showModal}
@@ -533,6 +910,40 @@ function Dashboard({ isOpen, company, loading, jobInfo, setSelectedJob }) {
           handleRemoveResponsibility={handleRemoveResponsibility}
           handleDateInput={handleDateInput}
           handleSubmit={handleSubmit}
+        />
+      )}
+      {showEditModal && (
+        <JobEditModal
+          showModal={showEditModal}
+          setShowModal={closeModel}
+          job={addJob}
+          handleJobInput={handleJobInput}
+          handleAddSkill={handleAddSkill}
+          handleRemoveSkill={handleRemoveSkill}
+          handleAddRequirement={handleAddRequirement}
+          handleRemoveRequirement={handleRemoveRequirement}
+          handleOnSkillChange={handleOnSkillChange}
+          handleOnRequirementChange={handleOnRequirementChange}
+          handleOnResponsibilityChange={handleOnResponsibilityChange}
+          handleAddResponsibility={handleAddResponsibility}
+          handleRemoveResponsibility={handleRemoveResponsibility}
+          handleDateInput={handleDateInput}
+          handleSubmit={handleEditSubmit}
+          closeModel={closeEditModal}
+        />
+      )}
+
+      {showEventModal && (
+        <EventsModal
+          showModal={showEventModal}
+          setShowModal={closeModel}
+          event={event}
+          handleEventInput={handleEventInput}
+          handleDateInput={handleEventDateInput}
+          handleStartInput={handleStartInput}
+          handleEndInput={handleEndInput}
+          closeModel={closeEventModel}
+          handleSubmit={handleEventSubmit}
         />
       )}
     </motion.div>

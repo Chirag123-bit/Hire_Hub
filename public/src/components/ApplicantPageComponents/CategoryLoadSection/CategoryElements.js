@@ -32,4 +32,5 @@ export const HeadTitle = styled.div`
 export const HeadSubtitle = styled.div`
   margin-top: 0;
   padding: 1rem;
+  color: "white";
 `;

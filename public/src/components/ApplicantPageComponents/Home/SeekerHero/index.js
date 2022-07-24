@@ -1,9 +1,10 @@
 import React from "react";
-import ParticleBackground from "../SeekerJob/ParticleBackground";
+import Video from "../../../../videos/background.mp4";
 import {
   ColoredSlogan,
   ContentHolder,
   FormContainer,
+  HeroBg,
   HeroContainer,
   JobSearch,
   LocationFilter,
@@ -12,19 +13,23 @@ import {
   Slogan,
   SloganSubtext,
   TextContent,
+  VideoBg,
 } from "./seekerHeroElements";
 import "./style.css";
 
 function SeekerHero() {
   return (
     <HeroContainer>
-      <ParticleBackground />
-      <ContentHolder style={{ backdropFilter: "blur(15px)" }}>
+      <HeroBg>
+        <VideoBg autoPlay loop muted src={Video} type="video/mp4" />
+      </HeroBg>
+      {/* <ParticleBackground /> */}
+      <ContentHolder>
         <TextContent>
           <Slogan>
             Get The <ColoredSlogan>Right Job</ColoredSlogan> {"\n"} You Deserve
           </Slogan>
-          <SloganSubtext>
+          <SloganSubtext style={{ color: "white" }}>
             100,000 jobs listed here! Your dream Job is Waiting
           </SloganSubtext>
         </TextContent>

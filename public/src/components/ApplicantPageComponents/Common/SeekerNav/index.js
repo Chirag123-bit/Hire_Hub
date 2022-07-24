@@ -7,7 +7,6 @@ import {
   MobileIcon,
   Nav,
   NavbarContainer,
-  NavBtnLink,
   NavImp,
   NavItem,
   NavLinks,
@@ -16,10 +15,14 @@ import {
   Notification,
 } from "./NavbarElements";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ChatState } from "../../../../context/ChatProvider";
 
 const SeekerNav = ({ toggle }) => {
+  const navigate = useNavigate();
   const [scrollNav, setScrollNav] = useState(false);
+  const { user } = ChatState();
+  const [loading, setLoading] = useState(true);
 
   const changeNav = () => {
     if (window.scrollY >= 80) {
@@ -38,6 +41,9 @@ const SeekerNav = ({ toggle }) => {
 
   useEffect(() => {
     window.addEventListener("scroll", changeNav);
+    if (user) {
+      setLoading(false);
+    }
   });
 
   const toggleHome = () => {
@@ -110,12 +116,19 @@ const SeekerNav = ({ toggle }) => {
               </NavItem>
             </NavMenu>
             <NavImp>
-              <NavBtnLink to="/auth/login">
-                <Notification size={18} scrollNav={scrollNav} />
-              </NavBtnLink>
-              <NavBtnLink to="/auth/login">
-                <Message size={18} scrollNav={scrollNav} />
-              </NavBtnLink>
+              <Notification
+                size={18}
+                scrollNav={scrollNav}
+                style={{ marginRight: "1rem", cursor: "pointer" }}
+              />
+
+              <Message
+                size={18}
+                scrollNav={scrollNav}
+                onClick={() => navigate("/chats")}
+                style={{ marginRight: "0.4rem", cursor: "pointer" }}
+              />
+
               <div class="dropdown">
                 <button
                   class="btn btn-secondary dropdown-toggle"
@@ -131,7 +144,9 @@ const SeekerNav = ({ toggle }) => {
                     color: "white",
                   }}
                 >
-                  Chirag Simkhada
+                  {loading
+                    ? "Loading...."
+                    : user.firstName + " " + user.lastName}
                 </button>
                 <div
                   class="dropdown-menu"

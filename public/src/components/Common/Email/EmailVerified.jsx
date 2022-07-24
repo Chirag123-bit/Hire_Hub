@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import background from "../../../images/backup.jpg";
 import Navbar from "../../OnboardingPageComponents/Navbar";
 
 export default function EmailVerified() {
+  useEffect(() => {
+    //redirect after 5 seconds
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 5000);
+  });
   return (
     <>
       <Navbar />
-      <VerifiedContainer>
-        <div style={{ backgroundColor: "#065f46" }}>
+      <VerifiedContainer
+        style={{
+          background: `url(${background})`,
+          backgroundAttachment: "fixed",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div style={{ backdropFilter: "blur(20px)" }}>
           <h2>Email has been verified</h2>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +34,7 @@ export default function EmailVerified() {
           >
             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
           </svg>
-          <h3>You can now log in</h3>
+          <h3>Redirecting Now!</h3>
         </div>
       </VerifiedContainer>
     </>
@@ -33,7 +48,7 @@ const VerifiedContainer = styled.div`
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   height: 100vh;
   display: flex;
-  background-color: #1dbf73;
+
   div {
     display: flex;
     flex-direction: column;

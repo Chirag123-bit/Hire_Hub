@@ -29,6 +29,12 @@ export const HomePanalWrap = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+  @media screen and (max-width: 910px) {
+    flex-basis: 40%;
+  }
+  @media screen and (max-width: 650px) {
+    flex-basis: 45%;
+  }
 `;
 export const ListWrap = styled.div`
   flex: 1;

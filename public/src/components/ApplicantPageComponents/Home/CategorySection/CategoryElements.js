@@ -30,6 +30,15 @@ export const HContainer = styled.div`
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
+
+  @media screen and (max-width: 900px) {
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  @media screen and (max-width: 740px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const CategoryCard = styled.div`

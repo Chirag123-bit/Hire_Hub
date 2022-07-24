@@ -5,6 +5,9 @@ export const JobCardsHoler = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 1000px) {
+    justify-content: center;
+  }
 `;
 export const JobCard = styled.div`
   display: flex;
@@ -21,6 +24,16 @@ export const JobCard = styled.div`
   position: relative;
   overflow: hidden;
   border-radius: 10%;
+
+  @media screen and (max-width: 1000px) {
+    max-width: 40%;
+  }
+  @media screen and (max-width: 910px) {
+    max-width: 70%;
+  }
+  @media screen and (max-width: 680px) {
+    max-width: 80%;
+  }
 
   &:hover {
     box-shadow: 1px 8px 20px rgba(69, 65, 221, 0.75);

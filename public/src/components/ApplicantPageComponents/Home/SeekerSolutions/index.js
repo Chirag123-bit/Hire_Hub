@@ -1,14 +1,3 @@
-// import {
-//   ColoredSlogan,
-//   Slogan,
-//   TextContent,
-// } from "../SeekerHero/seekerHeroElements";
-// import { CardsContainer, SolutionsContainer } from "./SolutionComponents";
-
-// import { useEffect } from "react";
-// import women from "../../../../images/woman.jpg";
-// import "../../../style.css";
-
 import {
   ColoredSlogan,
   Slogan,
@@ -68,11 +57,13 @@ function SeekerSolutions() {
                   prespective: 500,
                 }}
               >
-                <img
-                  src={host + "/" + category.category.image}
-                  class="proImg"
-                  alt="srh"
-                />
+                <div className="crdImg">
+                  <img
+                    src={host + "/" + category.category.image}
+                    class="proImg"
+                    alt="srh"
+                  />
+                </div>
 
                 <h2 class="name">{category.category.title}</h2>
                 <p>{category.jobs} Jobs Available</p>

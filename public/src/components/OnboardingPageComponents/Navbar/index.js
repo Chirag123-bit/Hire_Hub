@@ -11,10 +11,10 @@ import {
   NavItem,
   NavLinks,
   NavLogo,
-  NavMenu
+  NavMenu,
 } from "./NavbarElements";
 
-const Navbar = ({ toggle }) => {
+const Navbar = ({ toggle, hide, type }) => {
   const [scrollNav, setScrollNav] = useState(false);
 
   const changeNav = () => {
@@ -94,9 +94,25 @@ const Navbar = ({ toggle }) => {
                 </NavLinks>
               </NavItem>
             </NavMenu>
-            <NavBtn>
-              <NavBtnLink to="auth/login">Sign In</NavBtnLink>
-            </NavBtn>
+            {hide ? (
+              type == "Applicant" ? (
+                <NavBtn>
+                  <NavBtnLink to="/applicant/home">
+                    <span>Home</span>
+                  </NavBtnLink>
+                </NavBtn>
+              ) : (
+                <NavBtn>
+                  <NavBtnLink to="/employer/dashboard">
+                    <span>Home</span>
+                  </NavBtnLink>
+                </NavBtn>
+              )
+            ) : (
+              <NavBtn>
+                <NavBtnLink to="auth/login">Sign In</NavBtnLink>
+              </NavBtn>
+            )}
           </NavbarContainer>
         </Nav>
       </IconContext.Provider>

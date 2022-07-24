@@ -41,10 +41,11 @@ function CandidateDescription({ user }) {
                 <JobTitle>{experience.job_title}</JobTitle>
                 <Location>
                   <Company>
-                    <FaBus /> {experience.company}
+                    <FaBus style={{ color: "423edd" }} /> {experience.company}
                   </Company>{" "}
                   <Address>
-                    <IoLocationSharp /> {experience.company_location}
+                    <IoLocationSharp style={{ color: "423edd" }} />{" "}
+                    {experience.company_location}
                   </Address>
                 </Location>
               </TitleListing>
@@ -53,7 +54,7 @@ function CandidateDescription({ user }) {
                   {experience.work_type ? experience.work_type : "Part Time"}
                 </JobType>
                 <Date>
-                  <BsCalendar2Date />
+                  <BsCalendar2Date style={{ color: "423edd" }} />
                   {Moment(experience.startDate).format("MMM YYYY")} -{" "}
                   {Moment(experience.endDate).format("MMM YYYY")}
                 </Date>
@@ -70,13 +71,14 @@ function CandidateDescription({ user }) {
                 <JobTitle>{education.degree}</JobTitle>
                 <Location>
                   <Company>
-                    <IoSchoolOutline /> {education.college}
+                    <IoSchoolOutline style={{ color: "423edd" }} />{" "}
+                    {education.college}
                   </Company>
                 </Location>
               </TitleListing>
               <TypeDateListing>
                 <Date>
-                  <BsCalendar2Date />{" "}
+                  <BsCalendar2Date style={{ color: "423edd" }} />{" "}
                   {Moment(education.startDate).format("MMM YYYY")} -{" "}
                   {Moment(education.endDate).format("MMM YYYY")}
                 </Date>

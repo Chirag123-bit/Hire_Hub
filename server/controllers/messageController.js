@@ -14,7 +14,7 @@ const sendMessage = asyncHandler(async (req, res) => {
   const userId = req.user.id;
   var newMessage = {
     sender: userId,
-    content: content,
+    content: content ?? " ",
     chat: chatId,
   };
   try {
@@ -39,6 +39,42 @@ const sendMessage = asyncHandler(async (req, res) => {
   }
 });
 
+const sendMessageApp = asyncHandler(async (req, res) => {
+  const { chatId, content } = req.body;
+  if (!chatId || !content) {
+    console.log("Invalid data");
+    return res.status(400).json({
+      error: "Please provide chatId and/or content",
+    });
+  }
+  const userId = req.user.id;
+  var newMessage = {
+    sender: userId,
+    content: content ?? " ",
+    chat: chatId,
+  };
+  try {
+    var message = await Message.create(newMessage);
+    message = await message.populate(
+      "sender",
+      "firstName lastName avatarImage"
+    );
+
+    message = await message.populate("chat");
+    message = await User.populate(message, {
+      path: "chat.users",
+      select: "firstName lastName avatarImage email",
+    });
+    await Chat.findByIdAndUpdate(req.body.chatId, {
+      latestMessage: message,
+    });
+    res.status(200).json({ data: message });
+  } catch (e) {
+    res.status(400);
+    throw new Error(e.message);
+  }
+});
+
 const allMessages = asyncHandler(async (req, res) => {
   console.log(req.params.chatId);
   try {
@@ -52,5 +88,16 @@ const allMessages = asyncHandler(async (req, res) => {
     throw new Error(e.message);
   }
 });
+const allMessagesApp = asyncHandler(async (req, res) => {
+  console.log(req.params.chatId);
+  try {
+    const messages = await Message.find({ chat: req.params.chatId });
 
-module.exports = { sendMessage, allMessages };
+    res.status(200).json({ data: messages });
+  } catch (e) {
+    res.status(400);
+    throw new Error(e.message);
+  }
+});
+
+module.exports = { sendMessage, allMessages, allMessagesApp, sendMessageApp };

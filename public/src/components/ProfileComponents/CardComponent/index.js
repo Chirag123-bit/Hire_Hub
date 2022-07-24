@@ -32,6 +32,10 @@ function ProfileCard({ user }) {
 
   const [profileUrl, setProfileUrl] = useState(user.avatarImage);
 
+  if (profileUrl.substring(0, 4) !== "http") {
+    setProfileUrl(host + "/" + profileUrl);
+  }
+
   const getNewImage = async () => {
     setIsUpdating(true);
     const currentUser = await JSON.parse(localStorage.getItem("user"));
@@ -92,7 +96,7 @@ function ProfileCard({ user }) {
         <IntroContainer>
           <ImageContainer onClick={handleBtnClick}>
             <ReactRoundedImage
-              image={host + "/" + profileUrl}
+              image={profileUrl}
               roundedColor="rgb(4,93,233)"
               imageWidth="150"
               imageHeight="150"
@@ -101,10 +105,12 @@ function ProfileCard({ user }) {
             />
           </ImageContainer>
           <IntroTextHolder>
-            <Name>
+            <Name style={{ color: "#423edd" }}>
               {user.firstName} {user.lastName}
             </Name>
-            <Title>{user.professional.title}</Title>
+            <Title style={{ color: "#423edd" }}>
+              {user.professional.title}
+            </Title>
           </IntroTextHolder>
         </IntroContainer>
 
@@ -117,25 +123,25 @@ function ProfileCard({ user }) {
         <InfoHolder>
           <Info>
             <IconHolder>
-              <MdOutlineEmail />
+              <MdOutlineEmail style={{ color: "423edd" }} />
             </IconHolder>{" "}
             {user.email}
           </Info>
           <Info>
             <IconHolder>
-              <MdOutlineLocationCity />
+              <MdOutlineLocationCity style={{ color: "423edd" }} />
             </IconHolder>{" "}
             Kathmandu, Nepal
           </Info>
           <Info>
             <IconHolder>
-              <HiOutlineOfficeBuilding />
+              <HiOutlineOfficeBuilding style={{ color: "423edd" }} />
             </IconHolder>{" "}
             Full Time
           </Info>
           <Info>
             <IconHolder>
-              <IoSchoolOutline />
+              <IoSchoolOutline style={{ color: "423edd" }} />
             </IconHolder>{" "}
             {user.professional.sector}
           </Info>
@@ -144,7 +150,7 @@ function ProfileCard({ user }) {
           <Link to="profileUpdate">
             <Button
               variant="outlined"
-              style={{ color: "white", borderColor: "white", width: "100%" }}
+              style={{ color: "white", borderColor: "#423edd", width: "100%" }}
             >
               Edit Profile
             </Button>
@@ -154,7 +160,7 @@ function ProfileCard({ user }) {
           <Link to="ChangePassword">
             <Button
               variant="outlined"
-              style={{ color: "white", borderColor: "white", width: "100%" }}
+              style={{ color: "white", borderColor: "#423edd", width: "100%" }}
             >
               Change Password
             </Button>

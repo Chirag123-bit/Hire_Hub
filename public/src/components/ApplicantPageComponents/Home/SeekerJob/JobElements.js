@@ -22,6 +22,7 @@ export const JobsContainer = styled.div`
 
 export const ContentHolder = styled.div`
   padding: 5rem 0;
+  padding-bottom: 0;
   width: 90%;
   margin: auto;
   display: flex;
@@ -42,6 +43,11 @@ export const JobCardsHoler = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    justify-content: center;
+  }
 `;
 
 export const JobCard = styled.div`
@@ -104,6 +110,10 @@ export const JobCard = styled.div`
     border-radius: 10%;
     overflow: hidden;
     /* background: inherit; */
+  }
+  @media screen and (max-width: 768px) {
+    max-width: 50%;
+    /* justify-content: center; */
   }
 `;
 

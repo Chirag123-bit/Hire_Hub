@@ -25,7 +25,8 @@ export const DescriptionTitle = styled.h3`
   margin-bottom: 1.5rem;
   text-align: left;
   color: rgb(51, 71, 129);
-  color: white;
+  color: #423edd;
+  text-align: center;
 `;
 
 export const Summary = styled.p`
@@ -37,7 +38,7 @@ export const Listing = styled.div`
   margin-bottom: 2rem;
 
   padding-bottom: 2rem;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #423edd;
   display: flex;
   justify-content: space-between;
 `;
@@ -48,7 +49,7 @@ export const TitleListing = styled.div`
 `;
 
 export const JobTitle = styled.h4`
-  color: wheat;
+  color: white;
   /* margin-bottom: 1rem;
   margin-top: 0; */
   margin-bottom: 0;
@@ -61,7 +62,7 @@ export const Location = styled.div`
 `;
 
 export const Company = styled.p`
-  color: #50cdfe;
+  color: whitesmoke;
   font-size: 14px;
 `;
 
@@ -76,7 +77,8 @@ export const TypeDateListing = styled.div`
 
 export const JobType = styled.div`
   padding: 0.3rem 1rem;
-  background-color: #d7fee1;
+  backdrop-filter: blur(10px);
+  color: white;
   /* margin: 0.5rem 0; */
   border-radius: 10px;
   text-align: center;
