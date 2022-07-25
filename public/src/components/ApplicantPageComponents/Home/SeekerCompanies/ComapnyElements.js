@@ -12,11 +12,11 @@ export const SolutionsContainer = styled.div`
   padding: 5rem 0;
 
   @media screen and (max-width: 768px) {
-    height: 1100px;
+    /* height: 1100px; */
   }
 
   @media screen and (max-width: 480px) {
-    height: 1300px;
+    /* height: 1300px; */
   }
 `;
 
@@ -28,6 +28,10 @@ export const CardsContainer = styled.div`
   width: 85%;
   margin: 1rem 0;
   padding: 1rem 0;
+  @media screen and (max-width: 900px) {
+    /* height: 1100px; */
+    justify-content: center;
+  }
 `;
 export const FcAdvertisment = styled(FcGoogle)`
   font-size: 3rem;

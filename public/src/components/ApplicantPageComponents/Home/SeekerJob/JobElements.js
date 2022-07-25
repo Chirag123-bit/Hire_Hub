@@ -112,8 +112,11 @@ export const JobCard = styled.div`
     /* background: inherit; */
   }
   @media screen and (max-width: 768px) {
-    max-width: 50%;
+    max-width: 80%;
     /* justify-content: center; */
+  }
+  @media screen and (max-width: 500px) {
+    width: 90%;
   }
 `;
 

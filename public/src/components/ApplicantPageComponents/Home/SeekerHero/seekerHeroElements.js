@@ -9,11 +9,11 @@ export const HeroContainer = styled.div`
   align-items: center;
 
   @media screen and (max-width: 768px) {
-    height: 1100px;
+    /* height: 1100px; */
   }
 
   @media screen and (max-width: 480px) {
-    height: 1300px;
+    /* height: 1300px; */
   }
 `;
 
@@ -49,6 +49,11 @@ export const TextContent = styled.div`
   width: 90%;
   margin: auto;
   line-height: 4rem;
+  @media screen and (max-width: 640px) {
+    padding: 0;
+    width: 100%;
+    margin: auto;
+  }
 `;
 
 export const Slogan = styled.h1`
@@ -58,6 +63,9 @@ export const Slogan = styled.h1`
   margin: auto;
   line-height: 3.2rem;
   color: white;
+  @media screen and (max-width: 640px) {
+    width: 100%;
+  }
 `;
 export const ColoredSlogan = styled.span`
   color: #423edd;
@@ -72,6 +80,11 @@ export const FormContainer = styled.div`
   padding: 1.5rem;
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 640px) {
+    padding: 0;
+    width: 70%;
+    margin: auto;
+  }
 `;
 
 export const SearchContainer = styled.form`
@@ -82,6 +95,12 @@ export const SearchContainer = styled.form`
   border-radius: 2rem;
   width: max-content;
   background-color: rgb(255, 254, 254);
+
+  @media screen and (max-width: 640px) {
+    /* padding: 0; */
+    width: 80%;
+    margin: auto;
+  }
 `;
 export const JobSearch = styled.input`
   border-radius: 2rem;
@@ -89,6 +108,10 @@ export const JobSearch = styled.input`
   padding: 0.5rem;
   text-align: center;
   outline: none;
+  @media screen and (max-width: 640px) {
+    width: 61%;
+    margin: 0;
+  }
 `;
 
 export const LocationFilter = styled.select`
@@ -99,6 +122,9 @@ export const LocationFilter = styled.select`
   outline: none;
 
   width: max-content;
+  @media screen and (max-width: 640px) {
+    display: none;
+  }
 `;
 
 export const SearchBtn = styled.button`
@@ -110,4 +136,7 @@ export const SearchBtn = styled.button`
   background-color: #423edd;
   color: white;
   margin-left: auto;
+  @media screen and (max-width: 640px) {
+    width: 39%;
+  }
 `;

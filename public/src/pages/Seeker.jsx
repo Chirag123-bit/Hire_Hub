@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import SeekerNav from "../components/ApplicantPageComponents/Common/SeekerNav";
+import Sidebar from "../components/ApplicantPageComponents/Common/Sidebar";
 import Careers from "../components/ApplicantPageComponents/Company/CompanyView";
 import ApplicantEvents from "../components/ApplicantPageComponents/Events";
 import AppliedJobs from "../components/ApplicantPageComponents/Jobs/AppliedJobs";
@@ -9,7 +10,6 @@ import SeekerJobs from "../components/ApplicantPageComponents/Jobs/SeekerJobComp
 import ApplicantTodos from "../components/ApplicantPageComponents/Todo";
 import Footer from "../components/Common/Footer";
 import JobDescription from "../components/JobDescriptionComponent";
-import Sidebar from "../components/OnboardingPageComponents/Sidebar";
 import Profile from "../components/ProfileComponent";
 import ChangePassword from "../components/ProfileComponents/ChangePassword";
 import ProfileUpdateForm from "../components/ProfileComponents/ProfileUpdate/UpdateForm";

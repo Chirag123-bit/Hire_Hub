@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { getCategories, host } from "../../../../utils/APIRoutes";
 import "../../../style.css";
 
+import { Center } from "@chakra-ui/react";
 import Tilt from "react-tilt";
 import { v4 as uuid } from "uuid";
 
@@ -57,13 +58,17 @@ function SeekerSolutions() {
                   prespective: 500,
                 }}
               >
-                <div className="crdImg">
-                  <img
-                    src={host + "/" + category.category.image}
-                    class="proImg"
-                    alt="srh"
-                  />
-                </div>
+                <Center>
+                  <div className="crdImg">
+                    <Center>
+                      <img
+                        src={host + "/" + category.category.image}
+                        class="proImg"
+                        alt="srh"
+                      />
+                    </Center>
+                  </div>
+                </Center>
 
                 <h2 class="name">{category.category.title}</h2>
                 <p>{category.jobs} Jobs Available</p>
