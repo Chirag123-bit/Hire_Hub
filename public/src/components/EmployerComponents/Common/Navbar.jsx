@@ -17,6 +17,7 @@ function Navbar({ user, company, loading, jobInfo }) {
       Navigate("/auth/login");
     }
   }, []);
+
   return (
     <div className="navBar" style={{ paddingBottom: "0.8rem" }}>
       <div className="navBarContainer">
@@ -75,11 +76,11 @@ function Navbar({ user, company, loading, jobInfo }) {
           <div className="profilePic">
             <ReactRoundedImage
               image={host + "/" + company.avatarImage}
-              roundedColor="rgb(4,93,233)"
+              // roundedColor="rgb(4,93,233)"
               imageWidth="40"
               imageHeight="40"
               roundedSize="0"
-              hoverColor="#DD1144"
+              // hoverColor="#DD1144"
             />
           </div>
         </div>

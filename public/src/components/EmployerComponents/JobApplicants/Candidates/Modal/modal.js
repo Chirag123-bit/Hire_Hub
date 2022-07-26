@@ -6,7 +6,6 @@ import { BsCalendar2Date } from "react-icons/bs";
 import { FaBus } from "react-icons/fa";
 import { IoLocationSharp, IoSchoolOutline } from "react-icons/io5";
 import ReactRoundedImage from "react-rounded-image";
-import { host } from "../../../../../utils/APIRoutes";
 import {
   Skill,
   SkillHolder,
@@ -43,12 +42,12 @@ export const ApplicantModal = ({
             <div className="ModalHead d-flex justify-content-center align-items-center">
               <div style={{ flex: 2 }}>
                 <ReactRoundedImage
-                  image={host + "/" + selectedUser.avatarImage}
-                  roundedColor="rgb(4,93,233)"
+                  image={selectedUser.avatarImage}
+                  // roundedColor="rgb(4,93,233)"
                   imageWidth="110"
                   imageHeight="110"
                   roundedSize="0"
-                  hoverColor="#DD1144"
+                  // hoverColor="#DD1144"
                 />
               </div>
               <div>

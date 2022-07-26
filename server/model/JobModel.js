@@ -12,9 +12,9 @@ const jobSchema = new mongoose.Schema({
     min: 3,
   },
   sector: {
-    // type: mongoose.Schema.Types.ObjectId,
-    // ref: "Category",
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
+    // type: String,
   },
   skills: [
     {

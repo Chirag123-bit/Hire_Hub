@@ -107,6 +107,7 @@ module.exports.getAllJobs = async (req, res, next) => {
       .populate("company")
       .populate("sector")
       .then((result) => {
+        console.log(result);
         return res.json({
           success: true,
           data: result,
@@ -164,7 +165,8 @@ module.exports.getJob = async (req, res, next) => {
 
 module.exports.applyForJob = async (req, res, next) => {
   try {
-    var appliedJobId = req.body.params.job;
+    // var appliedJobId = req.body.params.job;
+    const { job } = req.body;
     // try {
     //   const { job } = req.body.params;
     //   appliedJobId = job;
@@ -174,10 +176,10 @@ module.exports.applyForJob = async (req, res, next) => {
     //   const { job } = req.body;
     //   appliedJobId = job;
     // } catch (error) {}
-    console.log(appliedJobId);
+    // console.log(appliedJobId);
 
     const user = req.user._id;
-    const appliedJob = await Job.findById(appliedJobId);
+    const appliedJob = await Job.findById(job);
 
     const appliedUser = await userModel.findById(user);
 

@@ -30,6 +30,7 @@ function SeekerJob() {
     axios.get(getAllJobs).then((result) => {
       jobs = result.data.data;
       setJobs(jobs);
+      console.log(jobs);
       setIsReady(true);
     });
   }, []);
@@ -57,10 +58,11 @@ function SeekerJob() {
                         <FcBrokenLink style={{ fontSize: "1.5rem" }} />
                       </div>
                       <div className="box2">
-                        <h6>{job.company.name}</h6>
-                        <p>
-                          {job.company.region}, {job.company.country}
-                        </p>
+                        <h6>
+                          {/* {job.company.name ? "Company" : } */}
+                          Google Inc
+                        </h6>
+                        <p>Kathmandu, Nepal</p>
                       </div>
                     </CompanyInfoHoler>
                     <JobTitleHolder>
