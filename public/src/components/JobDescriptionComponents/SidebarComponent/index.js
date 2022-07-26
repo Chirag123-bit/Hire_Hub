@@ -53,14 +53,25 @@ function Sidebar({ job, isLoading }) {
   }, [isLoading]);
 
   const handleApply = () => {
-    // alert("Clicked");
+    const token = JSON.parse(localStorage.getItem("token"));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
     axios
-      .post(applyForJob, {
-        params: {
-          job: job._id,
-          user: user._id,
+      .post(
+        applyForJob,
+        {
+          params: {
+            job: job._id,
+            user: user._id,
+          },
         },
-      })
+        config
+      )
       .then((result) => {
         toast.success(result.data.msg, toastOptions);
         window.location.reload();

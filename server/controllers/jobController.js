@@ -164,16 +164,17 @@ module.exports.getJob = async (req, res, next) => {
 
 module.exports.applyForJob = async (req, res, next) => {
   try {
-    var appliedJobId;
-    try {
-      const { job } = req.body.params;
-      appliedJobId = job;
-    } catch (error) {}
+    var appliedJobId = req.body.params.job;
+    // try {
+    //   const { job } = req.body.params;
+    //   appliedJobId = job;
+    // } catch (error) {}
 
-    try {
-      const { job } = req.body;
-      appliedJobId = job;
-    } catch (error) {}
+    // try {
+    //   const { job } = req.body;
+    //   appliedJobId = job;
+    // } catch (error) {}
+    console.log(appliedJobId);
 
     const user = req.user._id;
     const appliedJob = await Job.findById(appliedJobId);
