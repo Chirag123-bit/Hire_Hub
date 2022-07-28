@@ -20,6 +20,7 @@ const {
   updatePassword,
   updateCompanyDetails,
   allUsersApp,
+  getAppliedJobsWear,
 } = require("../controllers/usersController");
 const { protect } = require("../middleware/authMiddleware");
 
@@ -47,5 +48,6 @@ router.route("/updateCompany").put(protect, updateCompanyDetails);
 router.route("/updateUserDetails").post(protect, updateUserDetails);
 router.route("/changeProfilePic").post(protect, changeProfileImage);
 router.route("/updatePassword").put(protect, updatePassword);
+router.route("/appliedJobsWear").get(protect, getAppliedJobsWear);
 
 module.exports = router;

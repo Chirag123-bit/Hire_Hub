@@ -861,3 +861,31 @@ module.exports.updateCompanyDetails = async (req, res, next) => {
     status: false,
   });
 };
+
+//get apllied jobs along with the status of the job
+module.exports.getAppliedJobsWear = async (req, res, next) => {
+  const userId = req.user._id;
+  try {
+    const appliedJobs = await User.findById(userId)
+      .populate({
+        path: "appliedJobs.job",
+        model: "Job",
+        select: "title -_id",
+      })
+      .select("appliedJobs");
+    // .populate("appliedJobs.job")
+    // .select(
+    //   "appliedJobs.job.title appliedJobs.appliedDate appliedJobs.status"
+    // );
+
+    return res.status(200).json({
+      status: true,
+      data: appliedJobs,
+    });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({
+      status: false,
+    });
+  }
+};

@@ -155,3 +155,29 @@ module.exports.changeLogo = async (req, res, next) => {
     }
   });
 };
+
+//get jobs for company
+module.exports.getJobsWearOs = async (req, res, next) => {
+  const company_id = req.user.company;
+  try {
+    const company = await companyModel
+      .findById(company_id)
+      .populate({
+        path: "jobs",
+        model: "Job",
+        select: "title -_id applicants.applicant",
+      })
+      .select("jobs");
+
+    return res.status(200).json({
+      success: true,
+      data: company,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      error: error,
+    });
+  }
+};
