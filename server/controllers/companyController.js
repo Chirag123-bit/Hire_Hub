@@ -136,13 +136,12 @@ module.exports.changeLogo = async (req, res, next) => {
     }
     try {
       const user = await CompanyModel.findById(req.user.company);
-      console.log(user);
+
       if (!user) {
         return res.status(404).json({
           message: "Not Authorized for this action",
         });
       }
-      console.log(req.file);
       user.avatarImage = req.file.path;
       await user.save();
       const updatedUser = await CompanyModel.findById(req.user.company);

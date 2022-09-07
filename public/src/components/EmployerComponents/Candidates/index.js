@@ -44,7 +44,6 @@ function getStatus(st) {
 }
 
 function Candidates({ Applicants, isOpen, jobInfo }) {
-  console.log(jobInfo);
   const [selectedUser, setSelectedUser] = useState({});
   const [appliedDate, setAppliedDate] = useState({});
   const [showModal, setShowModal] = useState(false);

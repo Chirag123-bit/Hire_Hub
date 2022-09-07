@@ -76,7 +76,6 @@ const sendMessageApp = asyncHandler(async (req, res) => {
 });
 
 const allMessages = asyncHandler(async (req, res) => {
-  console.log(req.params.chatId);
   try {
     const messages = await Message.find({ chat: req.params.chatId })
       .populate("sender", "firstName lastName avatarImage email")
@@ -89,7 +88,6 @@ const allMessages = asyncHandler(async (req, res) => {
   }
 });
 const allMessagesApp = asyncHandler(async (req, res) => {
-  console.log(req.params.chatId);
   try {
     const messages = await Message.find({ chat: req.params.chatId });
 

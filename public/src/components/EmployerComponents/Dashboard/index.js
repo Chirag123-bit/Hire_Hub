@@ -134,7 +134,6 @@ function Dashboard({
   };
 
   const openEditModal = (job) => {
-    console.log(job);
     var skillSets = job.skills.map((skill) => {
       return {
         skill: skill,

@@ -107,7 +107,6 @@ module.exports.getAllJobs = async (req, res, next) => {
       .populate("company")
       .populate("sector")
       .then((result) => {
-        console.log(result);
         return res.json({
           success: true,
           data: result,
@@ -261,7 +260,6 @@ const getReusableJobDetail1 = async (job_id) => {
       select: "-appliedJobs -events -todos -favouriteJobs -savedJobs",
     },
   });
-  console.log(Jobs);
 
   return Jobs;
 };
@@ -364,7 +362,6 @@ module.exports.getAppliedJobs = asyncHandler(async (req, res, next) => {
         path: "company",
       },
     });
-  console.log(jobs.appliedJobs[0]);
 
   if (!jobs) {
     res.status(400).send("Applied Jobs not found");
@@ -383,7 +380,6 @@ module.exports.getSavedJobs = asyncHandler(async (req, res, next) => {
         path: "company",
       },
     });
-  console.log(jobs.savedJobs[0]);
 
   if (!jobs) {
     res.status(400).send("Saved Jobs not found");
@@ -403,8 +399,6 @@ module.exports.getAppliedJobsApp = asyncHandler(async (req, res, next) => {
         path: "company",
       },
     });
-
-  console.log(jobs.appliedJobs[0]);
 
   if (!jobs) {
     return res.status(400).json({ success: false });

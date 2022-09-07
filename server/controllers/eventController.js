@@ -6,7 +6,7 @@ const asyncHandler = require("express-async-handler");
 
 module.exports.addEvents = asyncHandler(async (req, res, next) => {
   const usr = await req.user._id;
-  console.log(req.body);
+
   const event = eventModel({
     title: req.body.title,
     note: req.body.note,
@@ -85,11 +85,9 @@ module.exports.updateEvent = asyncHandler(async (req, res, next) => {
 
 //delete event
 module.exports.deleteEvent = asyncHandler(async (req, res, next) => {
-  console.log(req.params.id);
   const usr = await req.user._id;
   const user = await userModel.findById(usr);
   const event = await eventModel.findById(req.params.id);
-  console.log(event);
 
   if (!event) {
     res.status(400).send("Event not found");

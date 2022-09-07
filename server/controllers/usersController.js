@@ -61,7 +61,6 @@ module.exports.changeProfileImage = async (req, res, next) => {
           message: "User not found",
         });
       }
-      console.log(req.file);
       user.avatarImage = req.file.path;
       await user.save();
       const updatedUser = await User.findById(userId);
@@ -382,12 +381,12 @@ module.exports.register = async (req, res, next) => {
       cabout,
       cdesc,
     } = req.body;
-    console.log(req.body);
+
     const usernameCheck = await User.findOne({ username });
 
     //Username and Email Validation
     if (usernameCheck) {
-      print("Username already exists. Please choose another username");
+      console.log("Username already exists. Please choose another username");
       return res.status(500).json({
         msg: "Username already used",
         status: false,
@@ -771,7 +770,6 @@ module.exports.updateUser = async (req, res, next) => {
     } else {
       user = await User.findOneAndUpdate({ _id: userId }, { $set: req.body });
     }
-    console.log(user);
     return res.status(200).json({
       status: true,
       user,
@@ -849,7 +847,7 @@ module.exports.updateCompanyDetails = async (req, res, next) => {
       }
     );
     const updatedDetails = await Company.find({ _id: companyId });
-    console.log(updatedDetails);
+
     return res.status(200).json({
       company: true,
       user: updatedDetails,

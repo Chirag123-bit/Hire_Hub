@@ -6,7 +6,7 @@ const asyncHandler = require("express-async-handler");
 
 module.exports.addTodo = asyncHandler(async (req, res, next) => {
   const usr = await req.user._id;
-  console.log(req.body);
+
   const event = todoModel({
     title: req.body.title,
     note: req.body.note,
@@ -40,7 +40,6 @@ module.exports.getTodos = asyncHandler(async (req, res, next) => {
     todos: 1,
     _id: 0,
   });
-  console.log(events);
 
   if (!events) {
     res.status(400).send("Applied Jobs not found");
@@ -84,7 +83,6 @@ module.exports.deleteEvent = asyncHandler(async (req, res, next) => {
   const usr = await req.user._id;
   const user = await userModel.findById(usr);
   const event = await todoModel.findById(req.params.id);
-  console.log(event);
 
   if (!event) {
     res.status(400).send("Event not found");
@@ -121,7 +119,6 @@ module.exports.deleteTodo = asyncHandler(async (req, res, next) => {
   const usr = await req.user._id;
   const user = await userModel.findById(usr);
   const event = await todoModel.findById(req.body.id);
-  console.log(event);
 
   if (!event) {
     res.status(400).send("Todo not found");

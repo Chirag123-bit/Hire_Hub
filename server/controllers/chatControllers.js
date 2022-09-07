@@ -4,7 +4,6 @@ const User = require("../model/userModel");
 
 const accessChat = asyncHandler(async (req, res, next) => {
   const { userId } = req.body;
-  console.log(userId, req.user._id.toString());
   if (!userId) {
     return res.status(400).send("Please provide userId");
   }
